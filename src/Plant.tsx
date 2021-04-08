@@ -14,7 +14,7 @@ export const PlantPage = () => {
     setTimeout(() => {
       history.push("/tree/699c5780-8015-47e2-ad3c-e1f160458593/info")
     }, 2000)
-  }, [])
+  }, [history])
   return <Page headerMessage="Celebrate Jenny by planting a tree in her honor.">
     <Row>
       <Col md="7">
@@ -37,7 +37,7 @@ export const PlantPage = () => {
       </Col>
       <Col />
       <Col md="4">
-        <img src={plantingTree} className="App-logo" alt="logo"/>
+        <img src={plantingTree} className="planting-tree-image" alt="logo"/>
       </Col>
     </Row>
   </Page>

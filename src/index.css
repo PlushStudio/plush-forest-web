@@ -35,3 +35,8 @@ code {
 .locate-on-blockchain-bar {
   background-color: #f7f7f7;
 }
+
+.planting-tree-image {
+  height: 40vmin;
+  pointer-events: none;
+}
