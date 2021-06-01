@@ -1,8 +1,8 @@
-import { Page } from "./Page"
+import { Page } from "../Page"
 import { ProgressBar } from "react-bootstrap"
 
-export const AboutPage = () => {
-  return <Page headerMessage="A pager for new users">
+export const TreesListPage = () => {
+  return <Page headerMessage="My Trees">
     The page is being constructed...
     <ProgressBar now={10} label="10%" />
   </Page>

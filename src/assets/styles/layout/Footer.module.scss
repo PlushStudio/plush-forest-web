@@ -1,0 +1,26 @@
+@use '../theme';
+
+
+.footerContainer {
+  margin: 34px 0 0;
+  padding: 70px 0 35px;
+  background-color: theme.$fill-21-grey-50;
+}
+
+.footerContent {
+  font-family: Moranga, sans-serif;
+  max-width: 1064px;
+  margin: auto;
+}
+
+.footerTitle {
+  color: theme.$grays-500;
+  padding-bottom: 1.5em;
+  font-family: Moranga, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+}

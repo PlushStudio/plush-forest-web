@@ -1,0 +1,27 @@
+@use '../theme';
+
+.container {
+  display: flex;
+  margin: 36px 62px 0 0;
+  border-radius: 160px;
+}
+
+.arrow {
+  margin-left: 1em;
+}
+
+.btnPrimary {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  color: theme.$white;
+  width: 208px;
+  height: 64px;
+  font-family: AvenirNextRoundedPro-Demi, serif;
+  border-radius: 160px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  background-image: linear-gradient(to bottom, #15cc98 0%, #00ad7a 100%);
+  cursor: pointer;
+  font-size: 20px;
+}

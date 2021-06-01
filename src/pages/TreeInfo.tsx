@@ -1,7 +1,7 @@
-import { Page } from "./Page"
+import { Page } from "../Page"
 import { Col, Nav, Row } from "react-bootstrap"
 import { useParams } from "react-router"
-import treeInfoPicture from "./images/treeInfo.png"
+import treeInfoPicture from "../assets/images/treeInfo.png"
 
 export const TreeInfoPage = () => {
   return <Page headerComponent={<Menu/>} headerTitle="Jenny's Tree"

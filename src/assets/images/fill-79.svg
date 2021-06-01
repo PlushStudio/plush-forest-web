@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="231" height="303" viewBox="0 0 231 303">
+    <defs>
+        <filter id="lq3tv3gbsa" width="130.8%" height="120.8%" x="-18.1%" y="-10.4%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" radius="2" result="shadowSpreadOuter1"/>
+            <feOffset dx="-5" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="10"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feMorphology in="SourceAlpha" radius="1" result="shadowSpreadOuter2"/>
+            <feOffset dx="-3" dy="2" in="shadowSpreadOuter2" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <filter id="xxrqe55x0c" width="122.7%" height="115.3%" x="-14.1%" y="-7.7%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="2"/>
+            <feOffset dx="-2" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+        </filter>
+        <path id="2asa9xd5ob" d="M881.036 2129.043c-17.913-34.676-50.118-41.862-78.503-30.025-20.494 8.544-36.44 28.07-50.245 47.927-14.295 20.428-24.943 42.266-29.391 59.953-9.258 36.246-6.975 75.326 7.17 110.177.282.698.57 1.395.864 2.09 5.149 12.2 11.905 23.964 21.77 32.765 10.247 9.146 23.433 14.505 36.92 15.585 10.483.823 20.775-.878 30.579-3.21 15.489-3.688 31.084-9.153 43.761-19.873 13.376-11.31 22.273-27.6 28.218-44.347 7.57-21.32 11.228-44.098 9.901-66.6-.88-14.952-4.306-29.633-6.662-44.474-3.244-20.442-4.936-41.573-14.382-59.968"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g transform="translate(-691 -2081) scale(-1 1) rotate(-28 0 5478.846)">
+                <use fill="#000" filter="url(#lq3tv3gbsa)" xlink:href="#2asa9xd5ob"/>
+                <use fill="#FAFAFA" xlink:href="#2asa9xd5ob"/>
+                <use fill="#000" filter="url(#xxrqe55x0c)" xlink:href="#2asa9xd5ob"/>
+            </g>
+        </g>
+    </g>
+</svg>

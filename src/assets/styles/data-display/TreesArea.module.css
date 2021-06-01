@@ -1,0 +1,83 @@
+.treesAreaImg {
+    position: absolute;
+    width: 100%;
+    object-fit: contain;
+    margin: 0 0 0 29.7px;
+}
+
+.treesArea {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 400px;
+    overflow-x: clip;
+}
+
+.treesArea1 {
+    top: -195px;
+    right: 26px;
+    max-height: 926px;
+}
+
+.treesArea2 {
+    transform: rotate(-722deg);
+    top: -124px;
+    right: 50px;
+    max-height: 823px;
+}
+
+.treesArea3 {
+    top: -38px;
+    right: 81px;
+    max-height: 712px;
+}
+
+.treesArea4 {
+    top: 78px;
+    right: -24px;
+    max-height: 403px;
+}
+
+.treesArea5 {
+    top: 141px;
+    right: -28px;
+    max-height: 289px;
+}
+
+.treesArea6 {
+    top: 200px;
+    right: -33px;
+    max-height: 185px;
+}
+
+.treesArea7 {
+    top: 370px;
+    right: 243px;
+    max-height: 239px;
+}
+
+.treesArea8 {
+    top: 415px;
+    right: 242px;
+    max-height: 160px;
+}
+
+.treesArea9 {
+    top: 452px;
+    right: 242px;
+    max-height: 92px;
+}
+
+.tree08 {
+    position: absolute;
+    width: 77px;
+    right: 764px;
+    top: 399px;
+    z-index: 999;
+    transition: 0.2s ease-in-out;
+}
+
+.tree08:hover {
+    filter: hue-rotate(180deg);
+    cursor: pointer;
+}

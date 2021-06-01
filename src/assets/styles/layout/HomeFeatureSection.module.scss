@@ -1,0 +1,140 @@
+@use '../theme';
+@use '../variables';
+
+.container {
+  display: flex;
+  margin-top: 6em;
+  height: 344px;
+}
+
+.firstContainerText {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5.5em;
+  padding-top: 2.2em;
+  width: 50%;
+}
+
+.maskedImg {
+  background-size: cover;
+  object-fit: cover;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.twoBirds {
+  width: 424px;
+  -webkit-mask-image: url(../../images/clip-3.svg);
+  mask-image: url(../../images/clip-3.svg);
+}
+
+.womanWithPlant {
+  height: 396px;
+  -webkit-mask-image: url(../../images/clip-4.svg);
+  mask-image: url(../../images/clip-4.svg);
+}
+
+.bigTree {
+  height: 402px;
+  position: absolute;
+  width: 394px;
+  top: -46px;
+  left: 56px;
+  -webkit-mask-image: url(../../images/clip-2.svg);
+  mask-image: url(../../images/clip-2.svg);
+}
+
+.leaf {
+  position: absolute;
+  right: 102px;
+  top: 124px;
+}
+
+.lines {
+  position: absolute;
+  right: 5%;
+  top: 0;
+}
+
+.secondContainerText {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 4em;
+  padding-top: 72px;
+  width: 50%;
+}
+
+.leafContainer {
+  position: absolute;
+  right: 0;
+  top: 1684px;
+}
+
+.imageBlock {
+  position: relative;
+  width: 36%;
+}
+
+.widthAuto {
+  width: auto;
+}
+
+.steps {
+  position: absolute;
+  left: 14px;
+  z-index: variables.$low-order;
+  top: 262px;
+  width: 116px;
+  height: 112px;
+  margin: 28px 412px 0 0;
+  object-fit: contain;
+}
+
+.link {
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  color: theme.$emerald-600-s;
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.title {
+  height: 40px;
+  font-family: Moranga, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.43;
+  color: #212121;
+}
+
+.description {
+  width: 603px;
+  margin: 16px 0 18px;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: theme.$grey-800;
+}
+
+.section3Description {
+  max-width: 512px;
+}
+
+.section3GetStarted {
+  padding-bottom: 4em;
+}
+
+.plantingDots {
+  position: absolute;
+  left: 0;
+  z-index: variables.$low-order;
+  top: 74px;
+}
+
+.dots {
+  position: absolute;
+  left: 104px;
+  top: 104px;
+  width: 342px;
+  height: 304px;
+  object-fit: contain;
+}

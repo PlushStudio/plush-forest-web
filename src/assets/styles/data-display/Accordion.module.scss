@@ -1,0 +1,42 @@
+@use '../theme';
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  background: white !important;
+  border: none !important;
+}
+
+.card {
+  border: none !important;
+  margin-bottom: 10px !important;
+  background: #fafafa !important;
+}
+
+.collapsing, .show {
+  background: white;
+  margin-top: 4px;
+}
+
+.accordionHeader {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: theme.$grey-800;
+}
+
+.accordionText {
+  padding: 1.25rem 3em;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: theme.$grey-800;
+}

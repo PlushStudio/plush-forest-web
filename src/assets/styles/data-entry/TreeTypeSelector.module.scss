@@ -1,0 +1,70 @@
+@use "../theme";
+
+.container {
+  margin-top: 2em;
+}
+
+.header, footer {
+  width: 135px;
+  margin: 0 23px 19px 0;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: theme.$grey-800;
+}
+
+.circlesContainer {
+  display: flex;
+  position: relative;
+}
+
+.ovalSelected {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: -4px;
+  top: -4px;
+}
+
+.circle {
+  display: flex;
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin-right: 1em;
+  border-radius: 50px;
+  background-position: center;
+  background-size: cover;
+  transition: .2s ease;
+  cursor: pointer;
+}
+
+.circle:hover {
+  webkit-box-shadow: 0 0 0 4px #ffd34e;
+  moz-box-shadow: 0 0 0 4px #ffd34e;
+  box-shadow: 0 0 0 4px #ffd34e;
+  z-index: 999;
+}
+
+.footer {
+  display: flex;
+  font-size: 14px;
+  line-height: 0;
+  letter-spacing: 0;
+  padding-left: 3px;
+}
+
+.treesCountBold {
+  display: flex;
+  margin-top: 24px;
+  padding-left: 6px;
+  font-family: AvenirNextRoundedPro-Reg, monospace ;
+}
+
+.numberValue {
+  padding-left: 5px;
+}

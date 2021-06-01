@@ -1,20 +1,24 @@
-import { FormEvent, useCallback, useState } from "react"
-import { Row, Col, Form, Button, Spinner } from "react-bootstrap"
-import 'bootstrap/dist/css/bootstrap.min.css'
-import plantingTree from './images/plantingTree.png';
-import { Page } from "./Page"
-import { useHistory } from "react-router"
+import { FormEvent, useCallback, useState } from "react";
+import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import plantingTree from '../assets/images/plantingTree.png';
+import { Page } from "../Page";
+import { useHistory } from "react-router";
 
 export const PlantPage = () => {
-  const [isPlanting, setIsPlanting] = useState(false)
-  const history = useHistory()
+  const [isPlanting, setIsPlanting] = useState(false);
+  const history = useHistory();
+
   const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsPlanting(true)
+    e.preventDefault();
+    setIsPlanting(true);
+
     setTimeout(() => {
-      history.push("/tree/699c5780-8015-47e2-ad3c-e1f160458593/info")
-    }, 2000)
-  }, [history])
+      history.push("/tree/699c5780-8015-47e2-ad3c-e1f160458593/info");
+    }, 2000);
+
+  }, [history]);
+
   return <Page headerMessage="Celebrate Jenny by planting a tree in her honor.">
     <Row>
       <Col md="7">

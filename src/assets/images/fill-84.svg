@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="137" height="190" viewBox="0 0 137 190">
+    <defs>
+        <filter id="0v5vaf57fa" width="145%" height="129%" x="-27.1%" y="-14.5%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" radius="1" result="shadowSpreadOuter1"/>
+            <feOffset dx="-5" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="8"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feMorphology in="SourceAlpha" radius=".5" result="shadowSpreadOuter2"/>
+            <feOffset dx="-3" dy="2" in="shadowSpreadOuter2" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="3"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <filter id="kx44cofmqc" width="133%" height="121.3%" x="-21.1%" y="-10.7%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="2"/>
+            <feOffset dx="-2" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+        </filter>
+        <path id="36vfe6v76b" d="M758.188 2291.176c3.3 7.79 7.56 15.395 13.946 20.975 6.389 5.583 15.209 8.903 23.529 7.144 6.546-1.382 12.07-5.65 17.008-10.141 25.535-23.226 41.955-56.106 45.124-90.364 1.218-13.141.373-27.064-6.422-38.402-8.685-14.49-33.366-30.446-50.948-29.587-16.652.812-24.136 15.66-32.194 28.892-20.238 33.239-25.393 75.244-10.043 111.483"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g transform="translate(-743 -2145) scale(-1 1) rotate(-28 0 5458.98)">
+                <use fill="#000" filter="url(#0v5vaf57fa)" xlink:href="#36vfe6v76b"/>
+                <use fill="#FAFAFA" xlink:href="#36vfe6v76b"/>
+                <use fill="#000" filter="url(#kx44cofmqc)" xlink:href="#36vfe6v76b"/>
+            </g>
+        </g>
+    </g>
+</svg>
