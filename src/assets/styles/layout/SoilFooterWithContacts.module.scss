@@ -1,0 +1,12 @@
+@use '../theme';
+
+
+.soilFooterWithContactsContainer {
+  background-color: theme.$fill-21-grey-50;
+}
+
+.soilFooterContent {
+  width: 100%;
+  height: 192px;
+  background-image: url("../../images/bitmap@3x.png");
+}
