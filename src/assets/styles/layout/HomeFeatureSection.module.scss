@@ -7,14 +7,6 @@
   height: 344px;
 }
 
-.firstContainerText {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 5.5em;
-  padding-top: 2.2em;
-  width: 50%;
-}
-
 .maskedImg {
   background-size: cover;
   object-fit: cover;
@@ -23,24 +15,24 @@
 
 .twoBirds {
   width: 424px;
-  -webkit-mask-image: url(../../images/clip-3.svg);
-  mask-image: url(../../images/clip-3.svg);
+  -webkit-mask-image: url("../../images/clip-3.svg");
+  mask-image: url("../../images/clip-3.svg");
 }
 
 .womanWithPlant {
   height: 396px;
-  -webkit-mask-image: url(../../images/clip-4.svg);
-  mask-image: url(../../images/clip-4.svg);
+  -webkit-mask-image: url("../../images/clip-4.svg");
+  mask-image: url("../../images/clip-4.svg");
 }
 
 .bigTree {
   height: 402px;
   position: absolute;
   width: 394px;
-  top: -46px;
-  left: 56px;
-  -webkit-mask-image: url(../../images/clip-2.svg);
-  mask-image: url(../../images/clip-2.svg);
+  top: -52px;
+  left: 30px;
+  -webkit-mask-image: url("../../images/clip-2.svg");
+  mask-image: url("../../images/clip-2.svg");
 }
 
 .leaf {
@@ -55,10 +47,18 @@
   top: 0;
 }
 
+.firstContainerText {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3.5em;
+  padding-top: 2.2em;
+  width: 50%;
+}
+
 .secondContainerText {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 4em;
+  margin-left: 2em;
   padding-top: 72px;
   width: 50%;
 }
@@ -103,7 +103,7 @@
   font-size: 28px;
   font-weight: 500;
   line-height: 1.43;
-  color: #212121;
+  color: theme.$black;
 }
 
 .description {

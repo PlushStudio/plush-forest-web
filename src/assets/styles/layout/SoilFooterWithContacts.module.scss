@@ -1,12 +1,71 @@
 @use '../theme';
+@use '../variables';
 
 
 .soilFooterWithContactsContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
   background-color: theme.$fill-21-grey-50;
+  background-image: url("../../images/bitmap-soil.png");
+  background-size: 366px 192px;
+  height: 192px;
+  object-fit: contain;
 }
 
 .soilFooterContent {
-  width: 100%;
-  height: 192px;
-  background-image: url("../../images/bitmap@3x.png");
+  width: 1280px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerPlant {
+  position: absolute;
+  width: 293px;
+  height: 306px;
+  pointer-events: none;
+  margin: auto;
+  top: 0;
+  left: 1015px;
+  right: 0;
+  bottom: 336px;
+  z-index: variables.$medium-order;
+}
+
+.rightPull, .leftPull {
+  display: flex;
+  align-items: center;
+  padding-top: 18px;
+  z-index: variables.$higher-order;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 14px;
+}
+
+.socialItem {
+  cursor: default;
+}
+
+.socialItem:nth-child(1) img {
+  margin-right: 24px;
+}
+
+.socialItem:nth-child(2) img {
+  margin-right: 36px;
+}
+
+.termsAndPrivacy {
+  margin-left: 12px;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 14px;
+  color: theme.$grays-000-white;
+  cursor: pointer;
+}
+
+.leftPullText {
+  cursor: default;
+}
+
+.leftPullTextPrimary {
+  color: theme.$purple-light;
 }
