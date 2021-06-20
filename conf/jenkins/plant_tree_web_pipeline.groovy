@@ -1,11 +1,12 @@
-multibranchPipelineJob('plant-tree-web/plant-tree-web-pipeline') {
-  displayName('plant-tree-web-pipeline')
+multibranchPipelineJob('plush-forest-web/plush-forest-web-pipeline') {
+  displayName('plush-forest-web-pipeline')
 
   branchSources {
-    git {
-      id('plant-tree-web')
-      credentialsId('GitLab')
-      remote('git@git.ideom.net:newbly/plant-tree-web.git')
+    github {
+      id('plush-forest-web')
+      scanCredentialsId('github')
+      repoOwner('PlushFamily')
+      repository('plush-forest-web')
     }
   }
 

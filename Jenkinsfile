@@ -2,8 +2,8 @@ pipeline {
   agent any
 
   environment {
-    IMAGE_NAME = "plant-tree-web"
-    SERVICE_NAME = "plant-tree-web"
+    IMAGE_NAME = "plush-forest-web"
+    SERVICE_NAME = "plush-forest-web"
   }
 
   stages {
@@ -71,20 +71,18 @@ pipeline {
     }
   }
 
-  options {
-    gitLabConnection('GitLab')
-  }
-
   triggers {
-    gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
+    githubPush()
   }
 
   post {
     failure {
       updateGitlabCommitStatus name: 'build', state: 'failed'
+      setBuildStatus("Build Failed", "FAILURE")
     }
     success {
       updateGitlabCommitStatus name: 'build', state: 'success'
+      setBuildStatus("Build Compelte", "SUCCESS")
     }
     always {
       cleanWs()
@@ -95,4 +93,17 @@ pipeline {
 
 def isMasterBranch() {
   env.BRANCH_NAME == "master"
+}
+
+def setBuildStatus(String message, String state) {
+  step([
+    $class: "GitHubCommitStatusSetter",
+    reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/PlushFamily/plush-forest-web"],
+    contextSource: [$class: "ManuallyEnteredCommitContextSource", context: env.JOB_NAME],
+    errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+    commitShaSource: [$class: "ManuallyEnteredShaSource", sha: env.GIT_COMMIT ],
+    statusResultSource: [$class: "ConditionalStatusResultSource", results: [
+      [$class: "AnyBuildResult", message: message, state: state]]
+    ]
+  ]);
 }
