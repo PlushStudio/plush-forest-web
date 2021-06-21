@@ -4,7 +4,7 @@ multibranchPipelineJob('plush-forest-web/plush-forest-web-pipeline') {
   branchSources {
     github {
       id('plush-forest-web')
-      scanCredentialsId('GitHubDeployKey')
+      scanCredentialsId('GitHubAccessToken')
       repoOwner('PlushFamily')
       repository('plush-forest-web')
     }
