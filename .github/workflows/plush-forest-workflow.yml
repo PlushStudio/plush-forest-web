@@ -1,0 +1,63 @@
+name: PF Workflow
+on: [ push ]
+env:
+  SERVICE_NAME: plush-forest-web
+  COMPOSE_FILE: /home/docker-compose.yml
+  DEVELOPMENT_BRANCH_REF: refs/heads/master
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      # Webpack Build & Checks
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn run build
+      # Build & Publish a Docker Image | Master Branch Only
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        if: ${{ github.ref == 'refs/heads/master' }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Downcase Repo Name for Registry
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          echo "GITHUB_REPOSITORY_LOWERCASE=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      - name: Build Docker Image and Push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ env.GITHUB_REPOSITORY_LOWERCASE }}/${{ env.SERVICE_NAME }}:latest
+  DeployDev:
+    runs-on: ubuntu-latest
+    needs: [ Build ]
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: newbly.com
+          username: deploy
+          key: ${{ secrets.SSH_PRIVATE_KEY_FOR_DEPLOY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE_FOR_DEPLOY }}
+          envs: COMPOSE_FILE, SERVICE_NAME
+          script: |
+            docker-compose pull $SERVICE_NAME
+            docker-compose up -d --no-deps --build $SERVICE_NAME
