@@ -1,5 +1,5 @@
 import React from 'react'
-import s from '@/assets/styles/data-display/HomeText.module.scss'
+import s from '@/components/common/App/shared-components/HomeText.module.scss'
 
 export const HomeText = () => {
   return (

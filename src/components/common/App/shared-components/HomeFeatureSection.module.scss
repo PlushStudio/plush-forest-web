@@ -1,5 +1,5 @@
-@use '../theme';
-@use '../variables';
+@use '/src/assets/styles/theme';
+@use '/src/assets/styles/variables';
 
 .container {
   display: flex;
@@ -15,14 +15,14 @@
 
 .twoBirds {
   width: 424px;
-  -webkit-mask-image: url("../../images/clip-3.svg");
-  mask-image: url("../../images/clip-3.svg");
+  -webkit-mask-image: url("/src/assets/images/clip-3.svg");
+  mask-image: url("/src/assets/images/clip-3.svg");
 }
 
 .womanWithPlant {
   height: 396px;
-  -webkit-mask-image: url("../../images/clip-4.svg");
-  mask-image: url("../../images/clip-4.svg");
+  -webkit-mask-image: url("/src/assets/images/clip-4.svg");
+  mask-image: url("/src/assets/images/clip-4.svg");
 }
 
 .bigTree {
@@ -31,8 +31,8 @@
   width: 394px;
   top: -52px;
   left: 30px;
-  -webkit-mask-image: url("../../images/clip-2.svg");
-  mask-image: url("../../images/clip-2.svg");
+  -webkit-mask-image: url("/src/assets/images/clip-2.svg");
+  mask-image: url("/src/assets/images/clip-2.svg");
 }
 
 .leaf {

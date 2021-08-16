@@ -1,5 +1,5 @@
 import React from "react"
-import s from "@/assets/styles/general/GetStartedBtn.module.scss"
+import s from "@/components/common/App/shared-components/GetStartedBtn.module.scss"
 import arrow from "@/assets/images/24-px-1-outlined-arrow-right.svg"
 
 export const GetStartedBtn = () => {

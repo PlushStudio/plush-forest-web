@@ -1,5 +1,5 @@
 import React from 'react'
-import s from '@/assets/styles/layout/HomeFeatureSection.module.scss'
+import s from '@/components/common/App/shared-components/HomeFeatureSection.module.scss'
 import steps from '@/assets/images/steps.svg'
 import bigTree from '@/assets/images/picture-large-tree.png'
 import leaf from '@/assets/images/leaf.svg'

@@ -20,7 +20,7 @@ import tree09 from '@/assets/images/tree-09@3x.png'
 import tree10 from '@/assets/images/tree-10@3x.png'
 import treesTooltipData from '@/assets/data/Trees'
 import { TooltipedTree } from '@/components/common/App/shared-components/TreesArea/TooltipedTree'
-import s from '@/assets/styles/data-display/TreesArea.module.css'
+import s from '@/components/common/App/shared-components/TreesArea/TreesArea.module.css'
 
 export const TreesArea = () => {
   return (

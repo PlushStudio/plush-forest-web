@@ -1,0 +1,13 @@
+.accordion > .card > .card-header {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  height: 64px;
+  align-items: center;
+  font-size: 18px;
+}
+
+.show, .collapsing {
+  max-width: 875px;
+  padding: 0 3em;
+}

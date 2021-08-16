@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import s from '@/assets/styles/layout/SoilFooterWithContacts.module.scss'
+import s from '@/components/common/App/layout-components/SoilFooterWithContacts.module.scss'
 import bitmapPlant from '@/assets/images/bitmap-plant.png'
 import twitterIcon from '@/assets/images/atom-icon-social-twitter.svg'
 import discordIcon from '@/assets/images/atom-icon-social-discord.svg'

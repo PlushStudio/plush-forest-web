@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import s from '@/assets/styles/layout/HeaderContent.module.scss'
+import s from '@/components/common/App/layout-components/HeaderContent.module.scss'
 import treeIcon from '@/assets/images/tree-icon.svg'
 
 export const HeaderContent: FC = () => {
