@@ -1,14 +1,14 @@
-import s from "./About.module.css"
-import {Header} from "../components/layout-components/Header";
-import {HomeText} from "../components/shared-components/HomeText";
-import {TreeTypeSelector} from "../components/shared-components/TreeTypeSelector";
-import {GetStartedBtn} from "../components/shared-components/GetStartedBtn";
-import {HomeFeatureSection1} from "../components/shared-components/HomeFeatureSection1";
-import {TreesArea} from "../components/shared-components/TreesArea/TreesArea";
 import React from "react";
-import {HomeFeatureSection2} from "../components/shared-components/HomeFeatureSection2";
-import {HomeFeatureSection3} from "../components/shared-components/HomeFeatureSection3";
-import {Footer} from "../components/layout-components/Footer";
+import s from "./About.module.css"
+import {Header } from "@/components/common/App/layout-components/Header"
+import {HomeText} from "@/components/common/App/shared-components/HomeText";
+import {TreeTypeSelector} from "@/components/common/App/shared-components/TreeTypeSelector";
+import {GetStartedBtn} from "@/components/common/App/shared-components/GetStartedBtn";
+import {HomeFeatureSection1} from "@/components/common/App/shared-components/HomeFeatureSection1";
+import {TreesArea} from "@/components/common/App/shared-components/TreesArea/TreesArea";
+import {HomeFeatureSection2} from "@/components/common/App/shared-components/HomeFeatureSection2";
+import {HomeFeatureSection3} from "@/components/common/App/shared-components/HomeFeatureSection3";
+import {Footer} from "@/components/common/App/layout-components/Footer";
 
 export const AboutPage = () => {
     return (

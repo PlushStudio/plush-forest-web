@@ -3,6 +3,7 @@
     width: 100%;
     object-fit: contain;
     margin: 0 0 0 29.7px;
+    z-index: 3;
 }
 
 .treesArea {
@@ -10,7 +11,6 @@
     top: 0;
     right: 0;
     left: 400px;
-    overflow-x: clip;
 }
 
 .treesArea1 {
@@ -68,16 +68,77 @@
     max-height: 92px;
 }
 
-.tree08 {
+.tree {
     position: absolute;
-    width: 77px;
-    right: 764px;
-    top: 399px;
+    width: 76px;
+    height: 76px;
     z-index: 999;
     transition: 0.2s ease-in-out;
 }
 
-.tree08:hover {
+.tree:hover {
     filter: hue-rotate(180deg);
     cursor: pointer;
 }
+
+.tree1 {
+    position: absolute;
+    width: 76px;
+    height: 76px;
+    right: 164px;
+    top: 399px;
+}
+
+.tree2 {
+    right: 470px;
+    top: 448px;
+}
+
+.tree3 {
+    right: 454px;
+    top: 289px;
+    width: 125px;
+    height: 135px;
+}
+
+.tree4 {
+    right: 158px;
+    top: 157px;
+    width: 108px;
+    height: 111px;
+}
+
+.tree5 {
+    right: 412px;
+    top: 78px;
+}
+
+.tree6 {
+    right: 519px;
+    top: 190px;
+}
+
+.tree7 {
+    right: 350px;
+    top: 198px;
+    width: 82px;
+    height: 83px;
+}
+
+.tree8 {
+    position: absolute;
+    width: 77px;
+    right: 719px;
+    top: 411px;
+}
+
+.tree9 {
+    right: 279px;
+    top: 71px;
+}
+
+.tree10 {
+    top: 566px;
+    right: 664px;
+}
+

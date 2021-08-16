@@ -1,8 +1,8 @@
 import logo from '../assets/images/smallTreeIcon.svg';
-import { Page } from "../Page"
+import { Page } from "@/Page"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { useHistory } from "react-router"
-import { useCallback } from "react"
+import React, { useCallback } from "react"
 
 export const PageNotFound = () => {
   const history = useHistory()

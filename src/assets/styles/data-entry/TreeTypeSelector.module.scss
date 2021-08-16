@@ -1,25 +1,23 @@
 @use "../theme";
+@use '../variables';
 
 .container {
   margin-top: 2em;
 }
 
 .header, footer {
-  width: 135px;
-  margin: 0 23px 19px 0;
+  width: 136px;
+  margin: 0 24px 20px 0;
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.33;
-  letter-spacing: normal;
   color: theme.$grey-800;
 }
 
 .circlesContainer {
   display: flex;
   position: relative;
+  z-index: variables.$higher-order;
 }
 
 .ovalSelected {
@@ -70,7 +68,6 @@
 }
 
 .popover {
-  width: 632px !important;
   max-width: inherit !important;
   border: none !important;
   border-radius: 20px !important;
@@ -79,7 +76,7 @@
 
 .popoverWrapper {
   display: flex;
-  width: 632px;
+  max-width: 632px;
   height: 192px;
   padding: 8px 16px 8px 8px;
   border-radius: 20px !important;

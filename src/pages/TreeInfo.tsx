@@ -1,4 +1,5 @@
-import { Page } from "../Page"
+import React from "react"
+import { Page } from '@/Page'
 import { Col, Nav, Row } from "react-bootstrap"
 import { useParams } from "react-router"
 import treeInfoPicture from "../assets/images/treeInfo.png"

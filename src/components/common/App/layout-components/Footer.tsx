@@ -1,13 +1,13 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 import {SoilFooterWithContacts} from './SoilFooterWithContacts'
-import s from "../../assets/styles/layout/Footer.module.scss";
+import s from "@/assets/styles/layout/Footer.module.scss";
+import "~/bootstrap/scss/bootstrap.scss";
 import {Accordion, Card} from "react-bootstrap";
-import accordionPlus from "../../assets/images/16-px-1-outlined-plus.svg"
-import accordionMinus from "../../assets/images/16-px-1-outlined-minus.svg"
-import bitmapPlant from "../../assets/images/bitmap-plant.png"
-import abstractIconLeaf from "../../assets/images/abstract-icon-1.svg"
-import abstractIconEye from "../../assets/images/abstract-icon-2.svg"
-import abstractIconHeart from "../../assets/images/abstract-icon-3.svg"
+import accordionPlus from "@/assets/images/16-px-1-outlined-plus.svg"
+import accordionMinus from "@/assets/images/16-px-1-outlined-minus.svg"
+import abstractIconLeaf from "@/assets/images/abstract-icon-1.svg"
+import abstractIconEye from "@/assets/images/abstract-icon-2.svg"
+import abstractIconHeart from "@/assets/images/abstract-icon-3.svg"
 
 export const Footer: FC = () => {
 
@@ -25,7 +25,7 @@ export const Footer: FC = () => {
                     <Accordion defaultActiveKey="0">
                         <Card>
                             <Accordion.Toggle
-                                className={`unselectable accordionText ${isOpenTabId === 0 && s.opened}`}
+                                className={`unselectable accordionText ${isOpenTabId === 7 && s.opened}`}
                                 onClick={() => handleTabClick(0)} as={Card.Header} eventKey="0">
 
                                 How it works
@@ -81,7 +81,6 @@ export const Footer: FC = () => {
                             <Accordion.Toggle
                                 className={`unselectable accordionText ${isOpenTabId === 1 && s.opened}`}
                                 onClick={() => handleTabClick(1)} as={Card.Header} eventKey="1">
-
                                 Why its important
                                 {isOpenTabId === 1 && <img alt="show more" src={accordionMinus}/>}
                                 {isOpenTabId !== 1 && <img alt="show more" src={accordionPlus}/>}

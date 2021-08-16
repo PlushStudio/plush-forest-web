@@ -1,3 +1,4 @@
+import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import {PageNotFound} from "./pages/PageNotFound"
 import {AboutPage} from "./pages/About"
