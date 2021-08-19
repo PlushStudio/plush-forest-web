@@ -1,15 +1,13 @@
 .treesAreaImg {
     position: absolute;
-    width: 100%;
     object-fit: contain;
-    margin: 0 0 0 29.7px;
     z-index: 3;
 }
 
 .treesArea {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 22px;
+    right: 82px;
     left: 400px;
 }
 
@@ -22,49 +20,49 @@
 .treesArea2 {
     transform: rotate(-722deg);
     top: -124px;
-    right: 50px;
+    right: 101px;
     max-height: 823px;
 }
 
 .treesArea3 {
     top: -38px;
-    right: 81px;
+    right: 165px;
     max-height: 712px;
 }
 
 .treesArea4 {
     top: 78px;
-    right: -24px;
+    right: 224px;
     max-height: 403px;
 }
 
 .treesArea5 {
     top: 141px;
-    right: -28px;
+    right: 263px;
     max-height: 289px;
 }
 
 .treesArea6 {
     top: 200px;
-    right: -33px;
+    right: 295px;
     max-height: 185px;
 }
 
 .treesArea7 {
     top: 370px;
-    right: 243px;
+    right: 526px;
     max-height: 239px;
 }
 
 .treesArea8 {
     top: 415px;
-    right: 242px;
+    right: 558px;
     max-height: 160px;
 }
 
 .treesArea9 {
     top: 452px;
-    right: 242px;
+    right: 588px;
     max-height: 92px;
 }
 
@@ -83,62 +81,72 @@
 
 .tree1 {
     position: absolute;
-    width: 76px;
-    height: 76px;
-    right: 164px;
-    top: 399px;
+    width: 88px;
+    height: 88px;
+    right: 186px;
+    top: 341px;
 }
 
 .tree2 {
-    right: 470px;
-    top: 448px;
+    height: 67px;
+    width: 92px;
+    right: 390px;
+    top: 458px;
 }
 
 .tree3 {
-    right: 454px;
-    top: 289px;
-    width: 125px;
-    height: 135px;
+    right: 416px;
+    top: 296px;
+    width: 130px;
+    height: 122px;
 }
 
 .tree4 {
-    right: 158px;
-    top: 157px;
-    width: 108px;
-    height: 111px;
+    right: 148px;
+    top: 176px;
+    width: 114px;
+    height: 114px;
 }
 
 .tree5 {
-    right: 412px;
-    top: 78px;
+    right: 362px;
+    top: 87px;
+    width: 58px;
+    height: 58px;
 }
 
 .tree6 {
-    right: 519px;
-    top: 190px;
+    width: 60px;
+    right: 482px;
+    height: 60px;
+    top: 192px;
 }
 
 .tree7 {
-    right: 350px;
-    top: 198px;
-    width: 82px;
-    height: 83px;
+    right: 310px;
+    top: 212px;
+    width: 78px;
+    height: 74px;
 }
 
 .tree8 {
     position: absolute;
-    width: 77px;
-    right: 719px;
-    top: 411px;
+    width: 70px;
+    height: 68px;
+    right: 662px;
+    top: 380px;
 }
 
 .tree9 {
-    right: 279px;
-    top: 71px;
+    right: 248px;
+    top: 78px;
+    width: 54px;
+    height: 54px;
 }
 
 .tree10 {
-    top: 566px;
-    right: 664px;
+    top: 554px;
+    right: 570px;
+    width: 88px;
 }
 

@@ -8,6 +8,9 @@
 }
 
 .show, .collapsing {
-  max-width: 875px;
+  max-width: 876px;
+}
+
+.accordion .collapse, .accordion .collapsing {
   padding: 0 3em;
 }

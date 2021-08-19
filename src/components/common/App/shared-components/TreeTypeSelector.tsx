@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import s from '@/components/common/App/shared-components/TreeTypeSelector.module.scss'
+import '@/components/common/App/shared-components/TreeTypeSelector.module.scss'
 import { treesTooltip } from '@/assets/data/treesTooltip'
 import oval from '@/assets/images/oval-copy.svg'
 import firstSelectorImg from '@/assets/images/img-in-selector-1.png'
