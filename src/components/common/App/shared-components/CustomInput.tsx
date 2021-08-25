@@ -1,4 +1,4 @@
-import React, {CSSProperties} from 'react'
+import React from 'react'
 import s from '@/components/common/App/shared-components/CustomInput.module.scss'
 import {Form} from "react-bootstrap";
 
@@ -13,7 +13,8 @@ interface ICustomInput {
 export const CustomInput = ({as, type, placeholder, readonly, className}: ICustomInput) => {
     return (
         <div>
-            <Form.Control className={s.CustomInput} as={as} type={type} placeholder={placeholder} readOnly={readonly}/>
+            <Form.Control className={`${className} + ${s.customInput}`} as={as} type={type} placeholder={placeholder}
+                          readOnly={readonly}/>
         </div>
     )
 }

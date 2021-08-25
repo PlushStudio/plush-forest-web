@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-color: theme.$fill-21-grey-50;
+  background-color: theme.$grays-50;
   background-image: url("../../../../assets/images/bitmap-soil.png");
   background-size: 366px 192px;
   height: 192px;
@@ -63,7 +63,7 @@
 }
 
 .leftPullText {
-  color: theme.$fill-21-grey-50;
+  color: theme.$grays-50;
   cursor: default;
   padding-left: 12px;
 }
