@@ -1,0 +1,28 @@
+@use 'src/assets/styles/theme';
+
+.container {
+  display: flex;
+  margin: 36px 62px 0 0;
+  border-radius: 160px;
+}
+
+.arrow {
+  margin-left: 1em;
+}
+
+.btnPrimary {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  color: theme.$white !important;
+  width: 208px !important;
+  height: 64px !important;
+  font-family: AvenirNextRoundedPro-Demi, serif;
+  border-radius: 160px !important;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04) !important;
+  background-image: linear-gradient(to bottom, #15cc98 0%, #00ad7a 100%) !important;
+  cursor: pointer;
+  font-size: 20px !important;
+  border-color: transparent !important;
+}

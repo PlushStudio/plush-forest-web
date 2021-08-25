@@ -1,0 +1,36 @@
+@use "/src/assets/styles/theme";
+
+.backgroundContainer {
+  height: 100vh;
+  background: theme.$grays-50;
+}
+
+.container {
+  max-width: 1240px;
+  margin: auto;
+  padding-bottom: 2.4em;
+}
+
+.plantingFormWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.plantingForm {
+  padding-top: 4em;
+}
+
+.select {
+  width: 512px;
+}
+
+.textarea {
+  height: 176px !important;
+}
+
+.formLabel {
+  font-family: Moranga, sans-serif;
+  font-size: 18px;
+  color: theme.$grey-800;
+}

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="328" height="419" viewBox="0 0 328 419">
+    <defs>
+        <filter id="0pp9s9vwba" width="124.5%" height="116.6%" x="-13.8%" y="-8.3%" filterUnits="objectBoundingBox">
+            <feOffset dx="-4" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="10"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0"/>
+            <feOffset dx="-2" dy="2" in="SourceAlpha" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation="4"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0417224377 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <filter id="rrqslo9gsc" width="117.6%" height="111.9%" x="-10.3%" y="-6%" filterUnits="objectBoundingBox">
+            <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="2"/>
+            <feOffset dx="-2" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+        </filter>
+        <path id="zk5felk0ib" d="M691.474 2193.04c-13.293 48.92-10.112 102.191 8.91 149.17 7.1 17.535 16.588 34.52 30.625 47.162 24.897 22.423 60.575 28.24 94.029 27.724 23.392-.358 47.718-3.682 67.154-16.743 20.51-13.783 33.09-36.808 40.908-60.297 9.953-29.899 13.401-61.959 10.037-93.3-2.61-24.306-9.23-47.984-13.43-72.066-5.77-33.092-7.206-67.775-22.08-97.872-62.922-127.327-196.625 44.358-216.153 116.221"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g transform="translate(-636 -2014) scale(-1 1) rotate(-28 0 5488.452)">
+                <use fill="#000" filter="url(#0pp9s9vwba)" xlink:href="#zk5felk0ib"/>
+                <use fill="#FAFAFA" xlink:href="#zk5felk0ib"/>
+                <use fill="#000" filter="url(#rrqslo9gsc)" xlink:href="#zk5felk0ib"/>
+            </g>
+        </g>
+    </g>
+</svg>

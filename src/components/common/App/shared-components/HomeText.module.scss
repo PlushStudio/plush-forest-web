@@ -1,0 +1,23 @@
+@use '../../../../assets/styles/theme';
+
+.container {
+  max-width: 580px;
+  padding-top: 14px;
+}
+
+.text {
+  height: 160px;
+  margin: 0 0 35px 0;
+  font-family: Moranga Regular, sans-serif;
+  font-size: 28px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: theme.$grey-800;
+}
+
+.primary {
+  color: theme.$emerald-600-s;
+}
