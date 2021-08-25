@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./About.module.css"
-import {Header } from "@/components/common/App/layout-components/Header"
+import {Header} from "@/components/common/App/layout-components/Header"
 import {HomeText} from "@/components/common/App/shared-components/HomeText";
 import {TreeTypeSelector} from "@/components/common/App/shared-components/TreeTypeSelector";
 import {GetStartedBtn} from "@/components/common/App/shared-components/GetStartedBtn";
@@ -27,7 +27,7 @@ export const AboutPage = () => {
                     <Header/>
                     <HomeText/>
                     <TreeTypeSelector/>
-                    <GetStartedBtn/>
+                    <GetStartedBtn text="Get Started"/>
                     <TreesArea/>
                 </div>
                 <div className={s.homeFeatureContainer}>

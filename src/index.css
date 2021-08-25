@@ -37,8 +37,9 @@ code {
 }
 
 .planting-tree-image {
-    height: 40vmin;
-    pointer-events: none;
+    width: 632px;
+    height: 712px;
+    object-fit: contain;
 }
 
 .unselectable {
