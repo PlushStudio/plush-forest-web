@@ -51,7 +51,7 @@ export const PlantPage = () => {
                         <GetStartedBtn onClick={(e: any) => submit(e)} text="Continue" variant='success'
                                        type='submit'/>}
                         {isPlanting &&
-                        <GetStartedBtn onClick={(e: any ) => submit(e)} loading={isPlanting} text="Planting..."
+                        <GetStartedBtn onClick={(e: any) => submit(e)} loading={isPlanting} text="Planting..."
                                        variant='success' type='submit'/>}
                     </Form>
                     <img src={plantingTree} className='planting-tree-image' alt='logo'/>

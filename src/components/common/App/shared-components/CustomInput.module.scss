@@ -6,11 +6,12 @@
   border-radius: 12px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   resize: none;
+  border: 1px solid #fff;
 }
 
 .customInput:focus {
-  border-color: #5668fe;
   box-shadow: 0 0 0 4px rgba(86, 104, 254, 0.2);
+  border: 1px solid #5668fe;
 }
 
 .customInput::placeholder {

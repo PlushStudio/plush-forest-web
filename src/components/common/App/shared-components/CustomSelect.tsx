@@ -13,18 +13,18 @@ export const CustomSelect = () => {
     ];
 
     const [isOpen, setOpen] = useState(false);
-    const [items, setItem] = useState(data);
+    const [items,] = useState(data);
     const [selectedItem, setSelectedItem] = useState(0);
 
     const toggleDropdown = () => setOpen(!isOpen);
 
     const handleItemClick = (id: number) => {
         selectedItem == id ? setSelectedItem(0) : setSelectedItem(id);
-    }
+    };
 
     return (
-        <div className={s.dropdown}>
-            <div className={s.dropdownHeader} onClick={toggleDropdown}>
+        <div className={`${s.dropdown} ${isOpen && s.focused}`}>
+            <div className={`${s.dropdownHeader}`} onClick={toggleDropdown}>
                 <div className={s.dropdownHeaderContent}>
                     <div className={s.dropdownHeaderPrefix}
                          style={{backgroundImage: `url(/src/assets/images/treeIcon-0${selectedItem + 1}.png)`}}/>
@@ -32,7 +32,7 @@ export const CustomSelect = () => {
                     {items.find(item => item.id == selectedItem).label}
 
                 </div>
-                <img className={s.dropDownArrow} src={arrowDown} style={isOpen ? {transform: "rotate(180deg)"} : null}
+                <img className={s.dropDownArrow} src={arrowDown} style={isOpen && {transform: "rotate(180deg)"}}
                      alt="arrow down"/>
             </div>
             <div className={`${s.dropdownBody} ${isOpen && s.dropdownBodyOpen}`}>
@@ -55,5 +55,4 @@ export const CustomSelect = () => {
             </div>
         </div>
     )
-
-}
+};
