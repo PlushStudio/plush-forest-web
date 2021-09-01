@@ -50,7 +50,7 @@ export const CustomSelect: React.FC = () => {
             <div className={`${s.dropdownHeader}`} onClick={(e:any) => {selectHandler(e)}}>
                 <div className={s.dropdownHeaderContent}>
                     <div className={s.dropdownHeaderPrefix}
-                         style={{backgroundImage: `url(images/treeIcon-0${selectedItem + 1}.png)`}}/>
+                         style={{backgroundImage: `url(/assets/treeIcon-0${selectedItem + 1}.png)`}}/>
 
                     {items.find((item: IData) => item.id == selectedItem)!.label}
 
@@ -63,7 +63,7 @@ export const CustomSelect: React.FC = () => {
 
                     <div className={s.dropdownItem} onClick={() => handleItemClick(index)}>
                         <div className={s.dropdownItemPrefix}
-                             style={{backgroundImage: `url(images/treeIcon-0${index + 1}.png)`}}/>
+                             style={{backgroundImage: `url(/assets/treeIcon-0${index + 1}.png)`}}/>
                         <div className={s.dropdownItemContent}>
                             <div className={s.dropdownLabel}>
                                 {item.label}

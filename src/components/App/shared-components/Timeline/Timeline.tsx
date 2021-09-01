@@ -4,7 +4,6 @@ import s from './Timeline.module.scss'
 import TimelineCard from "@/components/App/shared-components/Timeline/TimelineCards/TimelineCard";
 import heartImg from '@/assets/images/bitmap-copy@2x.png';
 import plantImg from '@/assets/images/plant-image.png';
-import timelineBase from '@/assets/images/timelinebase.png';
 
 export interface ICardInfo {
     date: string,
