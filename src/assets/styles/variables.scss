@@ -19,6 +19,13 @@ $grid-breakpoints: (
         xl: 1200px
 ) !default;
 
+// Define the width of timeline cards,
+$timeline-sizes: (
+        xs: 320,
+        sm: 428px,
+        md: 501px,
+        lg: 600px,
+) !default;
 
 // Grid containers
 //

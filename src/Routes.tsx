@@ -16,10 +16,10 @@ export const Routes = () => (
             <Route path="/about">
                 <AboutPage/>
             </Route>
-            <Route path="/plant">
+            <Route path="/planting">
                 <PlantPage/>
             </Route>
-            <Route path="/tree/:id/info">
+            <Route path="/tree/:id/:currentLocation">
                 <TreeInfoPage/>
             </Route>
             <Route path="/trees">

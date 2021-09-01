@@ -1,14 +1,14 @@
 import React from "react";
 import s from "./About.module.css"
-import {Header} from "@/components/common/App/layout-components/Header"
-import {HomeText} from "@/components/common/App/shared-components/HomeText";
-import {TreeTypeSelector} from "@/components/common/App/shared-components/TreeTypeSelector";
-import {GetStartedBtn} from "@/components/common/App/shared-components/GetStartedBtn";
-import {HomeFeatureSection1} from "@/components/common/App/shared-components/HomeFeatureSection1";
-import {TreesArea} from "@/components/common/App/shared-components/TreesArea/TreesArea";
-import {HomeFeatureSection2} from "@/components/common/App/shared-components/HomeFeatureSection2";
-import {HomeFeatureSection3} from "@/components/common/App/shared-components/HomeFeatureSection3";
-import {Footer} from "@/components/common/App/layout-components/Footer";
+import {Header} from "@/components/App/layout-components/Header/Header"
+import {HomeText} from "@/components/App/shared-components/HomeText/HomeText";
+import {TreeTypeSelector} from "@/components/App/shared-components/TreeTypeSelector/TreeTypeSelector";
+import {MainActionButton} from "@/components/App/shared-components/MainActionButton/MainActionButton";
+import {HomeFeatureSection1} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection1";
+import {TreesArea} from "@/components/App/shared-components/TreesArea/TreesArea";
+import {HomeFeatureSection2} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection2";
+import {HomeFeatureSection3} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection3";
+import {Footer} from "@/components/App/layout-components/Footer/Footer";
 
 export const AboutPage = () => {
     return (
@@ -27,7 +27,7 @@ export const AboutPage = () => {
                     <Header/>
                     <HomeText/>
                     <TreeTypeSelector/>
-                    <GetStartedBtn text="Get Started"/>
+                    <MainActionButton text="Get Started"/>
                     <TreesArea/>
                 </div>
                 <div className={s.homeFeatureContainer}>

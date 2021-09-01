@@ -1,0 +1,38 @@
+@use "../../../../assets/styles/theme";
+@use "../../../../assets/styles/variables";
+
+.headerContainer {
+  display: flex;
+  z-index: variables.$higher-order;
+}
+
+.logoTitle {
+  width: 100%;
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-size: 24px;
+  padding-top: 14px;
+  line-height: 0;
+  letter-spacing: normal;
+  color: theme.$black;
+}
+
+.treeIcon {
+  user-select: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.logoDescription {
+  font-size: 1em;
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-style: normal;
+  line-height: 1.38;
+  color: theme.$grey-800;
+}
+
+.contentBlock {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 14px;
+}
