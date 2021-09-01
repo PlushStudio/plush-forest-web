@@ -6,7 +6,7 @@ import firstSelectorImg from '@/assets/images/img-in-selector-1.png'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 
 export const TreeTypeSelector = () => {
-  const [activeTreeId, setActiveTreeId] = useState(3)
+  const [activeTreeId, setActiveTreeId] = useState(3);
 
   const handleClick = (activeTreeId: number) => {
     setActiveTreeId(activeTreeId)
@@ -41,7 +41,7 @@ export const TreeTypeSelector = () => {
           <OverlayTrigger trigger='hover' placement='top' overlay={popover} defaultShow={false}
                           delay={300}>
             <div onClick={() => handleClick(index)}
-                 style={{ backgroundImage: `url(images/treeIcon-0${index + 1}.png)` }}
+                 style={{ backgroundImage: `url(/assets/treeIcon-0${index + 1}.png)` }}
                  className={s.circle}>
               {activeTreeId === index &&
               <img className={s.ovalSelected} src={oval} alt='oval selected' />}
