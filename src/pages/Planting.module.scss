@@ -1,7 +1,7 @@
 @use "/src/assets/styles/theme";
 
 .backgroundContainer {
-  height: 100vh;
+  min-height: 100vh;
   background: theme.$grays-50;
 }
 

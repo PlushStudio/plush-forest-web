@@ -1,0 +1,21 @@
+@use "/src/assets/styles/theme";
+
+.backgroundContainer {
+  background: theme.$grays-50;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1240px;
+  margin: auto;
+  padding-bottom: 2.4em;
+}
+
+.mockInfo {
+  max-width: 1288px;
+  min-width: 1000px;
+  height: 640px;
+  margin: 0 0 8px;
+  border-radius: 32px;
+  background-color: theme.$white-two;
+}
