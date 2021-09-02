@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {ReactHTML} from 'react';
 import MessageInfo from "@/components/App/shared-components/Timeline/MessageInfo";
 import s from './Timeline.module.scss'
 import TimelineCard from "@/components/App/shared-components/Timeline/TimelineCards/TimelineCard";
 import heartImg from '@/assets/images/bitmap-copy@2x.png';
 import plantImg from '@/assets/images/plant-image.png';
+import timelineBase from '@/assets/images/timelinebase.png';
 
 export interface ICardInfo {
     date: string,
@@ -40,10 +41,14 @@ const Timeline: React.FC = () => {
     ];
     return (
         <div>
-            <div className={`${s.container} ${s.max_width_lg} ${s.cd_timeline__container}`}>
-                {cardInfo.map((item: ICardInfo, index: number) => {
+            <div className={`${s.container} ${s.cdTimelineContainer}`}>
+                <div className={s.greyDot}/>
+                {cardInfo.map((item: ICardInfo, index: number) : JSX.Element => {
                     return <TimelineCard id={index + 1} cardInfo={cardInfo[index]}/>
                 })}
+                <div className={s.timelineBase}>
+                    <img src={timelineBase} alt="tree timeline"/>
+                </div>
             </div>
             <MessageInfo/>
         </div>

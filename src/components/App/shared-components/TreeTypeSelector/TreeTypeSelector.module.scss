@@ -26,6 +26,7 @@
   position: absolute;
   left: -4px;
   top: -4px;
+  border-radius: 50px;
 }
 
 .circle {
@@ -42,10 +43,14 @@
 }
 
 .circle:hover {
-  webkit-box-shadow: 0 0 0 4px #ffd34e;
-  moz-box-shadow: 0 0 0 4px #ffd34e;
-  box-shadow: 0 0 0 4px #ffd34e;
-  z-index: 999;
+  webkit-box-shadow: 0 0 0 4px #ffd34e!important;
+  moz-box-shadow: 0 0 0 4px #ffd34e!important;
+  box-shadow: 0 0 0 4px #ffd34e!important;
+  z-index: 999!important;
+}
+
+.circleContainer {
+  position: relative;
 }
 
 .footer {

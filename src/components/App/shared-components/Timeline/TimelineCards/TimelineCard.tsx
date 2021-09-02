@@ -11,16 +11,17 @@ interface ITimelineCardProps {
 const TimelineCard: FC<ITimelineCardProps> = ({id, cardInfo}) => {
 
     return (
-        <div className={`${s.cd_timeline__block} ${id % 2 === 0 ? s.reverse : ''}`}>
-            <div className={`${s.cd_timeline__img} ${s.cd_timeline__img__picture}`}>
+        <div className={`${s.cdTimelineBlock} ${id % 2 === 0 ? s.reverse : ''}`}>
+            <div className={s.cdTimelineImg}>
                 <img src={orangeDot} alt="Picture"/>
             </div>
 
             <div className={s.cardContainer}>
-                <div className={`${s.cd_timeline__content} ${id % 2 === 0 ? s.arrowLeft : s.arrowRight} ${s[cardInfo.size]} ${s.text_component}`}>
-                    <div className={s.cd_timeline__content_text}>
-                        <span className={s.cd_timeline__date}>{cardInfo.date}</span>
-                        <p className={s.color_contrast_medium}>{cardInfo.text}</p>
+                <div
+                    className={`${s.cdTimelineContent} ${id % 2 === 0 ? s.arrowLeft : s.arrowRight} ${s[cardInfo.size]}`}>
+                    <div className={s.cdTimelineContentText}>
+                        <span className={s.cdTimelineDate}>{cardInfo.date}</span>
+                        <p className={s.colorContrastMedium}>{cardInfo.text}</p>
                         <a href="#" className={`${s.btn}`}>{cardInfo.subtext}</a>
                     </div>
                     <img className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
