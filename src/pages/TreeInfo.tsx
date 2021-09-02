@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {NavMenu} from "@/components/App/shared-components/NavMenu/NavMenu";
 import {Row, Col} from 'react-bootstrap';
 import s from './TreeInfo.module.scss'
-import {Header} from "@/components/App/layout-components/Header/Header";
+import {Header} from "@/components/App/layout-components/Header";
 import {useParams, useHistory} from "react-router-dom";
 import Timeline from "@/components/App/shared-components/Timeline/Timeline";
 

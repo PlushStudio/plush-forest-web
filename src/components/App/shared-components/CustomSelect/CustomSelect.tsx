@@ -1,7 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import '@/components/App/shared-components/CustomSelect/CustomSelect.module.scss'
 import s from "./CustomSelect.module.scss";
 import arrowDown from "@/assets/images/24-px-1-outlined-chevron-down.png";
+import treeIcon0 from "@/assets/images/treeIcon-01.png";
+import treeIcon1 from "@/assets/images/treeIcon-02.png";
+import treeIcon2 from "@/assets/images/treeIcon-03.png";
+import treeIcon3 from "@/assets/images/treeIcon-04.png";
 
 interface IData {
     id: number;
@@ -21,6 +25,8 @@ export const CustomSelect: React.FC = () => {
     const [items,] = useState<IData[]>(data);
     const [selectedItem, setSelectedItem] = useState<number>(0);
 
+    const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
+
     const toggleDropdown = () => setOpen(!isOpen);
 
     const handleItemClick = (id: number) => {
@@ -39,22 +45,25 @@ export const CustomSelect: React.FC = () => {
     };
 
 
-/*
-    useEffect(() => {
-        document.addEventListener('click', handleClickOutside, true);
-    });
-*/
+    /*
+        useEffect(() => {
+            document.addEventListener('click', handleClickOutside, true);
+        });
+    */
 
     return (
         <div className={`${s.dropdown} ${isOpen && s.focused}`}>
-            <div className={`${s.dropdownHeader}`} onClick={(e:any) => {selectHandler(e)}}>
+            <div className={`${s.dropdownHeader}`} onClick={(e: any) => {
+                selectHandler(e)
+            }}>
                 <div className={s.dropdownHeaderContent}>
-                    <div className={s.dropdownHeaderPrefix}
-                         style={{backgroundImage: `url(/assets/treeIcon-0${selectedItem + 1}.png)`}}/>
-
+                    {items.map((item: IData, index: number) => (
+                        selectedItem === index &&
+                        <img className={s.dropdownHeaderPrefix} src={TreeTypeSelectorImages[index]}/>
+                    ))}
                     {items.find((item: IData) => item.id == selectedItem)!.label}
-
                 </div>
+
                 <img className={`${s.dropDownArrow} ${isOpen && s.rotate180}`} src={arrowDown}
                      alt="arrow down"/>
             </div>
@@ -63,7 +72,7 @@ export const CustomSelect: React.FC = () => {
 
                     <div className={s.dropdownItem} onClick={() => handleItemClick(index)}>
                         <div className={s.dropdownItemPrefix}
-                             style={{backgroundImage: `url(/assets/treeIcon-0${index + 1}.png)`}}/>
+                             style={{backgroundImage: `url(/src/assets/images/treeIcon-0${index + 1}.png)`}}/>
                         <div className={s.dropdownItemContent}>
                             <div className={s.dropdownLabel}>
                                 {item.label}
@@ -72,7 +81,6 @@ export const CustomSelect: React.FC = () => {
                                 {`Available: ${item.available}`}
                             </div>
                         </div>
-
                     </div>
                 ))}
             </div>
