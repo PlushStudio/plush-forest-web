@@ -9,7 +9,6 @@ import s from './Planting.module.scss'
 import {MainActionButton} from "@/components/App/shared-components/MainActionButton/MainActionButton";
 import {CustomSelect} from "@/components/App/shared-components/CustomSelect/CustomSelect";
 
-
 export const PlantPage = () => {
     const [isPlanting, setIsPlanting] = useState(false);
     const history = useHistory();

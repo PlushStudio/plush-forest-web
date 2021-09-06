@@ -5,18 +5,17 @@
   width: calc(50% - 36px);
 }
 
-.cd_timeline {
-
+.cdTimeline {
   overflow: hidden;
   padding: 1em 0;
   color: red;
-  background-color: #b9b9fe;
+  background-color: theme.$purple-light;
 
   h2 {
     font-weight: 700;
   }
 
-  &__container {
+  &Container {
     position: relative;
     padding: calc(1.25 * 1.25em) 0;
     max-width: 80rem;
@@ -24,7 +23,7 @@
     margin-right: auto;
     width: calc(100% - 2 * 1.25 * 1.25em);
 
-    &::before { // this is the timeline vertical line
+    &::before {
       content: '';
       position: absolute;
       top: 0;
@@ -36,7 +35,7 @@
     }
   }
 
-  &__content {
+  &Content {
     text-align: right;
     display: flex;
     position: relative;
@@ -48,7 +47,7 @@
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 2px 0 rgba(0, 0, 0, 0.01), 0 2px 4px 0 rgba(0, 0, 0, 0.02), 0 4px 4px -1px rgba(0, 0, 0, 0.02), 0 8px 12px -2px rgba(0, 0, 0, 0.02);
     background-color: theme.$white;
 
-    &_container {
+    &Container {
       display: flex;
     }
 
@@ -67,7 +66,7 @@
     }
   }
 
-  &__img {
+  &Img {
     -ms-flex-order: 1;
     order: 1;
     position: absolute;
@@ -78,14 +77,13 @@
     align-items: center;
     flex-shrink: 0;
 
-
     img {
       width: 24px;
       height: 24px;
     }
   }
 
-  &__block {
+  &Block {
     display: flex;
     position: relative;
     z-index: 1;
@@ -97,7 +95,7 @@
     }
   }
 
-  &__date {
+  &Date {
     color: theme.$grays-500;
     font-family: AvenirNextRoundedPro-Med, sans-serif;
     font-size: 12px;
@@ -138,7 +136,7 @@
   color: theme.$emerald-600;
 }
 
-.cd_timeline__content_text {
+.cdTimelineContentText {
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 20px;
   color: theme.$grey-800;
@@ -147,15 +145,14 @@
 .reverse {
   flex-direction: row-reverse;
 
-  .cd_timeline {
-    &__img {
+  .cdTimeline {
+    &Img {
       margin-left: 0 !important;
       margin-right: calc(50% - 12px);
     }
 
-    &__content {
+    &Content {
       text-align: left !important;
-
       display: block !important;
 
       p {
@@ -181,10 +178,24 @@
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 2px 0 rgba(0, 0, 0, 0.01), 0 2px 4px 0 rgba(0, 0, 0, 0.02), 0 4px 4px -1px rgba(0, 0, 0, 0.02), 0 8px 12px -2px rgba(0, 0, 0, 0.02);
 }
 
-.timelinebase img {
-  height: 157px;
+.timelineBase img {
+  content: "";
   position: absolute;
-  margin-right: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  top: 100%;
+}
+
+.greyDot {
+  border-radius: 32px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: theme.$grey-200;
+  top: -26px;
 }
 
 .xs {

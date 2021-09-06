@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import s from './NavMenu.module.scss'
-import chart from '@/assets/images/32-px-1-outlined-chart.png'
-import gallery from '@/assets/images/32-px-1-outlined-gallery-01.png'
-import map from '@/assets/images/32-px-1-outlined-map-pin.png'
-import note from '@/assets/images/32-px-1-outlined-note.png'
-import tree from '@/assets/images/32-px-1-outlined-tree.png'
+import chart from '@/assets/images/32-px-1-outlined-chart-gray.png'
+import gallery from '@/assets/images/32-px-1-outlined-gallery-01-gray.png'
+import map from '@/assets/images/32-px-1-outlined-map-pin-gray.png'
+import note from '@/assets/images/32-px-1-outlined-note-gray.png'
+import tree from '@/assets/images/32-px-1-outlined-tree-white.png'
 import {Link} from 'react-router-dom'
 
 export const NavMenu: React.FC = () => {

@@ -1,12 +1,12 @@
 @use "/src/assets/styles/theme";
 
-.message_info {
+.messageInfo {
   display: flex;
   max-width: 688px;
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 auto;
+  margin: 2em auto 0 auto;
   padding: 30px 90px 26px 90px;
   border-radius: 160px;
   background: theme.$white;
@@ -21,7 +21,6 @@
 
   p {
     color: theme.$grey-800;
-
     span {
       color: theme.$emerald-600;
     }
