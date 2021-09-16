@@ -39,7 +39,6 @@ export const TreeTypeSelector = () => {
                 </div>
             </div>
         </Popover>
-    );
 
     return (
         <div className={s.container}>

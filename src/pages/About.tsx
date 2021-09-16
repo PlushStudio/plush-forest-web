@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./About.module.css"
-import {Header} from "@/components/App/layout-components/Header/Header"
+import {Header} from "@/components/App/layout-components/Header"
 import {HomeText} from "@/components/App/shared-components/HomeText/HomeText";
 import {TreeTypeSelector} from "@/components/App/shared-components/TreeTypeSelector/TreeTypeSelector";
 import {MainActionButton} from "@/components/App/shared-components/MainActionButton/MainActionButton";
@@ -8,7 +8,7 @@ import {HomeFeatureSection1} from "@/components/App/shared-components/HomeFeatur
 import {TreesArea} from "@/components/App/shared-components/TreesArea/TreesArea";
 import {HomeFeatureSection2} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection2";
 import {HomeFeatureSection3} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection3";
-import {Footer} from "@/components/App/layout-components/Footer/Footer";
+import {Footer} from "@/components/App/layout-components/Footer";
 
 export const AboutPage = () => {
     return (

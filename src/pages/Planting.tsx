@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import plantingTree from '../assets/images/group-5.png'
 import {useHistory} from 'react-router'
 import {CustomInput} from "@/components/App/shared-components/CustomInput/CustomInput";
-import {Header} from "@/components/App/layout-components/Header/Header";
+import {Header} from "@/components/App/layout-components/Header";
 import s from './Planting.module.scss'
 import {MainActionButton} from "@/components/App/shared-components/MainActionButton/MainActionButton";
 import {CustomSelect} from "@/components/App/shared-components/CustomSelect/CustomSelect";
