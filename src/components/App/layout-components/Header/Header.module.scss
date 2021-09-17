@@ -2,4 +2,21 @@
   display: flex;
   padding-bottom: 1.2em;
   padding-top: 2.4em;
+  justify-content: space-between;
+}
+
+.loginBtn {
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+  border-radius: 13px;
+  color: #1c1c1c;
+  border: 1px solid lightblue;
+  &:hover {
+    background-color: #5668fe;
+    cursor: pointer;
+    color: white;
+  }
 }

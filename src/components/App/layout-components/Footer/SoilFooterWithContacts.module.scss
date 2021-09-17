@@ -1,5 +1,5 @@
-@use '../../../../assets/styles/theme';
-@use '../../../../assets/styles/variables';
+@use '/src/assets/styles/theme';
+@use '/src/assets/styles/variables';
 
 
 .soilFooterWithContactsContainer {
@@ -7,7 +7,7 @@
   align-items: center;
   position: relative;
   background-color: theme.$grays-50;
-  background-image: url("../../../../assets/images/bitmap-soil.png");
+  background-image: url("@/assets/images/bitmap-soil.png");
   background-size: 366px 192px;
   height: 192px;
   object-fit: contain;
