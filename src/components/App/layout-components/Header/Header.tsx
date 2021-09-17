@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react'
 import s from '@/components/App/layout-components/Header/Header.module.scss'
 import {HeaderContent} from './HeaderContent'
-import useMetamaskAuth from '@/hooks/metamask/useMatamaskAuth'
+import useMetamaskAuth from '@/hooks/useMetamaskAuth';
 import api from '@/api/api';
 
 export const Header: FC = () => {
@@ -14,8 +14,12 @@ export const Header: FC = () => {
                 await login(
                     new URL(`${api.url}/${api.user.auth.nonce.url}`),
                     new URL(`${api.url}/${api.user.auth.login.url}`)
-                );
+                ).then((r: any) => {
+                    console.log(r)
+                });
+                setIsAuthenticated(true);
             } catch {
+                confirm("Ошибка, пользователь не зарегистрирован!");
                 console.error()
                 // TODO Handle errors. Now do nothing (perfect scenario)
             }

@@ -5,7 +5,6 @@ import {AboutPage} from "./pages/About"
 import {PlantPage} from "./pages/Planting"
 import Index from "./pages/index/Index";
 import {TreeInfoPage} from "./pages/TreeInfo"
-import {TreesListPage} from "./pages/TreesList"
 
 export const Routes = () => (
     <Router>
@@ -21,9 +20,6 @@ export const Routes = () => (
             </Route>
             <Route path="/tree/:id/:currentLocation">
                 <TreeInfoPage/>
-            </Route>
-            <Route path="/trees">
-                <TreesListPage/>
             </Route>
             <Route path="*">
                 <PageNotFound/>
