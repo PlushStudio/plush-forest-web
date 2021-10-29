@@ -40,7 +40,6 @@ export const TreeTypeSelector = () => {
             </div>
         </Popover>
     )
-
     return (
         <div className={s.container}>
             <div className={s.header}>Select your tree:</div>
