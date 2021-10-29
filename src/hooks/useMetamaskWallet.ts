@@ -1,10 +1,9 @@
-import { JsonRpcSigner, Web3Provider, ExternalProvider } from '@ethersproject/providers'
+import { JsonRpcSigner, Web3Provider, ExternalProvider} from '@ethersproject/providers'
 import detectEthereumProvider from '@metamask/detect-provider'
 import MetaMaskOnboarding from '@metamask/onboarding'
-import { ethers, utils } from 'ethers'
+import { ethers } from 'ethers'
 import { useEffect, useRef, useState } from 'react'
-
-const PLAIContractAddress = '0x7fD549d856c4a74fB902932dEA896FA7DE9D0823'
+import usePLAIContract from '@/hooks/usePLAIContract'
 
 export const errors = {
   walletNotInstalled: {
@@ -23,15 +22,16 @@ export const errors = {
 
 const useMetamaskWallet = () => {
   const onboarding = useRef<MetaMaskOnboarding>()
-  const [provider, setProvider] = useState<Web3Provider>()
   const [signer, setSigner] = useState<JsonRpcSigner>()
   const [initialized, setInitialized] = useState<boolean>(false)
+
+  const { PLAIContractAddress, PLAIContract, genericErc20Abi, provider } = usePLAIContract()
 
   /**
    * Returns MetaMask wallet installation state
    * @returns Is MetaMask wallet installed or not
    **/
-   const isInstalled = (): boolean => {
+  const isInstalled = (): boolean => {
     return MetaMaskOnboarding.isMetaMaskInstalled()
   }
 
@@ -88,9 +88,7 @@ const useMetamaskWallet = () => {
       throw errors.walletNotConnected
     }
 
-    const genericErc20Abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}];
-    const contract = new ethers.Contract(PLAIContractAddress, genericErc20Abi, provider)
-    const balance = ethers.utils.formatUnits(await contract.balanceOf(await getAddress()), 8)
+    const balance = ethers.utils.formatUnits(await PLAIContract.balanceOf(await getAddress()), 8)
 
     return parseInt(balance)
   }
@@ -114,27 +112,9 @@ const useMetamaskWallet = () => {
   }
 
   useEffect(() => {
-    /**
-     * Waits when window.ethereum will be available and
-     * sets provider and signer to work with blockchain
-     */
-    const detectProvider = async (): Promise<void> => {
-      const ethereumMetamaskGlobalObject = await detectEthereumProvider({ mustBeMetaMask: true, silent: true}) as ExternalProvider
-
-      if (!ethereumMetamaskGlobalObject) {
-        // Metamask wallet is not installed, but it is ok
-        // in this case, do nothing
-        return
-      }
-
-      setProvider(new ethers.providers.Web3Provider(ethereumMetamaskGlobalObject));
-    }
-
     if (!onboarding.current) {
       onboarding.current = new MetaMaskOnboarding()
     }
-
-    detectProvider()
   }, [])
 
   useEffect(() => {
@@ -144,6 +124,55 @@ const useMetamaskWallet = () => {
     }
   }, [provider])
 
+  function sendPLAI(send_token_amount: string, to_address: string, send_account: string) {
+    provider?.getGasPrice().then((currentGasPrice: any) => {
+      let gas_price = ethers.utils.hexlify(parseInt(currentGasPrice.toString()))
+      console.log(`gas_price: ${gas_price}`)
+
+      if (PLAIContractAddress) {
+        // general token send
+        let PLAIcontract = new ethers.Contract(
+            PLAIContractAddress,
+            genericErc20Abi,
+            // @ts-ignore
+            signer
+        )
+
+        // How many tokens?
+        let numberOfTokens = ethers.utils.parseUnits(send_token_amount, 8)
+        console.log(`numberOfTokens: ${numberOfTokens}`)
+
+        // Send tokens
+        PLAIcontract.transfer(to_address, numberOfTokens).then((transferResult: string) => {
+          console.dir(transferResult)
+          alert("sent token")
+        })
+      } // ether send
+      else {
+        const tx = {
+          from: send_account,
+          to: to_address,
+          value: ethers.utils.parseEther(send_token_amount),
+          nonce: provider.getTransactionCount(
+              send_account,
+              "latest"
+          ),
+          gasLimit: ethers.utils.hexlify('0x100000'), // 100000
+          gasPrice: gas_price,
+        }
+        console.dir(tx)
+        try {
+          signer?.sendTransaction(tx).then((transaction) => {
+            console.dir(transaction)
+            alert("Send finished!")
+          })
+        } catch (error) {
+          alert("failed to send!!")
+        }
+      }
+    })
+  }
+
   return {
     initialized,
     isInstalled,
@@ -152,7 +181,10 @@ const useMetamaskWallet = () => {
     connect,
     sign,
     getAddress,
-    getPLAIBalance
+    getPLAIBalance,
+    provider,
+    signer,
+    sendPLAI
   }
 }
 
