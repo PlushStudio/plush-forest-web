@@ -8,23 +8,24 @@ import abstractIconLeaf from '@/assets/images/abstract-icon-1.svg'
 import abstractIconEye from '@/assets/images/abstract-icon-2.svg'
 import abstractIconHeart from '@/assets/images/abstract-icon-3.svg'
 
-
 export const LearnMoreAccordion = () => {
-  const [isOpenTabId, setIsOpenTabId] = useState(0)
+  const [isOpenTabId, setIsOpenTabId] = useState(-1)
 
   const handleTabClick = (tabId: number) => {
     isOpenTabId === tabId ? setIsOpenTabId(-1) : setIsOpenTabId(tabId)
   }
 
   return (
-    <Accordion defaultActiveKey='0'>
+    <Accordion>
       <Card className={s.card}>
         <Accordion.Toggle
           className={`unselectable accordionText ${isOpenTabId === 0 ? s.opened : ''}`}
           onClick={() => handleTabClick(0)} as={Card.Header} eventKey='0'>
           How it works
-          {isOpenTabId === 0 && <img alt='show more' src={accordionMinus} />}
-          {isOpenTabId !== 0 && <img alt='show more' src={accordionPlus} />}
+          {isOpenTabId === 0 ?
+            <img alt='show more' src={accordionMinus} /> :
+            <img alt='show more' src={accordionPlus} />
+          }
         </Accordion.Toggle>
         <Accordion.Collapse eventKey='0'>
           <Card.Body>
@@ -73,13 +74,14 @@ export const LearnMoreAccordion = () => {
       </Card>
       <Card className={s.card}>
         <Accordion.Toggle
-          className={`unselectable accordionText ${isOpenTabId === 3 && s.opened}`}
-          onClick={() => handleTabClick(3)} as={Card.Header} eventKey='3'>
+          className={`unselectable accordionText ${isOpenTabId === 1 ? s.opened : ''}`}
+          onClick={() => handleTabClick(1)} as={Card.Header} eventKey='1'>
           About Plant Your Future NGO
-          {isOpenTabId === 3 && <img alt='show more' src={accordionMinus} />}
-          {isOpenTabId !== 3 && <img alt='show more' src={accordionPlus} />}
+          {isOpenTabId === 1 ? <img alt='show more' src={accordionMinus} /> :
+            <img alt='show more' src={accordionPlus} />
+          }
         </Accordion.Toggle>
-        <Accordion.Collapse eventKey='3'>
+        <Accordion.Collapse eventKey='1'>
           <Card.Body>Hello! I'm another body</Card.Body>
         </Accordion.Collapse>
       </Card>
