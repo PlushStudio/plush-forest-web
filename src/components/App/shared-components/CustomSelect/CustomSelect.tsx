@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { MouseEventHandler, useState } from 'react'
 import '@/components/App/shared-components/CustomSelect/CustomSelect.module.scss'
 import s from './CustomSelect.module.scss'
 import arrowDown from '@/assets/images/24-px-1-outlined-chevron-down.png'
@@ -39,7 +39,7 @@ export const CustomSelect: React.FC = () => {
     isOpen && setOpen(false)
   }
 
-  const selectHandler = (e: Event) => {
+  const selectHandler = () => {
     toggleDropdown()
     handleClickOutside()
   }
@@ -51,33 +51,39 @@ export const CustomSelect: React.FC = () => {
   */
   return (
     <div className={`${s.dropdown} ${isOpen ? s.focused : ''}`}>
-      <div className={`${s.dropdownHeader}`} onClick={(e: any) => {
-        selectHandler(e)
+      <div className={`${s.dropdownHeader}`} onClick={() => {
+        selectHandler()
       }}>
         <div className={s.dropdownHeaderContent}>
           {items.map((item: IData, index: number) => (
             selectedItem === index &&
-            <img className={s.dropdownHeaderPrefix} src={TreeTypeSelectorImages[index]} alt={'tree icon'} />
+            <img key={index} className={s.dropdownHeaderPrefix} src={TreeTypeSelectorImages[index]} alt={'tree icon'} />
           ))}
-          {items.find((item: IData) => item.id == selectedItem)!.label}
+          {items.find((item: IData) => item.id == selectedItem)?.label}
         </div>
-
-        <img className={`${s.dropDownArrow} ${isOpen ? s.rotate180 : ''}`} src={arrowDown}
-             alt='arrow down' />
+        <div className={s.dropdownHeaderRightPull}>
+          <div className={`${s.itemPrice} ${s.itemPriceDropdownHeader}`}>5 Plai</div>
+          <img className={`${s.dropDownArrow} ${isOpen ? s.rotate180 : ''}`} src={arrowDown}
+               alt='arrow down' />
+        </div>
       </div>
       <div className={`${s.dropdownBody} ${isOpen ? s.dropdownBodyOpen : ''}`}>
         {items.map((item: IData, index: number) => (
-          <div className={s.dropdownItem} onClick={() => handleItemClick(index)}>
-            <div className={s.dropdownItemPrefix}
-                 style={{ backgroundImage: `url(/src/assets/images/treeIcon-0${index + 1}.png)` }} />
-            <div className={s.dropdownItemContent}>
-              <div className={s.dropdownLabel}>
-                {item.label}
-              </div>
-              <div className={s.availableCount}>
-                {`Available: ${item.available}`}
+          <div key={item.id + index} className={`${s.dropdownItem} ${selectedItem === item.id ? s.selectedItem : ''}`}
+               onClick={() => handleItemClick(index)}>
+            <div className={s.dropdownItemPrefixContainer}>
+              <div className={s.dropdownItemPrefix}
+                   style={{ backgroundImage: `url(/src/assets/images/treeIcon-0${index + 1}.png)` }} />
+              <div className={s.dropdownItemContent}>
+                <div className={s.dropdownLabel}>
+                  {item.label}
+                </div>
+                <div className={s.availableCount}>
+                  {`Available: ${item.available}`}
+                </div>
               </div>
             </div>
+            <div className={s.itemPrice}>5 Plai</div>
           </div>
         ))}
       </div>

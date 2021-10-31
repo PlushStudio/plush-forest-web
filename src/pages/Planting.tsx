@@ -30,28 +30,19 @@ export const PlantPage = () => {
         <div className={s.plantingFormWrapper}>
           <Form className={s.plantingForm} onSubmit={submit}>
             <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>Tree type</Form.Label>
+              <Form.Label className={s.formLabel}>To Jasmin</Form.Label>
               <CustomSelect />
             </Form.Group>
             <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>Name of your daughter’s tree</Form.Label>
-              <CustomInput type='text' as='input' placeholder='Tree Name' readonly={isPlanting} />
-            </Form.Group>
-            <Form.Group controlId='parent'>
               <Form.Label className={s.formLabel}>From</Form.Label>
-              <CustomInput type='text' as='input' placeholder="Parent's Name" readonly={isPlanting} />
-            </Form.Group>
-            <Form.Group controlId='secretNote'>
-              <Form.Label className={s.formLabel}>Message</Form.Label>
-              <CustomInput className={s.textarea} type='text' as='textarea'
-                           placeholder='Your message to Jasmin' readonly={isPlanting} />
+              <CustomInput type='text' as='input' placeholder='Your name' readonly={isPlanting} />
             </Form.Group>
             {!isPlanting &&
-            <MainActionButton onClick={(e: any) => submit(e)} text='Continue' variant='success'
-                              type='submit' />}
+            <MainActionButton onClick={(e: any) => submit(e)} text='Plant your tree' variant='success'
+                              image='tree' />}
             {isPlanting &&
             <MainActionButton onClick={(e: any) => submit(e)} loading={isPlanting} text='Planting...'
-                              variant='success' type='submit' />}
+                              variant='success' image='tree' />}
           </Form>
           <img src={plantingTree} className='planting-tree-image' alt='logo' />
         </div>

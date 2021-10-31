@@ -27,7 +27,7 @@ export const AboutPage = () => {
                     <Header/>
                     <HomeText/>
                     <TreeTypeSelector/>
-                    <MainActionButton text="Get Started"/>
+                    <MainActionButton text="Get Started" image="next"/>
                     <TreesArea/>
                 </div>
                 <div className={s.homeFeatureContainer}>

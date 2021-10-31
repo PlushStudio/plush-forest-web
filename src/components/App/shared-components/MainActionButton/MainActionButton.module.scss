@@ -7,8 +7,9 @@
   border-radius: 160px;
 }
 
-.arrow {
-  margin-left: 1em;
+.image {
+  margin-left: 0.7em;
+  width: 24px;
 }
 
 .btnPrimary {
@@ -17,8 +18,8 @@
   align-content: center;
   justify-content: center;
   color: theme.$white !important;
-  width: 208px !important;
-  height: 64px !important;
+  width: 225px;
+  height: 64px;
   font-family: AvenirNextRoundedPro-Demi, serif;
   border-radius: 160px !important;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04) !important;

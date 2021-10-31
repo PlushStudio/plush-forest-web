@@ -7,10 +7,12 @@ export const HeaderContent: FC = () => {
 
   return (
     <div className={s.headerContainer}>
-      <Link to={'/'}><img className={s.treeIcon} src={treeIcon} alt='tree icon' /></Link>
+      <Link to={'/'}>
+        <img className={s.treeIcon} src={treeIcon} alt='tree icon' />
+      </Link>
       <div className={s.contentBlock}>
         <span className={s.logoTitle}>Plush Forest</span>
-        <span className={s.logoDescription}>Dedicate a tree to your child in the forest full of wonder.</span>
+        <span className={s.logoDescription}>A tree for every child.</span>
       </div>
     </div>)
 }
