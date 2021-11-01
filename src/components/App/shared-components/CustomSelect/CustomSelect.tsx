@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '@/components/App/shared-components/CustomSelect/CustomSelect.module.scss'
 import s from './CustomSelect.module.scss'
 import arrowDown from '@/assets/images/24-px-1-outlined-chevron-down.png'
@@ -6,6 +6,7 @@ import treeIcon0 from '@/assets/images/treeIcon-01.png'
 import treeIcon1 from '@/assets/images/treeIcon-02.png'
 import treeIcon2 from '@/assets/images/treeIcon-03.png'
 import treeIcon3 from '@/assets/images/treeIcon-04.png'
+import { userDetailsContext } from '@/context/UserDetailsProvider'
 
 interface IData {
   id: number;
@@ -24,15 +25,23 @@ export const CustomSelect: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false)
   const [items] = useState<IData[]>(data)
   const [selectedItem, setSelectedItem] = useState<number>(0)
+  const [userDetails, setUserDetails] = useContext(userDetailsContext);
 
   const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
   const toggleDropdown = () => setOpen(!isOpen)
 
   const handleItemClick = (id: number) => {
-    selectedItem == id ? setSelectedItem(0) : setSelectedItem(id)
+    if (selectedItem === id) {
+      setSelectedItem(0)
+    } else {
+      setSelectedItem(id)
+      setUserDetails({
+        ...userDetails,
+        treeTypeIdToPlant: data[id].id
+      })
+    }
     setOpen(false)
-
   }
 
   const handleClickOutside = () => {

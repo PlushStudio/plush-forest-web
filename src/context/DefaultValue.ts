@@ -1,5 +1,5 @@
 export const userDefault = {
   address: '',
-  treeTypeToPlant: '',
+  treeTypeIdToPlant: 0,
   name: ''
 }
