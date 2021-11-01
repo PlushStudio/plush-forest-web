@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from 'react'
+import React, { FormEvent, useCallback, useContext, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import plantingTree from '../assets/images/group-5.png'
@@ -48,6 +48,5 @@ export const PlantPage = () => {
         </div>
       </div>
     </div>
-
   )
 }

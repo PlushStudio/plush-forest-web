@@ -1,12 +1,12 @@
 import React from 'react'
 import '@/index.scss'
 import '@/index.css'
-import {Routes} from "@/Routes";
+import { Routes } from '@/Routes'
 
 function App() {
-    return (
-        <Routes/>
-    )
+  return (
+    <Routes />
+  )
 }
 
 export default App
