@@ -1,10 +1,10 @@
 import React, { FormEvent, useCallback, useContext, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import plantingTree1 from '../assets/images/planting-tree-02.png'
-import plantingTree2 from '../assets/images/planting-tree-01.png'
-import plantingTree3 from '../assets/images/planting-tree-03.png'
-import plantingTree4 from '../assets/images/planting-tree-04.png'
+import plantingTree1 from '@/assets/images/planting-tree-02.png'
+import plantingTree2 from '@/assets/images/planting-tree-01.png'
+import plantingTree3 from '@/assets/images/planting-tree-03.png'
+import plantingTree4 from '@/assets/images/planting-tree-04.png'
 import { useHistory } from 'react-router'
 import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
 import { Header } from '@/components/App/layout-components/Header/Header'
@@ -56,9 +56,8 @@ export const PlantPage = () => {
       try {
         const allowance = await getBuyAllowance(userDetails.address)
         if (allowance) {
-          console.log(userDetails.address, 5, treeNames[userDetails.treeTypeIdToPlant])
-          const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-          console.log(treeMintingResult)
+          //empty message for Pilot
+          await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
           clearInterval(updateBuyAllowance)
         } else await getApprove()
 
@@ -85,7 +84,7 @@ export const PlantPage = () => {
               <CustomInput onChange={(e: any) => setNameFrom(e.target.value)} value={nameFrom} type='text' as='input' placeholder='Your name' readonly={isPlanting} />
             </Form.Group>
             {!isPlanting &&
-            <MainActionButton onClick={(e: any) => plantTreeHandler()} text='Plant your tree' variant='success'
+            <MainActionButton onClick={() => plantTreeHandler()} text='Plant your tree' variant='success'
                               image='tree' />}
             {isPlanting &&
             <MainActionButton onClick={(e: any) => e.preventDefault()} loading={isPlanting} text='Planting...'

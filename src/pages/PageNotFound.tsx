@@ -5,10 +5,12 @@ import {useHistory} from "react-router"
 import React, {useCallback} from "react"
 
 export const PageNotFound = () => {
+
     const history = useHistory()
     const goToPlanting = useCallback(() => {
-        history.push("/plant")
+        history.push("/planting")
     }, [history])
+
     return <Page headerMessage="Page Not Found">
         <Row>
             <Col/>

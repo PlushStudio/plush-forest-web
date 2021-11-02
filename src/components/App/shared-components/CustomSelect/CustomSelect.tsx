@@ -24,7 +24,7 @@ export const CustomSelect: React.FC = () => {
 
   const [isOpen, setOpen] = useState<boolean>(false)
   const [items] = useState<IData[]>(data)
-  const [userDetails, setUserDetails] = useContext(userDetailsContext);
+  const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [selectedItem, setSelectedItem] = useState<number>(0)
 
   const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
@@ -36,7 +36,6 @@ export const CustomSelect: React.FC = () => {
   }, [])
 
   const handleItemClick = (id: number) => {
-    console.log(selectedItem)
     if (selectedItem === id) {
       setSelectedItem(0)
     } else {
@@ -86,8 +85,8 @@ export const CustomSelect: React.FC = () => {
           <div key={item.id + index} className={`${s.dropdownItem} ${selectedItem === item.id ? s.selectedItem : ''}`}
                onClick={() => handleItemClick(index)}>
             <div className={s.dropdownItemPrefixContainer}>
-              <div className={s.dropdownItemPrefix}
-                   style={{ backgroundImage: `url(/src/assets/images/treeIcon-0${index + 1}.png)` }} />
+              <img key={index} className={`${s.dropdownHeaderPrefix} ${s.dropdownChildItem}`} src={TreeTypeSelectorImages[index]}
+                   alt={'tree icon'} />
               <div className={s.dropdownItemContent}>
                 <div className={s.dropdownLabel}>
                   {item.label}
