@@ -61,7 +61,6 @@ export const Routes = () => {
         .then(response => {
           return response.data
         }).then((r: User) => {
-        console.log(r)
         setUserDetails({
           ...userDetails,
           name: r.name,
@@ -85,7 +84,7 @@ export const Routes = () => {
         </Route>`
         <Route exact path='/planting'>
           {userDetails.address ?
-            <PlantPage /> : <div className="notFoundContainer">User is not authorized</div>}
+            <PlantPage /> : <div className='notFoundContainer'>User is not authorized</div>}
         </Route>
         <Route exact path='/tree/:id/:currentLocation'>
           <TreeInfoPage />

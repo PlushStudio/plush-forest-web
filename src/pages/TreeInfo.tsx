@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import s from './TreeInfo.module.scss'
 import { Header } from '@/components/App/layout-components/Header/Header'

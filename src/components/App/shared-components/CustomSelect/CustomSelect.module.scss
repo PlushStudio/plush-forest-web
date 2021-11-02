@@ -102,6 +102,11 @@
   background-position: center;
 }
 
+.dropdownChildItem {
+  width: 64px;
+  height: 64px;
+}
+
 .itemPrice {
   padding: 5px 20px 7px;
   background: theme.$grays-50;
