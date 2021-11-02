@@ -1,5 +1,8 @@
 export type User = {
     address: string,
     treeTypeToPlant: string,
-    name: string
+    name: string,
+    childs: [{
+        name: string
+    }]
 }

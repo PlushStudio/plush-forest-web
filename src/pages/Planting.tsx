@@ -12,27 +12,63 @@ import s from './Planting.module.scss'
 import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
 import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
+import usePLAIContract from '@/hooks/usePLAIContract'
+import useTreeContract from '@/hooks/useTreeContract'
+
+const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
   const [isPlanting, setIsPlanting] = useState(false)
+  const [nameFrom, setNameFrom] = useState('')
   const [treeImage, setTreeImage] = useState(plantingTree1)
   const history = useHistory()
   const [userDetails] = useContext(userDetailsContext)
   const plantingTrees = [plantingTree1, plantingTree2, plantingTree3, plantingTree4]
+  const { getBuyAllowance, getApprove } = usePLAIContract()
+  const { mintATree } = useTreeContract()
 
   const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsPlanting(true)
 
     setTimeout(() => {
       history.push('/tree/699c5780-8015-47e2-ad3c-e1f160458593/tree')
-    }, 2000)
+    }, 1500)
 
   }, [history])
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
   }, [userDetails.treeTypeIdToPlant])
+
+  const plantTreeHandler = async () => {
+    setIsPlanting(true)
+
+    const updateBuyAllowance = setInterval(async function() {
+      const allowanceResult = getBuyAllowance(userDetails.address)
+      if (await allowanceResult) {
+        const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+        console.log(treeMintingResult)
+        clearInterval(updateBuyAllowance)
+      }
+    }, 7000)
+
+    if (userDetails.address) {
+      try {
+        const allowance = await getBuyAllowance(userDetails.address)
+        if (allowance) {
+          console.log(userDetails.address, 5, treeNames[userDetails.treeTypeIdToPlant])
+          const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+          console.log(treeMintingResult)
+          clearInterval(updateBuyAllowance)
+        } else await getApprove()
+
+      } catch (e) {
+        console.error(e.message)
+        setIsPlanting(false)
+        clearInterval(updateBuyAllowance)
+      }
+    }
+  }
 
   return (
     <div className={s.backgroundContainer}>
@@ -41,18 +77,18 @@ export const PlantPage = () => {
         <div className={s.plantingFormWrapper}>
           <Form className={s.plantingForm} onSubmit={submit}>
             <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>To Jasmin</Form.Label>
+              <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
               <CustomSelect />
             </Form.Group>
             <Form.Group controlId='treeName'>
               <Form.Label className={s.formLabel}>From</Form.Label>
-              <CustomInput type='text' as='input' placeholder='Your name' readonly={isPlanting} />
+              <CustomInput onChange={(e: any) => setNameFrom(e.target.value)} value={nameFrom} type='text' as='input' placeholder='Your name' readonly={isPlanting} />
             </Form.Group>
             {!isPlanting &&
-            <MainActionButton onClick={(e: any) => submit(e)} text='Plant your tree' variant='success'
+            <MainActionButton onClick={(e: any) => plantTreeHandler()} text='Plant your tree' variant='success'
                               image='tree' />}
             {isPlanting &&
-            <MainActionButton onClick={(e: any) => submit(e)} loading={isPlanting} text='Planting...'
+            <MainActionButton onClick={(e: any) => e.preventDefault()} loading={isPlanting} text='Planting...'
                               variant='success' image='tree' />}
           </Form>
           <img src={treeImage} className='planting-tree-image' alt='logo' />

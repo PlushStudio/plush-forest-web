@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '@/components/App/shared-components/CustomSelect/CustomSelect.module.scss'
 import s from './CustomSelect.module.scss'
 import arrowDown from '@/assets/images/24-px-1-outlined-chevron-down.png'
@@ -16,22 +16,27 @@ interface IData {
 
 export const CustomSelect: React.FC = () => {
   const data: IData[] = [
-    { id: 0, label: 'Cacao', available: 590 },
-    { id: 1, label: 'Shihuahuaco', available: 343 },
+    { id: 0, label: 'Shihuahuaco', available: 590 },
+    { id: 1, label: 'Cacao', available: 343 },
     { id: 2, label: 'Guaba', available: 58 },
     { id: 3, label: 'Caoba (Big-leafed mahogany)', available: 7 }
   ]
 
   const [isOpen, setOpen] = useState<boolean>(false)
   const [items] = useState<IData[]>(data)
-  const [selectedItem, setSelectedItem] = useState<number>(0)
   const [userDetails, setUserDetails] = useContext(userDetailsContext);
+  const [selectedItem, setSelectedItem] = useState<number>(0)
 
   const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
   const toggleDropdown = () => setOpen(!isOpen)
 
+  useEffect(() => {
+    setSelectedItem(userDetails.treeTypeIdToPlant)
+  }, [])
+
   const handleItemClick = (id: number) => {
+    console.log(selectedItem)
     if (selectedItem === id) {
       setSelectedItem(0)
     } else {

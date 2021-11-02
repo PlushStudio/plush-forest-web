@@ -17,16 +17,10 @@ export const Routes = () => {
   const [isFetching, setIsFetching] = useState(true)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
 
+
   useEffect(() => {
     isConnected().then(res => setWalletConnected(res))
   })
-
-  const s = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh'
-  }
 
   useEffect(() => {
     const setNetwork = async () => {
@@ -67,10 +61,12 @@ export const Routes = () => {
         .then(response => {
           return response.data
         }).then((r: User) => {
+        console.log(r)
         setUserDetails({
           ...userDetails,
           name: r.name,
-          address: r.address
+          address: r.address,
+          childName: r.childs[0].name
         })
       }).finally(() => setIsFetching(false))
     } else {
@@ -89,7 +85,7 @@ export const Routes = () => {
         </Route>`
         <Route exact path='/planting'>
           {userDetails.address ?
-            <PlantPage /> : <div style={s}>User is not authorized</div>}
+            <PlantPage /> : <div className="notFoundContainer">User is not authorized</div>}
         </Route>
         <Route exact path='/tree/:id/:currentLocation'>
           <TreeInfoPage />

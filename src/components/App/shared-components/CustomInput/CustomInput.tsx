@@ -7,14 +7,14 @@ interface ICustomInput {
     type: string,
     placeholder?: string,
     readonly?: boolean,
-    className?: string
+    className?: string,
+    onChange: any,
+    value: string
 }
 
-export const CustomInput = ({as, type, placeholder, readonly, className}: ICustomInput) => {
+export const CustomInput = ({as, type, placeholder, readonly, className, onChange, value}: ICustomInput) => {
     return (
-        <div>
-            <Form.Control className={`${className} + ${s.customInput}`} as={as} type={type} placeholder={placeholder}
+            <Form.Control onChange={onChange} value={value} className={`${className} + ${s.customInput}`} as={as} type={type} placeholder={placeholder}
                           readOnly={readonly}/>
-        </div>
     )
 }
