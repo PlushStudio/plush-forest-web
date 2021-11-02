@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useContext, useState } from 'react'
 import s from './TreeTypeSelector.module.scss'
 import {treesTooltip} from '@/assets/data/treesTooltip'
 import oval from '@/assets/images/oval-copy.svg'
@@ -8,13 +8,19 @@ import treeIcon1 from '@/assets/images/treeIcon-02.png';
 import treeIcon2 from '@/assets/images/treeIcon-03.png';
 import treeIcon3 from '@/assets/images/treeIcon-04.png';
 import {OverlayTrigger, Popover} from 'react-bootstrap'
+import { userDetailsContext } from '@/context/UserDetailsProvider'
 
 
 export const TreeTypeSelector = () => {
     const [activeTreeId, setActiveTreeId] = useState(3)
+    const [userDetails, setUserDetails] = useContext(userDetailsContext)
 
     const handleClick = (activeTreeId: number) => {
         setActiveTreeId(activeTreeId)
+        setUserDetails({
+            ...userDetails,
+            treeTypeIdToPlant: activeTreeId
+        })
         console.log(activeTreeId)
     }
 
@@ -56,10 +62,7 @@ export const TreeTypeSelector = () => {
             </div>
             <div className={s.footer}>
                 <div className={s.treesCountBold}>
-                    Total trees: <b className={s.numberValue}>1000</b>,
-                </div>
-                <div className={s.treesCountBold}>
-                    Available: <b className={s.numberValue}>658</b>
+                    Total trees: <b className={s.numberValue}>1000</b>
                 </div>
             </div>
         </div>

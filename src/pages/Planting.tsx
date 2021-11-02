@@ -1,62 +1,99 @@
-import React, {FormEvent, useCallback, useState} from 'react'
-import {Form} from 'react-bootstrap'
+import React, { FormEvent, useCallback, useContext, useEffect, useState } from 'react'
+import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import plantingTree from '../assets/images/group-5.png'
-import {useHistory} from 'react-router'
-import {CustomInput} from "@/components/App/shared-components/CustomInput/CustomInput";
-import {Header} from "@/components/App/layout-components/Header/Header";
+import plantingTree1 from '../assets/images/planting-tree-02.png'
+import plantingTree2 from '../assets/images/planting-tree-01.png'
+import plantingTree3 from '../assets/images/planting-tree-03.png'
+import plantingTree4 from '../assets/images/planting-tree-04.png'
+import { useHistory } from 'react-router'
+import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
+import { Header } from '@/components/App/layout-components/Header/Header'
 import s from './Planting.module.scss'
-import {MainActionButton} from "@/components/App/shared-components/MainActionButton/MainActionButton";
-import {CustomSelect} from "@/components/App/shared-components/CustomSelect/CustomSelect";
+import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
+import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
+import { userDetailsContext } from '@/context/UserDetailsProvider'
+import usePLAIContract from '@/hooks/usePLAIContract'
+import useTreeContract from '@/hooks/useTreeContract'
+
+const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
-    const [isPlanting, setIsPlanting] = useState(false);
-    const history = useHistory();
+  const [isPlanting, setIsPlanting] = useState(false)
+  const [nameFrom, setNameFrom] = useState('')
+  const [treeImage, setTreeImage] = useState(plantingTree1)
+  const history = useHistory()
+  const [userDetails] = useContext(userDetailsContext)
+  const plantingTrees = [plantingTree1, plantingTree2, plantingTree3, plantingTree4]
+  const { getBuyAllowance, getApprove } = usePLAIContract()
+  const { mintATree } = useTreeContract()
 
-    const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsPlanting(true);
+  const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
 
-        setTimeout(() => {
-            history.push('/tree/699c5780-8015-47e2-ad3c-e1f160458593/tree')
-        }, 2000)
+    setTimeout(() => {
+      history.push('/tree/699c5780-8015-47e2-ad3c-e1f160458593/tree')
+    }, 1500)
 
-    }, [history]);
+  }, [history])
 
-    return (
-        <div className={s.backgroundContainer}>
-            <div className={s.container}>
-                <Header/>
-                <div className={s.plantingFormWrapper}>
-                    <Form className={s.plantingForm} onSubmit={submit}>
-                        <Form.Group controlId='treeName'>
-                            <Form.Label className={s.formLabel}>Tree type</Form.Label>
-                            <CustomSelect/>
-                        </Form.Group>
-                        <Form.Group controlId='treeName'>
-                            <Form.Label className={s.formLabel}>Name of your daughter’s tree</Form.Label>
-                            <CustomInput type='text' as="input" placeholder="Tree Name" readonly={isPlanting}/>
-                        </Form.Group>
-                        <Form.Group controlId='parent'>
-                            <Form.Label className={s.formLabel}>From</Form.Label>
-                            <CustomInput type='text' as="input" placeholder="Parent's Name" readonly={isPlanting}/>
-                        </Form.Group>
-                        <Form.Group controlId='secretNote'>
-                            <Form.Label className={s.formLabel}>Message</Form.Label>
-                            <CustomInput className={s.textarea} type='text' as="textarea"
-                                         placeholder="Your message to Jasmin" readonly={isPlanting}/>
-                        </Form.Group>
-                        {!isPlanting &&
-                        <MainActionButton onClick={(e: any) => submit(e)} text="Continue" variant='success'
-                                          type='submit'/>}
-                        {isPlanting &&
-                        <MainActionButton onClick={(e: any) => submit(e)} loading={isPlanting} text="Planting..."
-                                          variant='success' type='submit'/>}
-                    </Form>
-                    <img src={plantingTree} className='planting-tree-image' alt='logo'/>
-                </div>
-            </div>
+  useEffect(() => {
+    setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
+  }, [userDetails.treeTypeIdToPlant])
+
+  const plantTreeHandler = async () => {
+    setIsPlanting(true)
+
+    const updateBuyAllowance = setInterval(async function() {
+      const allowanceResult = getBuyAllowance(userDetails.address)
+      if (await allowanceResult) {
+        const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+        console.log(treeMintingResult)
+        clearInterval(updateBuyAllowance)
+      }
+    }, 7000)
+
+    if (userDetails.address) {
+      try {
+        const allowance = await getBuyAllowance(userDetails.address)
+        if (allowance) {
+          console.log(userDetails.address, 5, treeNames[userDetails.treeTypeIdToPlant])
+          const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+          console.log(treeMintingResult)
+          clearInterval(updateBuyAllowance)
+        } else await getApprove()
+
+      } catch (e) {
+        console.error(e.message)
+        setIsPlanting(false)
+        clearInterval(updateBuyAllowance)
+      }
+    }
+  }
+
+  return (
+    <div className={s.backgroundContainer}>
+      <div className={s.container}>
+        <Header />
+        <div className={s.plantingFormWrapper}>
+          <Form className={s.plantingForm} onSubmit={submit}>
+            <Form.Group controlId='treeName'>
+              <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
+              <CustomSelect />
+            </Form.Group>
+            <Form.Group controlId='treeName'>
+              <Form.Label className={s.formLabel}>From</Form.Label>
+              <CustomInput onChange={(e: any) => setNameFrom(e.target.value)} value={nameFrom} type='text' as='input' placeholder='Your name' readonly={isPlanting} />
+            </Form.Group>
+            {!isPlanting &&
+            <MainActionButton onClick={(e: any) => plantTreeHandler()} text='Plant your tree' variant='success'
+                              image='tree' />}
+            {isPlanting &&
+            <MainActionButton onClick={(e: any) => e.preventDefault()} loading={isPlanting} text='Planting...'
+                              variant='success' image='tree' />}
+          </Form>
+          <img src={treeImage} className='planting-tree-image' alt='logo' />
         </div>
-
-    )
+      </div>
+    </div>
+  )
 }

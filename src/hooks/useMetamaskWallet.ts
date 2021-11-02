@@ -88,7 +88,7 @@ const useMetamaskWallet = () => {
       throw errors.walletNotConnected
     }
 
-    const balance = ethers.utils.formatUnits(await PLAIContract.balanceOf(await getAddress()), 8)
+    const balance = ethers.utils.formatUnits(await PLAIContract.balanceOf(await getAddress()), 18)
 
     return parseInt(balance)
   }

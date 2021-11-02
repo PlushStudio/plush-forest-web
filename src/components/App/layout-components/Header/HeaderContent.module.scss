@@ -1,5 +1,5 @@
-@use "../../../../assets/styles/theme";
-@use "../../../../assets/styles/variables";
+@use "src/assets/styles/theme";
+@use "src/assets/styles/variables";
 
 .headerContainer {
   display: flex;
@@ -10,25 +10,23 @@
   width: 100%;
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 24px;
-  padding-top: 14px;
-  line-height: 0;
   letter-spacing: normal;
   color: theme.$black;
 }
 
 .treeIcon {
   user-select: none;
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
+  padding-top: 8px;
 }
 
 .logoDescription {
   font-size: 1em;
-  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-style: normal;
   line-height: 1.38;
-  color: theme.$grey-800;
+  font-weight: 100;
+  color: theme.$grays-500;
 }
 
 .contentBlock {
