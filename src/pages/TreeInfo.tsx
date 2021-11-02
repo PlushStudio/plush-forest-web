@@ -49,7 +49,6 @@ export const TreeInfoPage: React.FC = () => {
     ]
   }
 
-
   return (
     <div className={s.backgroundContainer}>
       <div className={s.container}>
