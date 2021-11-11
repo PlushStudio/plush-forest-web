@@ -50,7 +50,6 @@ export const PlantPage = () => {
       if (await allowanceResult) {
         setPlantingStatus('Planting your tree')
         const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-        console.log(treeMintingResult)
         clearInterval(updateBuyAllowance)
       }
     }, 7000)
@@ -79,36 +78,36 @@ export const PlantPage = () => {
     <div className={s.backgroundContainer}>
       <div className={s.container}>
         <Header />
-        {isPlanting ? <PlantingModal status={plantingStatus}/> :
-        <div className={s.plantingFormWrapper}>
-          <Form className={s.plantingForm} onSubmit={submit}>
-            <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
-              <CustomSelect />
-            </Form.Group>
-            <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>From</Form.Label>
-              <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
-                           value={nameFrom}
-                           type='text'
-                           as='input'
-                           placeholder='Your name'
-                           readonly={isPlanting} />
-            </Form.Group>
-            {!isPlanting &&
-            <MainActionButton onClick={() => plantTreeHandler()}
-                              text='Plant your tree'
-                              variant='success'
-                              image='tree' />}
-            {isPlanting &&
-            <MainActionButton onClick={(e: any) => e.preventDefault()}
-                              loading={isPlanting}
-                              text='Planting...'
-                              variant='success'
-                              image='tree' />}
-          </Form>
-          <img src={treeImage} className='planting-tree-image' alt='logo' />
-        </div>
+        {isPlanting ? <PlantingModal status={plantingStatus} /> :
+          <div className={s.plantingFormWrapper}>
+            <Form className={s.plantingForm} onSubmit={submit}>
+              <Form.Group controlId='treeName'>
+                <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
+                <CustomSelect />
+              </Form.Group>
+              <Form.Group controlId='treeName'>
+                <Form.Label className={s.formLabel}>From</Form.Label>
+                <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
+                             value={nameFrom}
+                             type='text'
+                             as='input'
+                             placeholder='Your name'
+                             readonly={isPlanting} />
+              </Form.Group>
+              {!isPlanting &&
+              <MainActionButton onClick={() => plantTreeHandler()}
+                                text='Plant your tree'
+                                variant='success'
+                                image='tree' />}
+              {isPlanting &&
+              <MainActionButton onClick={(e: any) => e.preventDefault()}
+                                loading={isPlanting}
+                                text='Planting...'
+                                variant='success'
+                                image='tree' />}
+            </Form>
+            <img src={treeImage} className='planting-tree-image' alt='logo' />
+          </div>
         }
       </div>
     </div>

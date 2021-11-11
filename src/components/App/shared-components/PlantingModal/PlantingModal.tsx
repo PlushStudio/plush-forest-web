@@ -4,10 +4,10 @@ import './Loader.scss'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 
 interface Status {
-    status: string
+  status: string
 }
 
-export const PlantingModal = ({status}: Status) => {
+export const PlantingModal = ({ status }: Status) => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
 
   return (
@@ -20,13 +20,13 @@ export const PlantingModal = ({status}: Status) => {
           This should take about 10 - 15 sec.
         </div>
         <div className='loaderContainer'>
-            <div className='loro'>
-              <div className='circ' />
-              <div className='circ3' />
-              <div className='circ5' />
-              <div className='circ7' />
-              <div className='ojo' />
-            </div>
+          <div className='loro'>
+            <div className='circ' />
+            <div className='circ3' />
+            <div className='circ5' />
+            <div className='circ7' />
+            <div className='ojo' />
+          </div>
         </div>
         <div className={s.modalFooterContainer}>
           <div className={s.modalFooterTitle}>

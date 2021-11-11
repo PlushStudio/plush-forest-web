@@ -87,7 +87,7 @@ export const Routes = () => {
         <Route exact path='/planting'>
           {userDetails.address !== ''
           && userDetails.currentChainId === 4 ?
-            <PlantPage /> : <Header/>}
+            <PlantPage /> : <Header />}
         </Route>
         <Route exact path='/tree/:id/:currentLocation'>
           <TreeInfoPage />
