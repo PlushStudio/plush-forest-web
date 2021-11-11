@@ -1,8 +1,14 @@
 @use "/src/assets/styles/theme";
+@use "/src/assets/styles/variables";
 
 .backgroundContainer {
   min-height: 100vh;
-  background: theme.$grays-50;
+  background-color: theme.$grays-50;
+  background: url("../assets/images/sky.png") no-repeat;
+  background-size: cover;
+  background-position-x: 451px;
+  background-position-y: -70px;
+  z-index: variables.$low-order;
 }
 
 .container {
@@ -11,6 +17,9 @@
   padding-bottom: 2.4em;
 }
 
+.skyImage {
+  position: absolute;
+}
 .plantingFormWrapper {
   display: flex;
   justify-content: space-between;

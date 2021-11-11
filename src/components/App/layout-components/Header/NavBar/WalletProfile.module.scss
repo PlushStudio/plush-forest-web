@@ -57,3 +57,10 @@
   position: relative;
   z-index: variables.$higher-order;
 }
+
+.wrongNetworkContainer {
+  background: theme.$white;
+  color: darkred;
+  padding: 10px 20px;
+  border-radius: 8px;
+}

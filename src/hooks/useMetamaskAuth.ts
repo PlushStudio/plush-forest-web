@@ -80,7 +80,7 @@ const useMetamaskAuth = () => {
   }
 
   return {
-    login
+    login,
   }
 }
 

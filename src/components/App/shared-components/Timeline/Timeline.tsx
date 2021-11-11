@@ -1,10 +1,10 @@
-import React, {ReactHTML} from 'react';
+import React, { ReactHTML, useEffect, useState } from 'react'
 import MessageInfo from "@/components/App/shared-components/Timeline/MessageInfo";
 import s from './Timeline.module.scss'
 import TimelineCard from "@/components/App/shared-components/Timeline/TimelineCards/TimelineCard";
 import heartImg from '@/assets/images/bitmap-copy@2x.png';
-import plantImg from '@/assets/images/plant-image.png';
 import timelineBase from '@/assets/images/timelinebase.png';
+import { log } from 'util'
 
 export interface ICardInfo {
     date: string,
@@ -14,29 +14,32 @@ export interface ICardInfo {
     size: string
 }
 
-const Timeline: React.FC = () => {
+interface TimelineInfo {
+    firstBlockInfo: string,
+    secondBlockInfo: string,
+}
+
+const Timeline = (timelineInfo: any) => {
+    const [timelineData, setTimelineData] = useState(timelineInfo)
+
+    useEffect(() => {
+        setTimelineData(timelineInfo)
+    }, [timelineInfo])
 
     const cardInfo: ICardInfo[] = [
         {
             date: 'Mar 09, 2020',
-            text: 'Seedling is dedicated to Jasmin by James Dean.',
+            text: timelineInfo.timelineInfo.firstBlockInfo.split('.')[0],
             subtext: 'Verify',
             img: heartImg,
             size: 'md'
         },
         {
             date: 'Jan 11, 2020',
-            text: 'Cacao seedling was planted in Campoverde, Peru.',
+            text: timelineInfo.timelineInfo.secondBlockInfo.split('.')[0],
             subtext: 'Meet the planter',
-            img: plantImg,
+            img: timelineInfo.timelineInfo.imageLink,
             size: 'sm'
-        },
-        {
-            date: 'Jan 11, 2020',
-            text: 'Cacao seedling was planted in Campoverde, Peru.',
-            subtext: 'Meet the planter',
-            img: heartImg,
-            size: 'md'
         }
     ];
     return (

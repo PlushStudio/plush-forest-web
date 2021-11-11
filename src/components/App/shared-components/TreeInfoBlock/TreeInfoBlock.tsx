@@ -1,7 +1,6 @@
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import s from './TreeInfoBlock.module.scss'
 import { ITreeData } from '@/pages/TreeInfo'
-import { userDetailsContext } from '@/context/UserDetailsProvider'
 import { ucFirst } from '@/utils'
 import plantingTree1 from '@/assets/images/planting-tree-02.png'
 import plantingTree2 from '@/assets/images/planting-tree-01.png'
@@ -15,19 +14,18 @@ interface ITreeInfoBlockProps {
 const treeIcons = [plantingTree1, plantingTree2, plantingTree3, plantingTree4]
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
-const TreeInfoBlock: FC<ITreeInfoBlockProps> = ({ treeData }) => {
-  const [userDetails] = useContext(userDetailsContext)
+const TreeInfoBlock: FC<ITreeInfoBlockProps> = ({ treeData }: any) => {
   return (
     <div>
       <div className={s.info}>
         <div>
           <div className={s.infoTitle}>
-            <p>{`${userDetails.childName}'s ${ucFirst(treeNames[userDetails.treeTypeIdToPlant])} tree`}</p>
-            <span>{`${ucFirst(treeNames[userDetails.treeTypeIdToPlant])} - the Amazon’s tree of life.`}</span>
+            <p>{treeData.name}</p>
+            <span>{`${ucFirst(treeData.treeType)} - the Amazon’s tree of life.`}</span>
           </div>
           <div className={s.infoStats}>
             <div className={s.infoStatsContainerOne}>
-              {treeData.info.map((item, index: number) =>
+              {treeData.info.map((item: any, index: number) =>
                 <div key={item + `${index}_`} className={s.infoStatsContainerOneBlock}>
                   <p>{item.title}</p>
                   <span>{item.desc}</span>
@@ -35,7 +33,7 @@ const TreeInfoBlock: FC<ITreeInfoBlockProps> = ({ treeData }) => {
               )}
             </div>
             <div className={s.infoStatsContainerTwo}>
-              {treeData.subInfo.map((item, index: number) =>
+              {treeData.subInfo.map((item: any, index: number) =>
                 <div key={item + `_${index}`} className={s.infoStatsContainerTwoBlock}>
                   <img src={item.img} />
                   <div>
@@ -48,7 +46,7 @@ const TreeInfoBlock: FC<ITreeInfoBlockProps> = ({ treeData }) => {
           </div>
         </div>
         <div className={s.treeInRound}>
-          <img src={treeIcons[userDetails.treeTypeIdToPlant]} className={s.treeImage} alt='tree' />
+          <img src={treeIcons[treeNames.indexOf(treeData.treeType.toUpperCase())]} className={s.treeImage} alt='tree' />
         </div>
       </div>
     </div>

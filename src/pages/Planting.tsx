@@ -14,11 +14,15 @@ import { CustomSelect } from '@/components/App/shared-components/CustomSelect/Cu
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import usePLAIContract from '@/hooks/usePLAIContract'
 import useTreeContract from '@/hooks/useTreeContract'
+import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
+import axios from 'axios'
+import api from '@/api/api'
 
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
   const [isPlanting, setIsPlanting] = useState(false)
+  const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState('')
   const [treeImage, setTreeImage] = useState(plantingTree1)
   const history = useHistory()
@@ -27,27 +31,43 @@ export const PlantPage = () => {
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
 
-  const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    setTimeout(() => {
-      history.push('/tree/699c5780-8015-47e2-ad3c-e1f160458593/tree')
-    }, 1500)
-
-  }, [history])
-
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
   }, [userDetails.treeTypeIdToPlant])
 
+  const getMyTokens = async () => {
+    const updateGetMyTokens = setInterval(async function() {
+      axios.get(`${api.url}/forest/tokens/my?page=1&limit=10`, { withCredentials: true })
+        .then(response => {
+          if (response.status === 200) {
+            if (response.data?.items.length !== 0) {
+              history.push(`/token/${response.data?.items[0].token}`)
+              clearInterval(updateGetMyTokens)
+            }
+          } else {
+            clearInterval(updateGetMyTokens)
+            console.log('Error')
+          }
+          return response.status === 200
+        }).catch(r => {
+        console.error(r.message)
+        clearInterval(updateGetMyTokens)
+        return false
+      })
+    }, 5000)
+
+  }
   const plantTreeHandler = async () => {
     setIsPlanting(true)
 
     const updateBuyAllowance = setInterval(async function() {
       const allowanceResult = getBuyAllowance(userDetails.address)
       if (await allowanceResult) {
-        const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-        console.log(treeMintingResult)
+        setPlantingStatus('Planting your tree')
+        const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+        if (treeMintingResult) {
+          await getMyTokens()
+        }
         clearInterval(updateBuyAllowance)
       }
     }, 7000)
@@ -57,9 +77,12 @@ export const PlantPage = () => {
         const allowance = await getBuyAllowance(userDetails.address)
         if (allowance) {
           //empty message for Pilot
-          await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+          await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
           clearInterval(updateBuyAllowance)
-        } else await getApprove()
+        } else {
+          setPlantingStatus('Getting allowance to pay')
+          await getApprove()
+        }
 
       } catch (e) {
         console.error(e.message)
@@ -73,25 +96,37 @@ export const PlantPage = () => {
     <div className={s.backgroundContainer}>
       <div className={s.container}>
         <Header />
-        <div className={s.plantingFormWrapper}>
-          <Form className={s.plantingForm} onSubmit={submit}>
-            <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
-              <CustomSelect />
-            </Form.Group>
-            <Form.Group controlId='treeName'>
-              <Form.Label className={s.formLabel}>From</Form.Label>
-              <CustomInput onChange={(e: any) => setNameFrom(e.target.value)} value={nameFrom} type='text' as='input' placeholder='Your name' readonly={isPlanting} />
-            </Form.Group>
-            {!isPlanting &&
-            <MainActionButton onClick={() => plantTreeHandler()} text='Plant your tree' variant='success'
-                              image='tree' />}
-            {isPlanting &&
-            <MainActionButton onClick={(e: any) => e.preventDefault()} loading={isPlanting} text='Planting...'
-                              variant='success' image='tree' />}
-          </Form>
-          <img src={treeImage} className='planting-tree-image' alt='logo' />
-        </div>
+        {isPlanting ? <PlantingModal status={plantingStatus} /> :
+          <div className={s.plantingFormWrapper}>
+            <Form className={s.plantingForm}>
+              <Form.Group controlId='treeName'>
+                <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
+                <CustomSelect />
+              </Form.Group>
+              <Form.Group controlId='treeName'>
+                <Form.Label className={s.formLabel}>From</Form.Label>
+                <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
+                             value={nameFrom}
+                             type='text'
+                             as='input'
+                             placeholder='Your name'
+                             readonly={isPlanting} />
+              </Form.Group>
+              {!isPlanting &&
+              <MainActionButton onClick={() => plantTreeHandler()}
+                                text='Plant your tree'
+                                variant='success'
+                                image='tree' />}
+              {isPlanting &&
+              <MainActionButton onClick={(e: any) => e.preventDefault()}
+                                loading={isPlanting}
+                                text='Planting...'
+                                variant='success'
+                                image='tree' />}
+            </Form>
+            <img src={treeImage} className='planting-tree-image' alt='logo' />
+          </div>
+        }
       </div>
     </div>
   )

@@ -24,7 +24,9 @@ const WalletProfile: FC = () => {
 
   return (
     <div className={s.walletContainer}>
-      <Wallet walletAddress={userDetails.address} balance={balance} />
+      {userDetails.currentChainId === 4 ?
+        <Wallet walletAddress={userDetails.address} balance={balance} /> :
+        <div className={s.wrongNetworkContainer}>Wrong network detected</div>}
       <img alt='notification' className={s.outsideWalletItem} src={notificationIcon} />
       <img alt='sub-menu' className={s.outsideWalletItem} src={burgerIcon} />
     </div>
