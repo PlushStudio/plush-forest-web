@@ -14,7 +14,6 @@ export const LearnMoreAccordion = () => {
   const handleTabClick = (tabId: number) => {
     isOpenTabId === tabId ? setIsOpenTabId(-1) : setIsOpenTabId(tabId)
   }
-
   return (
     <Accordion>
       <Card className={s.card}>

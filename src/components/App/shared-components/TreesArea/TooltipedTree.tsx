@@ -31,7 +31,7 @@ export const TooltipedTree = (props: ITooltipedTree): JSX.Element => {
   )
 
   return (
-    <OverlayTrigger trigger='hover' placement='bottom' overlay={popover} delay={300}>
+    <OverlayTrigger trigger='focus' placement='bottom' overlay={popover} delay={300}>
       <img className={props.className} alt='tree-area' src={props.icon} />
     </OverlayTrigger>
   )

@@ -14,11 +14,13 @@ import { CustomSelect } from '@/components/App/shared-components/CustomSelect/Cu
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import usePLAIContract from '@/hooks/usePLAIContract'
 import useTreeContract from '@/hooks/useTreeContract'
+import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
-  const [isPlanting, setIsPlanting] = useState(false)
+  const [isPlanting, setIsPlanting] = useState(true)
+  const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState('')
   const [treeImage, setTreeImage] = useState(plantingTree1)
   const history = useHistory()
@@ -46,7 +48,8 @@ export const PlantPage = () => {
     const updateBuyAllowance = setInterval(async function() {
       const allowanceResult = getBuyAllowance(userDetails.address)
       if (await allowanceResult) {
-        const treeMintingResult = await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+        setPlantingStatus('Planting your tree')
+        const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
         console.log(treeMintingResult)
         clearInterval(updateBuyAllowance)
       }
@@ -57,9 +60,12 @@ export const PlantPage = () => {
         const allowance = await getBuyAllowance(userDetails.address)
         if (allowance) {
           //empty message for Pilot
-          await mintATree(userDetails.address,  treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+          await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
           clearInterval(updateBuyAllowance)
-        } else await getApprove()
+        } else {
+          setPlantingStatus('Getting allowance to pay')
+          await getApprove()
+        }
 
       } catch (e) {
         console.error(e.message)
@@ -73,6 +79,7 @@ export const PlantPage = () => {
     <div className={s.backgroundContainer}>
       <div className={s.container}>
         <Header />
+        {isPlanting ? <PlantingModal status={plantingStatus}/> :
         <div className={s.plantingFormWrapper}>
           <Form className={s.plantingForm} onSubmit={submit}>
             <Form.Group controlId='treeName'>
@@ -81,17 +88,28 @@ export const PlantPage = () => {
             </Form.Group>
             <Form.Group controlId='treeName'>
               <Form.Label className={s.formLabel}>From</Form.Label>
-              <CustomInput onChange={(e: any) => setNameFrom(e.target.value)} value={nameFrom} type='text' as='input' placeholder='Your name' readonly={isPlanting} />
+              <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
+                           value={nameFrom}
+                           type='text'
+                           as='input'
+                           placeholder='Your name'
+                           readonly={isPlanting} />
             </Form.Group>
             {!isPlanting &&
-            <MainActionButton onClick={() => plantTreeHandler()} text='Plant your tree' variant='success'
+            <MainActionButton onClick={() => plantTreeHandler()}
+                              text='Plant your tree'
+                              variant='success'
                               image='tree' />}
             {isPlanting &&
-            <MainActionButton onClick={(e: any) => e.preventDefault()} loading={isPlanting} text='Planting...'
-                              variant='success' image='tree' />}
+            <MainActionButton onClick={(e: any) => e.preventDefault()}
+                              loading={isPlanting}
+                              text='Planting...'
+                              variant='success'
+                              image='tree' />}
           </Form>
           <img src={treeImage} className='planting-tree-image' alt='logo' />
         </div>
+        }
       </div>
     </div>
   )

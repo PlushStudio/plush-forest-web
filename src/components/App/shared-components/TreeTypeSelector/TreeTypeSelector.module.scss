@@ -43,10 +43,10 @@
 }
 
 .circle:hover {
-  webkit-box-shadow: 0 0 0 4px #ffd34e!important;
-  moz-box-shadow: 0 0 0 4px #ffd34e!important;
-  box-shadow: 0 0 0 4px #ffd34e!important;
-  z-index: 999!important;
+  webkit-box-shadow: 0 0 0 4px #ffd34e !important;
+  moz-box-shadow: 0 0 0 4px #ffd34e !important;
+  box-shadow: 0 0 0 4px #ffd34e !important;
+  z-index: 999 !important;
 }
 
 .circleContainer {
@@ -82,15 +82,15 @@
 
 .popoverWrapper {
   display: flex;
-  max-width: 632px;
-  height: 192px;
+  max-width: 704px;
   padding: 8px 16px 8px 8px;
   border-radius: 20px !important;
 }
 
 .popoverImageContainer {
-  width: 192px;
-  height: 176px;
+  height: 100%;
+  width: auto;
+  max-width: 192px;
 }
 
 .popoverTextContainer {
@@ -105,11 +105,50 @@
   color: theme.$black
 }
 
-.popoverContent {
+.popoverTextAboutTree {
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-size: 16px;
   padding-top: 8px;
   line-height: 1.38;
   letter-spacing: -0.2px;
-  color: theme.$grays-500;
+  color: theme.$grey-800;
+  border-bottom: 1px solid theme.$grey-200;
+  padding-bottom: 18px;
+}
+
+.popoverContent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footerItem {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footerItemTitle {
+  width: 100%;
+  margin: 4px 0 0;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: theme.$grays-500
+}
+
+.footerItemValue {
+  margin: 0 50px 0 0;
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-size: 14px;
+}
+
+.popoverFooterContainer {
+  padding: 10px 0;
+}
+.popoverFooter {
+  display: flex;
+  padding-left: 18px;
 }

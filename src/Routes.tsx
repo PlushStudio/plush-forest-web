@@ -7,9 +7,9 @@ import Index from './pages/index/Index'
 import { TreeInfoPage } from './pages/TreeInfo'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
-import { Network } from '@ethersproject/providers'
 import { User } from '@/types/user'
 import api from '@/api/api'
+import { Header } from '@/components/App/layout-components/Header/Header'
 
 export const Routes = () => {
   const { isConnected, provider } = useMetamaskWallet()
@@ -22,38 +22,40 @@ export const Routes = () => {
     isConnected().then(res => setWalletConnected(res))
   })
 
+  const handleChainChanged = (networkId: string) => {
+    setUserDetails({
+      ...userDetails,
+      currentChainId: Number(networkId)
+    })
+  }
+  const handleAccountChanged = (accounts: Array<string>) => {
+    accounts.length === 0 && setUserDetails({
+      ...userDetails,
+      address: ''
+    })
+  }
+
   useEffect(() => {
-    const setNetwork = async () => {
-      const networkResponse: Network | undefined = await provider?.getNetwork()
-      if (networkResponse) {
-        setUserDetails({
-          ...userDetails,
-          currentChainId: networkResponse.chainId
-        })
-      }
-    }
-    setNetwork()
-  }, [provider])
+    // @ts-ignore
+    handleChainChanged(window.ethereum.networkVersion)
+  }, [])
 
   useEffect(() => {
     if (window.ethereum) {
       //@ts-ignore
-      window.ethereum.on('chainChanged', function(networkId: string) {
-        setUserDetails({
-          ...userDetails,
-          currentChainId: Number(networkId)
-        })
-      })
-
+      window.ethereum.on('chainChanged', (networkId: string) => handleChainChanged(networkId))
       //@ts-ignore
-      window.ethereum.on('accountsChanged', (accounts: Array<string>) => {
-        accounts.length === 0 && setUserDetails({
-          ...userDetails,
-          address: ''
-        })
-      })
+      window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
     }
-  })
+
+    setWalletConnected(true)
+    return () => {
+      // @ts-ignore
+      window.ethereum.removeListener('accountsChanged', handleAccountChanged)
+      // @ts-ignore
+      window.ethereum.removeListener('chainChanged', handleChainChanged)
+    }
+  }, [provider])
 
   useEffect(() => {
     if (walletConnected) {
@@ -71,7 +73,7 @@ export const Routes = () => {
     } else {
       setIsFetching(false)
     }
-  }, [walletConnected, isFetching])
+  }, [walletConnected, userDetails.address])
 
   return (
     <Router>
@@ -83,8 +85,9 @@ export const Routes = () => {
           <AboutPage />
         </Route>`
         <Route exact path='/planting'>
-          {userDetails.address ?
-            <PlantPage /> : <div className='notFoundContainer'>User is not authorized</div>}
+          {userDetails.address !== ''
+          && userDetails.currentChainId === 4 ?
+            <PlantPage /> : <Header/>}
         </Route>
         <Route exact path='/tree/:id/:currentLocation'>
           <TreeInfoPage />
