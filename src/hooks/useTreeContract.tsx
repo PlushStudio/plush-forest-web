@@ -137,17 +137,20 @@ const useTreeContract = () => {
       signer
     )
 
-    TreeContract.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
-      axios.post(`${api.url}/forest/transactions/new`,
+    return await TreeContract.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
+      return axios.post(`${api.url}/forest/transactions/new`,
         {
           hash: transferResult.hash, tree: treeType, name, from, message: 'Test message'
         }, { withCredentials: true }).then(response => {
         if (response.status === 201) {
-          history.push('/tree/699c5780-8015-47e2-ad3c-e1f160458593/tree')
           console.log('The token was minted successfully')
         } else {
           console.error('The token could not be minted')
         }
+        return response.status === 201
+      }).catch(r => {
+        console.log(r.message)
+        return false
       })
     })
   }

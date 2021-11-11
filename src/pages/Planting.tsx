@@ -15,11 +15,13 @@ import { userDetailsContext } from '@/context/UserDetailsProvider'
 import usePLAIContract from '@/hooks/usePLAIContract'
 import useTreeContract from '@/hooks/useTreeContract'
 import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
+import axios from 'axios'
+import api from '@/api/api'
 
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
-  const [isPlanting, setIsPlanting] = useState(true)
+  const [isPlanting, setIsPlanting] = useState(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState('')
   const [treeImage, setTreeImage] = useState(plantingTree1)
@@ -29,19 +31,31 @@ export const PlantPage = () => {
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
 
-  const submit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    setTimeout(() => {
-      history.push('/tree/699c5780-8015-47e2-ad3c-e1f160458593/tree')
-    }, 1500)
-
-  }, [history])
-
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
   }, [userDetails.treeTypeIdToPlant])
 
+  const getMyTokens = async () => {
+    const updateGetMyTokens = setInterval(async function() {
+      axios.get(`${api.url}/forest/tokens/my?page=1&limit=10`, { withCredentials: true })
+        .then(response => {
+          if (response.status === 200) {
+            if (response.data?.items.length !== 0) {
+              history.push(`/token/${response.data?.items[0].token}`)
+              console.log(response.data?.items[0].token)
+              clearInterval(updateGetMyTokens)
+            }
+          } else {
+            console.log('Error')
+          }
+          return response.status === 200
+        }).catch(r => {
+        console.log(r.message)
+        return false
+      })
+    }, 5000)
+
+  }
   const plantTreeHandler = async () => {
     setIsPlanting(true)
 
@@ -50,6 +64,9 @@ export const PlantPage = () => {
       if (await allowanceResult) {
         setPlantingStatus('Planting your tree')
         const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+        if (treeMintingResult) {
+          await getMyTokens()
+        }
         clearInterval(updateBuyAllowance)
       }
     }, 7000)
@@ -80,7 +97,7 @@ export const PlantPage = () => {
         <Header />
         {isPlanting ? <PlantingModal status={plantingStatus} /> :
           <div className={s.plantingFormWrapper}>
-            <Form className={s.plantingForm} onSubmit={submit}>
+            <Form className={s.plantingForm}>
               <Form.Group controlId='treeName'>
                 <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
                 <CustomSelect />

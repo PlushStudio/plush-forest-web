@@ -75,6 +75,8 @@ export const Routes = () => {
     }
   }, [walletConnected, userDetails.address])
 
+  console.log(userDetails.currentChainId)
+  console.log(userDetails.address)
   return (
     <Router>
       <Switch>
@@ -85,14 +87,19 @@ export const Routes = () => {
           <AboutPage />
         </Route>`
         <Route exact path='/planting'>
+
           {userDetails.address !== ''
-          && userDetails.currentChainId === 4 ?
-            <PlantPage /> : <Header />}
+          // @ts-ignore
+          && window.ethereum.networkVersion === '4' ?
+            <PlantPage /> : <Header/>}
         </Route>
-        <Route exact path='/tree/:id/:currentLocation'>
+        <Route exact path='/token/:id/'>
           <TreeInfoPage />
         </Route>
         <Route path='*'>
+          <PageNotFound />
+        </Route>
+        <Route path='/404'>
           <PageNotFound />
         </Route>
       </Switch>
