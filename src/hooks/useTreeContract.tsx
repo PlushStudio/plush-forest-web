@@ -142,14 +142,9 @@ const useTreeContract = () => {
         {
           hash: transferResult.hash, tree: treeType, name, from, message: 'Test message'
         }, { withCredentials: true }).then(response => {
-        if (response.status === 201) {
-          console.log('The token was minted successfully')
-        } else {
-          console.error('The token could not be minted')
-        }
         return response.status === 201
       }).catch(r => {
-        console.log(r.message)
+        console.error(r.message)
         return false
       })
     })

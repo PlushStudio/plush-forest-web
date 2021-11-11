@@ -14,7 +14,7 @@ import { Header } from '@/components/App/layout-components/Header/Header'
 export const Routes = () => {
   const { isConnected, provider } = useMetamaskWallet()
   const [walletConnected, setWalletConnected] = useState(false)
-  const [isFetching, setIsFetching] = useState(true)
+  const [, setIsFetching] = useState(true)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
 
 
@@ -75,8 +75,6 @@ export const Routes = () => {
     }
   }, [walletConnected, userDetails.address])
 
-  console.log(userDetails.currentChainId)
-  console.log(userDetails.address)
   return (
     <Router>
       <Switch>

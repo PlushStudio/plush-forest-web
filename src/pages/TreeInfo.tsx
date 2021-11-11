@@ -89,8 +89,7 @@ export const TreeInfoPage: React.FC = () => {
         } else {
           history.push('/404')
         }
-      }).catch(r => {
-      console.log(r.message)
+      }).catch(() => {
       history.push('/404')
     })
   }, [params.id])

@@ -42,15 +42,16 @@ export const PlantPage = () => {
           if (response.status === 200) {
             if (response.data?.items.length !== 0) {
               history.push(`/token/${response.data?.items[0].token}`)
-              console.log(response.data?.items[0].token)
               clearInterval(updateGetMyTokens)
             }
           } else {
+            clearInterval(updateGetMyTokens)
             console.log('Error')
           }
           return response.status === 200
         }).catch(r => {
-        console.log(r.message)
+        console.error(r.message)
+        clearInterval(updateGetMyTokens)
         return false
       })
     }, 5000)
