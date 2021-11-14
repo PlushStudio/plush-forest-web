@@ -1,10 +1,10 @@
-import React, { FormEvent, useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import plantingTree1 from '@/assets/images/planting-tree-02.png'
-import plantingTree2 from '@/assets/images/planting-tree-01.png'
-import plantingTree3 from '@/assets/images/planting-tree-03.png'
-import plantingTree4 from '@/assets/images/planting-tree-04.png'
+import plantingTree0 from '@/assets/images/planting-tree-shihuahuaco.png'
+import plantingTree1 from '@/assets/images/planting-tree-cacao.png'
+import plantingTree2 from '@/assets/images/planting-tree-guaba.png'
+import plantingTree3 from '@/assets/images/planting-tree-caoba.png'
 import { useHistory } from 'react-router'
 import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
 import { Header } from '@/components/App/layout-components/Header/Header'
@@ -24,10 +24,10 @@ export const PlantPage = () => {
   const [isPlanting, setIsPlanting] = useState(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState('')
-  const [treeImage, setTreeImage] = useState(plantingTree1)
+  const [treeImage, setTreeImage] = useState(plantingTree0)
   const history = useHistory()
   const [userDetails] = useContext(userDetailsContext)
-  const plantingTrees = [plantingTree1, plantingTree2, plantingTree3, plantingTree4]
+  const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
 
