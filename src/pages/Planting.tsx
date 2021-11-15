@@ -36,22 +36,22 @@ export const PlantPage = () => {
   }, [userDetails.treeTypeIdToPlant])
 
   const getMyTokens = async () => {
-    const updateGetMyTokens = setInterval(async function() {
-      axios.get(`${api.url}/forest/tokens/my?page=1&limit=10`, { withCredentials: true })
+    const getMyTokensInterval = setInterval(async function() {
+      api.user.users.token.request()
         .then(response => {
           if (response.status === 200) {
             if (response.data?.items.length !== 0) {
               history.push(`/token/${response.data?.items[0].token}`)
-              clearInterval(updateGetMyTokens)
+              clearInterval(getMyTokensInterval)
             }
           } else {
-            clearInterval(updateGetMyTokens)
+            clearInterval(getMyTokensInterval)
             console.log('Error')
           }
           return response.status === 200
         }).catch(r => {
         console.error(r.message)
-        clearInterval(updateGetMyTokens)
+        clearInterval(getMyTokensInterval)
         return false
       })
     }, 5000)
@@ -59,35 +59,50 @@ export const PlantPage = () => {
   }
   const plantTreeHandler = async () => {
     setIsPlanting(true)
-
-    const updateBuyAllowance = setInterval(async function() {
-      const allowanceResult = getBuyAllowance(userDetails.address)
-      if (await allowanceResult) {
-        setPlantingStatus('Planting your tree')
-        const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-        if (treeMintingResult) {
-          await getMyTokens()
-        }
-        clearInterval(updateBuyAllowance)
-      }
-    }, 7000)
-
     if (userDetails.address) {
       try {
         const allowance = await getBuyAllowance(userDetails.address)
         if (allowance) {
           //empty message for Pilot
-          await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-          clearInterval(updateBuyAllowance)
+          const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+
+          if (treeMintingResult) {
+            await getMyTokens()
+          }
+
         } else {
-          setPlantingStatus('Getting allowance to pay')
-          await getApprove()
+          const updateBuyAllowance = setInterval(async function() {
+            const allowanceResult = getBuyAllowance(userDetails.address)
+            if (await allowanceResult) {
+              clearInterval(updateBuyAllowance)
+              setPlantingStatus('Planting your tree')
+              const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+              if (treeMintingResult) {
+                await getMyTokens()
+              }
+            } else {
+              setPlantingStatus('Getting allowance to pay')
+              clearInterval(updateBuyAllowance)
+              await getApprove().then(async () => {
+                const updateBuyAllowance = setInterval(async function() {
+                  const allowance = await getBuyAllowance(userDetails.address)
+                  if (allowance) {
+                    setPlantingStatus('Planting your tree')
+                    clearInterval(updateBuyAllowance)
+                    //empty message for Pilot
+                    const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+                    if (treeMintingResult) {
+                      await getMyTokens()
+                    }}
+                }, 7000)
+              })
+            }
+          }, 7000)
         }
 
       } catch (e) {
         console.error(e.message)
         setIsPlanting(false)
-        clearInterval(updateBuyAllowance)
       }
     }
   }

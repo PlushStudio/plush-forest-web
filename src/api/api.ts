@@ -14,8 +14,7 @@ const urls = {
             address: 'user/users/address'
         },
         tokens: {
-            token: 'user/tokens/token',
-            mintRequests: 'user/tokens/mint-requests'
+            token: 'forest/tokens/my?page=1&limit=10',
         }
     }
 }
@@ -49,15 +48,20 @@ const api = {
                     }
                 }
             },
-            address: {
-                url: urls.user.users.address
+            token: {
+                url: urls.user.users.address,
+                request: async (): Promise<AxiosResponse> => {
+                    try {
+                        return await backend.get(
+                          urls.user.tokens.token,
+                          {
+                              withCredentials: true
+                          })
+                    } catch (error: any) {
+                        return error.response as AxiosResponse
+                    }
+                }
             }
-        },
-        token: {
-            url: urls.user.tokens.token
-        },
-        mintRequests: {
-            url: urls.user.tokens.mintRequests
         }
     }
 }

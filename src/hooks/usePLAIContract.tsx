@@ -158,8 +158,8 @@ const usePLAIContract = () => {
   }, [])
 
   const getBuyAllowance = async (address: string) => {
+    console.log('getting allowance')
     const allowanceResult = await PLAIContract.allowance(address, getTreeContractAddress)
-    console.log(parseInt(allowanceResult._hex, 16))
     return parseInt(allowanceResult._hex, 16) === 5000000000000000000
   }
 
