@@ -6,6 +6,8 @@ import notificationIcon from '@/assets/images/combined-shape@3x.png'
 import burgerIcon from '@/assets/images/atom-icon-more-horizontal@2x.png'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 
+const VITE_NETWORK_ID = import.meta.env.VITE_NETWORK_ID
+
 const WalletProfile: FC = () => {
   const { getPLAIBalance } = useMetamaskWallet()
   const [balance, setBalance] = useState(0)
@@ -24,7 +26,7 @@ const WalletProfile: FC = () => {
 
   return (
     <div className={s.walletContainer}>
-      {userDetails.currentChainId === 4 ?
+      {userDetails.currentChainId === VITE_NETWORK_ID ?
         <Wallet walletAddress={userDetails.address} balance={balance} /> :
         <div className={s.wrongNetworkContainer}>Wrong network detected</div>}
       <img alt='notification' className={s.outsideWalletItem} src={notificationIcon} />

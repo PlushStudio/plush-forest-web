@@ -27,7 +27,7 @@ jobs:
           VITE_PLAI_CONTRACT_ADDRESS: "0x8663f80619Cbc4562FF8e0986917429E917C79ba"
           VITE_CORE_CONTRACT_ADDRESS: "0x7fD549d856c4a74fB902932dEA896FA7DE9D0823"
           VITE_CORE_GET_TREE_CONTRACT_ADDRESS: "0x13fA2684F68DBc2C8D91AD2b1A9717C6530c7016"
-          VITE_NETWORK_ID: 4
+          VITE_NETWORK_ID: "4"
       # Build & Publish a Docker Image | Master Branch Only
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
