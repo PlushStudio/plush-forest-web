@@ -11,12 +11,13 @@ import { User } from '@/types/user'
 import api from '@/api/api'
 import { Header } from '@/components/App/layout-components/Header/Header'
 
+const VITE_NETWORK_ID = import.meta.env.VITE_NETWORK_ID
+
 export const Routes = () => {
   const { isConnected, provider } = useMetamaskWallet()
   const [walletConnected, setWalletConnected] = useState(false)
   const [, setIsFetching] = useState(true)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
-
 
   useEffect(() => {
     isConnected().then(res => setWalletConnected(res))
@@ -25,40 +26,32 @@ export const Routes = () => {
   const handleChainChanged = (networkId: string) => {
     setUserDetails({
       ...userDetails,
-      currentChainId: Number(networkId)
-    })
-  }
-  const handleAccountChanged = (accounts: Array<string>) => {
-    accounts.length === 0 && setUserDetails({
-      ...userDetails,
-      address: ''
+      currentChainId: networkId
     })
   }
 
-  useEffect(() => {
-    // @ts-ignore
-    handleChainChanged(window.ethereum.networkVersion)
-  }, [])
+  const handleAccountChanged = async (accounts: Array<string>) => {
+    if (accounts.length === 0) {
+      setUserDetails({
+        address: ''
+      })
+      await api.user.users.logout.request()
+    }
+  }
 
   useEffect(() => {
     if (window.ethereum) {
-      //@ts-ignore
       window.ethereum.on('chainChanged', (networkId: string) => handleChainChanged(networkId))
-      //@ts-ignore
       window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
     }
-
-    setWalletConnected(true)
     return () => {
-      // @ts-ignore
       window.ethereum.removeListener('accountsChanged', handleAccountChanged)
-      // @ts-ignore
       window.ethereum.removeListener('chainChanged', handleChainChanged)
     }
   }, [provider])
 
   useEffect(() => {
-    if (walletConnected) {
+    if (walletConnected && userDetails.address === '') {
       api.user.users.profile.request()
         .then(response => {
           return response.data
@@ -73,6 +66,8 @@ export const Routes = () => {
     } else {
       setIsFetching(false)
     }
+
+    handleChainChanged(window.ethereum.networkVersion)
   }, [walletConnected, userDetails.address])
 
   return (
@@ -83,13 +78,11 @@ export const Routes = () => {
         </Route>
         <Route exact path='/about'>
           <AboutPage />
-        </Route>`
+        </Route>
         <Route exact path='/planting'>
-
           {userDetails.address !== ''
-          // @ts-ignore
-          && window.ethereum.networkVersion === '4' ?
-            <PlantPage /> : <Header/>}
+          && window.ethereum.networkVersion === VITE_NETWORK_ID ?
+            <PlantPage /> : <Header />}
         </Route>
         <Route exact path='/token/:id/'>
           <TreeInfoPage />

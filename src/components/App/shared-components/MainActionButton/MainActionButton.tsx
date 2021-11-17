@@ -16,7 +16,7 @@ interface IGetStartedBtn {
 
 export const MainActionButton = ({ text, loading, onClick, image }: IGetStartedBtn) => {
   const [userDetails] = useContext(userDetailsContext)
-  console.log(userDetails.name)
+
   return (
     <div className={s.container}>
       {
