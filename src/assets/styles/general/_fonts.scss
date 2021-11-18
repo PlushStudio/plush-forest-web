@@ -30,3 +30,10 @@
   url("/src/assets/fonts/AvenirNextRoundedPro-Reg.woff2") format("woff2"),
   url("/src/assets/fonts/AvenirNextRoundedPro-Reg.woff") format("woff");
 }
+
+@font-face {
+  font-family: AvenirNextRoundedPro-Bold;
+  src: local(AvenirNextRoundedPro-Bold sans-serif),
+  url("/src/assets/fonts/AvenirNextRoundedPro-Bold.otf") format("otf"),
+  url("/src/assets/fonts/AvenirNextRoundedPro-Bold.woff") format("woff");
+}

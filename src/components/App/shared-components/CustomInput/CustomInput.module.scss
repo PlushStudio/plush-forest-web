@@ -1,3 +1,6 @@
+@use 'src/assets/styles/variables';
+@use 'src/assets/styles/theme';
+
 .customInput {
   width: 512px;
   height: 64px;
@@ -11,7 +14,11 @@
 
 .customInput:focus {
   box-shadow: 0 0 0 4px rgba(86, 104, 254, 0.2);
-  border: 1px solid #5668fe;
+  border: 1px solid theme.$purple-2;
+}
+
+.customInput:hover {
+  border: solid 1px theme.$purple-light;
 }
 
 .customInput::placeholder {
