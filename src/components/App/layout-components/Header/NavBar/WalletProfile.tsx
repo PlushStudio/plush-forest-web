@@ -6,7 +6,7 @@ import notificationIcon from '@/assets/images/combined-shape@3x.png'
 import burgerIcon from '@/assets/images/atom-icon-more-horizontal@2x.png'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 
-const VITE_NETWORK_ID = import.meta.env.VITE_NETWORK_ID
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
 const WalletProfile: FC = () => {
   const { getPLAIBalance } = useMetamaskWallet()

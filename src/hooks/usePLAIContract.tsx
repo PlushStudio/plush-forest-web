@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { ExternalProvider, JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 
-const getTreeContractAddress = import.meta.env.VITE_CORE_GET_TREE_CONTRACT_ADDRESS
-const PLAIContractAddress = import.meta.env.VITE_PLAI_CONTRACT_ADDRESS
+const getTreeContractAddress = window.config.CORE_GET_TREE_CONTRACT_ADDRESS ?? "0x13fA2684F68DBc2C8D91AD2b1A9717C6530c7016"
+const PLAIContractAddress = window.config.PLAI_CONTRACT_ADDRESS ?? "0x8663f80619Cbc4562FF8e0986917429E917C79ba"
 
 const usePLAIContract = () => {
   const [provider, setProvider] = useState<Web3Provider>()

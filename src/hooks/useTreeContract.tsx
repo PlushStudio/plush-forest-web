@@ -4,7 +4,7 @@ import axios from 'axios'
 import api from '@/api/api'
 
 const useTreeContract = () => {
-  const getTreeContractAddress = import.meta.env.VITE_CORE_GET_TREE_CONTRACT_ADDRESS
+  const getTreeContractAddress = window.config.CORE_GET_TREE_CONTRACT_ADDRESS ?? "0x13fA2684F68DBc2C8D91AD2b1A9717C6530c7016"
   const genericErc20Abi = [{
     'inputs': [{
       'internalType': 'address',
