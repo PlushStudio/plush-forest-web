@@ -11,7 +11,7 @@ import { User } from '@/types/user'
 import api from '@/api/api'
 import { Header } from '@/components/App/layout-components/Header/Header'
 
-const VITE_NETWORK_ID = import.meta.env.VITE_NETWORK_ID
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
 export const Routes = () => {
   const { isConnected, provider } = useMetamaskWallet()
