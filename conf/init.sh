@@ -6,11 +6,9 @@ jq -n env \
 INDEX_FILE=/usr/share/nginx/html/index.html
 TEMPLATE_FILE=/usr/share/nginx/html/index.html.tpl
 
-sed -i 's/<!-- INJECT VARIABLES INTO window.config -->/window.config = {{ include "clientConfig" }};/g' $INDEX_FILE
-
 if [ ! -f "$TEMPLATE_FILE" ]; then
     cp $INDEX_FILE $TEMPLATE_FILE
-    sed -i 's/<!-- INJECT VARIABLES INTO window.config -->/window.config = {{ include "clientConfig" }};/g' $TEMPLATE_FILE
+    sed -i 's/<!-- INJECT VARIABLES INTO window.config -->/<script>window.config = {{ include "clientConfig" }};<\/script>/g' $TEMPLATE_FILE
 fi
 
 gomplate -d clientConfig.json -f $TEMPLATE_FILE > $INDEX_FILE
