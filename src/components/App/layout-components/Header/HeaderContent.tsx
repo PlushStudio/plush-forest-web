@@ -15,10 +15,10 @@ export const HeaderContent: () => JSX.Element = () => {
       <Link to={'/'}>
         <img className={s.treeIcon} src={treeIcon} alt='tree icon' />
       </Link>
-      {params.currentLocation !== 'tree' ?
-        <div className={s.contentBlock}>
-          <span className={s.logoTitle}>Plush Forest</span>
-          <span className={s.logoDescription}>A tree for every child.</span>
-        </div> : ''}
+      <div className={`${params.currentLocation !== 'tree' ?
+        s.contentBlock : s.invisible}`}>
+        <span className={s.logoTitle}>Plush Forest</span>
+        <span className={s.logoDescription}>A tree for every child.</span>
+      </div>
     </div>)
 }
