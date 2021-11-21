@@ -1,14 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import s from './PlantingModal.module.scss'
 import './Loader.scss'
-import { userDetailsContext } from '@/context/UserDetailsProvider'
 
 interface Status {
   status: string
 }
 
 export const PlantingModal = ({ status }: Status) => {
-  const [userDetails, setUserDetails] = useContext(userDetailsContext)
 
   return (
     <div className={s.modalContainer}>
