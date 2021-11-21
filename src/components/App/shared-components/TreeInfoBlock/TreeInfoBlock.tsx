@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import s from './TreeInfoBlock.module.scss'
-import { ITreeData } from '@/pages/TreeInfo'
+import { TreeData } from '@/types/tree/TreeData'
 import { ucFirst } from '@/utils'
 import plantingTree1 from '@/assets/images/planting-tree/shihuahuaco.png'
 import plantingTree2 from '@/assets/images/planting-tree/cacao.png'
@@ -8,7 +8,7 @@ import plantingTree3 from '@/assets/images/planting-tree/guaba.png'
 import plantingTree4 from '@/assets/images/planting-tree/caoba.png'
 
 interface ITreeInfoBlockProps {
-  treeData: ITreeData
+  treeData: TreeData
 }
 
 const treeIcons = [plantingTree1, plantingTree2, plantingTree3, plantingTree4]

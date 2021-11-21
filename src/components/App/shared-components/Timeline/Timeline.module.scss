@@ -52,13 +52,12 @@
     }
 
     p {
-      font-family: AvenirNextRoundedW02, sans-serif;
       font-size: 20px;
       font-weight: bold;
       line-height: 1.4;
       text-align: right;
       color: theme.$grey-800;
-      margin: 7px 0 12px 0;
+      margin: 7px 0 4px 0;
     }
 
     h2 {
@@ -136,6 +135,29 @@
   color: theme.$emerald-600;
 }
 
+.disabledText {
+  pointer-events: none;
+  color: theme.$grays-500;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 16px;
+
+  &:hover {
+    text-decoration: none;
+    color: theme.$grays-500;
+  }
+}
+
+.colorContrastMedium {
+  font-family: AvenirNextRoundedPro-Bold, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: theme.$grey-800;
+}
+
 .cdTimelineContentText {
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 20px;
@@ -166,6 +188,14 @@
   max-width: 116px;
   height: 116px;
   object-fit: contain;
+  padding-top: 24px;
+  min-width: 112px;
+  border-radius: 50%;
+  background: theme.$pale-grey;
+}
+
+.mdCardImgContainer {
+  padding-left: 12px;
 }
 
 .timelineContentImgSm {
@@ -203,7 +233,7 @@
 }
 
 .sm {
-  max-width: 428px;
+  max-width: 448px;
   border-radius: 20px;
   padding: 24px;
 }
@@ -211,9 +241,10 @@
 .md {
   display: flex;
   align-items: center;
-  max-width: 501px;
+  max-width: 498px;
   border-radius: 160px;
-  padding: 12px;
+  padding: 8px 12px;
+  margin-left: auto;
 }
 
 .lg {
