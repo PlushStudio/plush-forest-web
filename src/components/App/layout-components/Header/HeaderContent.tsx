@@ -15,7 +15,7 @@ export const HeaderContent: () => JSX.Element = () => {
       <Link to={'/'}>
         <img className={s.treeIcon} src={treeIcon} alt='tree icon' />
       </Link>
-      <div className={`${params.currentLocation !== 'token' ?
+      <div className={`${!params.id ?
         s.contentBlock : s.invisible}`}>
         <span className={s.logoTitle}>Plush Forest</span>
         <span className={s.logoDescription}>A tree for every child.</span>
