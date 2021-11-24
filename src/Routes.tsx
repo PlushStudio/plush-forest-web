@@ -9,9 +9,6 @@ import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import { User } from '@/types/user'
 import api from '@/api/api'
-import { Header } from '@/components/App/layout-components/Header/Header'
-
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
 export const Routes = () => {
   const { isConnected, provider } = useMetamaskWallet()
@@ -33,7 +30,8 @@ export const Routes = () => {
   const handleAccountChanged = async (accounts: Array<string>) => {
     if (accounts.length === 0) {
       setUserDetails({
-        address: ''
+        ...userDetails,
+        address: 'logouted'
       })
       await api.user.users.logout.request()
     }
@@ -80,9 +78,7 @@ export const Routes = () => {
           <AboutPage />
         </Route>
         <Route exact path='/planting'>
-          {userDetails.address !== ''
-          && window.ethereum.networkVersion === VITE_NETWORK_ID ?
-            <PlantPage /> : <Header />}
+          <PlantPage />
         </Route>
         <Route exact path='/token/:id/'>
           <TreeInfoPage />

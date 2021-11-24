@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
-import { userDefault } from '@/context/DefaultValue'
+import { UserDefault, userDefault } from '@/context/DefaultValue'
 
-export const userDetailsContext = createContext<any>(userDefault);
+export const userDetailsContext = createContext<any>({});
 
 const UserDetailsProvider = (props: any) => {
   const [userDetails, setUserDetails] = useState(userDefault);

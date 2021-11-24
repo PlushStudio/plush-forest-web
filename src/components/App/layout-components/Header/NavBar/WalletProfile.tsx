@@ -1,10 +1,13 @@
 import React, { FC, useContext, useEffect, useState } from 'react'
 import s from './WalletProfile.module.scss'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
-import Wallet from './Wallet/Wallet'
-import notificationIcon from '@/assets/images/combined-shape@3x.png'
-import burgerIcon from '@/assets/images/atom-icon-more-horizontal@2x.png'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
+import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
+import WalletIcon from '@/components/App/layout-components/Header/NavBar/Wallet/WalletIcon'
+import WalletMain from '@/components/App/layout-components/Header/NavBar/Wallet/WalletMain'
+import WalletKebab from '@/components/App/layout-components/Header/NavBar/Wallet/WalletKebab'
+import WalletBalance from '@/components/App/layout-components/Header/NavBar/Wallet/WalletBalance'
+import WalletModal from '@/components/App/layout-components/Header/NavBar/Wallet/WalletModal'
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
@@ -27,10 +30,27 @@ const WalletProfile: FC = () => {
   return (
     <div className={s.walletContainer}>
       {userDetails.currentChainId === VITE_NETWORK_ID ?
-        <Wallet walletAddress={userDetails.address} balance={balance} /> :
+        <>
+          <div className={s.walletContainer}>
+            {userDetails.address === '' ||
+            userDetails.address === 'logouted' ?
+              <>
+                <WalletIcon />
+                <WalletMain />
+                <WalletKebab />
+              </>
+              :
+              <>
+                <WalletIcon />
+                <WalletMain />
+                <WalletBalance balance={balance} />
+                <WalletKebab />
+              </>
+            }
+            <WalletModal />
+          </div>
+        </> :
         <div className={s.wrongNetworkContainer}>Wrong network detected</div>}
-      <img alt='notification' className={s.outsideWalletItem} src={notificationIcon} />
-      <img alt='sub-menu' className={s.outsideWalletItem} src={burgerIcon} />
     </div>
   )
 }

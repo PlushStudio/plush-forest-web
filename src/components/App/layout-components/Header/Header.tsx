@@ -44,12 +44,12 @@ export const Header: FC = () => {
 
   return (
     <div className={s.headerContainer}>
-      <HeaderContent />
       {userDetails.address && walletConnected ?
         <WalletProfile /> :
         <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
           Connect
         </div>}
+      <HeaderContent />
     </div>
   )
 }

@@ -39,6 +39,7 @@ const useMetamaskWallet = () => {
    * Returns Metamask wallet connection state
    * @returns Is MetaMask wallet connected or not to the website
    */
+
   const isConnected = async (): Promise<boolean> => {
     try {
       await getAddress()

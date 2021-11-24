@@ -1,15 +1,10 @@
 @use 'src/assets/styles/variables';
 @use 'src/assets/styles/theme';
 
-.wallet {
-  height: 48px;
-  padding: 2px 2px 2px 17px;
-  box-sizing: border-box;
-  background: theme.$white;
+.walletContainer {
   display: flex;
   align-items: center;
-  color: theme.$grey-800;
-  border-radius: 160px;
+  position: relative;
 }
 
 .balance {

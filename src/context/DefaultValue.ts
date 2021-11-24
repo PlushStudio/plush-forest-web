@@ -1,12 +1,27 @@
 import locationImg from '@/assets/images/tree-location.png'
 import heightImg from '@/assets/images/tree-height.png'
+import { Gender } from '@/types/Gender'
 
-export const userDefault = {
+export interface UserDefault {
+  address: string,
+  treeTypeIdToPlant: number,
+  name: string,
+  currentChainId: string,
+  treeTypeToPlant: string,
+  gender: null | Gender
+}
+
+export const modalStateDefault = {
+  isWalletModalOpen: true
+}
+
+export const userDefault: UserDefault = {
   address: '',
   treeTypeIdToPlant: 0,
   name: '',
   currentChainId: '',
-  treeTypeToPlant: ''
+  treeTypeToPlant: '',
+  gender: null
 }
 
 export const treeDefault = {

@@ -3,11 +3,14 @@ import '@/index.scss'
 import '@/index.css'
 import { Routes } from '@/Routes'
 import UserDetailsProvider from '@/context/UserDetailsProvider'
+import ModalProvider from '@/context/ModalProvider'
 
 function App() {
   return (
     <UserDetailsProvider>
-      <Routes />
+      <ModalProvider>
+        <Routes />
+      </ModalProvider>
     </UserDetailsProvider>
   )
 }

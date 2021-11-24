@@ -25,12 +25,6 @@
   width: 1280px;
 }
 
-.outsideWalletItem {
-  width: 24px;
-  margin-left: 24px;
-  cursor: pointer;
-}
-
 .header {
   align-items: center;
   display: flex;
@@ -53,9 +47,11 @@
 .walletContainer {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   padding: 0 40px;
   position: relative;
-  z-index: variables.$higher-order;
+  z-index: variables.$modals;
+  width: 100%;
 }
 
 .wrongNetworkContainer {

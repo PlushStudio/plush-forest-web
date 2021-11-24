@@ -1,56 +1,40 @@
-import classnames from 'classnames'
-import React from 'react'
-import { FC } from 'react'
+import React, { FC, useContext } from 'react'
+import WalletIcon from '@/components/App/layout-components/Header/NavBar/Wallet/WalletIcon'
+import WalletMain from '@/components/App/layout-components/Header/NavBar/Wallet/WalletMain'
+import WalletKebab from '@/components/App/layout-components/Header/NavBar/Wallet/WalletKebab'
 import s from './Wallet.module.scss'
-import walletIcon from '@/assets/images/24-px-2-1-px-outline-wallet.svg'
-import StyledText from '../StyledText/StyledText'
-import childIcon from '@/assets/images/combined-shape@2x.png'
+import WalletBalance from '@/components/App/layout-components/Header/NavBar/Wallet/WalletBalance'
+import WalletModal from '@/components/App/layout-components/Header/NavBar/Wallet/WalletModal'
+import { Gender } from '@/types/Gender'
+import { userDefault } from '@/context/DefaultValue'
 
-interface IWallet {
-  balance?: number
-  walletAddress?: string
-  className?: string
+interface Wallet {
+  gender: Gender,
+  onConnected: () => void
+  onDisconnected: () => void
+  // pick network type
+  onNetworkChange: (network: string) => void
 }
 
-/**
- * Cuts the string and adds dots in the middle
- * @param id Wallet id
- * @returns Wallet id in format 0xXXXX...XXXX
- */
-const cutWalletPublicId = (id: string) => {
-  return `${id.substr(0, 6)}...${id.substr(id.length - 4, 4)}`
-}
-
-const Wallet: FC<IWallet> = ({ balance = 0, walletAddress, className }) => {
-  const style = classnames(s.wallet, className)
-
-  const validateBalance = (balance: number) => {
-    if (balance < 0) {
-      throw new Error('Balance cannot be less than zero')
-    }
-
-    return balance
-  }
-
+const Wallet: FC<Wallet> = ({gender}) => {
   return (
-    <div className={style}>
-      <img src={walletIcon} alt="wallet" />
-      <StyledText
-        family="avenir"
-        weight="w500"
-        size="s14"
-        color="rose500t90"
-        className={s.balance}
-      >
-        {validateBalance(balance)} Plai
-      </StyledText>
-      <div className={s.profile}>
-        <StyledText family="avenir" size="s14" color="gray800">
-          {walletAddress ? cutWalletPublicId(walletAddress) : ''}
-        </StyledText>
-        <img className={s.childIcon} src={childIcon}/>
+    <>
+      <div className={s.walletContainer}>
+        {userDefault.address ? <>
+            <WalletIcon />
+            <WalletMain/>
+            <WalletKebab />
+          </>
+          :
+          <>
+            <WalletIcon/>
+            <WalletMain />
+            <WalletBalance/>
+          </>
+        }
+        <WalletModal/>
       </div>
-    </div>
+    </>
   )
 }
 
