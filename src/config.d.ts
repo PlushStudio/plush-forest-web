@@ -7,5 +7,6 @@ interface Config {
   PLAI_CONTRACT_ADDRESS?: string
   CORE_CONTRACT_ADDRESS?: string
   CORE_GET_TREE_CONTRACT_ADDRESS?: string
-  NETWORK_ID?: string
+  NETWORK_ID?: string,
+  FOREST_CONTRACT_ADDRESS?: string
 }

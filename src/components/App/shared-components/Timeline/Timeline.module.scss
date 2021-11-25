@@ -5,6 +5,13 @@
   width: calc(50% - 36px);
 }
 
+.linked {
+  color: theme.$emerald-600;
+  &:hover {
+    color: theme.$emerald-600;
+  }
+}
+
 .cdTimeline {
   overflow: hidden;
   padding: 1em 0;
