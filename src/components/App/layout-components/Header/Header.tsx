@@ -6,6 +6,7 @@ import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
+import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 
 export const Header: FC = () => {
   const { login } = useMetamaskAuth()
@@ -31,6 +32,8 @@ export const Header: FC = () => {
   })
 
   const handleLoginButtonClick = async () => {
+    trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login');
+
     try {
       await login(
         new URL(`${api.url}/${api.user.auth.nonce.url}`),

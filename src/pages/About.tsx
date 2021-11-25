@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./About.module.css"
 import {Header} from "@/components/App/layout-components/Header/Header"
 import {HomeText} from "@/components/App/shared-components/HomeText/HomeText";
@@ -9,8 +9,13 @@ import {TreesArea} from "@/components/App/shared-components/TreesArea/TreesArea"
 import {HomeFeatureSection2} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection2";
 import {HomeFeatureSection3} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection3";
 import {Footer} from "@/components/App/layout-components/Footer/Footer";
+import { Category, MatomoEvent, trackEvent } from "@/utils/matomo";
 
 export const AboutPage = () => {
+    useEffect(() => {
+      trackEvent(Category.Info, MatomoEvent.PageVisited, 'About');
+    }, [])
+
     return (
         <>
             <svg style={{position: "absolute", minHeight: 400, zIndex: -1}} xmlns="http://www.w3.org/2000/svg"

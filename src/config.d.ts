@@ -1,5 +1,6 @@
 interface Window {
-  config: Config
+  config: Config,
+  _paq: any,
 }
 
 interface Config {
@@ -9,4 +10,6 @@ interface Config {
   CORE_GET_TREE_CONTRACT_ADDRESS?: string
   NETWORK_ID?: string,
   FOREST_CONTRACT_ADDRESS?: string
+  MATOMO_URL?: string,
+  MATOMO_SITE_ID?: string
 }
