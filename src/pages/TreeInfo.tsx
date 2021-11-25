@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom'
 import { useHistory } from 'react-router'
 import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValue'
+import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 
 export const TreeInfoPage: React.FC = () => {
   const params = useParams<any>()
@@ -47,6 +48,10 @@ export const TreeInfoPage: React.FC = () => {
       history.push('/404')
     })
   }, [params.id])
+
+  useEffect(() => {
+    trackEvent(Category.Info, MatomoEvent.PageVisited, 'Tree info');
+  }, [])
 
   return (
     <div className={s.backgroundContainer}>
