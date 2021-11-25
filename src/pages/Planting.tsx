@@ -17,19 +17,23 @@ import useTreeContract from '@/hooks/useTreeContract'
 import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
+import useMetamaskAuth from '@/hooks/useMetamaskAuth'
+
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
   const [isPlanting, setIsPlanting] = useState(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
-  const [nameFrom, setNameFrom] = useState('')
+  const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState(plantingTree0)
   const history = useHistory()
-  const [userDetails] = useContext(userDetailsContext)
+  const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
+  const { login } = useMetamaskAuth()
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
@@ -95,17 +99,30 @@ export const PlantPage = () => {
                     startAllowanceLoop()
                   })
                 } catch (e) {
-                  console.log(e.message)
                   setIsPlanting(false)
                 }
               }
             }, 7000)
           }
         } catch (e) {
-          console.error(e.message)
           setIsPlanting(false)
         }
       }
+    }
+  }
+
+  const Login = async () => {
+    try {
+      await login(
+        new URL(`${api.url}/${api.user.auth.nonce.url}`),
+        new URL(`${api.url}/${api.user.auth.login.url}`)
+      )
+      setUserDetails({
+        ...userDetails,
+        address: ''
+      })
+    } catch {
+      // TODO Handle errors. Now do nothing (perfect scenario)
     }
   }
 
@@ -130,7 +147,11 @@ export const PlantPage = () => {
                              readonly={isPlanting} />
               </Form.Group>
               {!isPlanting &&
-              <MainActionButton onClick={() => plantTreeHandler()}
+              <MainActionButton onClick={() => {
+                userDetails.address !== '' && userDetails.address !== 'logouted'
+                && window.ethereum.networkVersion === VITE_NETWORK_ID ? plantTreeHandler() :
+                  Login()
+              }}
                                 text='Plant your tree'
                                 variant='success'
                                 image='tree' />}

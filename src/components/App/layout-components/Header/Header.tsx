@@ -4,8 +4,8 @@ import { HeaderContent } from './HeaderContent'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
-import WalletProfile from '@/components/App/layout-components/Header/NavBar/WalletProfile'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
+import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
 
 export const Header: FC = () => {
   const { login } = useMetamaskAuth()
@@ -44,12 +44,12 @@ export const Header: FC = () => {
 
   return (
     <div className={s.headerContainer}>
-      <HeaderContent />
       {userDetails.address && walletConnected ?
-        <WalletProfile /> :
+        <Wallet address={userDetails.address} gender={userDetails.gender} name={userDetails.name} /> :
         <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
           Connect
         </div>}
+      <HeaderContent />
     </div>
   )
 }
