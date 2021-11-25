@@ -4,7 +4,12 @@
 .balanceContainer {
   display: flex;
   color: theme.$grey-800;
-  padding-left: 10px;
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 14px;
+  border-left: 1px solid theme.$grey-200;
+  padding-left: 14px;
+  margin-left: 10px;
+  height: 100%;
+  align-items: center;
+  padding-right: 10px;
 }

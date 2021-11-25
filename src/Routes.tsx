@@ -49,7 +49,7 @@ export const Routes = () => {
   }, [provider])
 
   useEffect(() => {
-    if (walletConnected) {
+    if (walletConnected && userDetails.address === '') {
       api.user.users.profile.request()
         .then(response => {
           return response.data
