@@ -20,20 +20,22 @@ interface TimelineInfo {
     secondBlockInfo: string,
     imageLink: string,
     planter: string,
+    dedicatedDate: string,
+    plantedDate: string
   }
 }
 
 const Timeline = ({ timelineInfo }: TimelineInfo) => {
   const cardInfo: ICardInfo[] = [
     {
-      date: 'Mar 09, 2020',
+      date: timelineInfo.dedicatedDate,
       text: timelineInfo.firstBlockInfo.split('.')[0],
       subtext: 'Verify',
       img: heartImg,
       size: 'md'
     },
     {
-      date: 'Jan 11, 2020',
+      date: timelineInfo.plantedDate,
       text: timelineInfo.secondBlockInfo.split('.')[0],
       planter: `Planted by: ${timelineInfo.planter}`,
       img: timelineInfo.imageLink,
