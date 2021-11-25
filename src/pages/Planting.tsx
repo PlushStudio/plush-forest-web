@@ -17,7 +17,7 @@ import useTreeContract from '@/hooks/useTreeContract'
 import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
-import useMetamaskAuth from '@/hooks/useMetamaskAuth'
+import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
@@ -33,7 +33,7 @@ export const PlantPage = () => {
   const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
-  const { login } = useMetamaskAuth()
+  const { getPLAIBalance, isConnected } = useMetamaskWallet()
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
@@ -111,10 +111,23 @@ export const PlantPage = () => {
     }
   }
 
-  const checkAllowanceToMint = () => {
-    userDetails.address !== '' && userDetails.address !== 'logouted'
-    && window.ethereum.networkVersion === VITE_NETWORK_ID ? plantTreeHandler() :
-      null
+  const checkAllowanceToMint = async () => {
+
+      const walletConnected = await isConnected()
+      if (walletConnected) {
+        getPLAIBalance().then((r) => {
+          if (r !== 0 &&
+            userDetails.address !== '' &&
+            userDetails.address !== 'logouted' &&
+            window.ethereum.networkVersion === VITE_NETWORK_ID
+          ) {
+            plantTreeHandler()
+          }
+        })
+      }
+
+
+
   }
 
   return (
