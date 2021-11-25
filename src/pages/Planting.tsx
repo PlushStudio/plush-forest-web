@@ -18,6 +18,7 @@ import { PlantingModal } from '@/components/App/shared-components/PlantingModal/
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
+import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
@@ -112,7 +113,7 @@ export const PlantPage = () => {
   }
 
   const checkAllowanceToMint = async () => {
-
+      trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Planting tree');
       const walletConnected = await isConnected()
       if (walletConnected) {
         getPLAIBalance().then((r) => {
@@ -125,10 +126,11 @@ export const PlantPage = () => {
           }
         })
       }
-
-
-
   }
+
+  useEffect(() => {
+    trackEvent(Category.Info, MatomoEvent.PageVisited, 'Planting');
+  }, [])
 
   return (
     <div className={s.backgroundContainer}>
