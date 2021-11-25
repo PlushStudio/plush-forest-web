@@ -7,7 +7,6 @@
   border-radius: 16px;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.02), 0 8px 8px -2px rgba(0, 0, 0, 0.02), 0 16px 16px -4px rgba(0, 0, 0, 0.03), 0 32px 32px -8px rgba(0, 0, 0, 0.04), 0 64px 64px -12px rgba(0, 0, 0, 0.03);
   width: 488px;
-  height: 184px;
   background: white;
   right: 0;
   padding: 16px;
@@ -18,7 +17,12 @@
 
 .modalContent {
   display: flex;
+  flex-wrap: wrap;
   height: fit-content;
+}
+
+.errorConnectionBlock {
+  margin: auto;
 }
 
 .address {
@@ -72,4 +76,25 @@
   font-size: 18px;
   color: theme.$grey-800;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  max-width: 300px;
+  margin: auto;
+  padding: 16px 0;
+}
+
+.modalTitle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: Moranga, sans-serif;
+  font-size: 22px;
+  color: theme.$grey-800;
+  margin: 0 55px 23px;
+}
+
+.modalErrorFooter {
+  text-align: center;
+}
+
+.errorModalContainer {
+  padding: 20px;
 }

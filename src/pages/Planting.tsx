@@ -111,19 +111,10 @@ export const PlantPage = () => {
     }
   }
 
-  const Login = async () => {
-    try {
-      await login(
-        new URL(`${api.url}/${api.user.auth.nonce.url}`),
-        new URL(`${api.url}/${api.user.auth.login.url}`)
-      )
-      setUserDetails({
-        ...userDetails,
-        address: ''
-      })
-    } catch {
-      // TODO Handle errors. Now do nothing (perfect scenario)
-    }
+  const checkAllowanceToMint = () => {
+    userDetails.address !== '' && userDetails.address !== 'logouted'
+    && window.ethereum.networkVersion === VITE_NETWORK_ID ? plantTreeHandler() :
+      null
   }
 
   return (
@@ -147,11 +138,7 @@ export const PlantPage = () => {
                              readonly={isPlanting} />
               </Form.Group>
               {!isPlanting &&
-              <MainActionButton onClick={() => {
-                userDetails.address !== '' && userDetails.address !== 'logouted'
-                && window.ethereum.networkVersion === VITE_NETWORK_ID ? plantTreeHandler() :
-                  Login()
-              }}
+              <MainActionButton onClick={() => checkAllowanceToMint()}
                                 text='Plant your tree'
                                 variant='success'
                                 image='tree' />}

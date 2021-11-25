@@ -6,25 +6,28 @@ import arrowBottomIcon from '@/assets/images/wallet/arrow-bottom.png'
 interface WalletMain {
   setModalVisibility: (modalVisibility: boolean) => void,
   modalVisibility: boolean,
-  name: string
+  name: string,
+  address: string
 }
 
-const WalletMain = ({ modalVisibility, setModalVisibility, name }: WalletMain) => {
+const WalletMain = ({ modalVisibility, setModalVisibility, name, address }: WalletMain) => {
   return (
     <div onClick={() => setModalVisibility(!modalVisibility)} className={s.mainContainer}>
       <div className={s.topPull}>
         <div className={s.name}>
-          Jamie
+          {name}
         </div>
         <div className={s.address}>
-          {cutWalletPublicId('0x4c49Dc38c549F888fA8AB7736a98EB118fAB6FE7')}
+          {name !== 'Hey,' ? cutWalletPublicId(address) : ''}
         </div>
         <div className={s.arrowBottom}>
           <img alt={'arrow-bottom'} src={arrowBottomIcon} />
         </div>
       </div>
       <div className={s.bottomPull}>
-        <span className={s.bottomPullText}>Connected to Rinkeby</span>
+        <span
+          className={`${s.bottomPullText} ${name === 'Hey,' ? s.errorText : ''}`}>{name === 'Hey,' ? 'Wrong network!' :
+          'Connected to Rinkeby'}</span>
       </div>
     </div>
   )

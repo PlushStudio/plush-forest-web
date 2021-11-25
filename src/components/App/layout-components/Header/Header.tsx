@@ -44,8 +44,11 @@ export const Header: FC = () => {
 
   return (
     <div className={s.headerContainer}>
-      {userDetails.address && walletConnected ?
-        <Wallet address={userDetails.address} gender={userDetails.gender} name={userDetails.name} /> :
+      { walletConnected ?
+        <Wallet address={userDetails.address}
+                chainId={userDetails.currentChainId}
+                gender={userDetails.gender}
+                name={userDetails.name} /> :
         <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
           Connect
         </div>}
