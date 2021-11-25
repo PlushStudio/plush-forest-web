@@ -16,9 +16,7 @@ interface Wallet {
 
 const Wallet = ({ name, gender, address }: Wallet) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const [userDetails, setUserDetails] = useContext(userDetailsContext)
 
-  console.log(userDetails.name)
   return (
     <div className={s.walletContainer}>
       <WalletIcon gender={gender} />
