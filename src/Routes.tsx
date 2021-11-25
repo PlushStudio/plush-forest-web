@@ -58,7 +58,8 @@ export const Routes = () => {
           ...userDetails,
           name: r.name,
           address: r.address,
-          childName: r.childs[0].name
+          childName: r.childs[0].name,
+          gender: r.gender
         })
       }).finally(() => setIsFetching(false))
     } else {

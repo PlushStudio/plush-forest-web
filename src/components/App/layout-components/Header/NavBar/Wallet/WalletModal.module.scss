@@ -1,0 +1,75 @@
+@use 'src/assets/styles/variables';
+@use 'src/assets/styles/theme';
+
+.modalContainer {
+  position: absolute;
+  display: flex;
+  border-radius: 16px;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.02), 0 8px 8px -2px rgba(0, 0, 0, 0.02), 0 16px 16px -4px rgba(0, 0, 0, 0.03), 0 32px 32px -8px rgba(0, 0, 0, 0.04), 0 64px 64px -12px rgba(0, 0, 0, 0.03);
+  width: 488px;
+  height: 184px;
+  background: white;
+  right: 0;
+  padding: 16px;
+  top: 50px;
+  z-index: 999;
+  flex-wrap: wrap;
+}
+
+.modalContent {
+  display: flex;
+  height: fit-content;
+}
+
+.address {
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 18px;
+}
+
+.addressBlockBottom {
+  color: theme.$indigo-500;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 12px;
+}
+
+.connectionBlock {
+  display: flex;
+  align-items: center;
+}
+
+.connectionCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: theme.$grays-50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.connectionImage {
+  width: 28px;
+}
+
+.addressInfoBlock {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 12px;
+  padding: 10px 0;
+}
+
+.addressBlock, .addressBlockBottom {
+  width: 100%;
+}
+
+.copyAddressIcon {
+  width: 16px;
+  margin-left: 4px;
+}
+
+.modalFooter {
+  text-align: center;
+  font-size: 18px;
+  color: theme.$grey-800;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+}
