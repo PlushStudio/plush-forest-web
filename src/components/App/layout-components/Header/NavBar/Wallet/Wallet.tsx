@@ -16,8 +16,8 @@ interface Wallet {
 
 const Wallet = ({ name, gender, address, chainId }: Wallet) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const { getPLAIBalance, isConnected } = useMetamaskWallet()
-  const [balance, setBalance] = useState(0)
+  const { getPLAIBalance, isConnected, getTicker } = useMetamaskWallet()
+  const [balance, setBalance] = useState('')
 
   useEffect(() => {
     setPLAIBalance()
@@ -25,8 +25,9 @@ const Wallet = ({ name, gender, address, chainId }: Wallet) => {
 
   const setPLAIBalance = async () => {
     const walletConnected = await isConnected()
+    const ticker = await getTicker()
     if (walletConnected) {
-      getPLAIBalance().then((r) => setBalance(r))
+      getPLAIBalance().then((r) => setBalance(`${r.toString()} ${ticker}`))
     }
   }
 

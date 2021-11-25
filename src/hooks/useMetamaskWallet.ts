@@ -1,5 +1,4 @@
-import { JsonRpcSigner, Web3Provider, ExternalProvider} from '@ethersproject/providers'
-import detectEthereumProvider from '@metamask/detect-provider'
+import { JsonRpcSigner } from '@ethersproject/providers'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { ethers } from 'ethers'
 import { useEffect, useRef, useState } from 'react'
@@ -17,7 +16,7 @@ export const errors = {
   signingFailed: {
     code: 3,
     message: 'Signing was failed'
-  },
+  }
 }
 
 const useMetamaskWallet = () => {
@@ -65,7 +64,7 @@ const useMetamaskWallet = () => {
       throw errors.walletNotInstalled
     }
 
-    await provider?.send("eth_requestAccounts", []);
+    await provider?.send('eth_requestAccounts', [])
   }
 
   /**
@@ -90,8 +89,11 @@ const useMetamaskWallet = () => {
     }
 
     const balance = ethers.utils.formatUnits(await PLAIContract.balanceOf(await getAddress()), 18)
-
     return parseInt(balance)
+  }
+
+  const getTicker = async (): Promise<string> => {
+    return await PLAIContract.symbol()
   }
 
   /**
@@ -131,10 +133,10 @@ const useMetamaskWallet = () => {
       if (PLAIContractAddress) {
         // general token send
         let PLAIcontract = new ethers.Contract(
-            PLAIContractAddress,
-            genericErc20Abi,
-            // @ts-ignore
-            signer
+          PLAIContractAddress,
+          genericErc20Abi,
+          // @ts-ignore
+          signer
         )
 
         // How many tokens?
@@ -143,7 +145,7 @@ const useMetamaskWallet = () => {
         // Send tokens
         PLAIcontract.transfer(to_address, numberOfTokens).then((transferResult: string) => {
           console.dir(transferResult)
-          alert("sent token")
+          alert('sent token')
         })
       } // ether send
       else {
@@ -152,20 +154,20 @@ const useMetamaskWallet = () => {
           to: to_address,
           value: ethers.utils.parseEther(send_token_amount),
           nonce: provider.getTransactionCount(
-              send_account,
-              "latest"
+            send_account,
+            'latest'
           ),
           gasLimit: ethers.utils.hexlify('0x100000'), // 100000
-          gasPrice: gas_price,
+          gasPrice: gas_price
         }
         console.dir(tx)
         try {
           signer?.sendTransaction(tx).then((transaction) => {
             console.dir(transaction)
-            alert("Send finished!")
+            alert('Send finished!')
           })
         } catch (error) {
-          alert("failed to send!!")
+          alert('failed to send!!')
         }
       }
     })
@@ -180,6 +182,7 @@ const useMetamaskWallet = () => {
     sign,
     getAddress,
     getPLAIBalance,
+    getTicker,
     provider,
     signer,
     sendPLAI

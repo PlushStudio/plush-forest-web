@@ -81,7 +81,30 @@ export const LearnMoreAccordion = () => {
           }
         </Accordion.Toggle>
         <Accordion.Collapse eventKey='1'>
-          <Card.Body>Hello! I'm another body</Card.Body>
+          <Card.Body>
+            <div className={s.tabMainBlock}>
+              Plant Your Future’s work helps farmers transform deforested and degraded land into productive agroforestry
+              systems. Put simply, agroforestry combines agriculture with forestry.
+              Native fruit and timber trees are planted alongside short-term crops.
+              <br/><br/>
+              <b className={s.secondAccordionTitle}>Since 2009, the charity has:</b>
+              <br/><br/>
+              <ul>
+                <li>
+                  Planted a further 35,000 trees that continue to thrive.
+                </li>
+                <li>
+                  Planted a further 35,000 trees that continue to thrive.
+                </li>
+                <li>
+                  Achieved certification under the Climate, Community and Biodiversity Standard and the Verified Carbon Standard.
+                </li>
+              </ul>
+              For more info, please visit: <a href={"https://www.plantyourfuture.org.uk"}>
+              https://www.plantyourfuture.org.uk
+            </a>
+            </div>
+          </Card.Body>
         </Accordion.Collapse>
       </Card>
     </Accordion>

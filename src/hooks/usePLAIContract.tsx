@@ -152,7 +152,7 @@ const usePLAIContract = () => {
       }
 
       // @ts-ignore
-      setProvider(new ethers.providers.Web3Provider(ethereumMetamaskGlobalObject))
+      setProvider(new ethers.providers.Web3Provider(ethereumMetamaskGlobalObject, "any"));
     }
     detectProvider()
   }, [])
