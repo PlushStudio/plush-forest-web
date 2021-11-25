@@ -99,14 +99,12 @@ export const PlantPage = () => {
                     startAllowanceLoop()
                   })
                 } catch (e) {
-                  console.log(e.message)
                   setIsPlanting(false)
                 }
               }
             }, 7000)
           }
         } catch (e) {
-          console.error(e.message)
           setIsPlanting(false)
         }
       }

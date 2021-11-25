@@ -128,8 +128,6 @@ const useMetamaskWallet = () => {
   function sendPLAI(send_token_amount: string, to_address: string, send_account: string) {
     provider?.getGasPrice().then((currentGasPrice: any) => {
       let gas_price = ethers.utils.hexlify(parseInt(currentGasPrice.toString()))
-      console.log(`gas_price: ${gas_price}`)
-
       if (PLAIContractAddress) {
         // general token send
         let PLAIcontract = new ethers.Contract(
@@ -141,7 +139,6 @@ const useMetamaskWallet = () => {
 
         // How many tokens?
         let numberOfTokens = ethers.utils.parseUnits(send_token_amount, 8)
-        console.log(`numberOfTokens: ${numberOfTokens}`)
 
         // Send tokens
         PLAIcontract.transfer(to_address, numberOfTokens).then((transferResult: string) => {

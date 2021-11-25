@@ -21,7 +21,7 @@ const urls = {
   }
 }
 
-const api = {
+export const api = {
   url: backend.defaults.baseURL,
   user: {
     auth: {
@@ -61,12 +61,12 @@ const api = {
               }).then(response => {
               if (response.status === 200) {
                 if (response.data?.items.length > 0) {
+                  window.location.href = `/token/${response.data?.items[0].token}`
                   clearInterval(getMyTokensInterval as NodeJS.Timeout)
                 }
               } else {
                 clearInterval(getMyTokensInterval as NodeJS.Timeout)
               }
-              console.log(response?.data)
               return response?.data
             }).catch(r => {
               console.error(r.message)
