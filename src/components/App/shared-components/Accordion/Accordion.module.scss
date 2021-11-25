@@ -13,6 +13,12 @@
   margin: 4px 140px 40px 42px !important;
 }
 
+.secondAccordionTitle {
+  display: inline;
+  width: 100%;
+  padding: 16px 0;
+}
+
 .collapsing, .show {
   background: theme.$white;
   margin-top: 4px;

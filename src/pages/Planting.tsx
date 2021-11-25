@@ -18,6 +18,7 @@ import { PlantingModal } from '@/components/App/shared-components/PlantingModal/
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
+import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
@@ -34,6 +35,7 @@ export const PlantPage = () => {
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
   const { getPLAIBalance, isConnected } = useMetamaskWallet()
+  const { login } = useMetamaskAuth()
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
@@ -113,21 +115,43 @@ export const PlantPage = () => {
 
   const checkAllowanceToMint = async () => {
 
-      const walletConnected = await isConnected()
-      if (walletConnected) {
-        getPLAIBalance().then((r) => {
-          if (r !== 0 &&
-            userDetails.address !== '' &&
-            userDetails.address !== 'logouted' &&
-            window.ethereum.networkVersion === VITE_NETWORK_ID
-          ) {
-            plantTreeHandler()
-          }
-        })
-      }
+    const walletConnected = await isConnected()
+    if (walletConnected) {
+      getPLAIBalance().then((r) => {
+        if (r !== 0 &&
+          userDetails.address !== '' &&
+          userDetails.address !== 'logouted' &&
+          window.ethereum.networkVersion === VITE_NETWORK_ID
+        ) {
+          plantTreeHandler()
+        }
+      })
+    }
+  }
 
+  const getUserData = () => {
+    api.user.users.profile.request()
+      .then(response => {
+        return response.data
+      }).then((r) => {
+      setUserDetails({
+        ...userDetails,
+        address: r.address,
+        name: r.name
+      })
+    })
+  }
 
-
+  const handleLoginButtonClick = async () => {
+    try {
+      await login(
+        new URL(`${api.url}/${api.user.auth.nonce.url}`),
+        new URL(`${api.url}/${api.user.auth.login.url}`)
+      )
+      getUserData()
+    } catch {
+      // TODO Handle errors. Now do nothing (perfect scenario)
+    }
   }
 
   return (
@@ -151,14 +175,11 @@ export const PlantPage = () => {
                              readonly={isPlanting} />
               </Form.Group>
               {!isPlanting &&
-              <MainActionButton onClick={() => checkAllowanceToMint()}
+              <MainActionButton onClick={(e: any) =>
+                userDetails.address === '' || userDetails.address === 'logouted' ?
+                  handleLoginButtonClick() :
+                  isPlanting ? e.preventDefault() : checkAllowanceToMint()}
                                 text='Plant your tree'
-                                variant='success'
-                                image='tree' />}
-              {isPlanting &&
-              <MainActionButton onClick={(e: any) => e.preventDefault()}
-                                loading={isPlanting}
-                                text='Planting...'
                                 variant='success'
                                 image='tree' />}
             </Form>
