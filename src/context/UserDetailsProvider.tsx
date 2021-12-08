@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { UserDefault, userDefault } from '@/context/DefaultValue'
+import { userDefault } from '@/context/DefaultValue'
 
 export const userDetailsContext = createContext<any>({});
 

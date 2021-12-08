@@ -17,7 +17,6 @@ const VITE_NETWORK_ID = window.config.FOREST_CONTRACT_ADDRESS ?? '0xd5015643F38A
 
 const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
 const params: Params = useParams()
-  console.log(params)
   return (
     <div className={`${s.cdTimelineBlock} ${id % 2 === 0 ? s.reverse : ''}`}>
       <div className={s.cdTimelineImg}>

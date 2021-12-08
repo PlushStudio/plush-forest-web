@@ -1,60 +1,26 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, {FC, useContext, useEffect, useState} from 'react'
 import s from '@/components/App/layout-components/Header/Header.module.scss'
 import { HeaderContent } from './HeaderContent'
-import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
-import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
-import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 
 export const Header: FC = () => {
-  const { login } = useMetamaskAuth()
-  const [userDetails, setUserDetails] = useContext(userDetailsContext)
-  const [walletConnected, setWalletConnected] = useState(false)
-  const { isConnected } = useMetamaskWallet()
-
-  const getUserData = () => {
-    api.user.users.profile.request()
-      .then(response => {
-        return response.data
-      }).then((r) => {
-      setUserDetails({
-        ...userDetails,
-        address: r.address,
-        name: r.name
-      })
-    })
-  }
-
-  useEffect(() => {
-    isConnected().then(res => setWalletConnected(res))
-  })
-
-  const handleLoginButtonClick = async () => {
-    trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login');
-
-    try {
-      await login(
-        new URL(`${api.url}/${api.user.auth.nonce.url}`),
-        new URL(`${api.url}/${api.user.auth.login.url}`)
-      )
-      getUserData()
-    } catch {
-      // TODO Handle errors. Now do nothing (perfect scenario)
-    }
-  }
+  const [userDetails] = useContext(userDetailsContext)
+  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false)
+  const [isOpenDropdownByError, setIsOpenDropdownByError] = useState<boolean | null>(null)
+    useEffect(() => {
+        if (userDetails.isOpenDropdownByError) {
+            setIsOpenDropdownByError(true)
+            setIsOpenDropdown(false)
+        } else {
+            setIsOpenDropdownByError(false)
+        }
+    }, [userDetails.isOpenDropdownByError, userDetails.isOpenDropdown])
 
   return (
     <div className={s.headerContainer}>
-      { walletConnected ?
-        <Wallet address={userDetails.address}
-                chainId={userDetails.currentChainId}
-                gender={userDetails.gender}
-                name={userDetails.name} /> :
-        <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
-          Connect
-        </div>}
+        <Wallet isOpenDropdown={isOpenDropdownByError ? true : isOpenDropdown}
+                setIsOpenDropdown={isOpenDropdownByError ? setIsOpenDropdownByError : setIsOpenDropdown} />
       <HeaderContent />
     </div>
   )

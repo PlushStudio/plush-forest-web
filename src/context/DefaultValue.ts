@@ -8,7 +8,9 @@ export interface UserDefault {
   name: string,
   currentChainId: string,
   treeTypeToPlant: string,
-  gender: null | Gender
+  gender: null | Gender,
+  isOpenDropdown: boolean | null,
+  isOpenDropdownByError: boolean | null
 }
 
 export const modalStateDefault = {
@@ -21,7 +23,9 @@ export const userDefault: UserDefault = {
   name: '',
   currentChainId: '',
   treeTypeToPlant: '',
-  gender: null
+  gender: null,
+  isOpenDropdown: null,
+  isOpenDropdownByError: null
 }
 
 export const treeDefault = {
