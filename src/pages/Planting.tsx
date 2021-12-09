@@ -18,6 +18,8 @@ import { PlantingModal } from '@/components/App/shared-components/PlantingModal/
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
+import {Category, MatomoEvent, trackEvent} from "@/utils/matomo";
+import useMetamaskAuth from "@/hooks/useMetamaskAuth";
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
 
@@ -28,16 +30,20 @@ export const PlantPage = () => {
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState(plantingTree0)
-  const history = useHistory()
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
+  const history = useHistory()
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
-  const { getPLAIBalance, isConnected } = useMetamaskWallet()
+  const { getPLAIBalance, walletConnected } = useMetamaskWallet()
+  const {login} = useMetamaskAuth()
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
-  }, [userDetails.treeTypeIdToPlant])
+    if (userDetails.name === '') {
+      getUserData()
+    }
+  }, [userDetails.treeTypeIdToPlant, userDetails.name])
 
   const startAllowanceLoop = (delay: number = 7000) => {
     const updateBuyAllowance = setInterval(async function() {
@@ -111,23 +117,57 @@ export const PlantPage = () => {
     }
   }
 
-  const checkAllowanceToMint = async () => {
+  const getUserData = () => {
+    api.user.users.profile.request()
+        .then(response => {
+          return response.data
+        }).then((r) => {
+      console.log(r)
+      setUserDetails({
+        ...userDetails,
+        name: r.name
+      })
+    })
+  }
 
-      const walletConnected = await isConnected()
+  const startMintProcess = async () => {
       if (walletConnected) {
-        getPLAIBalance().then((r) => {
-          if (r !== 0 &&
-            userDetails.address !== '' &&
-            userDetails.address !== 'logouted' &&
+        getPLAIBalance().then(async (balance: number) => {
+          if (balance !== 0 &&
+            userDetails.address !== 'disconnected' &&
             window.ethereum.networkVersion === VITE_NETWORK_ID
           ) {
-            plantTreeHandler()
+            if (userDetails.name == '') {
+              trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login');
+              try {
+                await login(
+                    new URL(`${api.url}/${api.user.auth.nonce.url}`),
+                    new URL(`${api.url}/${api.user.auth.login.url}`)
+                )
+              } catch {
+                // TODO Handle errors. Now do nothing (perfect scenario)
+              }
+            }
+            await plantTreeHandler()
+          } else {
+            setUserDetails({
+              ...userDetails,
+              isOpenDropdownByError: true,
+              isOpenDropdown: !userDetails.isOpenDropdown
+            })
           }
         })
+      } else {
+        trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login');
+        try {
+          await login(
+              new URL(`${api.url}/${api.user.auth.nonce.url}`),
+              new URL(`${api.url}/${api.user.auth.login.url}`)
+          )
+        } catch {
+          // TODO Handle errors. Now do nothing (perfect scenario)
+        }
       }
-
-
-
   }
 
   return (
@@ -151,12 +191,12 @@ export const PlantPage = () => {
                              readonly={isPlanting} />
               </Form.Group>
               {!isPlanting &&
-              <MainActionButton onClick={() => checkAllowanceToMint()}
+              <MainActionButton onClick={() => startMintProcess()}
                                 text='Plant your tree'
                                 variant='success'
                                 image='tree' />}
               {isPlanting &&
-              <MainActionButton onClick={(e: any) => e.preventDefault()}
+              <MainActionButton
                                 loading={isPlanting}
                                 text='Planting...'
                                 variant='success'

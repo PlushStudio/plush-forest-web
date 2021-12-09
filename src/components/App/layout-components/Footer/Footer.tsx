@@ -5,7 +5,6 @@ import {LearnMoreAccordion } from '@/components/App/shared-components/Accordion/
 import {SoilFooterWithContacts} from './SoilFooterWithContacts'
 
 export const Footer: FC = () => {
-
     return (
         <>
             <div className={s.footerContainer}>

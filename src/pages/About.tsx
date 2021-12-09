@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 import s from "./About.module.css"
 import {Header} from "@/components/App/layout-components/Header/Header"
 import {HomeText} from "@/components/App/shared-components/HomeText/HomeText";
@@ -10,10 +10,14 @@ import {HomeFeatureSection2} from "@/components/App/shared-components/HomeFeatur
 import {HomeFeatureSection3} from "@/components/App/shared-components/HomeFeatureSection/HomeFeatureSection3";
 import {Footer} from "@/components/App/layout-components/Footer/Footer";
 import { Category, MatomoEvent, trackEvent } from "@/utils/matomo";
+import api from "@/api/api";
+import {userDetailsContext} from "@/context/UserDetailsProvider";
 
 export const AboutPage = () => {
+    const [userDetails, setUserDetails] = useContext(userDetailsContext)
     useEffect(() => {
       trackEvent(Category.Info, MatomoEvent.PageVisited, 'About');
+
     }, [])
 
     return (

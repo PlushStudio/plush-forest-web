@@ -152,7 +152,6 @@ const useTreeContract = () => {
     }
   }
 
-
   return {
     mintATree
   }

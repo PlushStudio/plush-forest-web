@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import s from './TreeInfoBlock.module.scss'
 import { TreeData } from '@/types/tree/TreeData'
-import { ucFirst } from '@/utils'
+import { ucFirst } from '@/utils/utils'
 import plantingTree1 from '@/assets/images/planting-tree/shihuahuaco.png'
 import plantingTree2 from '@/assets/images/planting-tree/cacao.png'
 import plantingTree3 from '@/assets/images/planting-tree/guaba.png'

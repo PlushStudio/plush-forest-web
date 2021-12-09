@@ -19,6 +19,7 @@
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
+  margin: auto;
 }
 
 .errorConnectionBlock {
@@ -76,9 +77,8 @@
   font-size: 18px;
   color: theme.$grey-800;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
-  max-width: 300px;
   margin: auto;
-  padding: 16px 0;
+  padding: 16px;
 }
 
 .modalTitle {
@@ -88,7 +88,6 @@
   font-family: Moranga, sans-serif;
   font-size: 22px;
   color: theme.$grey-800;
-  margin: 0 55px 23px;
 }
 
 .modalErrorFooter {

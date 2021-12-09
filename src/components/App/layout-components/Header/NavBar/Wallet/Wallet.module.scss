@@ -40,6 +40,13 @@
   margin-left: 16px;
 }
 
+.kebab {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
 .menuButton {
   margin-left: 4px;
 }
@@ -54,9 +61,28 @@
   width: 100%;
 }
 
+.wallet {
+  display: flex;
+}
+
 .wrongNetworkContainer {
   background: theme.$white;
   color: darkred;
   padding: 10px 20px;
   border-radius: 8px;
+}
+
+.loginBtn {
+  display: flex;
+  justify-content: center;
+  width: 136px;
+  height: 48px;
+  border-radius: 160px;
+  align-items: center;
+  color: theme.$white;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.02) 0%), linear-gradient(to top, #eab1fb, #515bff);
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  box-shadow: 0 1px 1px 0 rgba(124, 92, 255, 0.04), 0 1px 2px 0 rgba(124, 92, 255, 0.04), 0 2px 4px 0 rgba(124, 92, 255, 0.08), 0 4px 4px -1px rgb(255, 255, 255), 0 8px 12px -2px rgba(255, 255, 255, 0.04), inset 0 -1px 0 0 rgba(124, 92, 255, 0.3);
+  font-size: 16px;
+  cursor: pointer;
 }
