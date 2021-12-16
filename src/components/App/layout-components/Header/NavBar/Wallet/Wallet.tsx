@@ -109,20 +109,20 @@ const Wallet: FC<{
       if (window.ethereum) {
         window.ethereum.on('chainChanged', (networkId: string) => {
           handleChainChanged(networkId)
+          console.log(networkId)
           if (networkId !== VITE_NETWORK_ID) {
             setIsOpenDropdown(true)
           }
         })
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
+        handleChainChanged(`0x${window.ethereum.networkVersion}`)
       }
-
-      handleChainChanged(`0x${window.ethereum.networkVersion}`)
 
       return () => {
         window.ethereum.removeListener('accountsChanged', handleAccountChanged)
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
-    }, [provider])
+    }, [provider, window.ethereum.networkVersion])
 
     useEffect(() => {
       if (userContractData.address === '' ||

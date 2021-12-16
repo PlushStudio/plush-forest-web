@@ -6,14 +6,17 @@
   align-items: center;
   font-size: 18px;
 }
-.accordion > .card{
+
+.accordion > .card {
   border: none;
   outline: none;
-  border-radius: 8px ;
-  &:first-of-type{
+  border-radius: 8px;
+
+  &:first-of-type {
     margin-bottom: 4px;
   }
 }
+
 .show, .collapsing {
   max-width: 1050px;
 }
