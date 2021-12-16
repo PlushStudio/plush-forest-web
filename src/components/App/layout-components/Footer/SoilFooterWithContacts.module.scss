@@ -9,12 +9,14 @@
   background-color: theme.$grays-50;
   background-image: url("@/assets/images/bitmap-soil.png");
   background-size: 366px 192px;
-  height: 192px;
+  height: 100px;
   object-fit: contain;
 }
 
 .soilFooterContent {
-  width: 1280px;
+  width: 100%;
+  max-width: 1392px;
+  padding: 0 88px;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -26,11 +28,16 @@
   height: 306px;
   pointer-events: none;
   margin: auto;
-  top: 0;
-  left: 1015px;
+  left: 855px;
   right: 0;
-  bottom: 336px;
+  bottom: 20px;
   z-index: variables.$medium-order;
+}
+@media (max-width: 1392px) {
+  .footerPlant{
+    left: auto;
+    right: 120px;
+  }
 }
 
 .rightPull, .leftPull {
@@ -57,7 +64,6 @@
 .termsAndPrivacy {
   margin-left: 12px;
   font-family: AvenirNextRoundedPro-Med, sans-serif;
-  font-size: 14px;
   color: theme.$grays-000-white;
   cursor: pointer;
 }
@@ -68,7 +74,3 @@
   padding-left: 12px;
 }
 
-.leftPullTextPrimary {
-  cursor: pointer;
-  color: theme.$purple-light;
-}
