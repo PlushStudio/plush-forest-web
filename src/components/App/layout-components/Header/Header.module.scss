@@ -1,9 +1,14 @@
 .headerContainer {
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 1.2em;
-  padding-top: 2.4em;
-  justify-content: flex-end;
+  padding: 1.2em 88px 1em;
+  position: absolute;
+  width: 100%;
+  max-width: 1392px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .wrongModalContainer {

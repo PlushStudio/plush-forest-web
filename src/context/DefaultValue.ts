@@ -28,6 +28,15 @@ export const userDefault: UserDefault = {
   isOpenDropdownByError: null
 }
 
+export const walletDefault: any = {
+  address: '',
+  balance: 0,
+  currentChainId: '',
+  ticker: '',
+  isOpenDropdown: null,
+  isOpenDropdownByError: null
+}
+
 export const treeDefault = {
   name: '',
   desc: '',

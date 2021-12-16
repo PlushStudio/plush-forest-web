@@ -1,50 +1,92 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {BrowserRouter as Router, Route, Switch, useParams} from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { PageNotFound } from './pages/PageNotFound'
 import { AboutPage } from './pages/About'
 import { PlantPage } from './pages/Planting'
-import Index from './pages/index/Index'
 import { TreeInfoPage } from './pages/TreeInfo'
-import useCoreContract from "@/hooks/useCoreContract";
-import {userDetailsContext} from "@/context/UserDetailsProvider";
+import { userDetailsContext } from '@/context/UserDetailsProvider'
+import api from '@/api/api'
+import useMetamaskWallet from '@/hooks/useMetamaskWallet'
+import useMetamaskAuth from '@/hooks/useMetamaskAuth'
+import { AxiosResponse } from 'axios'
+import { User } from '@/types/user'
+import { Page } from '@/Page'
 
 export const Routes = () => {
-  const { balanceOf } = useCoreContract()
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
+  const { walletConnected } = useMetamaskWallet()
+  const { login } = useMetamaskAuth()
+
+  const setUserData = async () => {
+    if (userDetails.name === '') {
+      const userData: any = await api.user.users.profile.request()
+      if (userData.status === 200) {
+        setUserDetails({
+          ...userDetails,
+          name: userData.data.name,
+          gender: userData.data.gender,
+          childName: userData.data.childs[0].name
+        })
+      } else {
+        try {
+          await login(
+            new URL(`${api.url}/${api.user.auth.nonce.url}`),
+            new URL(`${api.url}/${api.user.auth.login.url}`)
+          )
+          const userData: AxiosResponse<User> = await api.user.users.profile.request()
+
+          if (userData.status === 200) {
+            setUserDetails({
+              ...userDetails,
+              name: userData.data.name,
+              gender: userData.data.gender,
+              childName: userData.data.childs[0].name
+            })
+          }
+        } catch (e: any) {
+          switch (e.message) {
+            case 'User not found':
+              setUserDetails({
+                ...userDetails,
+                name: 'userNotFound'
+              })
+              break
+          }
+        }
+      }
+    }
+  }
 
   useEffect(() => {
-    const checkToken = async () => {
-      const hasTokenHex = await balanceOf('0x4c49Dc38c549F888fA8AB7736a98EB118fAB6FE7')
-      const hasTokenResult = parseInt(hasTokenHex['_hex'], 16)
-      setUserDetails({
-        ...userDetails,
-        hasToken: hasTokenResult === 1
-      })
+    if (walletConnected) {
+      setUserData()
     }
-    checkToken()
-  }, [userDetails.hasToken])
+  }, [walletConnected])
 
   return (
     <Router>
       <Switch>
-          <Route exact path='/'>
-            <Index />
-          </Route>
-          <Route exact path='/about'>
-            <AboutPage />
-          </Route>
-          <Route exact path='/planting'>
-            <PlantPage />
-          </Route>
-          <Route exact path='/token/:id/'>
-            <TreeInfoPage />
-          </Route>
-          <Route path='*'>
-            <PageNotFound />
-          </Route>
-          <Route path='/404'>
-            <PageNotFound/>
-          </Route>
+        <Route exact path='/'>
+          <Page children={<AboutPage />} />
+        </Route>
+        <Route exact path='/about'>
+          <Page children={<AboutPage />} />
+        </Route>
+        <Route exact path='/planting'>
+          {userDetails.address !== '' && userDetails.address !== 'disconnected' ?
+            <Page children={<PlantPage />} /> :
+            <Redirect to={'/about'}/>
+          }
+        </Route>
+        <Route exact path='/token/:id/'>
+          <Page children={<TreeInfoPage />} />
+        </Route>
+        <Route path='*'>
+          <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
+        </Route>
+        <Route path='/404'>
+          <PageNotFound />
+        </Route>
       </Switch>
     </Router>)
 }

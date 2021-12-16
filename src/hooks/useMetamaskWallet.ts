@@ -7,11 +7,11 @@ import usePLAIContract from '@/hooks/usePLAIContract'
 export const errors = {
   walletNotInstalled: {
     code: 1,
-    message: 'Wallet is not installed'
+    message: 'wallet is not installed'
   },
   walletNotConnected: {
     code: 2,
-    message: 'Wallet is not connected'
+    message: 'wallet is not connected'
   },
   signingFailed: {
     code: 3,
@@ -69,7 +69,7 @@ const useMetamaskWallet = () => {
 
   /**
    * Returns active wallet account address
-   * @returns Wallet address
+   * @returns wallet address
    **/
   const getAddress = async (): Promise<string> => {
     if (!signer) {
@@ -92,7 +92,7 @@ const useMetamaskWallet = () => {
     return parseInt(balance)
   }
 
-  const getTicker = async (): Promise<string> => {
+  const getCurrency = async (): Promise<string> => {
     return await PLAIContract.symbol()
   }
 
@@ -186,7 +186,7 @@ const useMetamaskWallet = () => {
     sign,
     getAddress,
     getPLAIBalance,
-    getTicker,
+    getCurrency,
     provider,
     signer,
     walletConnected,

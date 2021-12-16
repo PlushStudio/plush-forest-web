@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom'
 import { useHistory } from 'react-router'
 import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValue'
-import moment from 'moment';
+import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 
 export const TreeInfoPage: React.FC = () => {
@@ -51,7 +51,7 @@ export const TreeInfoPage: React.FC = () => {
   }, [params.id])
 
   useEffect(() => {
-    trackEvent(Category.Info, MatomoEvent.PageVisited, 'Tree info');
+    trackEvent(Category.Info, MatomoEvent.PageVisited, 'Tree info')
   }, [])
 
   return (

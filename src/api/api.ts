@@ -16,7 +16,7 @@ const urls = {
     },
     trees: {
       tokens: 'forest/tokens/my?page=1&limit=10',
-      token: 'forest/token/',
+      token: 'forest/token/'
     }
   }
 }
