@@ -1,17 +1,16 @@
 .container {
-    max-width: 1440px;
+    max-width: 1392px;
+    padding: 0 88px;
     margin: auto;
     padding-bottom: 2.4em;
 }
 
 .homeFeatureContainer {
-    max-width: 1281px;
-    padding-top: 4.7em;
+    padding-top: 6.4em;
     margin: auto;
 }
 
 .getStartedContentContainer {
-    padding-left: 8px;
     position: relative;
 }
 

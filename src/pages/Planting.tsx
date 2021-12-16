@@ -7,7 +7,6 @@ import plantingTree2 from '@/assets/images/planting-tree/guaba.png'
 import plantingTree3 from '@/assets/images/planting-tree/caoba.png'
 import { useHistory } from 'react-router'
 import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
-import { Header } from '@/components/App/layout-components/Header/Header'
 import s from './Planting.module.scss'
 import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
 import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
@@ -18,32 +17,30 @@ import { PlantingModal } from '@/components/App/shared-components/PlantingModal/
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
-import {Category, MatomoEvent, trackEvent} from "@/utils/matomo";
-import useMetamaskAuth from "@/hooks/useMetamaskAuth";
+import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
+import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '4'
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x4'
 
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
   const [isPlanting, setIsPlanting] = useState(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
+  const [helperText, setHelperText] = useState<string>('')
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState(plantingTree0)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
-  const history = useHistory()
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
-  const { getPLAIBalance, walletConnected } = useMetamaskWallet()
-  const {login} = useMetamaskAuth()
+  const { login } = useMetamaskAuth()
+  const history = useHistory()
+  const { walletConnected } = useMetamaskWallet()
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
-    if (userDetails.name === '') {
-      getUserData()
-    }
-  }, [userDetails.treeTypeIdToPlant, userDetails.name])
+  }, [userDetails.treeTypeIdToPlant])
 
   const startAllowanceLoop = (delay: number = 7000) => {
     const updateBuyAllowance = setInterval(async function() {
@@ -69,7 +66,7 @@ export const PlantPage = () => {
       history.push(`/token/${myTokens?.items[0].token}`)
     } else {
       setIsPlanting(true)
-      if (userDetails.address) {
+      if (userDetails.name !== '') {
         try {
           const allowance = await getBuyAllowance(userDetails.address)
           if (allowance) {
@@ -110,70 +107,55 @@ export const PlantPage = () => {
               }
             }, 7000)
           }
-        } catch (e) {
+        } catch (e: any) {
           setIsPlanting(false)
+          console.log(e.message)
         }
       }
     }
   }
 
-  const getUserData = () => {
-    api.user.users.profile.request()
-        .then(response => {
-          return response.data
-        }).then((r) => {
-      console.log(r)
-      setUserDetails({
-        ...userDetails,
-        name: r.name
-      })
-    })
+  const makeLogin = async () => {
+    trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login')
+    try {
+      await login(
+        new URL(`${api.url}/${api.user.auth.nonce.url}`),
+        new URL(`${api.url}/${api.user.auth.login.url}`)
+      )
+    } catch {
+      // TODO Handle errors. Now do nothing (perfect scenario)
+    }
   }
 
   const startMintProcess = async () => {
-      if (walletConnected) {
-        getPLAIBalance().then(async (balance: number) => {
-          if (balance !== 0 &&
-            userDetails.address !== 'disconnected' &&
-            window.ethereum.networkVersion === VITE_NETWORK_ID
-          ) {
-            if (userDetails.name == '') {
-              trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login');
-              try {
-                await login(
-                    new URL(`${api.url}/${api.user.auth.nonce.url}`),
-                    new URL(`${api.url}/${api.user.auth.login.url}`)
-                )
-              } catch {
-                // TODO Handle errors. Now do nothing (perfect scenario)
-              }
-            }
-            await plantTreeHandler()
-          } else {
-            setUserDetails({
-              ...userDetails,
-              isOpenDropdownByError: true,
-              isOpenDropdown: !userDetails.isOpenDropdown
-            })
-          }
-        })
-      } else {
-        trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login');
-        try {
-          await login(
-              new URL(`${api.url}/${api.user.auth.nonce.url}`),
-              new URL(`${api.url}/${api.user.auth.login.url}`)
-          )
-        } catch {
-          // TODO Handle errors. Now do nothing (perfect scenario)
+    if (walletConnected) {
+      if (
+        userDetails.address !== 'disconnected' &&
+        `0x${window.ethereum.networkVersion}` === VITE_NETWORK_ID
+      ) {
+        if (userDetails.name === '') {
+          await makeLogin()
         }
+        if (nameFrom === '') {
+          setHelperText('The name cannot be empty')
+        } else {
+          await plantTreeHandler()
+        }
+      } else {
+        setUserDetails({
+          ...userDetails,
+          isOpenDropdownByError: true,
+          isOpenDropdown: !userDetails.isOpenDropdown,
+        })
       }
+    } else {
+      await makeLogin()
+    }
   }
 
   return (
     <div className={s.backgroundContainer}>
       <div className={s.container}>
-        <Header />
         {isPlanting ? <PlantingModal status={plantingStatus} /> :
           <div className={s.plantingFormWrapper}>
             <Form className={s.plantingForm}>
@@ -190,17 +172,24 @@ export const PlantPage = () => {
                              placeholder='Your name'
                              readonly={isPlanting} />
               </Form.Group>
+              <span className={s.statusText}>
+                {helperText}
+              </span> <br/>
+              {userDetails.balance < 5 && <span className={s.statusText}>
+                You need more plush tokens to perform this operation
+              </span>}
               {!isPlanting &&
-              <MainActionButton onClick={() => startMintProcess()}
-                                text='Plant your tree'
-                                variant='success'
-                                image='tree' />}
+                <MainActionButton onClick={() => startMintProcess()}
+                                  text='Plant your tree'
+                                  variant='success'
+                                  image='tree' />}
+
               {isPlanting &&
-              <MainActionButton
-                                loading={isPlanting}
-                                text='Planting...'
-                                variant='success'
-                                image='tree' />}
+                <MainActionButton
+                  loading={isPlanting}
+                  text='Planting...'
+                  variant='success'
+                  image='tree' />}
             </Form>
             <img src={treeImage} className='planting-tree-image' alt='logo' />
           </div>

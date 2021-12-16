@@ -147,7 +147,7 @@ const useTreeContract = () => {
           return false
         })
       })
-    } catch (e) {
+    } catch (e: any) {
       console.error(e.message)
     }
   }

@@ -6,11 +6,18 @@
   align-items: center;
   font-size: 18px;
 }
-
+.accordion > .card{
+  border: none;
+  outline: none;
+  border-radius: 8px ;
+  &:first-of-type{
+    margin-bottom: 4px;
+  }
+}
 .show, .collapsing {
-  max-width: 876px;
+  max-width: 1050px;
 }
 
 .accordion .collapse, .accordion .collapsing {
-  padding: 0 3em;
+  padding: 0 5.2em;
 }

@@ -1,18 +1,40 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import s from './WalletMain.module.scss'
 import { cutWalletPublicId } from '@/utils/utils'
 import arrowBottomIcon from '@/assets/images/wallet/arrow-bottom.svg'
 
 interface WalletMain {
-  setModalVisibility: (modalVisibility: boolean) => void,
-  modalVisibility: boolean | null,
+  setManualModalVisibility?: (modalVisibility: boolean | null | undefined) => void | undefined,
   name: string,
-  address: string
+  address: string,
+  dropdownRef: React.MutableRefObject<null>
 }
 
-const WalletMain = ({ modalVisibility, setModalVisibility, name, address }: WalletMain) => {
+const WalletMain = ({ setManualModalVisibility, name, address, dropdownRef }: WalletMain) => {
+  const walletMainRef = useRef(null)
+  useEffect(() => {
+    /**
+     * Set dropdown state if clicked on outside of dropdown
+     */
+    handleClickOutside(walletMainRef)
+    handleClickOutside(dropdownRef)
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+
+  }, [walletMainRef, dropdownRef])
+
+  const handleClickOutside = (e: any) => {
+    if (setManualModalVisibility) {
+      // @ts-ignore
+      setManualModalVisibility(walletMainRef?.current?.contains(e.target) || dropdownRef?.current?.contains(e.target))
+    }
+  }
+
   return (
-    <div onClick={() => setModalVisibility(!modalVisibility)}
+    <div ref={walletMainRef} onClick={(e: any) => handleClickOutside(e)}
          className={s.mainContainer}>
       <div className={s.topPull}>
         <div className={s.name}>
@@ -28,7 +50,8 @@ const WalletMain = ({ modalVisibility, setModalVisibility, name, address }: Wall
       <div className={s.bottomPull}>
         <span
           className={`${s.bottomPullText} ${name === 'Hey,' ? s.errorText : ''}`}>{name === 'Hey,' ? 'Wrong network!' :
-          'Connected to Rinkeby'}</span>
+          'Connected to Rinkeby'}
+        </span>
       </div>
     </div>
   )

@@ -3,75 +3,72 @@
 
 .container {
   display: flex;
-  margin-top: 6em;
-  height: 344px;
-}
-
-.maskedImg {
-  background-size: cover;
-  object-fit: cover;
-  -webkit-mask-repeat: no-repeat;
+  align-items: center;
+  &:nth-of-type(2) {
+    margin-top: -105px;
+  }
+  &:nth-of-type(3) {
+    margin-top: -105px;
+  }
 }
 
 .twoBirds {
-  width: 424px;
-  -webkit-mask-image: url("/src/assets/images/clip-3.svg");
-  mask-image: url("/src/assets/images/clip-3.svg");
+  width: 525px;
 }
 
 .womanWithPlant {
-  height: 396px;
-  -webkit-mask-image: url("/src/assets/images/clip-4.svg");
-  mask-image: url("/src/assets/images/clip-4.svg");
+  height: 530px;
+  margin-left: -40px;
 }
 
 .bigTree {
-  height: 402px;
-  position: absolute;
-  width: 394px;
-  top: -52px;
-  left: 30px;
-  -webkit-mask-image: url("/src/assets/images/clip-2.svg");
-  mask-image: url("/src/assets/images/clip-2.svg");
+  height: 408px;
 }
 
 .leaf {
   position: absolute;
-  right: 102px;
-  top: 124px;
+  right: 87px;
+  top: 100px;
+  width: 70px;
 }
 
 .lines {
   position: absolute;
-  right: 5%;
-  top: 0;
+  right: 0;
+  top: -10px;
+  width: 145px;
 }
 
 .firstContainerText {
   display: flex;
-  flex-wrap: wrap;
-  margin-left: 3.5em;
-  padding-top: 2.2em;
+  flex-direction: column;
+  margin-left: 5em;
   width: 50%;
+  margin-top: 28px;
 }
 
 .secondContainerText {
   display: flex;
-  flex-wrap: wrap;
-  margin-left: 2em;
-  padding-top: 72px;
-  width: 50%;
+  flex-direction: column;
+  width: 47%;
+  margin-top: -20px;
 }
-
+.thirdContainerText {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5em;
+  width: 50%;
+  margin-top: 98px;
+}
 .leafContainer {
   position: absolute;
   right: 0;
-  top: 1684px;
+  top: 1664px;
 }
 
 .imageBlock {
   position: relative;
-  width: 36%;
+  width: 439px;
 }
 
 .widthAuto {
@@ -107,16 +104,17 @@
 }
 
 .description {
-  width: 603px;
+  width: 100%;
   margin: 16px 0 18px;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-size: 20px;
-  line-height: 1.5;
+  white-space: normal;
+  line-height: 1.4;
   color: theme.$grey-800;
 }
 
 .sectionThreeDescription {
-  max-width: 512px;
+  max-width: 96%;
 }
 
 .sectionThreeGetStarted {
@@ -125,6 +123,8 @@
   color: theme.$grey-800;
   padding-bottom: 4em;
   font-weight: 500;
+  font-size: 20px;
+  margin-top: 4px;
 }
 
 .plantingDots {

@@ -1,13 +1,5 @@
 import React from 'react'
-import treesArea1 from '@/assets/images/fill-29.svg'
-import treesArea2 from '@/assets/images/fill-34.svg'
-import treesArea3 from '@/assets/images/fill-39.svg'
-import treesArea4 from '@/assets/images/fill-74.svg'
-import treesArea5 from '@/assets/images/fill-79.svg'
-import treesArea6 from '@/assets/images/fill-84.svg'
-import treesArea7 from '@/assets/images/fill-89.svg'
-import treesArea8 from '@/assets/images/fill-94.svg'
-import treesArea9 from '@/assets/images/fill-99.svg'
+import treesArea1 from '@/assets/images/terrain.png'
 import tree01 from '@/assets/images/tree-01@3x.png'
 import tree02 from '@/assets/images/tree-02@3x.png'
 import tree03 from '@/assets/images/tree-03@3x.png'
@@ -38,14 +30,6 @@ export const TreesArea = () => {
                              year={treesTooltipData[index].year}
                              month={treesTooltipData[index].month}
                              name={treesTooltipData[index].name} />
-            )
-          })
-      }
-      {
-        [treesArea1, treesArea2, treesArea3, treesArea4, treesArea5, treesArea6, treesArea7, treesArea8, treesArea9]
-          .map((value, index) => {
-            return (
-              <img alt='tree-area' src={value} className={`${s.treesAreaImg} ${s['treesArea' + Number(++index)]}`} />
             )
           })
       }

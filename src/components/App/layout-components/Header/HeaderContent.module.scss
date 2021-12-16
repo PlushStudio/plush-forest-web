@@ -3,6 +3,7 @@
 
 .headerContainer {
   display: flex;
+  align-items: center;
   z-index: variables.$higher-order;
   width: 100%;
 }
@@ -11,7 +12,7 @@
   width: 100%;
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 24px;
-  letter-spacing: normal;
+  letter-spacing: -1px;
   color: theme.$black;
 }
 
@@ -19,6 +20,9 @@
   user-select: none;
   cursor: pointer;
   padding-top: 8px;
+  margin-left: -8px;
+  width: 64px;
+  height: 64px;
 }
 
 .logoDescription {
@@ -32,8 +36,8 @@
 
 .contentBlock {
   display: flex;
-  flex-wrap: wrap;
-  margin-left: 14px;
+  flex-direction: column;
+  margin-left: 8px;
 }
 
 .invisible {

@@ -27,14 +27,14 @@ export const CustomSelect: React.FC = () => {
   const [items] = useState<IData[]>(data)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [selectedItem, setSelectedItem] = useState<number>(0)
-  const { getTicker } = useMetamaskWallet()
+  const { getCurrency } = useMetamaskWallet()
   const [ticker, setTicker] = useState('')
   const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
   const toggleDropdown = () => setOpen(!isOpen)
 
   const getContractTicker = async () => {
-    const t = await getTicker()
+    const t = await getCurrency()
     setTicker(t)
   }
   useEffect(() => {

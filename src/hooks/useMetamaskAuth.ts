@@ -7,7 +7,7 @@ const useMetamaskAuth = () => {
   /**
    * Returns nonce from backend
    * @param nonceUrl URL to get nonce
-   * @param address Wallet address
+   * @param address wallet address
    * @returns Nonce number
    */
   const getNonce = useCallback(async (nonceUrl: URL, address: string): Promise<number | undefined> => {

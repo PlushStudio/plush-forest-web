@@ -1,6 +1,5 @@
 import React from 'react'
 import s from './HomeFeatureSection.module.scss'
-import dots from '@/assets/images/dots.png'
 import twoBirds from '@/assets/images/two-birds.png'
 
 export const HomeFeatureSection2 = () => {
@@ -17,8 +16,7 @@ export const HomeFeatureSection2 = () => {
                 </span>
             </div>
             <div className={s.imageBlock}>
-                <img className={s.twoBirds + ' ' + s.maskedImg} src={twoBirds} alt='two birds'/>
-                <img className={s.dots} src={dots} alt='planting dots'/>
+                <img className={s.twoBirds} src={twoBirds} alt='two birds'/>
             </div>
         </div>
     )
