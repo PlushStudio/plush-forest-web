@@ -11,13 +11,13 @@ import { RoutesPaths } from './routes'
  * Restricted allowed route paths overwrite default any string. Only
  * those paths that are in the routes available.
  */
-class Route<T extends {} = {}> extends ReactRouterRoute<T, RoutesPaths> {}
+class Route<T extends {} = {}> extends ReactRouterRoute<T, RoutesPaths> { }
 
 interface RestrictedLinkComponentParams<S = LocationState>
   extends React.ForwardRefExoticComponent<
-    React.PropsWithoutRef<LinkProps<S> & { to: RoutesPaths }> &
-      React.RefAttributes<HTMLAnchorElement>
-  > {}
+  React.PropsWithoutRef<LinkProps<S> & { to: RoutesPaths }> &
+  React.RefAttributes<HTMLAnchorElement>
+  > { }
 type RestrictedLink = <S = LocationState>(
   ...params: Parameters<RestrictedLinkComponentParams & { to: RoutesPaths }>
 ) => ReturnType<ReactRouterLink<S>>

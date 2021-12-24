@@ -25,7 +25,7 @@ export const Routes = () => {
           ...userDetails,
           name: userData.data.name,
           gender: userData.data.gender,
-          childName: userData.data.childs[0].name
+          childName: userData.data.childs[0].name,
         })
       } else {
         try {
@@ -75,7 +75,7 @@ export const Routes = () => {
         <Route exact path='/planting'>
           {userDetails.address !== '' && userDetails.address !== 'disconnected' ?
             <Page children={<PlantPage />} /> :
-            <Redirect to={'/about'}/>
+            <Redirect to={'/about'} />
           }
         </Route>
         <Route exact path='/token/:id/'>

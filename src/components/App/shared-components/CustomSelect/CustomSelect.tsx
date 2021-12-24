@@ -63,12 +63,11 @@ export const CustomSelect: React.FC = () => {
     toggleDropdown()
     handleClickOutside()
   }
-  /*
-  if outside click handler is required
-      useEffect(() => {
-          document.addEventListener('click', handleClickOutside, true);
-      });
-  */
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true);
+  });
+
   return (
     <div className={`${s.dropdown} ${isOpen ? s.focused : ''}`}>
       <div className={`${s.dropdownHeader}`} onClick={() => {
@@ -84,23 +83,23 @@ export const CustomSelect: React.FC = () => {
         <div className={s.dropdownHeaderRightPull}>
           <div className={`${s.itemPrice} ${s.itemPriceDropdownHeader}`}>{`5 ${ticker}`}</div>
           <img className={`${s.dropDownArrow} ${isOpen ? s.rotate180 : ''}`} src={arrowDown}
-               alt='arrow down' />
+            alt='arrow down' />
         </div>
       </div>
       <div className={`${s.dropdownBody} ${isOpen ? s.dropdownBodyOpen : ''}`}>
         {items.map((item: IData, index: number) => (
-          <div key={item.id + index} className={`${s.dropdownItem} ${selectedItem === item.id ? s.selectedItem : ''}`}
-               onClick={() => handleItemClick(index)}>
+          userDetails.treesCount[index] !== 0 && <div key={item.id + index} className={`${s.dropdownItem} ${selectedItem === item.id ? s.selectedItem : ''}`}
+            onClick={() => handleItemClick(item.id)}>
             <div className={s.dropdownItemPrefixContainer}>
               <img key={index} className={`${s.dropdownHeaderPrefix} ${s.dropdownChildItem}`}
-                   src={TreeTypeSelectorImages[index]}
-                   alt={'tree icon'} />
+                src={TreeTypeSelectorImages[item.id]}
+                alt={'tree icon'} />
               <div className={s.dropdownItemContent}>
                 <div className={s.dropdownLabel}>
                   {item.label}
                 </div>
                 <div className={s.availableCount}>
-                  {`Available: ${item.available}`}
+                  {`Available: ${userDetails.treesCount[item.id]}`}
                 </div>
               </div>
             </div>

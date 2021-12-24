@@ -1,7 +1,7 @@
 import { JsonRpcSigner } from '@ethersproject/providers'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { ethers } from 'ethers'
-import { useEffect, useRef, useState} from 'react'
+import { useEffect, useRef, useState } from 'react'
 import usePLAIContract from '@/hooks/usePLAIContract'
 
 export const errors = {
@@ -124,9 +124,9 @@ const useMetamaskWallet = () => {
     if (provider) {
       setSigner(provider.getSigner())
       setInitialized(true);
-      (async function() {
-       const accounts = await provider.listAccounts();
-       setWalletConnected(accounts.length > 0);
+      (async function () {
+        const accounts = await provider.listAccounts();
+        setWalletConnected(accounts.length > 0);
       })()
     }
   }, [provider])

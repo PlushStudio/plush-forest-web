@@ -17,13 +17,14 @@ const WalletDropdown: FC<{
   type: WalletDropdownType,
   networkId: string,
   setWalletState: (walletState: WalletState) => void,
-  onDropdownRefInitialized: (dropdownRef: React.MutableRefObject<null>) => void }> =
+  onDropdownRefInitialized: (dropdownRef: React.MutableRefObject<null>) => void
+}> =
   ({ isVisible,
-     address,
-     type,
-     networkId,
-     onDropdownRefInitialized,
-     setWalletState}) => {
+    address,
+    type,
+    networkId,
+    onDropdownRefInitialized,
+    setWalletState }) => {
     const [footerButtonText, setFooterButtonText] = useState('Switch to Rinkeby')
     const [footerSubtext, setFooterSubtext] = useState('Switch to Rinkeby')
     const dropdownRef = useRef(null)
@@ -54,7 +55,7 @@ const WalletDropdown: FC<{
       if (networkId !== VITE_NETWORK_ID) {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: VITE_NETWORK_ID}]
+          params: [{ chainId: VITE_NETWORK_ID }]
         })
       }
       if (type === 'SUCCESS') {
@@ -73,30 +74,30 @@ const WalletDropdown: FC<{
             <div className={`${s.connectionBlock} ${type === 'WRONG_NETWORK' ? s.errorConnectionBlock : ''}`}>
               <div className={`${s.connectionCircle}`}>
                 <img alt={'metamask icon'}
-                     className={s.connectionImage}
-                     src={metamaskIcon} />
+                  className={s.connectionImage}
+                  src={metamaskIcon} />
               </div>
               <div className={s.connectionImage}>
                 <img alt={'connection line'}
-                     className={s.connectionImage}
-                     src={type !== 'WRONG_NETWORK' ? successConnectionLine : badConnectionLine} />
+                  className={s.connectionImage}
+                  src={type !== 'WRONG_NETWORK' ? successConnectionLine : badConnectionLine} />
               </div>
               <div className={s.connectionCircle}>
                 <img alt={'rinkeby icon'}
-                     className={s.connectionImage}
-                     src={rinkebyIcon} />
+                  className={s.connectionImage}
+                  src={rinkebyIcon} />
               </div>
             </div>
           </>}
           {type === 'SUCCESS' &&
             <div className={s.addressInfoBlock}>
               <div className={s.addressBlock}>
-            <span className={s.address}>
-              {cutWalletPublicId(address)}
-            </span>
+                <span className={s.address}>
+                  {cutWalletPublicId(address)}
+                </span>
                 <img alt={'copy address icon'}
-                     className={s.copyAddressIcon}
-                     src={copyAddressIcon} />
+                  className={s.copyAddressIcon}
+                  src={copyAddressIcon} />
               </div>
               <div className={s.addressBlockBottom}>
                 View on Explorer
@@ -105,8 +106,8 @@ const WalletDropdown: FC<{
         </div>
         <div className={`${s.modalFooter} 
        ${type === 'WRONG_NETWORK' ?
-          s.modalFooterWrongNetwork :
-          type === 'USER_NOT_FOUND' ? s.modalFooterUserNotFound : ''}`}>
+            s.modalFooterWrongNetwork :
+            type === 'USER_NOT_FOUND' ? s.modalFooterUserNotFound : ''}`}>
           {type !== 'SUCCESS' &&
             <span className={s.footerSubtext}>{footerSubtext}</span>}
           <div className={s.modalFooterButton}>

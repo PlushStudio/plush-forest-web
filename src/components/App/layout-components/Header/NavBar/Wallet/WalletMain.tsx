@@ -35,7 +35,7 @@ const WalletMain = ({ setManualModalVisibility, name, address, dropdownRef }: Wa
 
   return (
     <div ref={walletMainRef} onClick={(e: any) => handleClickOutside(e)}
-         className={s.mainContainer}>
+      className={s.mainContainer}>
       <div className={s.topPull}>
         <div className={s.name}>
           {name}
@@ -50,7 +50,7 @@ const WalletMain = ({ setManualModalVisibility, name, address, dropdownRef }: Wa
       <div className={s.bottomPull}>
         <span
           className={`${s.bottomPullText} ${name === 'Hey,' ? s.errorText : ''}`}>{name === 'Hey,' ? 'Wrong network!' :
-          'Connected to Rinkeby'}
+            'Connected to Rinkeby'}
         </span>
       </div>
     </div>

@@ -59,18 +59,18 @@ export const api = {
               {
                 withCredentials: true
               }).then(response => {
-              if (response.status === 200) {
-                if (response.data?.items.length > 0) {
+                if (response.status === 200) {
+                  if (response.data?.items.length > 0) {
+                    clearInterval(getMyTokensInterval as NodeJS.Timeout)
+                  }
+                } else {
                   clearInterval(getMyTokensInterval as NodeJS.Timeout)
                 }
-              } else {
+                return response?.data
+              }).catch(r => {
+                console.error(r.message)
                 clearInterval(getMyTokensInterval as NodeJS.Timeout)
-              }
-              return response?.data
-            }).catch(r => {
-              console.error(r.message)
-              clearInterval(getMyTokensInterval as NodeJS.Timeout)
-            })
+              })
           } catch (error: any) {
             return error.response
           }

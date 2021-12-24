@@ -31,11 +31,11 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
             <a href='#' className={`${id % 2 === 0 ? s.disabledText : s.btn}`}>
               {id % 2 === 0 ? cardInfo.planter :
                 <a className={s.linked}
-                   href={`https://testnets.opensea.io/assets/${VITE_NETWORK_ID}/${params.id}`}>{cardInfo.subtext}</a>}</a>
+                  href={`https://testnets.opensea.io/assets/${VITE_NETWORK_ID}/${params.id}`}>{cardInfo.subtext}</a>}</a>
           </div>
           <div className={cardInfo.size === 'sm' ? s.smCardImgContainer : s.mdCardImgContainer}>
             <img className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
-                 src={cardInfo.img} alt='timeline content image' />
+              src={cardInfo.img} alt='timeline content image' />
           </div>
 
         </div>
