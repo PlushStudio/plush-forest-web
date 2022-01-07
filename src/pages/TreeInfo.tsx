@@ -14,7 +14,7 @@ import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValue'
 import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-
+import TreeNotAvailable from '@/components/App/shared-components/TreeNotAvailable/TreeNotAvailable'
 export const TreeInfoPage: React.FC = () => {
   const params = useParams<any>()
   const history = useHistory()
@@ -42,11 +42,7 @@ export const TreeInfoPage: React.FC = () => {
             },
             imageLink: response.data.image
           })
-        } else {
-          history.push('/404')
         }
-      }).catch(() => {
-        history.push('/404')
       })
   }, [params.id])
 
@@ -55,23 +51,31 @@ export const TreeInfoPage: React.FC = () => {
   }, [])
 
   return (
-    <div className={s.backgroundContainer}>
+    <div
+      className={`${s.backgroundContainer} ${!treeData.name.length && s.backgroundImg
+        } `}
+    >
       <div className={s.container}>
         <Header />
-        <Row>
-          <Col>
-            <TreeInfoBlock treeData={treeData} />
-            <Timeline
-              timelineInfo={{
-                firstBlockInfo: treeData.firstBlockInfo.message,
-                secondBlockInfo: treeData.secondBlockInfo.message,
-                imageLink: treeData.imageLink,
-                planter: treeData.planter,
-                dedicatedDate: treeData.firstBlockInfo.date,
-                plantedDate: treeData.secondBlockInfo.date
-              }} />
-          </Col>
-        </Row>
+        {!!treeData.name.length ? (
+          <Row>
+            <Col>
+              <TreeInfoBlock treeData={treeData} />
+              <Timeline
+                timelineInfo={{
+                  firstBlockInfo: treeData.firstBlockInfo.message,
+                  secondBlockInfo: treeData.secondBlockInfo.message,
+                  imageLink: treeData.imageLink,
+                  planter: treeData.planter,
+                  dedicatedDate: treeData.firstBlockInfo.date,
+                  plantedDate: treeData.secondBlockInfo.date,
+                }}
+              />
+            </Col>
+          </Row>
+        ) : (
+          <TreeNotAvailable />
+        )}
       </div>
       <div className={s.footer} />
     </div>

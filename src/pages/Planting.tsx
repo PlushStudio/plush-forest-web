@@ -20,7 +20,7 @@ import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x4'
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 

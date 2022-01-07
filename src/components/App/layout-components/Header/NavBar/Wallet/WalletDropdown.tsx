@@ -8,8 +8,9 @@ import copyAddressIcon from '@/assets/images/wallet/24-px-1-outlined-copy@2x.png
 import { cutWalletPublicId } from '@/utils/utils'
 import { WalletDropdownType } from '@/types/wallet/WalletDropdownType'
 import { WalletState } from '@/types/wallet/WalletStateType'
+import Copy from "@/components/App/layout-components/Header/NavBar/Wallet/Copy";
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x4'
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 const WalletDropdown: FC<{
   isVisible: boolean | null | undefined,
@@ -19,14 +20,16 @@ const WalletDropdown: FC<{
   setWalletState: (walletState: WalletState) => void,
   onDropdownRefInitialized: (dropdownRef: React.MutableRefObject<null>) => void
 }> =
-  ({ isVisible,
+  ({
+    isVisible,
     address,
     type,
     networkId,
     onDropdownRefInitialized,
-    setWalletState }) => {
-    const [footerButtonText, setFooterButtonText] = useState('Switch to Rinkeby')
-    const [footerSubtext, setFooterSubtext] = useState('Switch to Rinkeby')
+    setWalletState
+  }) => {
+    const [footerButtonText, setFooterButtonText] = useState('Switch to Mumbai')
+    const [footerSubtext, setFooterSubtext] = useState('Switch to Mumbai')
     const dropdownRef = useRef(null)
 
     useEffect(() => {
@@ -46,12 +49,25 @@ const WalletDropdown: FC<{
           setFooterSubtext('If you already have a Plush account, try switching between yourMetamask wallets. Otherwise, please visit Plush website to learn more about Plush, and create your account.')
           return
         case 'WRONG_NETWORK':
-          setFooterButtonText('Switch to Rinkeby')
-          setFooterSubtext('Please switch to Rinkeby Network in your wallet and try again.')
+          setFooterButtonText('Switch to Mumbai')
+          setFooterSubtext('Please switch to Mumbai Network in your wallet and try again.')
       }
     }, [type])
 
     const dropdownButtonHandler = async () => {
+      await window.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: VITE_NETWORK_ID,
+            rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+            chainName: 'Mumbai TestNet',
+            nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
+            blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+          },
+        ],
+      });
+
       if (networkId !== VITE_NETWORK_ID) {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
@@ -71,7 +87,7 @@ const WalletDropdown: FC<{
           </div>
           }
           {type === 'WRONG_NETWORK' && <>
-            <div className={`${s.connectionBlock} ${type === 'WRONG_NETWORK' ? s.errorConnectionBlock : ''}`}>
+            <div className={`${s.connectionBlock} ${s.errorConnectionBlock}`}>
               <div className={`${s.connectionCircle}`}>
                 <img alt={'metamask icon'}
                   className={s.connectionImage}
@@ -80,7 +96,7 @@ const WalletDropdown: FC<{
               <div className={s.connectionImage}>
                 <img alt={'connection line'}
                   className={s.connectionImage}
-                  src={type !== 'WRONG_NETWORK' ? successConnectionLine : badConnectionLine} />
+                  src={badConnectionLine} />
               </div>
               <div className={s.connectionCircle}>
                 <img alt={'rinkeby icon'}
@@ -91,16 +107,33 @@ const WalletDropdown: FC<{
           </>}
           {type === 'SUCCESS' &&
             <div className={s.addressInfoBlock}>
-              <div className={s.addressBlock}>
-                <span className={s.address}>
-                  {cutWalletPublicId(address)}
-                </span>
-                <img alt={'copy address icon'}
-                  className={s.copyAddressIcon}
-                  src={copyAddressIcon} />
+              <div className={`${s.connectionBlockSuccessState}`}>
+                <div className={`${s.connectionCircle}`}>
+                  <img alt={'metamask icon'}
+                    className={s.connectionImage}
+                    src={metamaskIcon} />
+                </div>
+                <div className={s.connectionImage}>
+                  <img alt={'connection line'}
+                    className={s.connectionImage}
+                    src={successConnectionLine} />
+                </div>
+                <div className={s.connectionCircle}>
+                  <img alt={'rinkeby icon'}
+                    className={s.connectionImage}
+                    src={rinkebyIcon} />
+                </div>
               </div>
-              <div className={s.addressBlockBottom}>
-                View on Explorer
+              <div className={s.s}>
+                <div className={s.addressBlock}>
+                  <span className={s.address}>
+                    {cutWalletPublicId(address)}
+                  </span>
+                  <Copy address={address} />
+                </div>
+                <div className={s.addressBlockBottom}>
+                  View on Explorer
+                </div>
               </div>
             </div>}
         </div>

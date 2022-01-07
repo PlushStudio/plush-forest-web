@@ -9,14 +9,14 @@ import WalletDropdown from '@/components/App/layout-components/Header/NavBar/Wal
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-import kebabIcon from '@/assets/images/wallet/32-px-1-outlined-kebab-horizontal.svg'
 import { AxiosResponse } from 'axios'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import { Gender } from '@/types/Gender'
 import { User } from '@/types/user'
+import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
 
 type UserWallet = User & { statusCode?: number, message?: string }
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x4'
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 const Wallet: FC<{
   isOpenDropdown?: boolean | null,
@@ -109,20 +109,19 @@ const Wallet: FC<{
       if (window.ethereum) {
         window.ethereum.on('chainChanged', (networkId: string) => {
           handleChainChanged(networkId)
-          console.log(networkId)
           if (networkId !== VITE_NETWORK_ID) {
             setIsOpenDropdown(true)
           }
         })
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
-        handleChainChanged(`0x${window.ethereum.networkVersion}`)
+        handleChainChanged(window.ethereum.networkVersion === '80001' ? VITE_NETWORK_ID : `0x${window.ethereum.networkVersion}`)
       }
 
       return () => {
         window.ethereum.removeListener('accountsChanged', handleAccountChanged)
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
-    }, [provider, window.ethereum.networkVersion])
+    }, [provider])
 
     useEffect(() => {
       if (userContractData.address === '' ||
@@ -175,10 +174,12 @@ const Wallet: FC<{
         {walletState !== 'DISCONNECTED' ?
           <div className={s.wallet}>
             <WalletIcon currentChain={networkId} gender={gender} />
-            <WalletMain dropdownRef={dropdownRefState} name={
-              walletState === 'WRONG_NETWORK' ? 'Hey,' :
-                walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
-              setManualModalVisibility={setIsOpenDropdown}
+            <WalletMain
+              isOpenDropdown={isOpenDropdown}
+              dropdownRef={dropdownRefState} name={
+                walletState === 'WRONG_NETWORK' ? 'Hey,' :
+                  walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
+              setModalVisibility={setIsOpenDropdown}
               address={userContractData.address}
             />
             <WalletBalance ticker={userContractData.currency}
@@ -194,9 +195,10 @@ const Wallet: FC<{
           <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
             Connect
           </div>}
-        <div className={s.kebab}>
-          <img alt={'kebab button'} src={kebabIcon} />
+        <div className={s.kebabContainer}>
+          <KebabDrowdown keys={['test message', 'message', 'message', 'message']} isOpen={false} />
         </div>
+
       </div>
     )
   }

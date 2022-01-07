@@ -13,7 +13,7 @@ interface Params {
   id: string
 }
 
-const VITE_NETWORK_ID = window.config.FOREST_CONTRACT_ADDRESS ?? '0xd5015643F38A06b2962283Ec0B9fF555812Adcd0'
+const FOREST_CONTRACT_ADDRESS = window.config.FOREST_CONTRACT_ADDRESS ?? '0xd5015643F38A06b2962283Ec0B9fF555812Adcd0'
 
 const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
   const params: Params = useParams()
@@ -31,7 +31,7 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
             <a href='#' className={`${id % 2 === 0 ? s.disabledText : s.btn}`}>
               {id % 2 === 0 ? cardInfo.planter :
                 <a className={s.linked}
-                  href={`https://testnets.opensea.io/assets/${VITE_NETWORK_ID}/${params.id}`}>{cardInfo.subtext}</a>}</a>
+                  href={`https://testnets.opensea.io/assets/${FOREST_CONTRACT_ADDRESS}/${params.id}`}>{cardInfo.subtext}</a>}</a>
           </div>
           <div className={cardInfo.size === 'sm' ? s.smCardImgContainer : s.mdCardImgContainer}>
             <img className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
