@@ -1,4 +1,4 @@
-import { ModalContent } from "@/types/modalContent";
+import { ModalContent } from "@/types/ModalContent";
 
 const modalData: ModalContent = {
   'Confirmation': {
