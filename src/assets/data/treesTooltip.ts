@@ -1,4 +1,4 @@
-export const treesTooltip = [
+export const TreesTooltip = [
   {
     name: 'Shihuahuaco',
     description: 'It can take a Shihuahuaco (Dipteryx micrantha) up to 1000 years to reach a height of 164 feet. It sustains a staggering amount of life and it can capture up to 40 tones of CO2. Each year, in Peru alone, approximately 184,000 of Shihuahuaco trees are cut down for the timber industry, making these trees highly endangered.',
