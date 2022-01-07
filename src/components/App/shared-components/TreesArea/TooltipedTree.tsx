@@ -14,6 +14,6 @@ interface ITooltipedTree {
 
 export const TooltipedTree = (props: ITooltipedTree): JSX.Element => {
   return (
-      <img className={props.className} alt='tree-area' src={props.icon} />
+    <img className={props.className} alt='tree-area' src={props.icon} />
   )
 }

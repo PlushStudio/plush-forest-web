@@ -86,9 +86,9 @@ export const LearnMoreAccordion = () => {
               Plant Your Future’s work helps farmers transform deforested and degraded land into productive agroforestry
               systems. Put simply, agroforestry combines agriculture with forestry.
               Native fruit and timber trees are planted alongside short-term crops.
-              <br/><br/>
+              <br /><br />
               <b className={s.secondAccordionTitle}>Since 2009, the charity has:</b>
-              <br/><br/>
+              <br /><br />
               <ul>
                 <li>
                   Planted a further 35,000 trees that continue to thrive.
@@ -101,8 +101,8 @@ export const LearnMoreAccordion = () => {
                 </li>
               </ul>
               For more info, please visit: <a href={"https://www.plantyourfuture.org.uk"}>
-              https://www.plantyourfuture.org.uk
-            </a>
+                https://www.plantyourfuture.org.uk
+              </a>
             </div>
           </Card.Body>
         </Accordion.Collapse>

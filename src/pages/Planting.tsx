@@ -22,7 +22,7 @@ import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x4'
 
-const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
+export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
   const [isPlanting, setIsPlanting] = useState(false)
@@ -43,7 +43,7 @@ export const PlantPage = () => {
   }, [userDetails.treeTypeIdToPlant])
 
   const startAllowanceLoop = (delay: number = 7000) => {
-    const updateBuyAllowance = setInterval(async function() {
+    const updateBuyAllowance = setInterval(async function () {
       const allowance = await getBuyAllowance(userDetails.address)
       if (allowance) {
         setPlantingStatus('Planting your tree')
@@ -51,7 +51,7 @@ export const PlantPage = () => {
         //empty message for Pilot
         const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
         if (treeMintingResult) {
-          const getMyTokensInterval = setInterval(async function() {
+          const getMyTokensInterval = setInterval(async function () {
             await api.user.users.tokens.request(getMyTokensInterval)
           }, 5000)
         } else {
@@ -60,6 +60,7 @@ export const PlantPage = () => {
       }
     }, delay)
   }
+
   const plantTreeHandler = async () => {
     const myTokens: UserTokens = await api.user.users.tokens.request()
     if (myTokens.items.length > 0) {
@@ -70,12 +71,13 @@ export const PlantPage = () => {
         try {
           const allowance = await getBuyAllowance(userDetails.address)
           if (allowance) {
+            setPlantingStatus('Planting your tree')
             //empty message for Pilot
             try {
               const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
 
               if (treeMintingResult) {
-                const getMyTokensInterval = setInterval(async function() {
+                const getMyTokensInterval = setInterval(async function () {
                   await api.user.users.tokens.request(getMyTokensInterval)
                 }, 5000)
               }
@@ -83,19 +85,19 @@ export const PlantPage = () => {
               setIsPlanting(false)
             }
           } else {
-            const updateBuyAllowance = setInterval(async function() {
+            const updateBuyAllowance = setInterval(async function () {
               const allowanceResult = getBuyAllowance(userDetails.address)
               if (await allowanceResult) {
                 clearInterval(updateBuyAllowance)
                 setPlantingStatus('Planting your tree')
                 const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
                 if (treeMintingResult) {
-                  const getMyTokensInterval = setInterval(async function() {
+                  const getMyTokensInterval = setInterval(async function () {
                     await api.user.users.tokens.request(getMyTokensInterval)
                   }, 5000)
                 }
               } else {
-                setPlantingStatus('Getting allowance to pay')
+                setPlantingStatus('Confirmation')
                 clearInterval(updateBuyAllowance)
                 try {
                   await getApprove().then(async () => {
@@ -166,23 +168,23 @@ export const PlantPage = () => {
               <Form.Group controlId='treeName'>
                 <Form.Label className={s.formLabel}>From</Form.Label>
                 <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
-                             value={nameFrom}
-                             type='text'
-                             as='input'
-                             placeholder='Your name'
-                             readonly={isPlanting} />
+                  value={nameFrom}
+                  type='text'
+                  as='input'
+                  placeholder='Your name'
+                  readonly={isPlanting} />
               </Form.Group>
               <span className={s.statusText}>
                 {helperText}
-              </span> <br/>
+              </span> <br />
               {userDetails.balance < 5 && <span className={s.statusText}>
                 You need more plush tokens to perform this operation
               </span>}
               {!isPlanting &&
                 <MainActionButton onClick={() => startMintProcess()}
-                                  text='Plant your tree'
-                                  variant='success'
-                                  image='tree' />}
+                  text='Plant your tree'
+                  variant='success'
+                  image='tree' />}
 
               {isPlanting &&
                 <MainActionButton

@@ -23,13 +23,13 @@ export const TreesArea = () => {
           .map((value, index) => {
             return (
               <TooltipedTree className={`${s.tree} ${s[`tree${index + 1}`]}`}
-                             from={treesTooltipData[index].from}
-                             to={treesTooltipData[index].to}
-                             icon={value}
-                             day={treesTooltipData[index].day}
-                             year={treesTooltipData[index].year}
-                             month={treesTooltipData[index].month}
-                             name={treesTooltipData[index].name} />
+                from={treesTooltipData[index].from}
+                to={treesTooltipData[index].to}
+                icon={value}
+                day={treesTooltipData[index].day}
+                year={treesTooltipData[index].year}
+                month={treesTooltipData[index].month}
+                name={treesTooltipData[index].name} />
             )
           })
       }

@@ -46,8 +46,8 @@ export const TreeInfoPage: React.FC = () => {
           history.push('/404')
         }
       }).catch(() => {
-      history.push('/404')
-    })
+        history.push('/404')
+      })
   }, [params.id])
 
   useEffect(() => {

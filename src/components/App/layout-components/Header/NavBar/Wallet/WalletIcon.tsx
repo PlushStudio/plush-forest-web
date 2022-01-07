@@ -31,12 +31,11 @@ const WalletIcon: FC<{ gender: Gender, currentChain: string }> =
     return (
       <div className={s.iconContainer}>
         <div className={`${s.icon} ${gradient}`}>
-        <span className={s.content}>
-           <img alt={'wallet icon'} src={icon} />
-        </span>
+          <span className={s.content}>
+            <img alt={'wallet icon'} src={icon} />
+          </span>
         </div>
-        <div className={`${s.iconStatus} ${
-          currentChain !== VITE_NETWORK_ID ?
+        <div className={`${s.iconStatus} ${currentChain !== VITE_NETWORK_ID ?
             s.iconError :
             s.iconSuccess}
           `} />

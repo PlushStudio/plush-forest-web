@@ -37,7 +37,7 @@ export const AboutPage = () => {
   return (
     <>
       <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
-           viewBox='110 300 1140 700'>
+        viewBox='110 300 1140 700'>
         <g fill='none'>
           <g fill='#FAFAFA'>
             <path

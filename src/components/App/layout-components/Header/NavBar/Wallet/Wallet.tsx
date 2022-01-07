@@ -30,12 +30,12 @@ const Wallet: FC<{
     hasToken?: boolean | undefined) => void
 }> =
   ({
-     isOpenDropdown,
-     setIsOpenDropdown,
-     name,
-     gender,
-     onWalletDataLoaded
-   }) => {
+    isOpenDropdown,
+    setIsOpenDropdown,
+    name,
+    gender,
+    onWalletDataLoaded
+  }) => {
     const { getPLAIBalance, getCurrency, provider, walletConnected, getAddress } = useMetamaskWallet()
     const { login } = useMetamaskAuth()
     const { balanceOf } = useCoreContract()
@@ -178,18 +178,18 @@ const Wallet: FC<{
             <WalletMain dropdownRef={dropdownRefState} name={
               walletState === 'WRONG_NETWORK' ? 'Hey,' :
                 walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
-                        setManualModalVisibility={setIsOpenDropdown}
-                        address={userContractData.address}
+              setManualModalVisibility={setIsOpenDropdown}
+              address={userContractData.address}
             />
             <WalletBalance ticker={userContractData.currency}
-                           balance={walletState === 'CONNECTED' ? userContractData.balance : null} />
+              balance={walletState === 'CONNECTED' ? userContractData.balance : null} />
             <WalletDropdown onDropdownRefInitialized={(ref) => setDropdownRefState(ref)} type={
               networkId !== VITE_NETWORK_ID ? 'WRONG_NETWORK' :
                 walletState === 'USER_NOT_FOUND' ? 'USER_NOT_FOUND' : 'SUCCESS'}
-                            isVisible={isOpenDropdown}
-                            setWalletState={setWalletState}
-                            networkId={networkId}
-                            address={userContractData.address} />
+              isVisible={isOpenDropdown}
+              setWalletState={setWalletState}
+              networkId={networkId}
+              address={userContractData.address} />
           </div> :
           <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
             Connect

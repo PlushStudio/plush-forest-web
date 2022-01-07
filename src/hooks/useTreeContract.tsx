@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import axios from 'axios'
 import api from '@/api/api'
+import { treeNames } from "@/pages/Planting";
 
 const useTreeContract = () => {
   const getTreeContractAddress = window.config.CORE_GET_TREE_CONTRACT_ADDRESS ?? "0x13fA2684F68DBc2C8D91AD2b1A9717C6530c7016"
@@ -126,34 +127,40 @@ const useTreeContract = () => {
   }]
   const { signer } = useMetamaskWallet()
 
+  let TreeContract = new ethers.Contract(
+    getTreeContractAddress,
+    genericErc20Abi,
+    // @ts-ignore
+    signer
+  )
+
   const mintATree = async (address: string, treeType: string, from: string, name: string, message?: string) => {
     try {
       const amount: string = '5000000000000000000'
-      let TreeContract = new ethers.Contract(
-        getTreeContractAddress,
-        genericErc20Abi,
-        // @ts-ignore
-        signer
-      )
-
       return await TreeContract.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
         return axios.post(`${api.url}/forest/transactions/new`,
           {
             hash: transferResult.hash, tree: treeType, name: name, from, message: 'Test message'
           }, { withCredentials: true }).then(response => {
-          return response.status === 201
-        }).catch(r => {
-          console.error(r.message)
-          return false
-        })
+            return response.status === 201
+          }).catch(r => {
+            console.error(r.message)
+            return false
+          })
       })
     } catch (e: any) {
       console.error(e.message)
     }
   }
 
+  const getTreeTypeCount = async (treeType: string) => {
+    const treeCount = await TreeContract.getTreeTypeCount(treeType)
+    return treeCount.toNumber();
+  }
+
   return {
-    mintATree
+    mintATree,
+    getTreeTypeCount
   }
 
 }

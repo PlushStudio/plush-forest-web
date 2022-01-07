@@ -7,7 +7,7 @@ export const HomeFeatureSection2 = () => {
         <div className={s.container}>
             <div className={s.secondContainerText}>
                 <span className={s.title}>
-                  Blockchain certified & transparent.
+                    Blockchain certified & transparent.
                 </span>
                 <span className={s.description}>
                     With the help from our friends at Ecomatcher, you will have access to the precise location of the tree,
@@ -16,7 +16,7 @@ export const HomeFeatureSection2 = () => {
                 </span>
             </div>
             <div className={s.imageBlock}>
-                <img className={s.twoBirds} src={twoBirds} alt='two birds'/>
+                <img className={s.twoBirds} src={twoBirds} alt='two birds' />
             </div>
         </div>
     )
