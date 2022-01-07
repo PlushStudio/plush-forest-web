@@ -5,7 +5,7 @@ import walletErrorIcon from '@/assets/images/wallet/32-px-1-outlined-alert-big.p
 import noAccountIcon from '@/assets/images/wallet/32-px-1-outlined-skull.png'
 import { Gender } from '@/types/Gender'
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x4'
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 const WalletIcon: FC<{ gender: Gender, currentChain: string }> =
   ({ gender, currentChain }) => {
@@ -36,8 +36,8 @@ const WalletIcon: FC<{ gender: Gender, currentChain: string }> =
           </span>
         </div>
         <div className={`${s.iconStatus} ${currentChain !== VITE_NETWORK_ID ?
-            s.iconError :
-            s.iconSuccess}
+          s.iconError :
+          s.iconSuccess}
           `} />
       </div>
     )

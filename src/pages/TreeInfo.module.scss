@@ -3,6 +3,12 @@
 .backgroundContainer {
   background: theme.$grays-50;
   min-height: 100vh;
+  &.backgroundImg {
+    background: url("../assets/images/sky.png") no-repeat;
+    background-size: cover;
+    background-position-x: 451px;
+    background-position-y: -70px;
+  }
 }
 
 .container {

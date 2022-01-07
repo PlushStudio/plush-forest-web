@@ -43,6 +43,12 @@
   padding-top: 24px;
 }
 
+.connectionBlockSuccessState {
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+}
+
 .connectionCircle {
   width: 64px;
   height: 64px;
@@ -62,15 +68,11 @@
   flex-wrap: wrap;
   margin-left: 12px;
   padding: 10px 0;
+  align-items: center;
 }
 
 .addressBlock, .addressBlockBottom {
   width: 100%;
-}
-
-.copyAddressIcon {
-  width: 16px;
-  margin-left: 4px;
 }
 
 .modalFooter {
@@ -104,7 +106,7 @@
   margin: auto;
 }
 
-.buttonText{
+.buttonText {
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 16px;
   letter-spacing: -0.2px;
@@ -129,6 +131,7 @@
   box-shadow: inset 0 -1px 0 0 rgba(124, 92, 255, 0.1);
   cursor: pointer;
   transition: .2s ease;
+
   &:hover {
     background: #7c5cff1f;
   }

@@ -7,7 +7,7 @@ import useTreeContract from "@/hooks/useTreeContract";
 
 export const Header: FC = () => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
-  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false)
+  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(true)
   const { getTreeTypeCount } = useTreeContract()
 
   const setContractData = async (address: string | undefined,

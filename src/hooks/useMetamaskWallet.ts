@@ -24,7 +24,7 @@ const useMetamaskWallet = () => {
   const [signer, setSigner] = useState<JsonRpcSigner>()
   const [initialized, setInitialized] = useState<boolean>(false)
   const [walletConnected, setWalletConnected] = useState<boolean>(false)
-  const { PLAIContractAddress, PLAIContract, genericErc20Abi, provider } = usePLAIContract()
+  const { PLAIContract, provider } = usePLAIContract()
 
   /**
    * Returns MetaMask wallet installation state
@@ -131,52 +131,6 @@ const useMetamaskWallet = () => {
     }
   }, [provider])
 
-  function sendPLAI(send_token_amount: string, to_address: string, send_account: string) {
-    provider?.getGasPrice().then((currentGasPrice: any) => {
-      let gas_price = ethers.utils.hexlify(parseInt(currentGasPrice.toString()))
-      if (PLAIContractAddress) {
-        // general token send
-        let PLAIcontract = new ethers.Contract(
-          PLAIContractAddress,
-          genericErc20Abi,
-          // @ts-ignore
-          signer
-        )
-
-        // How many tokens?
-        let numberOfTokens = ethers.utils.parseUnits(send_token_amount, 8)
-
-        // Send tokens
-        PLAIcontract.transfer(to_address, numberOfTokens).then((transferResult: string) => {
-          console.dir(transferResult)
-          alert('sent token')
-        })
-      } // ether send
-      else {
-        const tx = {
-          from: send_account,
-          to: to_address,
-          value: ethers.utils.parseEther(send_token_amount),
-          nonce: provider.getTransactionCount(
-            send_account,
-            'latest'
-          ),
-          gasLimit: ethers.utils.hexlify('0x100000'), // 100000
-          gasPrice: gas_price
-        }
-        console.dir(tx)
-        try {
-          signer?.sendTransaction(tx).then((transaction) => {
-            console.dir(transaction)
-            alert('Send finished!')
-          })
-        } catch (error) {
-          alert('failed to send!!')
-        }
-      }
-    })
-  }
-
   return {
     initialized,
     isInstalled,
@@ -189,8 +143,7 @@ const useMetamaskWallet = () => {
     getCurrency,
     provider,
     signer,
-    walletConnected,
-    sendPLAI
+    walletConnected
   }
 }
 
