@@ -23,11 +23,11 @@ const useTreeContract = () => {
           {
             hash: transferResult.hash, tree: treeType, name: name, from, message: 'Test message'
           }, { withCredentials: true }).then(response => {
-          return response.status === 201
-        }).catch(r => {
-          console.error(r.message)
-          return false
-        })
+            return response.status === 201
+          }).catch(r => {
+            console.error(r.message)
+            return false
+          })
       })
     } catch (e: any) {
       console.error(e.message)

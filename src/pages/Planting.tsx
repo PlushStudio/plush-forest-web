@@ -1,26 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Form } from 'react-bootstrap'
+import React, {useContext, useEffect, useState} from 'react'
+import {Form} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import plantingTree0 from '@/assets/images/planting-tree/shihuahuaco.png'
 import plantingTree1 from '@/assets/images/planting-tree/cacao.png'
 import plantingTree2 from '@/assets/images/planting-tree/guaba.png'
 import plantingTree3 from '@/assets/images/planting-tree/caoba.png'
-import { useHistory } from 'react-router'
-import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
+import {useHistory} from 'react-router'
+import {CustomInput} from '@/components/App/shared-components/CustomInput/CustomInput'
 import s from './Planting.module.scss'
-import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
-import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
-import { userDetailsContext } from '@/context/UserDetailsProvider'
-import usePLAIContract from '@/hooks/usePLAIContract'
+import {MainActionButton} from '@/components/App/shared-components/MainActionButton/MainActionButton'
+import {CustomSelect} from '@/components/App/shared-components/CustomSelect/CustomSelect'
+import {userDetailsContext} from '@/context/UserDetailsProvider'
+import usePLAIContract from '@/hooks/usePLUSHContract'
 import useTreeContract from '@/hooks/useTreeContract'
-import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
+import {PlantingModal} from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
-import { UserTokens } from '@/types/UserTokens'
+import {UserTokens} from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
-import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
+import {Category, MatomoEvent, trackEvent} from '@/utils/matomo'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -32,11 +30,11 @@ export const PlantPage = () => {
   const [treeImage, setTreeImage] = useState(plantingTree0)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
-  const { getBuyAllowance, getApprove } = usePLAIContract()
-  const { mintATree } = useTreeContract()
-  const { login } = useMetamaskAuth()
+  const {getBuyAllowance, getApprove} = usePLAIContract()
+  const {mintATree} = useTreeContract()
+  const {login} = useMetamaskAuth()
   const history = useHistory()
-  const { walletConnected } = useMetamaskWallet()
+  const {walletConnected} = useMetamaskWallet()
 
   useEffect(() => {
     setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
@@ -132,8 +130,7 @@ export const PlantPage = () => {
   const startMintProcess = async () => {
     if (walletConnected) {
       if (
-        userDetails.address !== 'disconnected' &&
-        `0x${window.ethereum.networkVersion}` === VITE_NETWORK_ID
+        userDetails.address !== 'disconnected'
       ) {
         if (userDetails.name === '') {
           await makeLogin()
@@ -158,42 +155,42 @@ export const PlantPage = () => {
   return (
     <div className={s.backgroundContainer}>
       <div className={s.container}>
-        {isPlanting ? <PlantingModal status={plantingStatus} /> :
+        {isPlanting ? <PlantingModal status={plantingStatus}/> :
           <div className={s.plantingFormWrapper}>
             <Form className={s.plantingForm}>
               <Form.Group controlId='treeName'>
                 <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
-                <CustomSelect />
+                <CustomSelect/>
               </Form.Group>
               <Form.Group controlId='treeName'>
                 <Form.Label className={s.formLabel}>From</Form.Label>
                 <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
-                  value={nameFrom}
-                  type='text'
-                  as='input'
-                  placeholder='Your name'
-                  readonly={isPlanting} />
+                             value={nameFrom}
+                             type='text'
+                             as='input'
+                             placeholder='Your name'
+                             readonly={isPlanting}/>
               </Form.Group>
               <span className={s.statusText}>
                 {helperText}
-              </span> <br />
+              </span> <br/>
               {userDetails.balance < 5 && <span className={s.statusText}>
                 You need more plush tokens to perform this operation
               </span>}
               {!isPlanting &&
                 <MainActionButton onClick={() => startMintProcess()}
-                  text='Plant your tree'
-                  variant='success'
-                  image='tree' />}
+                                  text='Plant your tree'
+                                  variant='success'
+                                  image='tree'/>}
 
               {isPlanting &&
                 <MainActionButton
                   loading={isPlanting}
                   text='Planting...'
                   variant='success'
-                  image='tree' />}
+                  image='tree'/>}
             </Form>
-            <img src={treeImage} className='planting-tree-image' alt='logo' />
+            <img src={treeImage} className='planting-tree-image' alt='logo'/>
           </div>
         }
       </div>
