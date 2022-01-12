@@ -34,6 +34,7 @@ export const AboutPage = () => {
       }
     }
   }
+
   return (
     <>
       <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
@@ -48,7 +49,7 @@ export const AboutPage = () => {
       <div className={s.container}>
         <div className={s.getStartedContentContainer}>
           <HomeText />
-          <TreeTypeSelector />
+          {userDetails.balance && <TreeTypeSelector />}
           <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
           <TreesArea />
         </div>

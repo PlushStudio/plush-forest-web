@@ -11,6 +11,7 @@ export interface UserDefault {
   gender: null | Gender,
   isOpenDropdown: boolean | null,
   isOpenDropdownByError: boolean | null
+  hasToken: undefined
 }
 
 export const modalStateDefault = {
@@ -25,7 +26,8 @@ export const userDefault: UserDefault = {
   treeTypeToPlant: '',
   gender: null,
   isOpenDropdown: null,
-  isOpenDropdownByError: null
+  isOpenDropdownByError: null,
+  hasToken: undefined
 }
 
 export const walletDefault: any = {
