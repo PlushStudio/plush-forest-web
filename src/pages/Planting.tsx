@@ -11,7 +11,7 @@ import s from './Planting.module.scss'
 import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
 import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
-import usePLAIContract from '@/hooks/usePLAIContract'
+import usePLAIContract from '@/hooks/usePLUSHContract'
 import useTreeContract from '@/hooks/useTreeContract'
 import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
@@ -19,8 +19,6 @@ import { UserTokens } from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -132,8 +130,7 @@ export const PlantPage = () => {
   const startMintProcess = async () => {
     if (walletConnected) {
       if (
-        userDetails.address !== 'disconnected' &&
-        `0x${window.ethereum.networkVersion}` === VITE_NETWORK_ID
+        userDetails.address !== 'disconnected'
       ) {
         if (userDetails.name === '') {
           await makeLogin()

@@ -2,7 +2,7 @@ import { JsonRpcSigner } from '@ethersproject/providers'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import { ethers } from 'ethers'
 import { useEffect, useRef, useState } from 'react'
-import usePLAIContract from '@/hooks/usePLAIContract'
+import usePLUSHContract from "@/hooks/usePLUSHContract";
 
 export const errors = {
   walletNotInstalled: {
@@ -24,7 +24,7 @@ const useMetamaskWallet = () => {
   const [signer, setSigner] = useState<JsonRpcSigner>()
   const [initialized, setInitialized] = useState<boolean>(false)
   const [walletConnected, setWalletConnected] = useState<boolean>(false)
-  const { PLAIContract, provider } = usePLAIContract()
+  const { PLUSHContract, provider } = usePLUSHContract()
 
   /**
    * Returns MetaMask wallet installation state
@@ -88,12 +88,12 @@ const useMetamaskWallet = () => {
       throw errors.walletNotConnected
     }
 
-    const balance = ethers.utils.formatUnits(await PLAIContract.balanceOf(await getAddress()), 18)
+    const balance = ethers.utils.formatUnits(await PLUSHContract.balanceOf(await getAddress()), 18)
     return parseInt(balance)
   }
 
   const getCurrency = async (): Promise<string> => {
-    return await PLAIContract.symbol()
+    return await PLUSHContract.symbol()
   }
 
   /**

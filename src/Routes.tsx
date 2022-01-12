@@ -11,6 +11,7 @@ import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 import { AxiosResponse } from 'axios'
 import { User } from '@/types/user'
 import { Page } from '@/Page'
+import NoPlushTokenModal from "@/components/App/shared-components/NoPlushTokenModal/NoPlushTokenModal";
 
 export const Routes = () => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
@@ -65,28 +66,29 @@ export const Routes = () => {
 
   return (
     <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Page children={<AboutPage />} />
-        </Route>
-        <Route exact path='/about'>
-          <Page children={<AboutPage />} />
-        </Route>
-        <Route exact path='/planting'>
-          {userDetails.address !== '' && userDetails.address !== 'disconnected' ?
-            <Page children={<PlantPage />} /> :
-            <Redirect to={'/about'} />
-          }
-        </Route>
-        <Route exact path='/token/:id/'>
-          <Page children={<TreeInfoPage />} />
-        </Route>
-        <Route path='*'>
-          <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
-        </Route>
-        <Route path='/404'>
-          <PageNotFound />
-        </Route>
-      </Switch>
+      {userDetails.hasToken !== false ?
+        <Switch>
+          <Route exact path='/'>
+            <Page children={<AboutPage />} />
+          </Route>
+          <Route exact path='/about'>
+            <Page children={<AboutPage />} />
+          </Route>
+          <Route exact path='/planting'>
+            {userDetails.address !== '' && userDetails.address !== 'disconnected' ?
+              <Page children={<PlantPage />} /> :
+              <Redirect to={'/about'} />
+            }
+          </Route>
+          <Route exact path='/token/:id/'>
+            <Page children={<TreeInfoPage />} />
+          </Route>
+          <Route path='*'>
+            <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
+          </Route>
+          <Route path='/404'>
+            <PageNotFound />
+          </Route>
+        </Switch> : <Page children={<NoPlushTokenModal redirectTo={'https://plush.family/'} />} />}
     </Router>)
 }
