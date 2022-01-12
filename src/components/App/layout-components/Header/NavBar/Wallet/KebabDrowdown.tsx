@@ -1,15 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react'
 import kebabIcon from "@/assets/images/wallet/32-px-1-outlined-kebab-horizontal.svg";
 import s from "./KebabDrowdown.module.scss"
+import { Link } from "react-router-dom";
 
-interface KebabDrowdown {
-  keys: string[],
-  isOpen: boolean
+interface MenuItem {
+  title: string,
+  href: string
 }
 
-const WalletKebab = ({ keys, isOpen }: KebabDrowdown) => {
-  const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState<boolean>(isOpen)
+const WalletKebab = () => {
+  const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState<boolean>(false)
+  const [activeItemId, setActiveItemId] = useState<number>(0)
   const kebabRef = useRef(null)
+
+  const menuList = [
+    {
+      title: 'About',
+      href: '/'
+    },
+    {
+      title: 'Discord',
+      href: '/discord'
+    },
+    {
+      title: 'Privacy',
+      href: '/privacy'
+    },
+    {
+      title: 'Terms',
+      href: '/terms'
+    }
+  ];
 
   const handleClickOutside = (e: any) => {
     // @ts-ignore
@@ -26,8 +47,9 @@ const WalletKebab = ({ keys, isOpen }: KebabDrowdown) => {
     }
   }, [])
 
-  const menuItemHandler = (itemName: string) => {
-
+  const menuItemHandler = (itemName: string, index: number) => {
+    setActiveItemId(index)
+    setIsKebabDropdownOpen(false)
   }
 
   return (
@@ -35,8 +57,17 @@ const WalletKebab = ({ keys, isOpen }: KebabDrowdown) => {
       <img alt={'kebab button'} src={kebabIcon} />
       <div className={`${s.kebabDropdown} ${isKebabDropdownOpen ? s.visible : s.hidden}`}>
         {
-          keys.map((value: string) =>
-            <div onClick={() => menuItemHandler(value)} className={s.kebabListItem}>{value}</div>)
+          menuList.map((menuItem: MenuItem, index: number) =>
+            <div className={`${s.kebabListItemContainer} ${activeItemId === index ? s.kebabListItemContainerActive : ''}`}>
+              <Link to={'/'} onClick={() => menuItemHandler(menuItem.href, index)}>
+                <div className={`${activeItemId === index ? s.activeMenuItem : s.kebabListItem}`}>
+                  {menuItem.title}
+                </div>
+                <div className={s.menuItemIcon}>
+
+                </div>
+              </Link>
+            </div>)
         }
       </div>
     </div>

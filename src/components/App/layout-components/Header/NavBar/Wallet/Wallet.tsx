@@ -196,7 +196,7 @@ const Wallet: FC<{
             Connect
           </div>}
         <div className={s.kebabContainer}>
-          <KebabDrowdown keys={['test message', 'message', 'message', 'message']} isOpen={false} />
+          <KebabDrowdown />
         </div>
 
       </div>
