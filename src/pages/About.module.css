@@ -10,6 +10,11 @@
     margin: auto;
 }
 
+.homeFeatureContainerHeight {
+    padding-top: 15.4em;
+    margin: auto;
+}
+
 .getStartedContentContainer {
     position: relative;
 }
