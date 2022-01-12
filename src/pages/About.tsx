@@ -52,7 +52,7 @@ export const AboutPage = () => {
           <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
           <TreesArea />
         </div>
-        <div className={s.homeFeatureContainer}>
+        <div className={userDetails.balance ? s.homeFeatureContainer : s.homeFeatureContainer}>
           <HomeFeatureSection1 />
           <HomeFeatureSection2 />
           <HomeFeatureSection3 />
