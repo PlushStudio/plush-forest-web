@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.iconActive {
+  filter: invert(45%) sepia(100%) saturate(1300%) hue-rotate(215deg);
+}
+
 .kebabDropdown {
   width: 288px;
   position: absolute;
@@ -38,6 +42,8 @@
 }
 
 .kebabListItem {
+  display: flex;
+  justify-content: space-between;
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 16px;
   color: #26272a;
@@ -49,6 +55,8 @@
   background: theme.$light-gray;
   transition: .3s all;
   padding: 16px 12px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .activeMenuItem {
@@ -56,6 +64,8 @@
   color: theme.$indigo-500;
   transition: .3s ease;
   padding: 16px 12px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .activeMenuItem:hover {
