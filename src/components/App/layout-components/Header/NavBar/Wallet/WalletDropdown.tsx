@@ -50,7 +50,7 @@ const WalletDropdown: FC<{
           return
         case 'WRONG_NETWORK':
           setFooterButtonText('Switch to Mumbai')
-          setFooterSubtext('Please switch to Mumbai Network in your wallet and try again.')
+          setFooterSubtext('Please switch to Polygon Mumbai Network in your wallet and try again.')
       }
     }, [type])
 
