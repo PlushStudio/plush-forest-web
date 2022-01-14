@@ -16,7 +16,6 @@ import { User } from '@/types/user'
 import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
 
 type UserWallet = User & { statusCode?: number, message?: string }
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
 const Wallet: FC<{
   isOpenDropdown?: boolean | null,
@@ -49,6 +48,7 @@ const Wallet: FC<{
     const dropdownRef = useRef(null)
     const [networkId, setNetworkId] = useState<string>('')
     const [dropdownRefState, setDropdownRefState] = useState<React.MutableRefObject<null>>(dropdownRef)
+    const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
     const getUserContractData = async () => {
       console.log('10')
