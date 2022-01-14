@@ -105,7 +105,7 @@ const Wallet: FC<{
           address: 'disconnected'
         })
         if (onWalletDataLoaded) {
-          onWalletDataLoaded('ff', undefined, '', false)
+          onWalletDataLoaded('', undefined, '', false)
         }
       }
     }
@@ -124,7 +124,7 @@ const Wallet: FC<{
         window.ethereum.removeListener('accountsChanged', handleAccountChanged)
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
-    }, [provider])
+    }, [provider, window.ethereum.chainId])
 
     useEffect(() => {
       if (userContractData.address === '' ||
