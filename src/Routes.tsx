@@ -28,9 +28,7 @@ export const Routes = () => {
         gender: userData.data.gender,
         childName: userData.data.childs[0].name,
       })
-      console.log('2')
     } else {
-      console.log('3')
       try {
         await login(
           new URL(`${api.url}/${api.user.auth.nonce.url}`),
@@ -47,7 +45,6 @@ export const Routes = () => {
           })
         }
       } catch (e: any) {
-        console.log('4')
         switch (e.message) {
           case 'User not found':
             setUserDetails({
@@ -60,10 +57,8 @@ export const Routes = () => {
     }
   }
 
-  console.log(userDetails)
   useEffect(() => {
     if (walletConnected) {
-      console.log('5')
       setUserData()
     }
   }, [walletConnected])
