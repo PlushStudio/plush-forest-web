@@ -20,9 +20,11 @@ export const Header: FC = () => {
     hasToken: boolean | undefined) => {
 
     try {
+      console.log('6')
       const networkId = await provider?.getNetwork();
 
       if (networkId?.chainId === Number(VITE_NETWORK_ID)) {
+        console.log('7')
         setUserDetails({
           ...userDetails,
           address,
@@ -38,6 +40,7 @@ export const Header: FC = () => {
           networkId: Number(VITE_NETWORK_ID)
         })
       } else {
+        console.log('8')
         setUserDetails({
           ...userDetails,
           address,
@@ -46,6 +49,7 @@ export const Header: FC = () => {
         })
       }
     } catch (e) {
+      console.log('9')
       setUserDetails({
         ...userDetails,
         address,
