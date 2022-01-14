@@ -1,7 +1,7 @@
-import React, {FC, useContext, useEffect, useState} from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import s from '@/components/App/layout-components/Header/Header.module.scss'
-import {HeaderContent} from './HeaderContent'
-import {userDetailsContext} from '@/context/UserDetailsProvider'
+import { HeaderContent } from './HeaderContent'
+import { userDetailsContext } from '@/context/UserDetailsProvider'
 import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
 import useTreeContract from "@/hooks/useTreeContract";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
@@ -10,13 +10,13 @@ export const Header: FC = () => {
   const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(true)
-  const {getTreeTypeCount} = useTreeContract()
-  const {provider} = useMetamaskWallet()
+  const { getTreeTypeCount } = useTreeContract()
+  const { provider } = useMetamaskWallet()
 
   const setContractData = async (address: string | undefined,
-                                 balance: number | undefined,
-                                 currency: string | undefined,
-                                 hasToken: boolean | undefined) => {
+    balance: number | undefined,
+    currency: string | undefined,
+    hasToken: boolean | undefined) => {
 
     try {
       const networkId = await provider?.getNetwork();
@@ -53,9 +53,8 @@ export const Header: FC = () => {
     }
   }
 
-
   useEffect(() => {
-    setIsOpenDropdown(!isOpenDropdown)
+    setIsOpenDropdown(true)
   }, [userDetails.isOpenDropdown])
 
   return (
@@ -65,8 +64,8 @@ export const Header: FC = () => {
         name={userDetails.name}
         onWalletDataLoaded={setContractData}
         isOpenDropdown={isOpenDropdown}
-        setIsOpenDropdown={setIsOpenDropdown}/>
-      <HeaderContent/>
+        setIsOpenDropdown={setIsOpenDropdown} />
+      <HeaderContent />
     </div>
   )
 }

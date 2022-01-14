@@ -1,22 +1,21 @@
-import React, {useContext, useEffect} from 'react'
-import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
-import {PageNotFound} from './pages/PageNotFound'
-import {AboutPage} from './pages/About'
-import {PlantPage} from './pages/Planting'
-import {TreeInfoPage} from './pages/TreeInfo'
-import {userDetailsContext} from '@/context/UserDetailsProvider'
+import React, { useContext, useEffect } from 'react'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { PageNotFound } from './pages/PageNotFound'
+import { AboutPage } from './pages/About'
+import { PlantPage } from './pages/Planting'
+import { TreeInfoPage } from './pages/TreeInfo'
+import { userDetailsContext } from '@/context/UserDetailsProvider'
 import api from '@/api/api'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-import {AxiosResponse} from 'axios'
-import {User} from '@/types/user'
-import {Page} from '@/Page'
-import NoPlushTokenModal from "@/components/App/shared-components/NoPlushTokenModal/NoPlushTokenModal";
+import { AxiosResponse } from 'axios'
+import { User } from '@/types/user'
+import { Page } from '@/Page'
 
 export const Routes = () => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
-  const {walletConnected} = useMetamaskWallet()
-  const {login} = useMetamaskAuth()
+  const { walletConnected } = useMetamaskWallet()
+  const { login } = useMetamaskAuth()
 
   const setUserData = async () => {
     const userData: any = await api.user.users.profile.request()
@@ -64,29 +63,28 @@ export const Routes = () => {
 
   return (
     <Router>
-      {userDetails.hasToken !== false ?
-        <Switch>
-          <Route exact path='/'>
-            <Page children={<AboutPage/>}/>
-          </Route>
-          <Route exact path='/about'>
-            <Page children={<AboutPage/>}/>
-          </Route>
-          <Route exact path='/planting'>
-            {userDetails.address !== '' && userDetails.address !== 'disconnected' ?
-              <Page children={<PlantPage/>}/> :
-              <Redirect to={'/about'}/>
-            }
-          </Route>
-          <Route exact path='/token/:id/'>
-            <Page children={<TreeInfoPage/>}/>
-          </Route>
-          <Route path='*'>
-            <Page contentClass={'notFoundContentClass'} children={<PageNotFound/>}/>
-          </Route>
-          <Route path='/404'>
-            <PageNotFound/>
-          </Route>
-        </Switch> : <Page children={<NoPlushTokenModal redirectTo={'https://plush.family/'}/>}/>}
+      <Switch>
+        <Route exact path='/'>
+          <Page children={<AboutPage />} />
+        </Route>
+        <Route exact path='/about'>
+          <Page children={<AboutPage />} />
+        </Route>
+        <Route exact path='/planting'>
+          {userDetails.address !== undefined && userDetails.address !== 'disconnected' ?
+            <Page children={<PlantPage />} /> :
+            <Redirect to={'/about'} />
+          }
+        </Route>
+        <Route exact path='/token/:id/'>
+          <Page children={<TreeInfoPage />} />
+        </Route>
+        <Route path='*'>
+          <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
+        </Route>
+        <Route path='/404'>
+          <PageNotFound />
+        </Route>
+      </Switch>
     </Router>)
 }

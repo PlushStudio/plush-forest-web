@@ -3,9 +3,9 @@ import heightImg from '@/assets/images/tree-height.png'
 import { Gender } from '@/types/Gender'
 
 export interface UserDefault {
-  address: string,
+  address: string | undefined,
   treeTypeIdToPlant: number,
-  name: string,
+  name: string | undefined,
   currentChainId: string,
   treeTypeToPlant: string,
   gender: null | Gender,
@@ -19,9 +19,9 @@ export const modalStateDefault = {
 }
 
 export const userDefault: UserDefault = {
-  address: '',
+  address: undefined,
   treeTypeIdToPlant: 0,
-  name: '',
+  name: undefined,
   currentChainId: '',
   treeTypeToPlant: '',
   gender: null,

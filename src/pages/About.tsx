@@ -12,19 +12,22 @@ import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
+import { checkWrongNetwork } from "@/utils/utils";
+import { useHistory } from "react-router";
 
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
 export const AboutPage = () => {
   const { login } = useMetamaskAuth()
-  const [userDetails] = useContext(userDetailsContext)
+  const [userDetails, setUserDetails] = useContext(userDetailsContext)
+  const history = useHistory()
 
   useEffect(() => {
     trackEvent(Category.Info, MatomoEvent.PageVisited, 'About')
   }, [])
 
   const checkWalletConnection = async () => {
-    if (userDetails.address === '') {
+    if (userDetails.address === undefined) {
       trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login')
       try {
         await login(
@@ -34,6 +37,14 @@ export const AboutPage = () => {
       } catch {
         // TODO Handle errors. Now do nothing (perfect scenario)
       }
+    }
+    if (userDetails.hasToken === undefined) {
+      setUserDetails({
+        ...userDetails,
+        isOpenDropdown: !userDetails.isOpenDropdown
+      })
+    } else {
+      history.push('/planting')
     }
   }
 
@@ -51,7 +62,7 @@ export const AboutPage = () => {
       <div className={s.container}>
         <div className={s.getStartedContentContainer}>
           <HomeText />
-          {userDetails.networkId === Number(VITE_NETWORK_ID) && <TreeTypeSelector />}
+          {!checkWrongNetwork(VITE_NETWORK_ID, String(userDetails.networkId)) && <TreeTypeSelector />}
           <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
           <TreesArea />
         </div>

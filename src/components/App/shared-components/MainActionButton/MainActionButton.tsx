@@ -9,7 +9,7 @@ interface IGetStartedBtn {
   text: string,
   variant?: string,
   image?: 'tree' | 'next',
-  onClick?: () => {},
+  onClick?: () => void,
   loading?: boolean
 }
 
@@ -17,20 +17,18 @@ export const MainActionButton = ({ text, loading, onClick, image }: IGetStartedB
 
   return (
     <div className={s.container}>
-      <Link style={{ textDecoration: 'none' }} to={'/planting'}>
-        <Button onClick={onClick} className={s.btnPrimary}>
-          {text}
-          {image === 'next' && <img alt='get started arrow' className={s.image} src={arrowIcon} />}
-          {image === 'tree' && <img alt='get started arrow' className={s.image} src={treeIcon} />}
-          {loading && <Spinner
-            as='span'
-            animation='grow'
-            size='sm'
-            role='status'
-            aria-hidden='true'
-          />}
-        </Button>
-      </Link>
+      <Button onClick={onClick} className={s.btnPrimary}>
+        {text}
+        {image === 'next' && <img alt='get started arrow' className={s.image} src={arrowIcon} />}
+        {image === 'tree' && <img alt='get started arrow' className={s.image} src={treeIcon} />}
+        {loading && <Spinner
+          as='span'
+          animation='grow'
+          size='sm'
+          role='status'
+          aria-hidden='true'
+        />}
+      </Button>
     </div>
   )
 }
