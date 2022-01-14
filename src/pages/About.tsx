@@ -13,6 +13,8 @@ import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+
 export const AboutPage = () => {
   const { login } = useMetamaskAuth()
   const [userDetails] = useContext(userDetailsContext)
@@ -34,6 +36,7 @@ export const AboutPage = () => {
       }
     }
   }
+
   return (
     <>
       <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
@@ -48,11 +51,11 @@ export const AboutPage = () => {
       <div className={s.container}>
         <div className={s.getStartedContentContainer}>
           <HomeText />
-          <TreeTypeSelector />
+          {userDetails.networkId === Number(VITE_NETWORK_ID) && <TreeTypeSelector />}
           <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
           <TreesArea />
         </div>
-        <div className={s.homeFeatureContainer}>
+        <div className={userDetails.balance ? s.homeFeatureContainer : s.homeFeatureContainerHeight}>
           <HomeFeatureSection1 />
           <HomeFeatureSection2 />
           <HomeFeatureSection3 />

@@ -22,7 +22,7 @@ export const TreesArea = () => {
         [tree01, tree02, tree03, tree04, tree05, tree06, tree07, tree08, tree09, tree10]
           .map((value, index) => {
             return (
-              <TooltipedTree className={`${s.tree} ${s[`tree${index + 1}`]}`}
+              <TooltipedTree key={index} className={`${s.tree} ${s[`tree${index + 1}`]}`}
                 from={treesTooltipData[index].from}
                 to={treesTooltipData[index].to}
                 icon={value}

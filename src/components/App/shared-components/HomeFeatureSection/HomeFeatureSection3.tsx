@@ -15,7 +15,7 @@ export const HomeFeatureSection3 = () => {
           A forest of a thousand wishes.
         </span>
         <span className={`${s.sectionThreeDescription} ${s.description}`}>
-          Each tree comes with an option to add a secret note for your child. Only [Jenny] will be able to read it, and only on a date that you specify. And thanks to smart contract technology, your message will be securely sealed until [she] is ready to view it.
+          Each tree comes with an option to add a secret note for your child. Only your child will be able to read it, and only on a date that you specify. And thanks to smart contract technology, your message will be securely sealed until your child is ready to view it.
         </span>
         <span className={`${s.sectionThreeGetStarted}`}>Coming soon</span>
       </div>

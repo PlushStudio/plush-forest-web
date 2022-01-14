@@ -1,3 +1,6 @@
+@use "/src/assets/styles/theme";
+@use "/src/assets/styles/variables";
+
 .kebab {
   display: flex;
   align-items: center;
@@ -5,15 +8,27 @@
   cursor: pointer;
 }
 
+.iconActive {
+  filter: invert(45%) sepia(100%) saturate(1300%) hue-rotate(215deg);
+}
+
 .kebabDropdown {
-  width: 200px;
+  width: 288px;
   position: absolute;
   background: white;
   border-radius: 24px;
-  padding: 16px;
   top: 62px;
   right: 52px;
   transition: .2s ease;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.02), 0 8px 8px -2px rgba(0, 0, 0, 0.02), 0 16px 16px -4px rgba(0, 0, 0, 0.03), 0 32px 32px -8px rgba(0, 0, 0, 0.04), 0 64px 64px -12px rgba(0, 0, 0, 0.03);
+}
+
+.kebabDropdown div:first-child {
+  border-radius: 20px 20px 0 0;
+}
+
+.kebabDropdown div:last-child {
+  border-radius: 0 0 20px 20px;
 }
 
 .visible {
@@ -27,6 +42,42 @@
 }
 
 .kebabListItem {
-  font-family: 'Moranga', sans-serif;
-  color: #5f36ea;
+  display: flex;
+  justify-content: space-between;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 16px;
+  color: #26272a;
+  padding: 16px 12px;
+  text-decoration: none;
+}
+
+.activeItem {
+  background: theme.$light-gray;
+  transition: .3s all;
+  padding: 16px 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.activeMenuItem {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  color: theme.$indigo-500;
+  transition: .3s ease;
+  padding: 16px 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.activeMenuItem:hover {
+  text-decoration: none;
+  color: theme.$indigo-500;
+}
+
+.kebabListItemContainerActive {
+  background: theme.$light-gray;
+}
+
+.kebabListItemContainer:hover {
+  transition: .3s ease;
+  background: theme.$light-gray;
 }
