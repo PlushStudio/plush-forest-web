@@ -51,7 +51,9 @@ const Wallet: FC<{
     const [dropdownRefState, setDropdownRefState] = useState<React.MutableRefObject<null>>(dropdownRef)
 
     const getUserContractData = async () => {
+      console.log('10')
       if (networkId === VITE_NETWORK_ID) {
+        console.log('11')
         const currency = await getCurrency()
         const address = await getAddress()
         const hasTokenHex = await balanceOf(address)
@@ -66,11 +68,16 @@ const Wallet: FC<{
     }
 
     useEffect(() => {
+      console.log('12')
       const updateWalletNetwork = async () => {
         try {
+          console.log('13')
           if (walletConnected) {
+            console.log('14')
             const userContractD = await getUserContractData();
+            console.log('15')
             if (onWalletDataLoaded) {
+              console.log('16')
               onWalletDataLoaded(
                 userContractD?.address,
                 userContractD?.balance,
@@ -79,10 +86,12 @@ const Wallet: FC<{
             }
           }
         } catch (e) {
+          console.log('17')
           console.log(e)
         }
       }
 
+      console.log('18')
       updateWalletNetwork()
 
     }, [walletState, name, networkId])
@@ -92,6 +101,7 @@ const Wallet: FC<{
     }
 
     const handleAccountChanged = async (accounts: Array<string>) => {
+      console.log('19')
       if (accounts.length > 0) {
         await api.user.users.logout.request()
         setUserContractData({
@@ -100,18 +110,22 @@ const Wallet: FC<{
         })
         window.location.reload()
       } else {
+        console.log('20')
         setUserContractData({
           ...userContractData,
           address: 'disconnected'
         })
         if (onWalletDataLoaded) {
+          console.log('21')
           onWalletDataLoaded('', undefined, '', false)
         }
       }
     }
 
     useEffect(() => {
+      console.log('22')
       if (window.ethereum) {
+        console.log('23')
         window.ethereum.on('chainChanged', (chainId: string) => {
           handleChainChanged(chainId)
           setIsOpenDropdown(chainId !== '0x13881')
@@ -127,19 +141,24 @@ const Wallet: FC<{
     }, [provider, window.ethereum.chainId])
 
     useEffect(() => {
+      console.log('24')
       if (userContractData.address === '' ||
         userContractData.address === 'disconnected') {
+        console.log('25')
         setWalletState('DISCONNECTED')
       }
       if (userContractData.address !== '' &&
         userContractData.address !== 'disconnected' &&
         name !== '') {
+        console.log('26')
         setWalletState('CONNECTED')
       }
       if (name === 'userNotFound') {
+        console.log('27')
         setWalletState('USER_NOT_FOUND')
       }
       if (networkId !== '80001') {
+        console.log('28')
         setWalletState('WRONG_NETWORK')
       }
     }, [networkId, userContractData.address, name])
@@ -159,6 +178,7 @@ const Wallet: FC<{
         }
 
       } catch (e: any) {
+        console.log('29')
         switch (e.message) {
           case 'User not found':
             setWalletState('USER_NOT_FOUND')
@@ -171,6 +191,8 @@ const Wallet: FC<{
         }
       }
     }
+
+    console.log(walletState)
 
     return (
       <div className={s.walletContainer}>
