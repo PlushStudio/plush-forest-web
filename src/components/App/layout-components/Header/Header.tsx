@@ -6,9 +6,10 @@ import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wall
 import useTreeContract from "@/hooks/useTreeContract";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+
 
 export const Header: FC = () => {
+  const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(true)
   const { getTreeTypeCount } = useTreeContract()
