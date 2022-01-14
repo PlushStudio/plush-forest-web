@@ -1,3 +1,5 @@
+import { mumbaiMainnetChainId, mumbaiMainnetNetworkId, mumbaiTestnetChainId, mumbaiTestnetNetworkId } from "@/constants";
+
 export function ucFirst(str: string) {
   if (!str) return str
 
@@ -5,5 +7,29 @@ export function ucFirst(str: string) {
 }
 
 export const cutWalletPublicId = (id: string) => {
-  return `${id.substr(0, 6)}...${id.substr(id.length - 4, 4)}`
+  if (id) {
+    return `${id.substr(0, 6)}...${id.substr(id.length - 4, 4)}`
+  }
+}
+
+export const checkWrongNetwork = (VITE_NETWORK_ID: string, networkId: string) => {
+  if (VITE_NETWORK_ID === '80001') {
+    console.log(networkId)
+    console.log(mumbaiTestnetNetworkId)
+    return networkId !== mumbaiTestnetNetworkId
+  }
+  if (VITE_NETWORK_ID === '137') {
+    return networkId !== mumbaiMainnetNetworkId
+  }
+  return true
+}
+
+export const getNetworkIdByChainId = (chainId: string) => {
+  if (chainId === mumbaiTestnetChainId) {
+    return mumbaiTestnetNetworkId
+  }
+  if (chainId === mumbaiMainnetChainId) {
+    return mumbaiMainnetNetworkId
+  }
+  return 'Unsupported network'
 }

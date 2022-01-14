@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import s from './Wallet.module.scss'
 import api from '@/api/api'
 import useCoreContract from '@/hooks/useCoreContract'
@@ -8,12 +8,14 @@ import WalletBalance from '@/components/App/layout-components/Header/NavBar/Wall
 import WalletDropdown from '@/components/App/layout-components/Header/NavBar/Wallet/WalletDropdown'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-import {Category, MatomoEvent, trackEvent} from '@/utils/matomo'
-import {AxiosResponse} from 'axios'
-import {WalletState} from '@/types/wallet/WalletStateType'
-import {Gender} from '@/types/Gender'
-import {User} from '@/types/user'
+import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
+import { AxiosResponse } from 'axios'
+import { WalletState } from '@/types/wallet/WalletStateType'
+import { Gender } from '@/types/Gender'
+import { User } from '@/types/user'
 import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
+import { checkWrongNetwork, getNetworkIdByChainId } from "@/utils/utils";
+import { useHistory } from "react-router";
 
 type UserWallet = User & { statusCode?: number, message?: string }
 
@@ -29,19 +31,20 @@ const Wallet: FC<{
     hasToken?: boolean | undefined) => void
 }> =
   ({
-     isOpenDropdown,
-     setIsOpenDropdown,
-     name,
-     gender,
-     onWalletDataLoaded,
-   }) => {
-    const {getPLAIBalance, getCurrency, provider, walletConnected, getAddress} = useMetamaskWallet()
-    const {login} = useMetamaskAuth()
-    const {balanceOf} = useCoreContract()
+    isOpenDropdown,
+    setIsOpenDropdown,
+    name,
+    gender,
+    onWalletDataLoaded,
+  }) => {
+    const { getPLAIBalance, getCurrency, provider, walletConnected, getAddress } = useMetamaskWallet()
+    const { login } = useMetamaskAuth()
+    const { balanceOf } = useCoreContract()
+    const history = useHistory()
     const [walletState, setWalletState] = useState<WalletState>('DISCONNECTED')
     const [userContractData, setUserContractData] = useState<any>({
       currency: 'PLAI',
-      address: '',
+      address: undefined,
       balance: 0,
       hasToken: false
     })
@@ -59,14 +62,14 @@ const Wallet: FC<{
         const hasToken = parseInt(hasTokenHex['_hex'], 16)
         const hasTokenResult = hasToken === 1
 
-        setUserContractData({address, balance, currency, hasTokenResult})
-        return {address, balance, currency, hasTokenResult}
+        setUserContractData({ address, balance, currency, hasTokenResult })
+        return { address, balance, currency, hasTokenResult }
       }
-      return {address: '', balance: 0, currency: '', hasTokenResult: undefined}
+      return { address: await getAddress(), balance: 0, currency: '', hasTokenResult: undefined }
     }
 
     useEffect(() => {
-      if (name !== '' && name !== 'userNotFound') {
+      if (name !== undefined) {
         const updateWalletNetwork = async () => {
           try {
             if (walletConnected) {
@@ -85,12 +88,13 @@ const Wallet: FC<{
         }
         updateWalletNetwork()
       }
-
-
     }, [walletState, name])
 
     const handleChainChanged = async (chainId: string) => {
-      setNetworkId(chainId === '0x13881' ? VITE_NETWORK_ID : chainId)
+      setNetworkId(getNetworkIdByChainId(chainId))
+      if (checkWrongNetwork(VITE_NETWORK_ID, networkId)) {
+        history.push('/about')
+      }
     }
 
     const handleAccountChanged = async (accounts: Array<string>) => {
@@ -107,16 +111,17 @@ const Wallet: FC<{
           address: 'disconnected'
         })
         if (onWalletDataLoaded) {
-          onWalletDataLoaded('', undefined, '', undefined)
+          onWalletDataLoaded(undefined, undefined, '', undefined)
         }
       }
     }
+
 
     useEffect(() => {
       if (window.ethereum) {
         window.ethereum.on('chainChanged', (chainId: string) => {
           handleChainChanged(chainId)
-          setIsOpenDropdown(chainId !== '0x13881')
+          setIsOpenDropdown(checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId)))
         })
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
         handleChainChanged(window.ethereum.chainId)
@@ -129,13 +134,13 @@ const Wallet: FC<{
     }, [provider, window.ethereum.chainId])
 
     useEffect(() => {
-      if (userContractData.address === '' ||
+      if (userContractData.address === undefined ||
         userContractData.address === 'disconnected') {
         setWalletState('DISCONNECTED')
       }
-      if (userContractData.address !== '' &&
+      if (userContractData.address !== undefined &&
         userContractData.address !== 'disconnected' &&
-        name !== '') {
+        name !== undefined) {
         setWalletState('CONNECTED')
       }
       if (name === 'userNotFound') {
@@ -178,30 +183,30 @@ const Wallet: FC<{
       <div className={s.walletContainer}>
         {walletState !== 'DISCONNECTED' ?
           <div className={s.wallet}>
-            <WalletIcon currentChain={networkId} gender={gender}/>
+            <WalletIcon networkId={networkId} gender={gender} />
             <WalletMain
               isOpenDropdown={isOpenDropdown}
               dropdownRef={dropdownRefState} name={
-              walletState === 'WRONG_NETWORK' ? 'Hey,' :
-                walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
-              setModalVisibility={setIsOpenDropdown}
+                walletState === 'WRONG_NETWORK' ? 'Hey,' :
+                  walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
+              setDropdownVisibility={setIsOpenDropdown}
               address={userContractData.address}
             />
             <WalletBalance ticker={userContractData.currency}
-                           balance={walletState === 'CONNECTED' ? userContractData.balance : null}/>
+              balance={walletState === 'CONNECTED' ? userContractData.balance : null} />
             <WalletDropdown onDropdownRefInitialized={(ref) => setDropdownRefState(ref)} type={
               networkId !== VITE_NETWORK_ID ? 'WRONG_NETWORK' :
                 walletState === 'USER_NOT_FOUND' ? 'USER_NOT_FOUND' : 'SUCCESS'}
-                            isVisible={isOpenDropdown}
-                            setWalletState={setWalletState}
-                            chainId={window.ethereum.chainId}
-                            address={userContractData.address}/>
+              isVisible={isOpenDropdown}
+              setWalletState={setWalletState}
+              chainId={window.ethereum.chainId}
+              address={userContractData.address} />
           </div> :
           <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
             Connect
           </div>}
         <div className={s.kebabContainer}>
-          <KebabDrowdown/>
+          <KebabDrowdown />
         </div>
 
       </div>

@@ -4,13 +4,11 @@ import successConnectionLine from '@/assets/images/wallet/32-px-1-outlined-link-
 import badConnectionLine from '@/assets/images/wallet/32-px-1-outlined-bad-connection-01@2x.png'
 import metamaskIcon from '@/assets/images/wallet/group-59@2x.png'
 import rinkebyIcon from '@/assets/images/wallet/group-43@2x.png'
-import copyAddressIcon from '@/assets/images/wallet/24-px-1-outlined-copy@2x.png'
 import { cutWalletPublicId } from '@/utils/utils'
 import { WalletDropdownType } from '@/types/wallet/WalletDropdownType'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import Copy from "@/components/App/layout-components/Header/NavBar/Wallet/Copy";
-
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+import { mumbaiMainnetChainId, mumbaiMainnetNetworkId, mumbaiTestnetChainId } from "@/constants";
 
 const WalletDropdown: FC<{
   isVisible: boolean | null | undefined,
@@ -31,6 +29,7 @@ const WalletDropdown: FC<{
     const [footerButtonText, setFooterButtonText] = useState('Switch to Mumbai')
     const [footerSubtext, setFooterSubtext] = useState('Switch to Mumbai')
     const dropdownRef = useRef(null)
+    const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
     useEffect(() => {
       if (dropdownRef) {
@@ -59,7 +58,7 @@ const WalletDropdown: FC<{
         method: 'wallet_addEthereumChain',
         params: [
           {
-            chainId: VITE_NETWORK_ID === '80001' ? '0x13881' : chainId,
+            chainId: VITE_NETWORK_ID === mumbaiMainnetNetworkId ? mumbaiMainnetChainId : mumbaiTestnetChainId,
             rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
             chainName: 'Mumbai TestNet',
             nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
@@ -70,7 +69,7 @@ const WalletDropdown: FC<{
 
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: VITE_NETWORK_ID === '80001' ? '0x13881' : chainId }]
+        params: [{ chainId: VITE_NETWORK_ID === mumbaiMainnetNetworkId ? mumbaiMainnetChainId : mumbaiTestnetChainId }]
       })
 
       if (type === 'SUCCESS') {
