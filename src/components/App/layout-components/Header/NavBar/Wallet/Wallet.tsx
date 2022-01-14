@@ -68,31 +68,35 @@ const Wallet: FC<{
     }
 
     useEffect(() => {
-      console.log('12')
-      const updateWalletNetwork = async () => {
-        try {
-          console.log('13')
-          if (walletConnected) {
-            console.log('14')
-            const userContractData = await getUserContractData();
-            console.log('15')
-            if (onWalletDataLoaded) {
-              console.log('16')
-              onWalletDataLoaded(
-                userContractData?.address,
-                userContractData?.balance,
-                userContractData?.currency,
-                userContractData?.hasTokenResult)
+      console.log('test')
+      if (name !== '' && name !== 'userNotFound') {
+        console.log('12')
+        const updateWalletNetwork = async () => {
+          try {
+            console.log('13')
+            if (walletConnected) {
+              console.log('14')
+              const userContractData = await getUserContractData();
+              console.log('15')
+              if (onWalletDataLoaded) {
+                console.log('16')
+                onWalletDataLoaded(
+                  userContractData?.address,
+                  userContractData?.balance,
+                  userContractData?.currency,
+                  userContractData?.hasTokenResult)
+              }
             }
+          } catch (e) {
+            console.log('17')
+            console.log(e)
           }
-        } catch (e) {
-          console.log('17')
-          console.log(e)
         }
+
+        console.log('18')
+        updateWalletNetwork()
       }
 
-      console.log('18')
-      updateWalletNetwork()
 
     }, [walletState, name])
 
@@ -117,7 +121,7 @@ const Wallet: FC<{
         })
         if (onWalletDataLoaded) {
           console.log('21')
-          onWalletDataLoaded('', undefined, '', false)
+          onWalletDataLoaded('', undefined, '', undefined)
         }
       }
     }
