@@ -19,7 +19,6 @@ export const Routes = () => {
   const {login} = useMetamaskAuth()
 
   const setUserData = async () => {
-    console.log('1')
     const userData: any = await api.user.users.profile.request()
     if (userData.status === 200) {
       setUserDetails({

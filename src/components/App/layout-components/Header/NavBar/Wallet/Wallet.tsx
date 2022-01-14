@@ -66,6 +66,7 @@ const Wallet: FC<{
     }
 
     useEffect(() => {
+      if (name !== '' && name !== 'userNotFound') {
         const updateWalletNetwork = async () => {
           try {
             if (walletConnected) {
@@ -83,6 +84,9 @@ const Wallet: FC<{
           }
         }
         updateWalletNetwork()
+      }
+
+
     }, [walletState, name])
 
     const handleChainChanged = async (chainId: string) => {
@@ -179,7 +183,7 @@ const Wallet: FC<{
               isOpenDropdown={isOpenDropdown}
               dropdownRef={dropdownRefState} name={
               walletState === 'WRONG_NETWORK' ? 'Hey,' :
-              walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
+                walletState === 'USER_NOT_FOUND' ? 'No account' : name ?? ''}
               setModalVisibility={setIsOpenDropdown}
               address={userContractData.address}
             />
