@@ -59,12 +59,12 @@ const WalletKebab = () => {
       <div className={`${s.kebabDropdown} ${isKebabDropdownOpen ? s.visible : s.hidden}`}>
         {
           menuList.map((menuItem: MenuItem, index: number) =>
-            <div className={`${s.kebabListItemContainer} ${activeItemId === index ? s.kebabListItemContainerActive : ''}`}>
+            <div key={index} className={`${s.kebabListItemContainer} ${activeItemId === index ? s.kebabListItemContainerActive : ''}`}>
               <Link to={'/'} onClick={() => menuItemHandler(menuItem.href, index)}>
                 <div className={`${activeItemId === index ? s.activeMenuItem : s.kebabListItem}`}>
                   {menuItem.title}
                   <div className={s.menuItemIcon}>
-                    <img alt={"globe icon"} className={activeItemId === index ? s.iconActive : ''} src={outlineGlobe}/>
+                    <img alt={"globe icon"} className={activeItemId === index ? s.iconActive : ''} src={outlineGlobe} />
                   </div>
                 </div>
               </Link>

@@ -10,13 +10,13 @@ import { WalletDropdownType } from '@/types/wallet/WalletDropdownType'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import Copy from "@/components/App/layout-components/Header/NavBar/Wallet/Copy";
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
 const WalletDropdown: FC<{
   isVisible: boolean | null | undefined,
   address: string,
   type: WalletDropdownType,
-  networkId: string,
+  chainId: string,
   setWalletState: (walletState: WalletState) => void,
   onDropdownRefInitialized: (dropdownRef: React.MutableRefObject<null>) => void
 }> =
@@ -24,7 +24,7 @@ const WalletDropdown: FC<{
     isVisible,
     address,
     type,
-    networkId,
+    chainId,
     onDropdownRefInitialized,
     setWalletState
   }) => {
@@ -59,7 +59,7 @@ const WalletDropdown: FC<{
         method: 'wallet_addEthereumChain',
         params: [
           {
-            chainId: VITE_NETWORK_ID,
+            chainId: VITE_NETWORK_ID === '80001' ? '0x13881' : chainId,
             rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
             chainName: 'Mumbai TestNet',
             nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
@@ -68,12 +68,11 @@ const WalletDropdown: FC<{
         ],
       });
 
-      if (networkId !== VITE_NETWORK_ID) {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: VITE_NETWORK_ID }]
-        })
-      }
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: VITE_NETWORK_ID === '80001' ? '0x13881' : chainId }]
+      })
+
       if (type === 'SUCCESS') {
         setWalletState('DISCONNECTED')
       }
