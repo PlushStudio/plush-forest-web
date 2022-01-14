@@ -74,15 +74,15 @@ const Wallet: FC<{
           console.log('13')
           if (walletConnected) {
             console.log('14')
-            const userContractD = await getUserContractData();
+            const userContractData = await getUserContractData();
             console.log('15')
             if (onWalletDataLoaded) {
               console.log('16')
               onWalletDataLoaded(
-                userContractD?.address,
-                userContractD?.balance,
-                userContractD?.currency,
-                userContractD?.hasTokenResult)
+                userContractData?.address,
+                userContractData?.balance,
+                userContractData?.currency,
+                userContractData?.hasTokenResult)
             }
           }
         } catch (e) {
@@ -94,7 +94,7 @@ const Wallet: FC<{
       console.log('18')
       updateWalletNetwork()
 
-    }, [walletState, name, networkId])
+    }, [walletState, name])
 
     const handleChainChanged = async (chainId: string) => {
       setNetworkId(chainId === '0x13881' ? VITE_NETWORK_ID : chainId)
