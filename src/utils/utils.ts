@@ -14,8 +14,6 @@ export const cutWalletPublicId = (id: string) => {
 
 export const checkWrongNetwork = (VITE_NETWORK_ID: string, networkId: string) => {
   if (VITE_NETWORK_ID === '80001') {
-    console.log(networkId)
-    console.log(mumbaiTestnetNetworkId)
     return networkId !== mumbaiTestnetNetworkId
   }
   if (VITE_NETWORK_ID === '137') {

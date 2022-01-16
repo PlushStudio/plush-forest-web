@@ -9,7 +9,6 @@ import TreeInfoBlock from '@/components/App/shared-components/TreeInfoBlock/Tree
 import axios from 'axios'
 import api from '@/api/api'
 import { useParams } from 'react-router-dom'
-import { useHistory } from 'react-router'
 import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValue'
 import moment from 'moment'
@@ -17,7 +16,6 @@ import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import TreeNotAvailable from '@/components/App/shared-components/TreeNotAvailable/TreeNotAvailable'
 export const TreeInfoPage: React.FC = () => {
   const params = useParams<any>()
-  const history = useHistory()
   const [treeData, setTreeData] = useState<TreeData>(treeDefault)
 
   useEffect(() => {
@@ -56,7 +54,6 @@ export const TreeInfoPage: React.FC = () => {
         } `}
     >
       <div className={s.container}>
-        <Header />
         {!!treeData.name.length ? (
           <Row>
             <Col>

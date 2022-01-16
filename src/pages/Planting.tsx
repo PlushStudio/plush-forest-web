@@ -17,8 +17,6 @@ import { PlantingModal } from '@/components/App/shared-components/PlantingModal/
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
-import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -28,11 +26,10 @@ export const PlantPage = () => {
   const [helperText, setHelperText] = useState<string>('')
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState(plantingTree0)
-  const [userDetails, setUserDetails] = useContext(userDetailsContext)
+  const [userDetails] = useContext(userDetailsContext)
   const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
-  const { login } = useMetamaskAuth()
   const history = useHistory()
   const { walletConnected } = useMetamaskWallet()
 
@@ -65,7 +62,7 @@ export const PlantPage = () => {
       history.push(`/token/${myTokens?.items[0].token}`)
     } else {
       setIsPlanting(true)
-      if (userDetails.name !== '') {
+      if (userDetails.name !== undefined) {
         try {
           const allowance = await getBuyAllowance(userDetails.address)
           if (allowance) {
@@ -115,40 +112,13 @@ export const PlantPage = () => {
     }
   }
 
-  const makeLogin = async () => {
-    trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login')
-    try {
-      await login(
-        new URL(`${api.url}/${api.user.auth.nonce.url}`),
-        new URL(`${api.url}/${api.user.auth.login.url}`)
-      )
-    } catch {
-      // TODO Handle errors. Now do nothing (perfect scenario)
-    }
-  }
-
   const startMintProcess = async () => {
     if (walletConnected) {
-      if (
-        userDetails.address !== 'disconnected'
-      ) {
-        if (userDetails.name === '') {
-          await makeLogin()
-        }
-        if (nameFrom === '') {
-          setHelperText('The name cannot be empty')
-        } else {
-          await plantTreeHandler()
-        }
+      if (nameFrom === '') {
+        setHelperText('The name cannot be empty')
       } else {
-        setUserDetails({
-          ...userDetails,
-          isOpenDropdownByError: true,
-          isOpenDropdown: !userDetails.isOpenDropdown,
-        })
+        await plantTreeHandler()
       }
-    } else {
-      await makeLogin()
     }
   }
 
