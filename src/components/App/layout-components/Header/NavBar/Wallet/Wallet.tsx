@@ -92,7 +92,7 @@ const Wallet: FC<{
 
     const handleChainChanged = async (chainId: string) => {
       setNetworkId(getNetworkIdByChainId(chainId))
-      if (checkWrongNetwork(VITE_NETWORK_ID, networkId)) {
+      if (checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId))) {
         history.push('/about')
       }
     }

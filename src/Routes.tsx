@@ -70,14 +70,14 @@ export const Routes = () => {
         <Route exact path='/about'>
           <Page children={<AboutPage />} />
         </Route>
+        <Route path='/token/:id/'>
+          <Page children={<TreeInfoPage />} />
+        </Route>
         <Route exact path='/planting'>
           {userDetails.address !== undefined && userDetails.address !== 'disconnected' ?
             <Page children={<PlantPage />} /> :
             <Redirect to={'/about'} />
           }
-        </Route>
-        <Route exact path='/token/:id/'>
-          <Page children={<TreeInfoPage />} />
         </Route>
         <Route path='*'>
           <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
