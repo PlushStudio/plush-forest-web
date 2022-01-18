@@ -74,7 +74,7 @@ export const Routes = () => {
           <Page children={<TreeInfoPage />} />
         </Route>
         <Route exact path='/planting'>
-          {userDetails.address !== undefined && userDetails.address !== 'disconnected' ?
+          {userDetails.address !== 'disconnected' ?
             <Page children={<PlantPage />} /> :
             <Redirect to={'/about'} />
           }

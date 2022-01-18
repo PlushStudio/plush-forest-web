@@ -13,35 +13,48 @@ import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValue'
 import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
+
 import TreeNotAvailable from '@/components/App/shared-components/TreeNotAvailable/TreeNotAvailable'
 export const TreeInfoPage: React.FC = () => {
   const params = useParams<any>()
   const [treeData, setTreeData] = useState<TreeData>(treeDefault)
+  const [userHasToken, setUserHasToken] = useState<boolean | undefined>(undefined)
 
   useEffect(() => {
-    axios.get(`${api.url}/forest/tokens/token/${params.id}`, { withCredentials: true })
-      .then(response => {
-        if (response.status === 200) {
-          setTreeData({
-            ...treeData,
-            name: response.data.name.split('tree')[0],
-            treeType: response.data.attributes[2].value,
-            subInfo: [
-              { title: 'Location', desc: response.data.attributes[4].value, img: locationImg },
-              { title: 'Tree height', desc: '5.2 Inches', img: heightImg }],
-            firstBlockInfo: {
-              message: response.data.description,
-              date: moment.unix(response.data.attributes[1].value).format('ll')
+    (async () => {
+      try {
+        const response = await axios.get(
+          `${api.url}/forest/tokens/token/${params.id}`,
+          { withCredentials: true }
+        )
+        setTreeData({
+          ...treeData,
+          name: response.data.name.split('tree')[0],
+          treeType: response.data.attributes[2].value,
+          subInfo: [
+            {
+              title: 'Location',
+              desc: response.data.attributes[4].value,
+              img: locationImg,
             },
-            planter: response.data.attributes[5].value,
-            secondBlockInfo: {
-              message: `${response.data.attributes[2].value} seedling was planted in ${response.data.attributes[4].value}.`,
-              date: moment.unix(response.data.attributes[0].value).format('ll')
-            },
-            imageLink: response.data.image
-          })
-        }
-      })
+            { title: 'Tree height', desc: '5.2 Inches', img: heightImg },
+          ],
+          firstBlockInfo: {
+            message: response.data.description,
+            date: moment.unix(response.data.attributes[1].value).format('ll'),
+          },
+          planter: response.data.attributes[5].value,
+          secondBlockInfo: {
+            message: `${response.data.attributes[2].value} seedling was planted in ${response.data.attributes[4].value}.`,
+            date: moment.unix(response.data.attributes[0].value).format('ll'),
+          },
+          imageLink: response.data.image,
+        })
+        setUserHasToken(true)
+      } catch (error) {
+        setUserHasToken(false)
+      }
+    })()
   }, [params.id])
 
   useEffect(() => {
@@ -50,29 +63,24 @@ export const TreeInfoPage: React.FC = () => {
 
   return (
     <div
-      className={`${s.backgroundContainer} ${!treeData.name.length && s.backgroundImg
-        } `}
+      className={`${s.backgroundContainer} ${userHasToken && s.backgroundImg} `}
     >
       <div className={s.container}>
-        {!!treeData.name.length ? (
-          <Row>
-            <Col>
-              <TreeInfoBlock treeData={treeData} />
-              <Timeline
-                timelineInfo={{
-                  firstBlockInfo: treeData.firstBlockInfo.message,
-                  secondBlockInfo: treeData.secondBlockInfo.message,
-                  imageLink: treeData.imageLink,
-                  planter: treeData.planter,
-                  dedicatedDate: treeData.firstBlockInfo.date,
-                  plantedDate: treeData.secondBlockInfo.date,
-                }}
-              />
-            </Col>
-          </Row>
-        ) : (
-          <TreeNotAvailable />
-        )}
+        {userHasToken !== false ? <Row>
+          <Col>
+            <TreeInfoBlock treeData={treeData} />
+            <Timeline
+              timelineInfo={{
+                firstBlockInfo: treeData.firstBlockInfo.message,
+                secondBlockInfo: treeData.secondBlockInfo.message,
+                imageLink: treeData.imageLink,
+                planter: treeData.planter,
+                dedicatedDate: treeData.firstBlockInfo.date,
+                plantedDate: treeData.secondBlockInfo.date,
+              }}
+            />
+          </Col>
+        </Row> : <TreeNotAvailable />}
       </div>
       <div className={s.footer} />
     </div>

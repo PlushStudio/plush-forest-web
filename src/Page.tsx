@@ -1,9 +1,9 @@
-import React, { ReactNode, useContext, useEffect, useState } from 'react'
-import { Header } from '@/components/App/layout-components/Header/Header'
+import React, {ReactNode, useContext, useEffect, useState} from 'react'
+import {Header} from '@/components/App/layout-components/Header/Header'
 import NoPlushTokenModal from "@/components/App/shared-components/NoPlushTokenModal/NoPlushTokenModal";
-import { userDetailsContext } from "@/context/UserDetailsProvider";
-import { CircleLoader } from "@/components/App/shared-components/Loader/CircleLoader";
-import useMetamaskWallet from "@/hooks/useMetamaskWallet";
+import {userDetailsContext} from "@/context/UserDetailsProvider";
+import {CircleLoader} from "@/components/App/shared-components/Loader/CircleLoader";
+import {useParams} from "react-router-dom";
 
 type Props = {
   children: ReactNode
@@ -15,36 +15,36 @@ type Props = {
 
 export const Page = (props: Props) => {
   const [userDetails] = useContext(userDetailsContext)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const { isConnected } = useMetamaskWallet()
+  const [isReady, setIsReady] = useState<boolean>(false)
+  const params = useParams<{id?: string}>();
 
   useEffect(() => {
-    const checkInitialValues = async () => {
-      const walletConnected = isConnected();
-      if (await walletConnected && isLoading) {
-        if (userDetails.name && userDetails.address) {
-          setIsLoading(false)
-        } else {
-          setIsLoading(!userDetails.address)
-        }
-      } else {
-        setIsLoading(false)
-      }
+    switch (window.location.pathname) {
+      case'/planting' :
+        setIsReady(userDetails.address !== undefined && userDetails.name !== '' && userDetails.treesCount.length !== 0)
+        break
+      case '/about' :
+        setIsReady(true)
+        break
+      case `/token/${params.id}` :
+        setIsReady(true)
+        break
+      default:
+        setIsReady(true)
     }
-    checkInitialValues()
-  }, [userDetails.address, userDetails.name])
+  }, [window.location.pathname, userDetails.address, userDetails.name, userDetails.treesCount])
 
   return <>
-    <Header />
+    <Header/>
     {!!props.headerComponent &&
       props.headerComponent
     }
-    {!isLoading ?
+    {isReady ?
       <div className={`${props.contentClass}`}>
         {userDetails.hasToken !== false ? props.children :
-          <NoPlushTokenModal redirectTo={'https://plush.family/'} />
+          <NoPlushTokenModal redirectTo={'https://plush.family/'}/>
         }
-      </div> : <CircleLoader />}
+      </div> : <CircleLoader/>}
     {!!props.footerComponent &&
       props.footerComponent
     }
