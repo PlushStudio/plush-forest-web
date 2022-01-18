@@ -57,58 +57,51 @@ export const PlantPage = () => {
   }
 
   const plantTreeHandler = async () => {
-    const myTokens: UserTokens = await api.user.users.tokens.request()
-    if (myTokens.items.length > 0) {
-      history.push(`/token/${myTokens?.items[0].token}`)
-    } else {
-      setIsPlanting(true)
-      if (userDetails.name !== undefined) {
+    setIsPlanting(true)
+    try {
+      const allowance = await getBuyAllowance(userDetails.address)
+      if (allowance) {
+        setPlantingStatus('Planting your tree')
+        //empty message for Pilot
         try {
-          const allowance = await getBuyAllowance(userDetails.address)
-          if (allowance) {
-            setPlantingStatus('Planting your tree')
-            //empty message for Pilot
-            try {
-              const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+          const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
 
-              if (treeMintingResult) {
-                const getMyTokensInterval = setInterval(async function () {
-                  await api.user.users.tokens.request(getMyTokensInterval)
-                }, 5000)
-              }
+          if (treeMintingResult) {
+            const getMyTokensInterval = setInterval(async function () {
+              await api.user.users.tokens.request(getMyTokensInterval)
+            }, 5000)
+          }
+        } catch (e) {
+          setIsPlanting(false)
+        }
+      } else {
+        const updateBuyAllowance = setInterval(async function () {
+          const allowanceResult = getBuyAllowance(userDetails.address)
+          if (await allowanceResult) {
+            clearInterval(updateBuyAllowance)
+            setPlantingStatus('Planting your tree')
+            const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+            if (treeMintingResult) {
+              const getMyTokensInterval = setInterval(async function () {
+                await api.user.users.tokens.request(getMyTokensInterval)
+              }, 5000)
+            }
+          } else {
+            setPlantingStatus('Confirmation')
+            clearInterval(updateBuyAllowance)
+            try {
+              await getApprove().then(async () => {
+                startAllowanceLoop()
+              })
             } catch (e) {
               setIsPlanting(false)
             }
-          } else {
-            const updateBuyAllowance = setInterval(async function () {
-              const allowanceResult = getBuyAllowance(userDetails.address)
-              if (await allowanceResult) {
-                clearInterval(updateBuyAllowance)
-                setPlantingStatus('Planting your tree')
-                const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-                if (treeMintingResult) {
-                  const getMyTokensInterval = setInterval(async function () {
-                    await api.user.users.tokens.request(getMyTokensInterval)
-                  }, 5000)
-                }
-              } else {
-                setPlantingStatus('Confirmation')
-                clearInterval(updateBuyAllowance)
-                try {
-                  await getApprove().then(async () => {
-                    startAllowanceLoop()
-                  })
-                } catch (e) {
-                  setIsPlanting(false)
-                }
-              }
-            }, 7000)
           }
-        } catch (e: any) {
-          setIsPlanting(false)
-          console.log(e.message)
-        }
+        }, 7000)
       }
+    } catch (e: any) {
+      setIsPlanting(false)
+      console.log(e.message)
     }
   }
 
@@ -123,47 +116,48 @@ export const PlantPage = () => {
   }
 
   return (
-    <div className={s.backgroundContainer}>
-      <div className={s.container}>
-        {isPlanting ? <PlantingModal status={plantingStatus} /> :
-          <div className={s.plantingFormWrapper}>
-            <Form className={s.plantingForm}>
-              <Form.Group controlId='treeName'>
-                <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
-                <CustomSelect />
-              </Form.Group>
-              <Form.Group controlId='treeName'>
-                <Form.Label className={s.formLabel}>From</Form.Label>
-                <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
-                  value={nameFrom}
-                  type='text'
-                  as='input'
-                  placeholder='Your name'
-                  readonly={isPlanting} />
-              </Form.Group>
-              <span className={s.statusText}>
-                {helperText}
-              </span> <br />
-              {userDetails.balance < 5 && <span className={s.statusText}>
-                You need more plush tokens to perform this operation
-              </span>}
-              {!isPlanting &&
-                <MainActionButton onClick={() => startMintProcess()}
-                  text='Plant your tree'
-                  variant='success'
-                  image='tree' />}
+    userDetails.treesCount ?
+      <div className={s.backgroundContainer}>
+        <div className={s.container}>
+          {isPlanting ? <PlantingModal status={plantingStatus} /> :
+            <div className={s.plantingFormWrapper}>
+              <Form className={s.plantingForm}>
+                <Form.Group controlId='treeName'>
+                  <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
+                  <CustomSelect />
+                </Form.Group>
+                <Form.Group controlId='treeName'>
+                  <Form.Label className={s.formLabel}>From</Form.Label>
+                  <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
+                    value={nameFrom}
+                    type='text'
+                    as='input'
+                    placeholder='Your name'
+                    readonly={isPlanting} />
+                </Form.Group>
+                <span className={s.statusText}>
+                  {helperText}
+                </span> <br />
+                {userDetails.balance < 5 && <span className={s.statusText}>
+                  You need more plush tokens to perform this operation
+                </span>}
+                {!isPlanting &&
+                  <MainActionButton onClick={() => startMintProcess()}
+                    text='Plant your tree'
+                    variant='success'
+                    image='tree' />}
 
-              {isPlanting &&
-                <MainActionButton
-                  loading={isPlanting}
-                  text='Planting...'
-                  variant='success'
-                  image='tree' />}
-            </Form>
-            <img src={treeImage} className='planting-tree-image' alt='logo' />
-          </div>
-        }
-      </div>
-    </div>
+                {isPlanting &&
+                  <MainActionButton
+                    loading={isPlanting}
+                    text='Planting...'
+                    variant='success'
+                    image='tree' />}
+              </Form>
+              <img src={treeImage} className='planting-tree-image' alt='logo' />
+            </div>
+          }
+        </div>
+      </div> : <></>
   )
 }

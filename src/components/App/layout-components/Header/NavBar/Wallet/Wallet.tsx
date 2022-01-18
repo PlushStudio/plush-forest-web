@@ -146,7 +146,7 @@ const Wallet: FC<{
       if (name === 'userNotFound') {
         setWalletState('USER_NOT_FOUND')
       }
-      if (networkId !== '80001') {
+      if (checkWrongNetwork(VITE_NETWORK_ID, networkId)) {
         setWalletState('WRONG_NETWORK')
       }
     }, [networkId, userContractData.address, name])

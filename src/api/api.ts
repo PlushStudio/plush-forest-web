@@ -62,6 +62,7 @@ export const api = {
                 if (response.status === 200) {
                   if (response.data?.items.length > 0) {
                     clearInterval(getMyTokensInterval as NodeJS.Timeout)
+                    window.location.href = `/token/${response.data?.items[0].token}`
                   }
                 } else {
                   clearInterval(getMyTokensInterval as NodeJS.Timeout)
