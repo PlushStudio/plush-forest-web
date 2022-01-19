@@ -18,10 +18,13 @@ export const Header: FC = () => {
     currency: string | undefined,
     hasToken: boolean | undefined) => {
 
+    console.log('test10')
     try {
+      console.log('test11')
       const networkId = await provider?.getNetwork();
-
+      console.log('test12')
       if (networkId?.chainId === Number(VITE_NETWORK_ID)) {
+        console.log('test13')
         setUserDetails({
           ...userDetails,
           address,
@@ -37,6 +40,7 @@ export const Header: FC = () => {
           networkId: Number(VITE_NETWORK_ID)
         })
       } else {
+        console.log('test14')
         setUserDetails({
           ...userDetails,
           address,
@@ -45,6 +49,7 @@ export const Header: FC = () => {
         })
       }
     } catch (e) {
+      console.log('test15')
       setUserDetails({
         ...userDetails,
         address,
@@ -52,6 +57,7 @@ export const Header: FC = () => {
       })
     }
   }
+  console.log(userDetails)
 
   useEffect(() => {
     setIsOpenDropdown(true)

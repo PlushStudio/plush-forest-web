@@ -1,7 +1,5 @@
 export type UserTokens = {
-  items: [{
-    token: number
-  }],
+  items: [],
   meta: {
     currentPage: number,
     itemCount: number,

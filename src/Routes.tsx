@@ -18,6 +18,7 @@ export const Routes = () => {
   const { login } = useMetamaskAuth()
 
   const setUserData = async () => {
+    console.log('test16')
     const userData: any = await api.user.users.profile.request()
     if (userData.status === 200) {
       setUserDetails({
@@ -27,6 +28,7 @@ export const Routes = () => {
         childName: userData.data.childs[0].name,
       })
     } else {
+      console.log('test17')
       try {
         await login(
           new URL(`${api.url}/${api.user.auth.nonce.url}`),
@@ -43,6 +45,7 @@ export const Routes = () => {
           })
         }
       } catch (e: any) {
+        console.log('test18')
         switch (e.message) {
           case 'User not found':
             setUserDetails({
@@ -56,6 +59,7 @@ export const Routes = () => {
   }
 
   useEffect(() => {
+    console.log('test19')
     if (walletConnected) {
       setUserData()
     }

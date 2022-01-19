@@ -54,7 +54,9 @@ const Wallet: FC<{
     const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
     const getUserContractData = async () => {
+      console.log('test1')
       if (networkId === VITE_NETWORK_ID) {
+        console.log('test2')
         const currency = await getCurrency()
         const address = await getAddress()
         const hasTokenHex = await balanceOf(address)
@@ -69,8 +71,11 @@ const Wallet: FC<{
     }
 
     useEffect(() => {
+      console.log('test3')
       if (name !== undefined) {
+        console.log('test4')
         const updateWalletNetwork = async () => {
+          console.log('test5')
           try {
             if (walletConnected) {
               const userContractData = await getUserContractData();
@@ -91,6 +96,7 @@ const Wallet: FC<{
     }, [walletState, name])
 
     const handleChainChanged = async (chainId: string) => {
+      console.log('test5')
       setNetworkId(getNetworkIdByChainId(chainId))
       if (checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId))) {
         history.push('/about')
@@ -98,6 +104,7 @@ const Wallet: FC<{
     }
 
     const handleAccountChanged = async (accounts: Array<string>) => {
+      console.log('test7')
       if (accounts.length > 0) {
         await api.user.users.logout.request()
         setUserContractData({
@@ -120,6 +127,7 @@ const Wallet: FC<{
     useEffect(() => {
       if (window.ethereum) {
         window.ethereum.on('chainChanged', (chainId: string) => {
+          console.log('test6')
           handleChainChanged(chainId)
           setIsOpenDropdown(checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId)))
         })
@@ -132,6 +140,8 @@ const Wallet: FC<{
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
     }, [provider, window.ethereum.chainId])
+
+    console.log('networkId = ', networkId,'userContractData.address = ', userContractData.address, 'name = ',  name)
 
     useEffect(() => {
       if (userContractData.address === undefined ||
