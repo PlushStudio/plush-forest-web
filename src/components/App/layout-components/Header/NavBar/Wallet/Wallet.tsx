@@ -68,6 +68,7 @@ const Wallet: FC<{
       return { address: await getAddress(), balance: 0, currency: '', hasTokenResult: undefined }
     }
 
+
     useEffect(() => {
       if (name !== undefined) {
         const updateWalletNetwork = async () => {
@@ -88,7 +89,7 @@ const Wallet: FC<{
         }
         updateWalletNetwork()
       }
-    }, [walletState, name])
+    }, [networkId, name])
 
     const handleChainChanged = async (chainId: string) => {
       setNetworkId(getNetworkIdByChainId(chainId))

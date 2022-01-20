@@ -47,7 +47,7 @@ const Timeline = ({ timelineInfo }: TimelineInfo) => {
       <div className={`${s.container} ${s.cdTimelineContainer}`}>
         <div className={s.greyDot} />
         {cardInfo.map((item: ICardInfo, index: number): JSX.Element => {
-          return <TimelineCard id={index + 1} cardInfo={cardInfo[index]} />
+          return <TimelineCard key={item.text + index} id={index + 1} cardInfo={cardInfo[index]} />
         })}
         <div className={s.timelineBase}>
           <img src={timelineBase} alt='tree timeline' />

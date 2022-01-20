@@ -1,9 +1,9 @@
-import React, {ReactNode, useContext, useEffect, useState} from 'react'
-import {Header} from '@/components/App/layout-components/Header/Header'
+import React, { ReactNode, useContext, useEffect, useState } from 'react'
+import { Header } from '@/components/App/layout-components/Header/Header'
 import NoPlushTokenModal from "@/components/App/shared-components/NoPlushTokenModal/NoPlushTokenModal";
-import {userDetailsContext} from "@/context/UserDetailsProvider";
-import {CircleLoader} from "@/components/App/shared-components/Loader/CircleLoader";
-import {useParams} from "react-router-dom";
+import { userDetailsContext } from "@/context/UserDetailsProvider";
+import { CircleLoader } from "@/components/App/shared-components/Loader/CircleLoader";
+import { useParams } from "react-router-dom";
 
 type Props = {
   children: ReactNode
@@ -15,36 +15,40 @@ type Props = {
 
 export const Page = (props: Props) => {
   const [userDetails] = useContext(userDetailsContext)
-  const [isReady, setIsReady] = useState<boolean>(false)
-  const params = useParams<{id?: string}>();
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
+  const params = useParams<{ id?: string }>();
 
   useEffect(() => {
-    switch (window.location.pathname) {
-      case'/planting' :
-        setIsReady(userDetails.address !== undefined && userDetails.name !== '' && userDetails.treesCount.length !== 0)
-        break
-      case '/about' :
-        setIsReady(true)
-        break
-      case `/token/${params.id}` :
-        setIsReady(true)
-        break
-      default:
-        setIsReady(true)
+    if (!isDataLoaded) {
+      switch (window.location.pathname) {
+        case '/planting':
+          setIsDataLoaded(userDetails.address !== undefined
+            && userDetails.name !== ''
+            && userDetails.treesCount.length !== 0)
+          break
+        case '/about':
+          setIsDataLoaded(true)
+          break
+        case `/token/${params.id}`:
+          setIsDataLoaded(true)
+          break
+        default:
+          setIsDataLoaded(true)
+      }
     }
-  }, [window.location.pathname, userDetails.address, userDetails.name, userDetails.treesCount])
+  }, [userDetails.address, userDetails.name, userDetails.treesCount])
 
   return <>
-    <Header/>
+    <Header />
     {!!props.headerComponent &&
       props.headerComponent
     }
-    {isReady ?
+    {isDataLoaded ?
       <div className={`${props.contentClass}`}>
         {userDetails.hasToken !== false ? props.children :
-          <NoPlushTokenModal redirectTo={'https://plush.family/'}/>
+          <NoPlushTokenModal redirectTo={'https://plush.family/'} />
         }
-      </div> : <CircleLoader/>}
+      </div> : <CircleLoader />}
     {!!props.footerComponent &&
       props.footerComponent
     }

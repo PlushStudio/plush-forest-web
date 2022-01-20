@@ -27,7 +27,7 @@ export const CustomSelect: React.FC = () => {
   const [items] = useState<IData[]>(data)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [selectedItem, setSelectedItem] = useState<number>(0)
-  const { getCurrency } = useMetamaskWallet()
+  const { getCurrency, walletConnected } = useMetamaskWallet()
   const [ticker, setTicker] = useState('')
   const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
@@ -38,9 +38,11 @@ export const CustomSelect: React.FC = () => {
     setTicker(t)
   }
   useEffect(() => {
-    getContractTicker()
+    if (walletConnected) {
+      getContractTicker()
+    }
     setSelectedItem(userDetails.treeTypeIdToPlant)
-  })
+  }, [walletConnected])
 
   const handleItemClick = (id: number) => {
     if (selectedItem === id) {
