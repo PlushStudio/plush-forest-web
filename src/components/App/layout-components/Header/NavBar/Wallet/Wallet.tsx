@@ -16,7 +16,6 @@ import { User } from '@/types/user'
 import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
 import {checkWrongNetwork, getChainIdByNetworkId, getNetworkIdByChainId} from "@/utils/utils";
 import { useHistory } from "react-router";
-import {Network} from "@ethersproject/providers";
 
 type UserWallet = User & { statusCode?: number, message?: string }
 
@@ -71,11 +70,9 @@ const Wallet: FC<{
 
     useEffect(() => {
       console.log('name & networkId triggered')
-      //ыполняется 4 раза и bad
-      // 3 раза и good
       console.log(name)
       console.log(networkId)
-      if (name !== undefined) {
+      if (name !== undefined && networkId !== '') {
         const updateWalletNetwork = async () => {
           try {
             if (walletConnected) {
@@ -133,8 +130,11 @@ const Wallet: FC<{
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
 
         const initialCheckNetwork = async () => {
-          const networkId: number | Network | undefined = await provider?.getNetwork();
-          await handleChainChanged(getChainIdByNetworkId(networkId?.chainId))
+          if (walletConnected) {
+            const networkId: any = await provider?.getNetwork();
+            await handleChainChanged(getChainIdByNetworkId(networkId?.chainId)
+            )
+          }
         }
         initialCheckNetwork()
       }
@@ -143,7 +143,7 @@ const Wallet: FC<{
         window.ethereum.removeListener('accountsChanged', handleAccountChanged)
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
-    }, [provider, window.ethereum.chainId])
+    }, [provider, window.ethereum.chainId, walletConnected])
 
     useEffect(() => {
       if (userContractData.address === undefined ||

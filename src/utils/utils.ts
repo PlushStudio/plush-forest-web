@@ -34,8 +34,6 @@ export const getNetworkIdByChainId = (chainId: string) => {
 }
 
 export const getChainIdByNetworkId = (networkId: number | Network | undefined) => {
-  console.log(networkId)
-  console.log( Number(mumbaiTestnetNetworkId))
   if (networkId === Number(mumbaiTestnetNetworkId)) {
     return mumbaiTestnetChainId
   }
