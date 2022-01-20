@@ -69,16 +69,12 @@ const Wallet: FC<{
     }
 
     useEffect(() => {
-      console.log('name & networkId triggered')
-      console.log(name)
-      console.log(networkId)
       if (name !== undefined && networkId !== '') {
         const updateWalletNetwork = async () => {
           try {
             if (walletConnected) {
               const userContractData = await getUserContractData();
               if (onWalletDataLoaded) {
-                console.log('onWalletDataLoaded')
                 onWalletDataLoaded(
                   userContractData?.address,
                   userContractData?.balance,
