@@ -70,12 +70,14 @@ const Wallet: FC<{
 
 
     useEffect(() => {
+      console.log('name & networkId triggered')
       if (name !== undefined) {
         const updateWalletNetwork = async () => {
           try {
             if (walletConnected) {
               const userContractData = await getUserContractData();
               if (onWalletDataLoaded) {
+                console.log('onWalletDataLoaded')
                 onWalletDataLoaded(
                   userContractData?.address,
                   userContractData?.balance,
@@ -97,6 +99,9 @@ const Wallet: FC<{
         history.push('/about')
       }
     }
+
+    console.log(name)
+    console.log(walletState)
 
     const handleAccountChanged = async (accounts: Array<string>) => {
       if (accounts.length > 0) {

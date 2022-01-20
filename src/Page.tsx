@@ -38,6 +38,7 @@ export const Page = (props: Props) => {
     }
   }, [userDetails.address, userDetails.name, userDetails.treesCount])
 
+  console.log(userDetails)
   return <>
     <Header />
     {!!props.headerComponent &&
