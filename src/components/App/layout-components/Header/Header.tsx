@@ -17,7 +17,7 @@ export const Header: FC = () => {
     balance: number | undefined,
     currency: string | undefined,
     hasToken: boolean | undefined) => {
-    console.log('contractData triggered')
+
     try {
       const networkId = await provider?.getNetwork();
 

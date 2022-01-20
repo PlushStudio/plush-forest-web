@@ -71,6 +71,10 @@ const Wallet: FC<{
 
     useEffect(() => {
       console.log('name & networkId triggered')
+      //ыполняется 4 раза и bad
+      // 3 раза и good
+      console.log(name)
+      console.log(networkId)
       if (name !== undefined) {
         const updateWalletNetwork = async () => {
           try {
@@ -99,9 +103,6 @@ const Wallet: FC<{
         history.push('/about')
       }
     }
-
-    console.log(name)
-    console.log(walletState)
 
     const handleAccountChanged = async (accounts: Array<string>) => {
       if (accounts.length > 0) {
