@@ -42,7 +42,7 @@ const usePLUSHContract = () => {
     detectProvider()
   }, [])
 
-  const getBuyAllowance = async (address: string) => {
+  const getBuyAllowance = async (address: string): Promise<boolean> => {
     const allowanceResult = await PLUSHContract.allowance(address, getTreeContractAddress)
     return parseInt(allowanceResult._hex, 16) === 5000000000000000000
   }

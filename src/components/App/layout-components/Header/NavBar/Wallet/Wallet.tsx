@@ -14,7 +14,7 @@ import { WalletState } from '@/types/wallet/WalletStateType'
 import { Gender } from '@/types/Gender'
 import { User } from '@/types/user'
 import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
-import { checkWrongNetwork, getNetworkIdByChainId } from "@/utils/utils";
+import {checkWrongNetwork, getChainIdByNetworkId, getNetworkIdByChainId} from "@/utils/utils";
 import { useHistory } from "react-router";
 
 type UserWallet = User & { statusCode?: number, message?: string }
@@ -69,7 +69,7 @@ const Wallet: FC<{
     }
 
     useEffect(() => {
-      if (name !== undefined) {
+      if (name !== undefined && networkId !== '') {
         const updateWalletNetwork = async () => {
           try {
             if (walletConnected) {
@@ -88,7 +88,7 @@ const Wallet: FC<{
         }
         updateWalletNetwork()
       }
-    }, [walletState, name])
+    }, [networkId, name])
 
     const handleChainChanged = async (chainId: string) => {
       setNetworkId(getNetworkIdByChainId(chainId))
@@ -124,14 +124,22 @@ const Wallet: FC<{
           setIsOpenDropdown(checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId)))
         })
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
-        handleChainChanged(window.ethereum.chainId)
+
+        const initialCheckNetwork = async () => {
+          if (walletConnected) {
+            const networkId: any = await provider?.getNetwork();
+            await handleChainChanged(getChainIdByNetworkId(networkId?.chainId)
+            )
+          }
+        }
+        initialCheckNetwork()
       }
 
       return () => {
         window.ethereum.removeListener('accountsChanged', handleAccountChanged)
         window.ethereum.removeListener('chainChanged', handleChainChanged)
       }
-    }, [provider, window.ethereum.chainId])
+    }, [provider, window.ethereum.chainId, walletConnected])
 
     useEffect(() => {
       if (userContractData.address === undefined ||

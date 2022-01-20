@@ -2,10 +2,10 @@ import React, { useContext, useState } from 'react'
 import s from './TreeTypeSelector.module.scss'
 import { treesTooltip } from '@/assets/data/TreesTooltip'
 import oval from '@/assets/images/oval-copy.svg'
-import treeIcon0 from '@/assets/images/tree-icon-selector/shihuahuaco.png'
-import treeIcon1 from '@/assets/images/tree-icon-selector/cacao.png'
-import treeIcon2 from '@/assets/images/tree-icon-selector/guaba.png'
-import treeIcon3 from '@/assets/images/tree-icon-selector/caoba.png'
+import shihuahuacoIcon from '@/assets/images/tree-icon-selector/shihuahuaco.png'
+import cacaoIcon from '@/assets/images/tree-icon-selector/cacao.png'
+import guabaIcon from '@/assets/images/tree-icon-selector/guaba.png'
+import caobaIcon from '@/assets/images/tree-icon-selector/caoba.png'
 import selectorCaobaImg from '@/assets/images/tree-type-selector/caoba.png'
 import selectorCacaoImg from '@/assets/images/tree-type-selector/cacao.png'
 import selectorGuabaImg from '@/assets/images/tree-type-selector/guaba.png'
@@ -35,7 +35,7 @@ export const TreeTypeSelector = () => {
     })
   }
 
-  const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
+  const TreeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
 
   const popover = (treeTooltip: treeTooltip, index: number) => {
     return (
@@ -84,7 +84,7 @@ export const TreeTypeSelector = () => {
       <div className={s.header}>Select your tree:</div>
       <div className={s.circlesContainer}>
         {userDetails?.treesCount?.map((count: any, index: number) =>
-          count !== 0 && <OverlayTrigger key={index} trigger='hover' placement='top' overlay={popover(treesTooltip[index], index)}
+          count !== 0 && <OverlayTrigger key={index} trigger={['hover', 'focus']} placement='top' overlay={popover(treesTooltip[index], index)}
             defaultShow={false}
             delay={300}>
             <div className={s.circleContainer} onClick={() => handleClick(index)}>

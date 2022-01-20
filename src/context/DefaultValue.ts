@@ -6,7 +6,6 @@ export interface UserDefault {
   address: string | undefined,
   treeTypeIdToPlant: number,
   name: string | undefined,
-  currentChainId: string,
   treeTypeToPlant: string,
   gender: null | Gender,
   isOpenDropdown: boolean | null,
@@ -22,21 +21,11 @@ export const userDefault: UserDefault = {
   address: undefined,
   treeTypeIdToPlant: 0,
   name: undefined,
-  currentChainId: '',
   treeTypeToPlant: '',
   gender: null,
   isOpenDropdown: null,
   isOpenDropdownByError: null,
   hasToken: undefined
-}
-
-export const walletDefault: any = {
-  address: '',
-  balance: 0,
-  currentChainId: '',
-  ticker: '',
-  isOpenDropdown: null,
-  isOpenDropdownByError: null
 }
 
 export const treeDefault = {
