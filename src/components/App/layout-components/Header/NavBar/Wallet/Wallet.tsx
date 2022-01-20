@@ -131,6 +131,7 @@ const Wallet: FC<{
           setIsOpenDropdown(checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId)))
         })
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
+        console.log(window.ethereum.chainId)
         handleChainChanged(window.ethereum.chainId)
       }
 

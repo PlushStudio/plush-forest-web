@@ -23,7 +23,7 @@ export const Page = (props: Props) => {
       switch (window.location.pathname) {
         case '/planting':
           setIsDataLoaded(userDetails.address !== undefined
-            && userDetails.name !== ''
+            && userDetails.name !== undefined
             && userDetails.treesCount.length !== 0)
           break
         case '/about':
