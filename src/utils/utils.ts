@@ -1,4 +1,5 @@
 import { mumbaiMainnetChainId, mumbaiMainnetNetworkId, mumbaiTestnetChainId, mumbaiTestnetNetworkId } from "@/constants";
+import {Network} from "@ethersproject/providers";
 
 export function ucFirst(str: string) {
   if (!str) return str
@@ -30,4 +31,16 @@ export const getNetworkIdByChainId = (chainId: string) => {
     return mumbaiMainnetNetworkId
   }
   return 'Unsupported network'
+}
+
+export const getChainIdByNetworkId = (networkId: number | Network | undefined) => {
+  console.log(networkId)
+  console.log( Number(mumbaiTestnetNetworkId))
+  if (networkId === Number(mumbaiTestnetNetworkId)) {
+    return mumbaiTestnetChainId
+  }
+  if (networkId === Number(mumbaiMainnetNetworkId)) {
+    return mumbaiMainnetChainId
+  }
+  return 'Unsupported chain'
 }

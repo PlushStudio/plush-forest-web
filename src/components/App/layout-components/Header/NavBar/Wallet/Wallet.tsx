@@ -14,8 +14,9 @@ import { WalletState } from '@/types/wallet/WalletStateType'
 import { Gender } from '@/types/Gender'
 import { User } from '@/types/user'
 import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
-import { checkWrongNetwork, getNetworkIdByChainId } from "@/utils/utils";
+import {checkWrongNetwork, getChainIdByNetworkId, getNetworkIdByChainId} from "@/utils/utils";
 import { useHistory } from "react-router";
+import {Network} from "@ethersproject/providers";
 
 type UserWallet = User & { statusCode?: number, message?: string }
 
@@ -67,7 +68,6 @@ const Wallet: FC<{
       }
       return { address: await getAddress(), balance: 0, currency: '', hasTokenResult: undefined }
     }
-
 
     useEffect(() => {
       console.log('name & networkId triggered')
@@ -131,8 +131,12 @@ const Wallet: FC<{
           setIsOpenDropdown(checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId)))
         })
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
-        console.log(window.ethereum.chainId)
-        handleChainChanged(window.ethereum.chainId)
+
+        const initialCheckNetwork = async () => {
+          const networkId: number | Network | undefined = await provider?.getNetwork();
+          await handleChainChanged(getChainIdByNetworkId(networkId?.chainId))
+        }
+        initialCheckNetwork()
       }
 
       return () => {
