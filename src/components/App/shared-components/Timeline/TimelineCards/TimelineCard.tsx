@@ -73,6 +73,7 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
             <button>Back</button>
           </div>
           <img
+            src={cardInfo.planterPhoto}
             className={
               cardInfo.size === 'sm'
                 ? s.timelineContentImgSm
