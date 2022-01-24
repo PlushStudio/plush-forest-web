@@ -13,7 +13,6 @@ import { AxiosResponse } from 'axios'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import { Gender } from '@/types/Gender'
 import { User } from '@/types/user'
-import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
 import {checkWrongNetwork, getChainIdByNetworkId, getNetworkIdByChainId} from "@/utils/utils";
 import { useHistory } from "react-router";
 
@@ -213,10 +212,6 @@ const Wallet: FC<{
           <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
             Connect
           </div>}
-        <div className={s.kebabContainer}>
-          <KebabDrowdown />
-        </div>
-
       </div>
     )
   }

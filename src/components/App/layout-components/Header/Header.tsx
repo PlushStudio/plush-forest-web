@@ -4,6 +4,9 @@ import { HeaderContent } from './HeaderContent'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
 import useTreeContract from "@/hooks/useTreeContract";
+import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
+import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
+import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
 
 export const Header: FC = () => {
@@ -57,6 +60,19 @@ export const Header: FC = () => {
     setIsOpenDropdown(true)
   }, [userDetails.isOpenDropdown])
 
+  const menuList = [
+    {
+      title: 'About',
+      href: '/',
+      icon: infoIcon
+    },
+    {
+      title: 'Request features',
+      href: '/',
+      icon: cakeIcon
+    }
+  ];
+
   return (
     <div className={s.headerContainer}>
       <Wallet
@@ -65,6 +81,9 @@ export const Header: FC = () => {
         onWalletDataLoaded={setContractData}
         isOpenDropdown={isOpenDropdown}
         setIsOpenDropdown={setIsOpenDropdown} />
+      <div className={s.kebabContainer}>
+        <KebabDrowdown menuList={menuList} />
+      </div>
       <HeaderContent />
     </div>
   )
