@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import s from './TreeNotAvailable.module.scss'
 import ModalImg from '@/assets/images/image-1@3x.png'
+
 const TreeNotAvailable = () => {
   return (
     <div className={s.container}>

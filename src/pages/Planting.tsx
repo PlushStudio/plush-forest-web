@@ -1,45 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import plantingTree0 from '@/assets/images/planting-tree/shihuahuaco.png'
-import plantingTree1 from '@/assets/images/planting-tree/cacao.png'
-import plantingTree2 from '@/assets/images/planting-tree/guaba.png'
-import plantingTree3 from '@/assets/images/planting-tree/caoba.png'
-import { useHistory } from 'react-router'
+import shihuahuacoTreeImage from '@/assets/images/planting-tree/shihuahuaco.png'
+import cacaoTreeImage from '@/assets/images/planting-tree/cacao.png'
+import guabaTreeImage from '@/assets/images/planting-tree/guaba.png'
+import caobaImage from '@/assets/images/planting-tree/caoba.png'
 import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
 import s from './Planting.module.scss'
 import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
 import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
-import usePLAIContract from '@/hooks/usePLAIContract'
+import usePLAIContract from '@/hooks/usePLUSHContract'
 import useTreeContract from '@/hooks/useTreeContract'
 import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
-import useMetamaskWallet from '@/hooks/useMetamaskWallet'
-import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
-  const [isPlanting, setIsPlanting] = useState(false)
+  const [isPlanting, setIsPlanting] = useState<boolean>(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [helperText, setHelperText] = useState<string>('')
   const [nameFrom, setNameFrom] = useState<string>('')
-  const [treeImage, setTreeImage] = useState(plantingTree0)
-  const [userDetails, setUserDetails] = useContext(userDetailsContext)
-  const plantingTrees = [plantingTree0, plantingTree1, plantingTree2, plantingTree3]
+  const [treeImage, setTreeImage] = useState(shihuahuacoTreeImage)
+  const [userDetails] = useContext(userDetailsContext)
+  const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
-  const { login } = useMetamaskAuth()
-  const history = useHistory()
-  const { walletConnected } = useMetamaskWallet()
 
   useEffect(() => {
-    setTreeImage(plantingTrees[userDetails.treeTypeIdToPlant])
+    setTreeImage(plantingTreeImages[userDetails.treeTypeIdToPlant])
   }, [userDetails.treeTypeIdToPlant])
 
   const startAllowanceLoop = (delay: number = 7000) => {
@@ -63,95 +54,61 @@ export const PlantPage = () => {
 
   const plantTreeHandler = async () => {
     const myTokens: UserTokens = await api.user.users.tokens.request()
-    if (myTokens.items.length > 0) {
-      history.push(`/token/${myTokens?.items[0].token}`)
-    } else {
+    if (!myTokens.items.length) {
       setIsPlanting(true)
-      if (userDetails.name !== '') {
-        try {
-          const allowance = await getBuyAllowance(userDetails.address)
-          if (allowance) {
-            setPlantingStatus('Planting your tree')
-            //empty message for Pilot
-            try {
-              const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+      try {
+        const allowance = await getBuyAllowance(userDetails.address)
+        if (allowance) {
+          setPlantingStatus('Planting your tree')
+          //empty message for Pilot
+          try {
+            const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
 
+            if (treeMintingResult) {
+              const getMyTokensInterval = setInterval(async function () {
+                await api.user.users.tokens.request(getMyTokensInterval)
+              }, 5000)
+            }
+          } catch (e) {
+            setIsPlanting(false)
+          }
+        } else {
+          const updateBuyAllowance = setInterval(async function () {
+            const allowanceResult = getBuyAllowance(userDetails.address)
+            if (await allowanceResult) {
+              clearInterval(updateBuyAllowance)
+              setPlantingStatus('Planting your tree')
+              const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
               if (treeMintingResult) {
                 const getMyTokensInterval = setInterval(async function () {
                   await api.user.users.tokens.request(getMyTokensInterval)
                 }, 5000)
               }
-            } catch (e) {
-              setIsPlanting(false)
-            }
-          } else {
-            const updateBuyAllowance = setInterval(async function () {
-              const allowanceResult = getBuyAllowance(userDetails.address)
-              if (await allowanceResult) {
-                clearInterval(updateBuyAllowance)
-                setPlantingStatus('Planting your tree')
-                const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
-                if (treeMintingResult) {
-                  const getMyTokensInterval = setInterval(async function () {
-                    await api.user.users.tokens.request(getMyTokensInterval)
-                  }, 5000)
-                }
-              } else {
-                setPlantingStatus('Confirmation')
-                clearInterval(updateBuyAllowance)
-                try {
-                  await getApprove().then(async () => {
-                    startAllowanceLoop()
-                  })
-                } catch (e) {
-                  setIsPlanting(false)
-                }
+            } else {
+              setPlantingStatus('Confirmation')
+              clearInterval(updateBuyAllowance)
+              try {
+                await getApprove().then(async () => {
+                  startAllowanceLoop()
+                })
+              } catch (e) {
+                setIsPlanting(false)
               }
-            }, 7000)
-          }
-        } catch (e: any) {
-          setIsPlanting(false)
-          console.log(e.message)
+            }
+          }, 7000)
         }
+      } catch (e: any) {
+        setIsPlanting(false)
+        console.log(e.message)
       }
-    }
-  }
-
-  const makeLogin = async () => {
-    trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login')
-    try {
-      await login(
-        new URL(`${api.url}/${api.user.auth.nonce.url}`),
-        new URL(`${api.url}/${api.user.auth.login.url}`)
-      )
-    } catch {
-      // TODO Handle errors. Now do nothing (perfect scenario)
     }
   }
 
   const startMintProcess = async () => {
-    if (walletConnected) {
-      if (
-        userDetails.address !== 'disconnected' &&
-        `0x${window.ethereum.networkVersion}` === VITE_NETWORK_ID
-      ) {
-        if (userDetails.name === '') {
-          await makeLogin()
-        }
-        if (nameFrom === '') {
-          setHelperText('The name cannot be empty')
-        } else {
-          await plantTreeHandler()
-        }
-      } else {
-        setUserDetails({
-          ...userDetails,
-          isOpenDropdownByError: true,
-          isOpenDropdown: !userDetails.isOpenDropdown,
-        })
-      }
+    if (nameFrom === '') {
+      setHelperText('The name cannot be empty')
     } else {
-      await makeLogin()
+      await plantTreeHandler()
     }
   }
 

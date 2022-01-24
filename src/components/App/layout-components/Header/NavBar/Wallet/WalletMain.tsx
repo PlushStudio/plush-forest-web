@@ -4,14 +4,14 @@ import { cutWalletPublicId } from '@/utils/utils'
 import arrowBottomIcon from '@/assets/images/wallet/arrow-bottom.svg'
 
 interface WalletMain {
-  setModalVisibility?: (modalVisibility: boolean | null | undefined) => void | undefined,
+  setDropdownVisibility?: (modalVisibility: boolean | null | undefined) => void | undefined,
   name: string,
   address: string,
   isOpenDropdown: boolean | undefined | null,
   dropdownRef: React.MutableRefObject<null>
 }
 
-const WalletMain = ({ setModalVisibility, name, address, dropdownRef, isOpenDropdown }: WalletMain) => {
+const WalletMain = ({ setDropdownVisibility, name, address, dropdownRef, isOpenDropdown }: WalletMain) => {
   const [transformState, setTransformState] = useState('')
 
   useEffect(() => {
@@ -33,9 +33,9 @@ const WalletMain = ({ setModalVisibility, name, address, dropdownRef, isOpenDrop
   }, [walletMainRef, dropdownRef])
 
   const handleClickOutside = (e: any) => {
-    if (setModalVisibility) {
+    if (setDropdownVisibility) {
       // @ts-ignore
-      setModalVisibility(walletMainRef?.current?.contains(e.target) || dropdownRef?.current?.contains(e.target))
+      setDropdownVisibility(walletMainRef?.current?.contains(e.target) || dropdownRef?.current?.contains(e.target))
     }
   }
 

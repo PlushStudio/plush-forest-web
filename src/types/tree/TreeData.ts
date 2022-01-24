@@ -19,5 +19,8 @@ export type TreeData = {
     date: string
   },
   imageLink: string,
-  planter: string
+  planterOrganization: string,
+  planterPhoto: string,
+  planterBio: string,
+  planterName: string,
 }

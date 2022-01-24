@@ -18,40 +18,38 @@ export const Routes = () => {
   const { login } = useMetamaskAuth()
 
   const setUserData = async () => {
-    if (userDetails.name === '') {
-      const userData: any = await api.user.users.profile.request()
-      if (userData.status === 200) {
-        setUserDetails({
-          ...userDetails,
-          name: userData.data.name,
-          gender: userData.data.gender,
-          childName: userData.data.childs[0].name,
-        })
-      } else {
-        try {
-          await login(
-            new URL(`${api.url}/${api.user.auth.nonce.url}`),
-            new URL(`${api.url}/${api.user.auth.login.url}`)
-          )
-          const userData: AxiosResponse<User> = await api.user.users.profile.request()
+    const userData: any = await api.user.users.profile.request()
+    if (userData.status === 200) {
+      setUserDetails({
+        ...userDetails,
+        name: userData.data.name,
+        gender: userData.data.gender,
+        childName: userData.data.childs[0].name,
+      })
+    } else {
+      try {
+        await login(
+          new URL(`${api.url}/${api.user.auth.nonce.url}`),
+          new URL(`${api.url}/${api.user.auth.login.url}`)
+        )
+        const userData: AxiosResponse<User> = await api.user.users.profile.request()
 
-          if (userData.status === 200) {
+        if (userData.status === 200) {
+          setUserDetails({
+            ...userDetails,
+            name: userData.data.name,
+            gender: userData.data.gender,
+            childName: userData.data.childs[0].name
+          })
+        }
+      } catch (e: any) {
+        switch (e.message) {
+          case 'User not found':
             setUserDetails({
               ...userDetails,
-              name: userData.data.name,
-              gender: userData.data.gender,
-              childName: userData.data.childs[0].name
+              name: 'userNotFound'
             })
-          }
-        } catch (e: any) {
-          switch (e.message) {
-            case 'User not found':
-              setUserDetails({
-                ...userDetails,
-                name: 'userNotFound'
-              })
-              break
-          }
+            break
         }
       }
     }
@@ -72,14 +70,14 @@ export const Routes = () => {
         <Route exact path='/about'>
           <Page children={<AboutPage />} />
         </Route>
+        <Route path='/token/:id/'>
+          <Page children={<TreeInfoPage />} />
+        </Route>
         <Route exact path='/planting'>
-          {userDetails.address !== '' && userDetails.address !== 'disconnected' ?
+          {userDetails.address !== 'disconnected' ?
             <Page children={<PlantPage />} /> :
             <Redirect to={'/about'} />
           }
-        </Route>
-        <Route exact path='/token/:id/'>
-          <Page children={<TreeInfoPage />} />
         </Route>
         <Route path='*'>
           <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />

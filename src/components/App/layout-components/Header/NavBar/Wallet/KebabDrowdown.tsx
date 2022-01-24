@@ -45,7 +45,7 @@ const WalletKebab = (props : { menuList : MenuItem[] } ) => {
                 <div className={`${activeItemId === index ? s.activeMenuItem : s.kebabListItem}`}>
                   {menuItem.title}
                   <div className={s.menuItemIcon}>
-                    <img alt={"globe icon"} src={props.menuList[index].icon }/>
+                    <img alt={"menu list icon"} src={props.menuList[index].icon }/>
                   </div>
                 </div>
               </Link>

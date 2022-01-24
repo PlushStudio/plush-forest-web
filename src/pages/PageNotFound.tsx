@@ -1,11 +1,10 @@
+import React, { useCallback } from "react";
 import logo from '../assets/images/smallTreeIcon.svg';
 import { Page } from "@/Page"
 import { Button, Card, Col, Row } from "react-bootstrap"
 import { useHistory } from "react-router"
-import { useCallback } from "react"
 
 export const PageNotFound = () => {
-
     const history = useHistory()
     const goToPlanting = useCallback(() => {
         history.push("/planting")
@@ -25,6 +24,5 @@ export const PageNotFound = () => {
             </Col>
             <Col />
         </Row>
-
     </Page>
 }

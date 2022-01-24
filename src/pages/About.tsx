@@ -12,17 +12,22 @@ import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
+import { checkWrongNetwork } from "@/utils/utils";
+import { useHistory } from "react-router";
+
+const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
 export const AboutPage = () => {
   const { login } = useMetamaskAuth()
-  const [userDetails] = useContext(userDetailsContext)
+  const [userDetails, setUserDetails] = useContext(userDetailsContext)
+  const history = useHistory()
 
   useEffect(() => {
     trackEvent(Category.Info, MatomoEvent.PageVisited, 'About')
   }, [])
 
   const checkWalletConnection = async () => {
-    if (userDetails.address === '') {
+    if (userDetails.address === undefined) {
       trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login')
       try {
         await login(
@@ -33,7 +38,16 @@ export const AboutPage = () => {
         // TODO Handle errors. Now do nothing (perfect scenario)
       }
     }
+    if (userDetails.hasToken === undefined) {
+      setUserDetails({
+        ...userDetails,
+        isOpenDropdown: !userDetails.isOpenDropdown
+      })
+    } else {
+      history.push('/planting')
+    }
   }
+
   return (
     <>
       <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
@@ -48,11 +62,11 @@ export const AboutPage = () => {
       <div className={s.container}>
         <div className={s.getStartedContentContainer}>
           <HomeText />
-          <TreeTypeSelector />
+          {!checkWrongNetwork(VITE_NETWORK_ID, String(userDetails.networkId)) && <TreeTypeSelector />}
           <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
           <TreesArea />
         </div>
-        <div className={s.homeFeatureContainer}>
+        <div className={userDetails.balance ? s.homeFeatureContainer : s.homeFeatureContainerHeight}>
           <HomeFeatureSection1 />
           <HomeFeatureSection2 />
           <HomeFeatureSection3 />

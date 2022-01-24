@@ -7,33 +7,57 @@ import useTreeContract from "@/hooks/useTreeContract";
 import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
 import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
 import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
+import useMetamaskWallet from "@/hooks/useMetamaskWallet";
 
 export const Header: FC = () => {
+  const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(true)
   const { getTreeTypeCount } = useTreeContract()
+  const { provider } = useMetamaskWallet()
 
   const setContractData = async (address: string | undefined,
     balance: number | undefined,
     currency: string | undefined,
     hasToken: boolean | undefined) => {
-    setUserDetails({
-      ...userDetails,
-      address,
-      balance,
-      currency,
-      hasToken,
-      treesCount: [
-        await getTreeTypeCount('SHIHUAHUACO'),
-        await getTreeTypeCount('CACAO'),
-        await getTreeTypeCount('GUABA'),
-        await getTreeTypeCount('CAOBA')
-      ]
-    })
+
+    try {
+      const networkId = await provider?.getNetwork();
+
+      if (networkId?.chainId === Number(VITE_NETWORK_ID)) {
+        setUserDetails({
+          ...userDetails,
+          address,
+          balance,
+          currency,
+          hasToken,
+          treesCount: [
+            await getTreeTypeCount('SHIHUAHUACO'),
+            await getTreeTypeCount('CACAO'),
+            await getTreeTypeCount('GUABA'),
+            await getTreeTypeCount('CAOBA')
+          ],
+          networkId: Number(VITE_NETWORK_ID)
+        })
+      } else {
+        setUserDetails({
+          ...userDetails,
+          address,
+          networkId: networkId?.chainId,
+          hasToken,
+        })
+      }
+    } catch (e) {
+      setUserDetails({
+        ...userDetails,
+        address,
+        networkId: 'wrongNetwork'
+      })
+    }
   }
 
   useEffect(() => {
-    setIsOpenDropdown(!isOpenDropdown)
+    setIsOpenDropdown(true)
   }, [userDetails.isOpenDropdown])
 
   const menuList = [
@@ -51,7 +75,8 @@ export const Header: FC = () => {
 
   return (
     <div className={s.headerContainer}>
-      <Wallet gender={userDetails.gender}
+      <Wallet
+        gender={userDetails.gender}
         name={userDetails.name}
         onWalletDataLoaded={setContractData}
         isOpenDropdown={isOpenDropdown}

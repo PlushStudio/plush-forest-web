@@ -3,14 +3,14 @@ import heightImg from '@/assets/images/tree-height.png'
 import { Gender } from '@/types/Gender'
 
 export interface UserDefault {
-  address: string,
+  address: string | undefined,
   treeTypeIdToPlant: number,
-  name: string,
-  currentChainId: string,
+  name: string | undefined,
   treeTypeToPlant: string,
   gender: null | Gender,
   isOpenDropdown: boolean | null,
   isOpenDropdownByError: boolean | null
+  hasToken: undefined
 }
 
 export const modalStateDefault = {
@@ -18,23 +18,14 @@ export const modalStateDefault = {
 }
 
 export const userDefault: UserDefault = {
-  address: '',
+  address: undefined,
   treeTypeIdToPlant: 0,
-  name: '',
-  currentChainId: '',
+  name: undefined,
   treeTypeToPlant: '',
   gender: null,
   isOpenDropdown: null,
-  isOpenDropdownByError: null
-}
-
-export const walletDefault: any = {
-  address: '',
-  balance: 0,
-  currentChainId: '',
-  ticker: '',
-  isOpenDropdown: null,
-  isOpenDropdownByError: null
+  isOpenDropdownByError: null,
+  hasToken: undefined
 }
 
 export const treeDefault = {
@@ -62,5 +53,8 @@ export const treeDefault = {
     date: '11.22.22'
   },
   imageLink: '',
-  planter: ''
+  planterName: '',
+  planterOrganization: '',
+  planterBio: '',
+  planterPhoto: ''
 }
