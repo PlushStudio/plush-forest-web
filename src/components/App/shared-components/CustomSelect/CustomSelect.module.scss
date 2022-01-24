@@ -8,14 +8,10 @@
   border: solid 1px theme.$white;
   position: relative;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-
+  
   &.focused {
     box-shadow: 0 0 0 4px rgba(86, 104, 254, 0.2) !important;
     border: 1px solid #5668fe !important;
-  }
-
-  &:hover .itemPrice {
-    background: theme.$white;
   }
 }
 
@@ -42,7 +38,7 @@
 .dropdownBody {
   display: none;
   position: absolute;
-  border-top: 1px solid #E5E8EC;
+  border-top: 1px solid #e5e8ec;
   background: white;
   width: 100%;
   top: 94px;
@@ -75,10 +71,17 @@
     cursor: pointer;
     background: theme.$purple-super-light;
   }
+  
+  &:hover .itemPrice {
+    background: theme.$white;
+  }
 }
 
 .selectedItem {
   background: theme.$purple-super-light;
+  .itemPrice{
+    background-color: theme.$white;
+  }
 }
 
 .dropdownItemPrefix {
@@ -117,11 +120,8 @@
 
   &.itemPriceDropdownHeader {
     margin-right: 10px;
-    background: theme.$grays-50;
-
-    &:hover {
-      background: theme.$grays-50;
-    }
+    background-color: theme.$light-grays-500;
+    
   }
 }
 
