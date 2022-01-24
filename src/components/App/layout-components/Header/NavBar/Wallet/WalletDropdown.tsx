@@ -8,7 +8,7 @@ import { cutWalletPublicId } from '@/utils/utils'
 import { WalletDropdownType } from '@/types/wallet/WalletDropdownType'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import Copy from "@/components/App/layout-components/Header/NavBar/Wallet/Copy";
-import { mumbaiMainnetChainId, mumbaiMainnetNetworkId, mumbaiTestnetChainId } from "@/constants";
+import { mainnetChainId, mainnetNetworkId, testnetChainId } from "@/constants";
 
 const WalletDropdown: FC<{
   isVisible: boolean | null | undefined,
@@ -58,7 +58,7 @@ const WalletDropdown: FC<{
         method: 'wallet_addEthereumChain',
         params: [
           {
-            chainId: VITE_NETWORK_ID === mumbaiMainnetNetworkId ? mumbaiMainnetChainId : mumbaiTestnetChainId,
+            chainId: VITE_NETWORK_ID === mainnetNetworkId ? mainnetChainId : testnetChainId,
             rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
             chainName: 'Mumbai TestNet',
             nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
@@ -69,7 +69,7 @@ const WalletDropdown: FC<{
 
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: VITE_NETWORK_ID === mumbaiMainnetNetworkId ? mumbaiMainnetChainId : mumbaiTestnetChainId }]
+        params: [{ chainId: VITE_NETWORK_ID === mainnetNetworkId ? mainnetChainId : testnetChainId }]
       })
 
       if (type === 'SUCCESS') {
