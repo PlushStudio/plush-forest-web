@@ -13,7 +13,6 @@ import { AxiosResponse } from 'axios'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import { Gender } from '@/types/Gender'
 import { User } from '@/types/user'
-import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
 
 type UserWallet = User & { statusCode?: number, message?: string }
 const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '0x13881'
@@ -195,10 +194,6 @@ const Wallet: FC<{
           <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>
             Connect
           </div>}
-        <div className={s.kebabContainer}>
-          <KebabDrowdown />
-        </div>
-
       </div>
     )
   }
