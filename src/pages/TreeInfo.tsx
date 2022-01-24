@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import s from './TreeInfo.module.scss'
-import { Header } from '@/components/App/layout-components/Header/Header'
 import Timeline from '@/components/App/shared-components/Timeline/Timeline'
 import locationImg from '@/assets/images/widgets/rectangle-4.png'
 import heightImg from '@/assets/images/widgets/group-18.png'
@@ -43,9 +42,12 @@ export const TreeInfoPage: React.FC = () => {
             message: response.data.description,
             date: moment.unix(response.data.attributes[1].value).format('ll'),
           },
-          planter: response.data.attributes[5].value,
+          planterOrganization: response.data.attributes[5].value,
+          planterName: response.data.attributes[4].value,
+          planterBio: response.data.farmerBio,
+          planterPhoto: response.data.farmerPhoto,
           secondBlockInfo: {
-            message: `${response.data.attributes[2].value} seedling was planted in ${response.data.attributes[4].value}.`,
+            message: `${response.data.attributes[2].value} seedling was planted in ${response.data.attributes[3].value}.`,
             date: moment.unix(response.data.attributes[0].value).format('ll'),
           },
           imageLink: response.data.image,
@@ -74,9 +76,12 @@ export const TreeInfoPage: React.FC = () => {
                 firstBlockInfo: treeData.firstBlockInfo.message,
                 secondBlockInfo: treeData.secondBlockInfo.message,
                 imageLink: treeData.imageLink,
-                planter: treeData.planter,
+                planterName: treeData.planterName,
+                planterOrganization: treeData.planterOrganization,
+                planterPhoto: treeData.planterPhoto,
                 dedicatedDate: treeData.firstBlockInfo.date,
                 plantedDate: treeData.secondBlockInfo.date,
+                planterBio: treeData.planterBio
               }}
             />
           </Col>

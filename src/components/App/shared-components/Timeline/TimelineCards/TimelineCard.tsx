@@ -5,7 +5,7 @@ import orangeDot from '@/assets/images/orange-dot.png'
 import { useParams } from 'react-router-dom'
 
 interface ITimelineCardProps {
-  id: number;
+  id: number
   cardInfo: ICardInfo
 }
 
@@ -13,34 +13,75 @@ interface Params {
   id: string
 }
 
-const FOREST_CONTRACT_ADDRESS = window.config.FOREST_CONTRACT_ADDRESS ?? '0xd5015643F38A06b2962283Ec0B9fF555812Adcd0'
+const FOREST_CONTRACT_ADDRESS =
+  window.config.FOREST_CONTRACT_ADDRESS ??
+  '0xd5015643F38A06b2962283Ec0B9fF555812Adcd0'
 
 const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
   const params: Params = useParams()
+
   return (
-    <div className={`${s.cdTimelineBlock} ${id % 2 === 0 ? s.reverse : ''}`}>
+    <div className={`${s.cdTimelineBlock} ${id % 2 === 0 ? s.reverse : ''} `}>
       <div className={s.cdTimelineImg}>
-        <img src={orangeDot} alt='Picture' />
+        <img src={orangeDot} alt="Picture" />
       </div>
-      <div className={s.cardContainer}>
+      <div className={`${s.cardContainer} ${cardInfo.flipable && s.flipable}`}>
         <div
-          className={`${s.cdTimelineContent} ${id % 2 === 0 ? s.arrowLeft : s.arrowRight} ${s[cardInfo.size]}`}>
+          className={`${s.cdTimelineContent} ${
+            id % 2 === 0 ? s.arrowLeft : s.arrowRight
+          } ${s[cardInfo.size]}`}
+        >
           <div className={s.cdTimelineContentText}>
             <span className={s.cdTimelineDate}>{cardInfo.date}</span>
             <p className={s.colorContrastMedium}>{cardInfo.text}</p>
-            <a href='#' className={`${id % 2 === 0 ? s.disabledText : s.btn}`}>
-              {id % 2 === 0 ? cardInfo.planter :
-                <a className={s.linked}
-                  href={`https://testnets.opensea.io/assets/${FOREST_CONTRACT_ADDRESS}/${params.id}`}>{cardInfo.subtext}</a>}</a>
+            <a href="#" className={`${id % 2 === 0 ? s.disabledText : s.btn}`}>
+              {id % 2 === 0 ? (
+                cardInfo.planterOrganization
+              ) : (
+                <a
+                  className={s.linked}
+                  href={`https://testnets.opensea.io/assets/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
+                >
+                  {cardInfo.subtext}
+                </a>
+              )}
+            </a>
           </div>
-          <div className={cardInfo.size === 'sm' ? s.smCardImgContainer : s.mdCardImgContainer}>
-            <img className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
-              src={cardInfo.img} alt='timeline content image' />
+          <div
+            className={
+              cardInfo.size === 'sm'
+                ? s.smCardImgContainer
+                : s.mdCardImgContainer
+            }
+          >
+            <img
+              className={
+                cardInfo.size === 'sm'
+                  ? s.timelineContentImgSm
+                  : s.timelineContentImgMd
+              }
+              src={cardInfo.img}
+              alt="timeline content image"
+            />
           </div>
-
+        </div>
+        <div className={`${s.backSide} ${s.cdTimelineContent}  ${s[cardInfo.size]} `}>
+          <div className={s.backSideInfo}>
+            <span>caretaker</span>
+            <h2>{cardInfo.planterName}</h2>
+            <p>{cardInfo.planterBio}</p>
+            <button>Back</button>
+          </div>
+          <img
+            className={
+              cardInfo.size === 'sm'
+                ? s.timelineContentImgSm
+                : s.timelineContentImgMd
+            }
+            alt="timeline content image"
+          />
         </div>
       </div>
-
     </div>
   )
 }

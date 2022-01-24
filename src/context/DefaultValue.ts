@@ -53,5 +53,8 @@ export const treeDefault = {
     date: '11.22.22'
   },
   imageLink: '',
-  planter: ''
+  planterName: '',
+  planterOrganization: '',
+  planterBio: '',
+  planterPhoto: ''
 }

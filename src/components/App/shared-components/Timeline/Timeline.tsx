@@ -8,10 +8,14 @@ import timelineBase from '@/assets/images/timelinebase.png'
 export interface ICardInfo {
   date: string,
   text: string,
-  subtext?: string,
   img: string,
   size: string,
-  planter?: string
+  subtext?: string,
+  planterName?: string
+  planterPhoto?: string,
+  planterOrganization?: string,
+  planterBio?: string,
+  flipable?: boolean,
 }
 
 interface TimelineInfo {
@@ -19,9 +23,12 @@ interface TimelineInfo {
     firstBlockInfo: string,
     secondBlockInfo: string,
     imageLink: string,
-    planter: string,
+    planterName: string,
+    planterOrganization: string,
     dedicatedDate: string,
-    plantedDate: string
+    plantedDate: string,
+    planterBio: string,
+    planterPhoto: string,
   }
 }
 
@@ -32,25 +39,29 @@ const Timeline = ({ timelineInfo }: TimelineInfo) => {
       text: timelineInfo.firstBlockInfo.split('.')[0],
       subtext: 'Verify',
       img: heartImg,
-      size: 'md'
+      size: 'md',
     },
     {
       date: timelineInfo.plantedDate,
       text: timelineInfo.secondBlockInfo.split('.')[0],
-      planter: `Planted by: ${timelineInfo.planter}`,
+      planterOrganization: `Planted by: ${timelineInfo.planterOrganization}`,
       img: timelineInfo.imageLink,
-      size: 'sm'
-    }
+      planterPhoto: timelineInfo.planterPhoto,
+      size: 'sm',
+      flipable: true,
+      planterName: timelineInfo.planterName,
+      planterBio: timelineInfo.planterBio
+    },
   ]
   return (
     <div>
       <div className={`${s.container} ${s.cdTimelineContainer}`}>
         <div className={s.greyDot} />
         {cardInfo.map((item: ICardInfo, index: number): JSX.Element => {
-          return <TimelineCard key={item.text + index} id={index + 1} cardInfo={cardInfo[index]} />
+          return <TimelineCard id={index + 1} cardInfo={cardInfo[index]} />
         })}
         <div className={s.timelineBase}>
-          <img src={timelineBase} alt='tree timeline' />
+          <img src={timelineBase} alt="tree timeline" />
         </div>
       </div>
       <MessageInfo />
