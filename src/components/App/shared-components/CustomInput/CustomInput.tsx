@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import s from './CustomInput.module.scss'
 import classnames from 'classnames'
 
@@ -9,7 +9,8 @@ interface ICustomInput {
   onChange: any
   value: string
   input: React.RefObject<HTMLInputElement>
-  status?: 'error' | 'isTyping' | ''
+  status?: 'error' | 'isTyping' | '',
+  message?: string
 }
 
 export const CustomInput = ({
@@ -20,6 +21,7 @@ export const CustomInput = ({
   value,
   input,
   status = '',
+  message
 }: ICustomInput) => {
   const style = classnames(s.inputContainer, s[status], { [s.hidden]: !value })
 
@@ -28,17 +30,22 @@ export const CustomInput = ({
   }
 
   return (
-    <div onClick={handlerOnClick} className={style}>
-      <p className={s.nameText}>{placeholder}</p>
-      <input
-        ref={input}
-        onChange={onChange}
-        value={value}
-        className={s.customInput}
-        type={type}
-        placeholder={placeholder}
-        readOnly={readonly}
-      />
-    </div>
+      <>
+        <div onClick={handlerOnClick} className={style}>
+          <p className={s.nameText}>{placeholder}</p>
+          <input
+              ref={input}
+              onChange={onChange}
+              value={value}
+              className={s.customInput}
+              type={type}
+              placeholder={placeholder}
+              readOnly={readonly}
+          />
+
+        </div>
+        {message && <p className={s.inputMessage}>{message}</p>}
+      </>
+
   )
 }

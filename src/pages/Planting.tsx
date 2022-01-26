@@ -156,6 +156,7 @@ export const PlantPage = () => {
                   placeholder="Your name"
                   readonly={isPlanting}
                   status={nameFrom || !isVisited ? 'isTyping' : 'error'}
+                  message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
                 />
               </Form.Group>
               <span className={s.statusText}>{helperText}</span> <br />
