@@ -44,11 +44,6 @@
   cursor: pointer;
 }
 
-.kebabContainer {
-  display: flex;
-  align-items: center;
-}
-
 .menuButton {
   margin-left: 4px;
 }
@@ -57,10 +52,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 40px;
   position: relative;
-  z-index: variables.$modals;
-  width: 100%;
+  z-index: 999;
+  width: calc(100% - 64px);
 }
 
 .wallet {
