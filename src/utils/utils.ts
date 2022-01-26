@@ -1,4 +1,4 @@
-import { mumbaiMainnetChainId, mumbaiMainnetNetworkId, mumbaiTestnetChainId, mumbaiTestnetNetworkId } from "@/constants";
+import { mainnetChainId, mainnetNetworkId, testnetChainId, testnetNetworkId } from "@/constants";
 import {Network} from "@ethersproject/providers";
 
 export function ucFirst(str: string) {
@@ -15,30 +15,30 @@ export const cutWalletPublicId = (id: string) => {
 
 export const checkWrongNetwork = (VITE_NETWORK_ID: string, networkId: string) => {
   if (VITE_NETWORK_ID === '80001') {
-    return networkId !== mumbaiTestnetNetworkId
+    return networkId !== testnetNetworkId
   }
   if (VITE_NETWORK_ID === '137') {
-    return networkId !== mumbaiMainnetNetworkId
+    return networkId !== mainnetNetworkId
   }
   return true
 }
 
 export const getNetworkIdByChainId = (chainId: string) => {
-  if (chainId === mumbaiTestnetChainId) {
-    return mumbaiTestnetNetworkId
+  if (chainId === testnetChainId) {
+    return testnetNetworkId
   }
-  if (chainId === mumbaiMainnetChainId) {
-    return mumbaiMainnetNetworkId
+  if (chainId === mainnetChainId) {
+    return mainnetNetworkId
   }
   return 'Unsupported network'
 }
 
 export const getChainIdByNetworkId = (networkId: number | Network | undefined) => {
-  if (networkId === Number(mumbaiTestnetNetworkId)) {
-    return mumbaiTestnetChainId
+  if (networkId === Number(testnetNetworkId)) {
+    return testnetChainId
   }
-  if (networkId === Number(mumbaiMainnetNetworkId)) {
-    return mumbaiMainnetChainId
+  if (networkId === Number(mainnetNetworkId)) {
+    return mainnetChainId
   }
   return 'Unsupported chain'
 }
