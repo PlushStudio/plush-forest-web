@@ -3,6 +3,7 @@ import s from '@/components/App/shared-components/Timeline/Timeline.module.scss'
 import { ICardInfo } from '@/components/App/shared-components/Timeline/Timeline'
 import orangeDot from '@/assets/images/orange-dot.png'
 import { useParams } from 'react-router-dom'
+import { mainnetNetworkId, testnetNetworkId } from "@/constants";
 
 interface ITimelineCardProps {
     id: number
@@ -15,7 +16,9 @@ interface Params {
 
 const FOREST_CONTRACT_ADDRESS =
     window.config.FOREST_CONTRACT_ADDRESS ??
-    '0xd5015643F38A06b2962283Ec0B9fF555812Adcd0'
+    '0x3aA5283D113BeD501dC4e773EBB1A2f8299207C0'
+
+const NETWORK_ID = window.config.NETWORK_ID ?? '80001'
 
 const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
     const params: Params = useParams()
@@ -51,7 +54,7 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                             ) : (
                                 <a
                                     className={s.linked}
-                                    href={`https://testnets.opensea.io/assets/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
+                                    href={`https://${NETWORK_ID === testnetNetworkId && `testnets.`}opensea.io/assets/${NETWORK_ID === mainnetNetworkId ? 'matic' : 'mumbai'}/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
                                 >
                                     {cardInfo.subtext}
                                 </a>
