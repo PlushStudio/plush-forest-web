@@ -27,9 +27,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
       </div>
       <div className={`${s.cardContainer} ${cardInfo.flipable && s.flipable}`}>
         <div
-          className={`${s.cdTimelineContent} ${
-            id % 2 === 0 ? s.arrowLeft : s.arrowRight
-          } ${s[cardInfo.size]}`}
+          className={`${s.cdTimelineContent} ${id % 2 === 0 ? s.arrowLeft : s.arrowRight
+            } ${s[cardInfo.size]}`}
         >
           <div className={s.cdTimelineContentText}>
             <span className={s.cdTimelineDate}>{cardInfo.date}</span>

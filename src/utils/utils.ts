@@ -1,5 +1,5 @@
 import { mumbaiMainnetChainId, mumbaiMainnetNetworkId, mumbaiTestnetChainId, mumbaiTestnetNetworkId } from "@/constants";
-import {Network} from "@ethersproject/providers";
+import { Network } from "@ethersproject/providers";
 
 export function ucFirst(str: string) {
   if (!str) return str

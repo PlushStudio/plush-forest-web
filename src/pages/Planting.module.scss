@@ -3,8 +3,7 @@
 
 .backgroundContainer {
   min-height: 100vh;
-  background-color: theme.$grays-50;
-  background: url("../assets/images/sky.png") no-repeat;
+  background: theme.$grays-50 url('../assets/images/sky.png') no-repeat;
   background-size: cover;
   background-position-x: 451px;
   background-position-y: -70px;
@@ -21,6 +20,7 @@
 .skyImage {
   position: absolute;
 }
+
 .plantingFormWrapper {
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,8 @@
 }
 
 .plantingForm {
-  padding-top: 4em;
+  padding-top: 32px;
+  padding-left: 10px;
 }
 
 .select {
@@ -39,15 +40,26 @@
   height: 176px !important;
 }
 
+.formHeader{
+  margin-bottom: 26px;
+}
+
 .formLabel {
   font-family: Moranga, sans-serif;
   font-size: 18px;
   color: theme.$grey-800;
+  width: 100%;
+
+}
+.inputWrapper{
+  margin-bottom: 6px;
 }
 
 .statusText {
   display: inline;
   width: 100%;
-  color: brown;
-  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  color:  theme.$light-pink;
+  font-family: AvenirNextRoundedPro-REg, sans-serif;
+  font-size: 14px;
+  padding-left: 8px;
 }
