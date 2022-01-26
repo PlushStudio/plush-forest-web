@@ -44,8 +44,8 @@ export const TreeInfoPage: React.FC = () => {
           },
           planterOrganization: response.data.attributes[5].value,
           planterName: response.data.attributes[4].value,
-          planterBio: response.data.farmerBio,
-          planterPhoto: response.data.farmerPhoto,
+          planterBio: response.data.farmer_bio,
+          planterPhoto: response.data.farmer_photo,
           secondBlockInfo: {
             message: `${response.data.attributes[2].value} seedling was planted in ${response.data.attributes[3].value}.`,
             date: moment.unix(response.data.attributes[0].value).format('ll'),
