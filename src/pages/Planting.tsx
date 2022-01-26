@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import shihuahuacoTreeImage from '@/assets/images/planting-tree/shihuahuaco.png'
@@ -19,6 +19,8 @@ import { UserTokens } from '@/types/UserTokens'
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 export const PlantPage = () => {
+  const input = useRef<HTMLInputElement>(null)
+  const [isVisited, setIsVisited] = useState<boolean>(false)
   const [isPlanting, setIsPlanting] = useState<boolean>(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [helperText, setHelperText] = useState<string>('')
@@ -40,7 +42,13 @@ export const PlantPage = () => {
         setPlantingStatus('Planting your tree')
         clearInterval(updateBuyAllowance)
         //empty message for Pilot
-        const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+        const treeMintingResult = await mintATree(
+          userDetails.address,
+          treeNames[userDetails.treeTypeIdToPlant],
+          nameFrom,
+          userDetails.childName,
+          ''
+        )
         if (treeMintingResult) {
           const getMyTokensInterval = setInterval(async function () {
             await api.user.users.tokens.request(getMyTokensInterval)
@@ -104,55 +112,78 @@ export const PlantPage = () => {
     }
   }
 
-  const startMintProcess = async () => {
-    if (nameFrom === '') {
-      setHelperText('The name cannot be empty')
+  const startMintProcess = async (e: any) => {
+    e.preventDefault()
+    if (!nameFrom?.length) {
+      setHelperText('Your name is required to plant a tree.')
+      input.current?.focus()
+      setIsVisited(true)
     } else {
       await plantTreeHandler()
     }
   }
 
+  const nameFromHandler = (e: any) => {
+    setIsVisited(true)
+    setNameFrom(e.target.value)
+  }
+
   return (
     <div className={s.backgroundContainer}>
       <div className={s.container}>
-        {isPlanting ? <PlantingModal status={plantingStatus} /> :
+        {isPlanting ? (
+          <PlantingModal status={plantingStatus} />
+        ) : (
           <div className={s.plantingFormWrapper}>
             <Form className={s.plantingForm}>
-              <Form.Group controlId='treeName'>
-                <Form.Label className={s.formLabel}>To {userDetails.childName}</Form.Label>
+              <Form.Group controlId="treeName" className={s.formHeader}>
+                <Form.Label className={s.formLabel}>
+                  To {userDetails.childName}
+                </Form.Label>
                 <CustomSelect />
               </Form.Group>
-              <Form.Group controlId='treeName'>
-                <Form.Label className={s.formLabel}>From</Form.Label>
-                <CustomInput onChange={(e: any) => setNameFrom(e.target.value)}
+              <Form.Group controlId="treeName" className={s.inputWrapper}>
+                <Form.Label className={s.formLabel}>
+                  From
+                </Form.Label>
+                <CustomInput
+                  input={input}
+                  onChange={(e: any) => {
+                    nameFromHandler(e)
+                  }}
                   value={nameFrom}
-                  type='text'
-                  as='input'
-                  placeholder='Your name'
-                  readonly={isPlanting} />
+                  type="text"
+                  placeholder="Your name"
+                  readonly={isPlanting}
+                  status={nameFrom || !isVisited ? 'isTyping' : 'error'}
+                />
               </Form.Group>
-              <span className={s.statusText}>
-                {helperText}
-              </span> <br />
-              {userDetails.balance < 5 && <span className={s.statusText}>
-                You need more plush tokens to perform this operation
-              </span>}
-              {!isPlanting &&
-                <MainActionButton onClick={() => startMintProcess()}
-                  text='Plant your tree'
-                  variant='success'
-                  image='tree' />}
-
-              {isPlanting &&
+              <span className={s.statusText}>{helperText}</span> <br />
+              {userDetails.balance < 5 && (
+                <span className={s.statusText}>
+                  You need more plush tokens to perform this operation
+                </span>
+              )}
+              {!isPlanting && (
+                <MainActionButton
+                  onClick={(e: void) => startMintProcess(e)}
+                  text="Plant your tree"
+                  variant="small"
+                  image="tree"
+                />
+              )}
+              {isPlanting && (
                 <MainActionButton
                   loading={isPlanting}
-                  text='Planting...'
-                  variant='success'
-                  image='tree' />}
+                  text="Planting..."
+                  variant="small"
+                  image="tree"
+                />
+              )}
             </Form>
-            <img src={treeImage} className='planting-tree-image' alt='logo' />
+            <img src={treeImage} className="planting-tree-image" alt="logo" />
           </div>
-        }
+        )}
       </div>
     </div>
   )

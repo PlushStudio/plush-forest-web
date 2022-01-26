@@ -30,6 +30,22 @@
   align-items: center;
 }
 
+.headerContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h2 {
+    font-size: 20px;
+    color: theme.$grey-800;
+    margin-bottom: 0px;
+  }
+  p {
+    margin: 0;
+    font-size: 16px;
+    color: theme.$grays-500;
+  }
+}
+
 .dropdownHeaderRightPull {
   display: flex;
   align-items: center;
@@ -55,7 +71,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  transition: .2s ease;
+  transition: 0.2s ease;
 
   &:first-child {
     border-top-left-radius: 16px;
@@ -100,7 +116,7 @@
 .dropdownHeaderPrefix {
   width: 56px;
   height: 56px;
-  margin: 0 12px 0 0;
+  margin: 0 18px 0 0;
   border-radius: 160px;
   background-position: center;
 }
@@ -112,21 +128,36 @@
 
 .itemPrice {
   padding: 5px 20px 7px;
+  padding-right: 10px;
   background: theme.$grays-50;
   border-radius: 26px;
-  color: #26272a;
-  font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 14px;
-
   &.itemPriceDropdownHeader {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
     margin-right: 10px;
-    background-color: theme.$light-grays-500;
+ background-color: theme.$light-grays-500;
     
+    h2 {
+      font-size: 14px;
+      margin: 0;
+      color: theme.$grey-800;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+
+    }
+    p {
+      font-size: 12px;
+      margin: 0;
+      color: theme.$grays-500;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+    }
+   
   }
 }
 
 .dropDownArrow {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .rotate180 {

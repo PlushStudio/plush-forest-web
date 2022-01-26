@@ -5,10 +5,23 @@
   display: flex;
   margin: 33px 62px 0 0;
   border-radius: 160px;
+
+  &.small {
+    margin: 20px 62px 0 0;
+
+    .btnPrimary {
+      font-size: 18px;
+      padding-left: 24px;
+
+      .image {
+        margin: 0 0 0 10px;
+      }
+    }
+  }
 }
 
 .image {
-  margin-left: 1.24em;
+  margin: 0 8px 0 12px;
   width: 24px;
 }
 
@@ -17,21 +30,17 @@
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  color: theme.$white !important;
-  padding: 0 22px !important;
-  padding-left: 30px !important;
-  // width: 209px;
+  color: theme.$white;
+  padding: 0 22px;
+  padding-left: 30px;
   width: fit-content;
   height: 64px;
   font-family: AvenirNextRoundedPro-Demi, serif;
-  border-radius: 160px !important;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04) !important;
-  background-image: linear-gradient(
-    to bottom,
-    #15cc98 0%,
-    #00ad7a 100%
-  ) !important;
+  border-radius: 160px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.04),
+  inset 0 -1px 0 0 #009369;
+  background-image: linear-gradient(#3ecc78 0%, #03af86 100%);
   cursor: pointer;
-  font-size: 20px !important;
-  border-color: transparent !important;
+  font-size: 18px;
+  border: none;
 }
