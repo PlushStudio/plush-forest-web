@@ -23,7 +23,6 @@ export const PlantPage = () => {
   const [isVisited, setIsVisited] = useState<boolean>(false)
   const [isPlanting, setIsPlanting] = useState<boolean>(false)
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
-  const [helperText, setHelperText] = useState<string>('')
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState(shihuahuacoTreeImage)
   const [userDetails] = useContext(userDetailsContext)
@@ -115,7 +114,6 @@ export const PlantPage = () => {
   const startMintProcess = async (e: any) => {
     e.preventDefault()
     if (!nameFrom?.length) {
-      setHelperText('Your name is required to plant a tree.')
       input.current?.focus()
       setIsVisited(true)
     } else {
@@ -159,7 +157,6 @@ export const PlantPage = () => {
                   message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
                 />
               </Form.Group>
-              <span className={s.statusText}>{helperText}</span> <br />
               {userDetails.balance < 5 && (
                 <span className={s.statusText}>
                   You need more plush tokens to perform this operation
