@@ -4,6 +4,7 @@ import { ICardInfo } from '@/components/App/shared-components/Timeline/Timeline'
 import orangeDot from '@/assets/images/orange-dot.png'
 import { useParams } from 'react-router-dom'
 import { mainnetNetworkId, testnetNetworkId } from "@/constants";
+import classNames from "classnames";
 
 interface ITimelineCardProps {
     id: number
@@ -75,10 +76,7 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                         />
                     </div>
                 </div>
-                <div
-                    className={`${s.backSide} ${s.cdTimelineContent}  ${s[cardInfo.size]
-                        } `}
-                >
+                <div className={classNames(s.backSide, s.cdTimelineContent, s[cardInfo.size])}>
                     <div className={s.backSideInfo}>
                         <span>caretaker</span>
                         <h2>{cardInfo.planterName}</h2>
