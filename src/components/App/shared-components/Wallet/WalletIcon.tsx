@@ -4,13 +4,11 @@ import walletFaceIcon from '@/assets/images/wallet/32-px-1-outlined-child-generi
 import walletErrorIcon from '@/assets/images/wallet/32-px-1-outlined-alert-big.png'
 import noAccountIcon from '@/assets/images/wallet/32-px-1-outlined-skull.png'
 import { Gender } from '@/types/Gender'
-import { checkWrongNetwork } from "@/utils/utils";
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
 
 const WalletIcon: FC<{ gender: Gender, networkId: string }> =
   ({ gender, networkId }) => {
-
     const [state, setState] = useState({
       icon: walletFaceIcon,
       gradient: s.errorGradient,
@@ -18,8 +16,7 @@ const WalletIcon: FC<{ gender: Gender, networkId: string }> =
     })
 
     useEffect(() => {
-      const isWrongNetwork = checkWrongNetwork(VITE_NETWORK_ID, networkId)
-      if (gender && !isWrongNetwork) {
+      if (gender && networkId === NETWORK_ID) {
         setState({
           icon: walletFaceIcon,
           gradient: gender === 'MALE' ? s.maleGradient : s.femaleGradient,
@@ -33,7 +30,7 @@ const WalletIcon: FC<{ gender: Gender, networkId: string }> =
           status: 'error'
         })
       }
-      if (isWrongNetwork) {
+      if (networkId !== NETWORK_ID) {
         setState({
           icon: walletErrorIcon,
           gradient: s.errorGradient,

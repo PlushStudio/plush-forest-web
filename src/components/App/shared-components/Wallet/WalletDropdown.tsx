@@ -7,14 +7,13 @@ import rinkebyIcon from '@/assets/images/wallet/group-43@2x.png'
 import { cutWalletPublicId } from '@/utils/utils'
 import { WalletDropdownType } from '@/types/wallet/WalletDropdownType'
 import { WalletState } from '@/types/wallet/WalletStateType'
-import Copy from "@/components/App/layout-components/Header/NavBar/Wallet/Copy";
-import { mainnetChainId, mainnetNetworkId, testnetChainId } from "@/constants";
+import Copy from "@/components/App/shared-components/Wallet/Copy";
+import { ethers } from "ethers";
 
 const WalletDropdown: FC<{
   isVisible: boolean | null | undefined,
   address: string,
   type: WalletDropdownType,
-  chainId: string,
   setWalletState: (walletState: WalletState) => void,
   onDropdownRefInitialized: (dropdownRef: React.MutableRefObject<null>) => void
 }> =
@@ -22,15 +21,16 @@ const WalletDropdown: FC<{
     isVisible,
     address,
     type,
-    chainId,
     onDropdownRefInitialized,
     setWalletState
   }) => {
     const [footerButtonText, setFooterButtonText] = useState('Switch to Mumbai')
     const [footerSubtext, setFooterSubtext] = useState('Switch to Mumbai')
     const dropdownRef = useRef(null)
-    const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+    const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
+    const VITE_SIGNUP_LINK = import.meta.env.VITE_SIGNUP_LINK
 
+    console.log(isVisible)
     useEffect(() => {
       if (dropdownRef) {
         onDropdownRefInitialized(dropdownRef)
@@ -54,26 +54,30 @@ const WalletDropdown: FC<{
     }, [type])
 
     const dropdownButtonHandler = async () => {
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [
-          {
-            chainId: VITE_NETWORK_ID === mainnetNetworkId ? mainnetChainId : testnetChainId,
-            rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
-            chainName: 'Mumbai TestNet',
-            nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
-            blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
-          },
-        ],
-      });
-
-      await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: VITE_NETWORK_ID === mainnetNetworkId ? mainnetChainId : testnetChainId }]
-      })
-
+      if (type === 'USER_NOT_FOUND') {
+        window.location.href = VITE_SIGNUP_LINK
+      }
       if (type === 'SUCCESS') {
         setWalletState('DISCONNECTED')
+      }
+      if (type === 'WRONG_NETWORK') {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: ethers.utils.hexValue(ethers.utils.hexlify(Number(NETWORK_ID))),
+              rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+              chainName: 'Mumbai TestNet',
+              nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
+              blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+            },
+          ],
+        });
+
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [ethers.utils.hexValue(ethers.utils.hexlify(Number(NETWORK_ID)))]
+        })
       }
     }
     return (

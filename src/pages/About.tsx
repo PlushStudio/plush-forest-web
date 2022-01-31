@@ -12,10 +12,10 @@ import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import api from '@/api/api'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
-import { checkWrongNetwork } from "@/utils/utils";
 import { useHistory } from "react-router";
+import routes from "@/components/Router/routes";
 
-const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
 
 export const AboutPage = () => {
   const { login } = useMetamaskAuth()
@@ -44,10 +44,9 @@ export const AboutPage = () => {
         isOpenDropdown: !userDetails.isOpenDropdown
       })
     } else {
-      history.push('/planting')
+      history.push(routes.planting)
     }
   }
-
   return (
     <>
       <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
@@ -62,7 +61,7 @@ export const AboutPage = () => {
       <div className={s.container}>
         <div className={s.getStartedContentContainer}>
           <HomeText />
-          {!checkWrongNetwork(VITE_NETWORK_ID, String(userDetails.networkId)) && <TreeTypeSelector />}
+          {userDetails.networkId === Number(NETWORK_ID) && <TreeTypeSelector />}
           <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
           <TreesArea />
         </div>

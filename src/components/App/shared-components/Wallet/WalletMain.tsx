@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import s from './WalletMain.module.scss'
 import { cutWalletPublicId } from '@/utils/utils'
 import arrowBottomIcon from '@/assets/images/wallet/arrow-bottom.svg'
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 
 interface WalletMain {
   setDropdownVisibility?: (modalVisibility: boolean | null | undefined) => void | undefined,
@@ -12,35 +13,27 @@ interface WalletMain {
 }
 
 const WalletMain = ({ setDropdownVisibility, name, address, dropdownRef, isOpenDropdown }: WalletMain) => {
-  const [transformState, setTransformState] = useState('')
+  const [transformState, setTransformState] = useState<string>('')
+  const walletMainRef = useRef(null)
 
   useEffect(() => {
     isOpenDropdown ? setTransformState('rotate(180deg)') : setTransformState('')
   }, [isOpenDropdown])
 
-  const walletMainRef = useRef(null)
-
-  useEffect(() => {
-    /**
-     * Set dropdown state if clicked on outside of dropdown
-     */
-    document.addEventListener('click', handleClickOutside)
-    handleClickOutside(false)
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-
-  }, [walletMainRef, dropdownRef])
-
-  const handleClickOutside = (e: any) => {
+  const handleClickOutside = () => {
     if (setDropdownVisibility) {
-      // @ts-ignore
-      setDropdownVisibility(walletMainRef?.current?.contains(e.target) || dropdownRef?.current?.contains(e.target))
+      setDropdownVisibility(false)
     }
   }
+  const handleClickInside = () => {
+    if (setDropdownVisibility) {
+      setDropdownVisibility(true)
+    }
+  }
+  useOnClickOutside(dropdownRef, handleClickOutside)
 
   return (
-    <div ref={walletMainRef} onClick={(e: any) => handleClickOutside(e)}
+    <div ref={walletMainRef} onClick={() => handleClickInside()}
       className={s.mainContainer}>
       <div className={s.topPull}>
         <div className={s.name}>

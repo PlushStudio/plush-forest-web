@@ -14,11 +14,8 @@ interface Params {
     id: string
 }
 
-const FOREST_CONTRACT_ADDRESS =
-    window.config.FOREST_CONTRACT_ADDRESS ??
-    '0x3aA5283D113BeD501dC4e773EBB1A2f8299207C0'
-
-const NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+const FOREST_CONTRACT_ADDRESS = window.config.FOREST_CONTRACT_ADDRESS ?? import.meta.env.VITE_FOREST_CONTRACT_ADDRESS
+const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
 
 const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
     const params: Params = useParams()
@@ -41,9 +38,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                 className={`${s.cardContainer} ${showBack && s.showBack}`}
             >
                 <div
-                    className={`${s.cdTimelineContent} ${
-                        id % 2 === 0 ? s.arrowLeft : s.arrowRight
-                    } ${s[cardInfo.size]}`}
+                    className={`${s.cdTimelineContent} ${id % 2 === 0 ? s.arrowLeft : s.arrowRight
+                        } ${s[cardInfo.size]}`}
                 >
                     <div className={s.cdTimelineContentText}>
                         <span className={s.cdTimelineDate}>{cardInfo.date}</span>
@@ -80,9 +76,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                     </div>
                 </div>
                 <div
-                    className={`${s.backSide} ${s.cdTimelineContent}  ${
-                        s[cardInfo.size]
-                    } `}
+                    className={`${s.backSide} ${s.cdTimelineContent}  ${s[cardInfo.size]
+                        } `}
                 >
                     <div className={s.backSideInfo}>
                         <span>caretaker</span>

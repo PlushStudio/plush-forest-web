@@ -2,19 +2,20 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 import s from './Wallet.module.scss'
 import api from '@/api/api'
 import useCoreContract from '@/hooks/useCoreContract'
-import WalletMain from '@/components/App/layout-components/Header/NavBar/Wallet/WalletMain'
-import WalletIcon from '@/components/App/layout-components/Header/NavBar/Wallet/WalletIcon'
-import WalletBalance from '@/components/App/layout-components/Header/NavBar/Wallet/WalletBalance'
-import WalletDropdown from '@/components/App/layout-components/Header/NavBar/Wallet/WalletDropdown'
+import WalletMain from '@/components/App/shared-components/Wallet/WalletMain'
+import WalletIcon from '@/components/App/shared-components/Wallet/WalletIcon'
+import WalletBalance from '@/components/App/shared-components/Wallet/WalletBalance'
+import WalletDropdown from '@/components/App/shared-components/Wallet/WalletDropdown'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import { AxiosResponse } from 'axios'
-import { WalletState } from '@/types/wallet/WalletStateType'
-import { Gender } from '@/types/Gender'
-import { User } from '@/types/user'
-import {checkWrongNetwork, getChainIdByNetworkId, getNetworkIdByChainId} from "@/utils/utils";
+import { WalletState } from './types/WalletStateType'
+import { Gender } from './types/Gender'
+import { User } from './types/user'
 import { useHistory } from "react-router";
+import { ethers } from "ethers";
+import routes from "@/components/Router/routes";
 
 type UserWallet = User & { statusCode?: number, message?: string }
 
@@ -36,7 +37,7 @@ const Wallet: FC<{
     gender,
     onWalletDataLoaded,
   }) => {
-    const { getPLAIBalance, getCurrency, provider, walletConnected, getAddress } = useMetamaskWallet()
+    const { getPLAIBalance, getCurrency, isConnected, provider, walletConnected, getAddress } = useMetamaskWallet()
     const { login } = useMetamaskAuth()
     const { balanceOf } = useCoreContract()
     const history = useHistory()
@@ -50,10 +51,10 @@ const Wallet: FC<{
     const dropdownRef = useRef(null)
     const [networkId, setNetworkId] = useState<string>('')
     const [dropdownRefState, setDropdownRefState] = useState<React.MutableRefObject<null>>(dropdownRef)
-    const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+    const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
 
     const getUserContractData = async () => {
-      if (networkId === VITE_NETWORK_ID) {
+      if (networkId === NETWORK_ID) {
         const currency = await getCurrency()
         const address = await getAddress()
         const hasTokenHex = await balanceOf(address)
@@ -90,9 +91,10 @@ const Wallet: FC<{
     }, [networkId, name])
 
     const handleChainChanged = async (chainId: string) => {
-      setNetworkId(getNetworkIdByChainId(chainId))
-      if (checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId))) {
-        history.push('/about')
+      setNetworkId(String(Number(chainId)))
+      setIsOpenDropdown(chainId !== ethers.utils.hexValue(ethers.utils.hexlify(Number(NETWORK_ID))))
+      if (String(Number(chainId)) !== NETWORK_ID) {
+        history.push(routes.index)
       }
     }
 
@@ -115,20 +117,15 @@ const Wallet: FC<{
       }
     }
 
-
     useEffect(() => {
       if (window.ethereum) {
-        window.ethereum.on('chainChanged', (chainId: string) => {
-          handleChainChanged(chainId)
-          setIsOpenDropdown(checkWrongNetwork(VITE_NETWORK_ID, getNetworkIdByChainId(chainId)))
-        })
+        window.ethereum.on('chainChanged', (chainId: string) => handleChainChanged(chainId))
         window.ethereum.on('accountsChanged', (accounts: Array<string>) => handleAccountChanged(accounts))
 
         const initialCheckNetwork = async () => {
           if (walletConnected) {
             const networkId: any = await provider?.getNetwork();
-            await handleChainChanged(getChainIdByNetworkId(networkId?.chainId)
-            )
+            await handleChainChanged(ethers.utils.hexValue(ethers.utils.hexlify(networkId?.chainId)))
           }
         }
         initialCheckNetwork()
@@ -140,11 +137,11 @@ const Wallet: FC<{
       }
     }, [provider, window.ethereum.chainId, walletConnected])
 
+    const checkMetamaskConnection = async () => {
+      return await isConnected()
+    }
+
     useEffect(() => {
-      if (userContractData.address === undefined ||
-        userContractData.address === 'disconnected') {
-        setWalletState('DISCONNECTED')
-      }
       if (userContractData.address !== undefined &&
         userContractData.address !== 'disconnected' &&
         name !== undefined) {
@@ -153,8 +150,13 @@ const Wallet: FC<{
       if (name === 'userNotFound') {
         setWalletState('USER_NOT_FOUND')
       }
-      if (checkWrongNetwork(VITE_NETWORK_ID, networkId)) {
-        setWalletState('WRONG_NETWORK')
+      checkMetamaskConnection().then((isAccountConnected) => {
+        if (isAccountConnected && networkId !== NETWORK_ID) {
+          setWalletState('WRONG_NETWORK')
+        }
+      })
+      if ((userContractData.address === 'disconnected')) {
+        setWalletState('DISCONNECTED')
       }
     }, [networkId, userContractData.address, name])
 
@@ -202,11 +204,10 @@ const Wallet: FC<{
             <WalletBalance ticker={userContractData.currency}
               balance={walletState === 'CONNECTED' ? userContractData.balance : null} />
             <WalletDropdown onDropdownRefInitialized={(ref) => setDropdownRefState(ref)} type={
-              networkId !== VITE_NETWORK_ID ? 'WRONG_NETWORK' :
+              networkId !== NETWORK_ID ? 'WRONG_NETWORK' :
                 walletState === 'USER_NOT_FOUND' ? 'USER_NOT_FOUND' : 'SUCCESS'}
               isVisible={isOpenDropdown}
               setWalletState={setWalletState}
-              chainId={window.ethereum.chainId}
               address={userContractData.address} />
           </div> :
           <div onClick={() => handleLoginButtonClick()} className={s.loginBtn}>

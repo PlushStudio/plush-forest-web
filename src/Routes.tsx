@@ -67,23 +67,20 @@ export const Routes = () => {
         <Route exact path='/'>
           <Page children={<AboutPage />} />
         </Route>
-        <Route exact path='/about'>
-          <Page children={<AboutPage />} />
-        </Route>
-        <Route path='/token/:id/'>
+        <Route exact path='/token/:id/'>
           <Page children={<TreeInfoPage />} />
         </Route>
         <Route exact path='/planting'>
           {userDetails.address !== 'disconnected' ?
             <Page children={<PlantPage />} /> :
-            <Redirect to={'/about'} />
+            <Redirect to={'/'} />
           }
+        </Route>
+        <Route exact path='/404'>
+          <PageNotFound />
         </Route>
         <Route path='*'>
           <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
-        </Route>
-        <Route path='/404'>
-          <PageNotFound />
         </Route>
       </Switch>
     </Router>)
