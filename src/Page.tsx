@@ -4,6 +4,7 @@ import NoPlushTokenModal from "@/components/App/shared-components/NoPlushTokenMo
 import { userDetailsContext } from "@/context/UserDetailsProvider";
 import { CircleLoader } from "@/components/App/shared-components/Loader/CircleLoader";
 import { useParams } from "react-router-dom";
+import routes from "@/components/Router/routes";
 
 type Props = {
   children: ReactNode
@@ -21,12 +22,12 @@ export const Page = (props: Props) => {
   useEffect(() => {
     if (!isDataLoaded) {
       switch (window.location.pathname) {
-        case '/planting':
+        case routes.planting:
           setIsDataLoaded(userDetails.address !== undefined
             && userDetails.name !== undefined
             && userDetails.treesCount.length !== 0)
           break
-        case '/about':
+        case routes.index:
           setIsDataLoaded(true)
           break
         case `/token/${params.id}`:

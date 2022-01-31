@@ -9,7 +9,7 @@ interface MenuItem {
   icon: string
 }
 
-const WalletKebab = (props : { menuList : MenuItem[] } ) => {
+const WalletKebab = (props: { menuList: MenuItem[] }) => {
   const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState<boolean>(false)
   const [activeItemId, setActiveItemId] = useState<number>(0)
   const kebabRef = useRef(null)
@@ -45,7 +45,7 @@ const WalletKebab = (props : { menuList : MenuItem[] } ) => {
                 <div className={`${activeItemId === index ? s.activeMenuItem : s.kebabListItem}`}>
                   {menuItem.title}
                   <div className={s.menuItemIcon}>
-                    <img alt={"menu list icon"} src={props.menuList[index].icon }/>
+                    <img alt={"menu list icon"} src={props.menuList[index].icon} />
                   </div>
                 </div>
               </Link>

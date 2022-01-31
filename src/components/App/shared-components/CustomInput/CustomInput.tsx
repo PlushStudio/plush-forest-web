@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import s from './CustomInput.module.scss'
 import classnames from 'classnames'
 
@@ -30,22 +30,22 @@ export const CustomInput = ({
   }
 
   return (
-      <>
-        <div onClick={handlerOnClick} className={style}>
-          <p className={s.nameText}>{placeholder}</p>
-          <input
-              ref={input}
-              onChange={onChange}
-              value={value}
-              className={s.customInput}
-              type={type}
-              placeholder={placeholder}
-              readOnly={readonly}
-          />
+    <>
+      <div onClick={handlerOnClick} className={style}>
+        <p className={s.nameText}>{placeholder}</p>
+        <input
+          ref={input}
+          onChange={onChange}
+          value={value}
+          className={s.customInput}
+          type={type}
+          placeholder={placeholder}
+          readOnly={readonly}
+        />
 
-        </div>
-        {message && <p className={s.inputMessage}>{message}</p>}
-      </>
+      </div>
+      {message && <p className={s.inputMessage}>{message}</p>}
+    </>
 
   )
 }

@@ -131,6 +131,28 @@ const useMetamaskWallet = () => {
     }
   }, [provider])
 
+  const addMetamaskNetwork = async (NETWORK_ID: string) => {
+    await window.ethereum.request({
+      method: 'wallet_addEthereumChain',
+      params: [
+        {
+          chainId: ethers.utils.hexValue(ethers.utils.hexlify(Number(NETWORK_ID))),
+          rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+          chainName: 'Mumbai TestNet',
+          nativeCurrency: { name: 'MATIC', decimals: 18, symbol: 'MATIC' },
+          blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+        },
+      ],
+    });
+  }
+
+  const switchMetamaskNetwork = async (NETWORK_ID: string) => {
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [ethers.utils.hexValue(ethers.utils.hexlify(Number(NETWORK_ID)))]
+    })
+  }
+
   return {
     initialized,
     isInstalled,
@@ -141,6 +163,8 @@ const useMetamaskWallet = () => {
     getAddress,
     getPLAIBalance,
     getCurrency,
+    addMetamaskNetwork,
+    switchMetamaskNetwork,
     provider,
     signer,
     walletConnected

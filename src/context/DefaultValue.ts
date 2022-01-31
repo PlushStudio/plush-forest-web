@@ -9,7 +9,6 @@ export interface UserDefault {
   treeTypeToPlant: string,
   gender: null | Gender,
   isOpenDropdown: boolean | null,
-  isOpenDropdownByError: boolean | null
   hasToken: undefined
 }
 
@@ -23,8 +22,7 @@ export const userDefault: UserDefault = {
   name: undefined,
   treeTypeToPlant: '',
   gender: null,
-  isOpenDropdown: null,
-  isOpenDropdownByError: null,
+  isOpenDropdown: false,
   hasToken: undefined
 }
 

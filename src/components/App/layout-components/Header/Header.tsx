@@ -2,17 +2,18 @@ import React, { FC, useContext, useEffect, useState } from 'react'
 import s from '@/components/App/layout-components/Header/Header.module.scss'
 import { HeaderContent } from './HeaderContent'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
-import Wallet from '@/components/App/layout-components/Header/NavBar/Wallet/Wallet'
+import Wallet from '@/components/App/shared-components/Wallet/Wallet'
 import useTreeContract from "@/hooks/useTreeContract";
-import KebabDrowdown from "@/components/App/layout-components/Header/NavBar/Wallet/KebabDrowdown";
+import KebabDrowdown from "@/components/App/shared-components/Wallet/KebabDrowdown";
 import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
 import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
+import routes from "@/components/Router/routes";
 
 export const Header: FC = () => {
-  const VITE_NETWORK_ID = window.config.NETWORK_ID ?? '80001'
+  const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
-  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(true)
+  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false)
   const { getTreeTypeCount } = useTreeContract()
   const { provider } = useMetamaskWallet()
 
@@ -24,7 +25,7 @@ export const Header: FC = () => {
     try {
       const networkId = await provider?.getNetwork();
 
-      if (networkId?.chainId === Number(VITE_NETWORK_ID)) {
+      if (networkId?.chainId === Number(NETWORK_ID)) {
         setUserDetails({
           ...userDetails,
           address,
@@ -37,7 +38,7 @@ export const Header: FC = () => {
             await getTreeTypeCount('GUABA'),
             await getTreeTypeCount('CAOBA')
           ],
-          networkId: Number(VITE_NETWORK_ID)
+          networkId: Number(NETWORK_ID)
         })
       } else {
         setUserDetails({
@@ -63,7 +64,7 @@ export const Header: FC = () => {
   const menuList = [
     {
       title: 'About',
-      href: '/',
+      href: routes.index,
       icon: infoIcon
     },
     {

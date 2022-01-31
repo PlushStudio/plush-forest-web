@@ -11,6 +11,7 @@ import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 import { AxiosResponse } from 'axios'
 import { User } from '@/types/user'
 import { Page } from '@/Page'
+import routes from "@/components/Router/routes";
 
 export const Routes = () => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
@@ -64,26 +65,23 @@ export const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path={routes.index}>
           <Page children={<AboutPage />} />
         </Route>
-        <Route exact path='/about'>
-          <Page children={<AboutPage />} />
-        </Route>
-        <Route path='/token/:id/'>
+        <Route exact path='/token/:id/'>
           <Page children={<TreeInfoPage />} />
         </Route>
-        <Route exact path='/planting'>
+        <Route exact path={routes.planting}>
           {userDetails.address !== 'disconnected' ?
             <Page children={<PlantPage />} /> :
-            <Redirect to={'/about'} />
+            <Redirect to={'/'} />
           }
+        </Route>
+        <Route exact path={routes.notFound}>
+          <PageNotFound />
         </Route>
         <Route path='*'>
           <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
-        </Route>
-        <Route path='/404'>
-          <PageNotFound />
         </Route>
       </Switch>
     </Router>)
