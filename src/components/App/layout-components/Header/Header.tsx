@@ -4,7 +4,7 @@ import { HeaderContent } from './HeaderContent'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import Wallet from '@/components/App/shared-components/Wallet/Wallet'
 import useTreeContract from "@/hooks/useTreeContract";
-import KebabDrowdown from "@/components/App/shared-components/Wallet/KebabDrowdown";
+import KebabDrowdown from "@/components/App/shared-components/KebabDropdown/KebabDrowdown";
 import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
 import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
