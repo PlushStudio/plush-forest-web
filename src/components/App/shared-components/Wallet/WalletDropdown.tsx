@@ -32,6 +32,11 @@ const WalletDropdown: FC<{
     const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
     const VITE_SIGNUP_LINK = import.meta.env.VITE_SIGNUP_LINK
 
+    const dropdownClassName = classNames(s.modalContainer, {
+      [s.errorModalContainer]: type === 'WRONG_NETWORK',
+      [s.dropdownHidden]: !isVisible
+    })
+
     console.log(isVisible)
     useEffect(() => {
       if (dropdownRef) {
@@ -69,9 +74,7 @@ const WalletDropdown: FC<{
       }
     }
     return (
-      <div ref={dropdownRef} className={classNames(s.modalContainer,
-        type === 'WRONG_NETWORK' ? s.errorModalContainer : '',
-        isVisible ? s.dropdownVisible : s.dropdownHidden)}>
+      <div ref={dropdownRef} className={dropdownClassName}>
         <div className={s.modalContent}>
           {type !== 'SUCCESS' && <div className={s.modalTitle}>
             {type === 'USER_NOT_FOUND' ? 'Plush account is required' : 'Wrong network detected'}
