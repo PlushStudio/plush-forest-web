@@ -15,7 +15,7 @@ const urls = {
       address: 'user/users/address'
     },
     trees: {
-      tokens: 'forest/tokens/my?page=1&limit=10',
+      tokens: 'forest/tokens/my',
       token: 'forest/token/'
     }
   }
@@ -60,9 +60,8 @@ export const api = {
                 withCredentials: true
               }).then(response => {
                 if (response.status === 200) {
-                  if (response.data?.items.length > 0) {
+                  if (response.data?.result.length > 0) {
                     clearInterval(getMyTokensInterval as NodeJS.Timeout)
-                    window.location.href = `/token/${response.data?.items[0].token}`
                   }
                 } else {
                   clearInterval(getMyTokensInterval as NodeJS.Timeout)
