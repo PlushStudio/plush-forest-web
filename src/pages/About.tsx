@@ -26,7 +26,7 @@ export const AboutPage = () => {
     trackEvent(Category.Info, MatomoEvent.PageVisited, 'About')
   }, [])
 
-  const checkWalletConnection = async () => {
+  const getStarted = async () => {
     if (userDetails.address === undefined) {
       trackEvent(Category.Action, MatomoEvent.ButtonPressed, 'Login')
       try {
@@ -61,8 +61,8 @@ export const AboutPage = () => {
       <div className={s.container}>
         <div className={s.getStartedContentContainer}>
           <HomeText />
-          {userDetails.networkId === Number(NETWORK_ID) && <TreeTypeSelector />}
-          <MainActionButton onClick={() => checkWalletConnection()} text='Get started' image='next' />
+          {userDetails.networkId === Number(NETWORK_ID) && userDetails.address && <TreeTypeSelector />}
+          <MainActionButton onClick={() => getStarted()} text='Get started' image='next' />
           <TreesArea />
         </div>
         <div className={userDetails.balance ? s.homeFeatureContainer : s.homeFeatureContainerHeight}>

@@ -3,13 +3,14 @@ import s from './WalletDropdown.module.scss'
 import successConnectionLine from '@/assets/images/wallet/32-px-1-outlined-link-01@2x.png'
 import badConnectionLine from '@/assets/images/wallet/32-px-1-outlined-bad-connection-01@2x.png'
 import metamaskIcon from '@/assets/images/wallet/group-59@2x.png'
-import rinkebyIcon from '@/assets/images/wallet/group-43@2x.png'
+import polygonIcon from '@/assets/images/wallet/polygonIcon.svg'
 import { cutWalletPublicId } from '@/utils/utils'
 import { WalletDropdownType } from '@/types/wallet/WalletDropdownType'
 import { WalletState } from '@/types/wallet/WalletStateType'
 import Copy from "@/components/App/shared-components/Wallet/Copy";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
 import classNames from "classnames";
+import api from "@/api/api";
 
 const WalletDropdown: FC<{
   isVisible: boolean | null | undefined,
@@ -30,14 +31,13 @@ const WalletDropdown: FC<{
     const dropdownRef = useRef(null)
     const { addMetamaskNetwork, switchMetamaskNetwork } = useMetamaskWallet()
     const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
-    const VITE_SIGNUP_LINK = import.meta.env.VITE_SIGNUP_LINK
+    const VITE_SIGNUP_LINK = window.config.SIGNUP_LINK ?? import.meta.env.VITE_SIGNUP_LINK
 
     const dropdownClassName = classNames(s.modalContainer, {
       [s.errorModalContainer]: type === 'WRONG_NETWORK',
       [s.dropdownHidden]: !isVisible
     })
 
-    console.log(isVisible)
     useEffect(() => {
       if (dropdownRef) {
         onDropdownRefInitialized(dropdownRef)
@@ -67,6 +67,7 @@ const WalletDropdown: FC<{
           break
         case 'SUCCESS':
           setWalletState('DISCONNECTED')
+          await api.user.users.logout.request()
           break
         case 'WRONG_NETWORK':
           await addMetamaskNetwork(NETWORK_ID)
@@ -95,7 +96,7 @@ const WalletDropdown: FC<{
               <div className={s.connectionCircle}>
                 <img alt={'rinkeby icon'}
                   className={s.connectionImage}
-                  src={rinkebyIcon} />
+                  src={polygonIcon} />
               </div>
             </div>
           </>}
@@ -115,7 +116,7 @@ const WalletDropdown: FC<{
                 <div className={s.connectionCircle}>
                   <img alt={'rinkeby icon'}
                     className={s.connectionImage}
-                    src={rinkebyIcon} />
+                    src={polygonIcon} />
                 </div>
               </div>
               <div className={s.s}>

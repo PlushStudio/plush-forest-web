@@ -15,6 +15,7 @@ import useTreeContract from '@/hooks/useTreeContract'
 import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
+import { useHistory } from "react-router";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -29,6 +30,7 @@ export const PlantPage = () => {
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintATree } = useTreeContract()
+  const history = useHistory()
 
   useEffect(() => {
     setTreeImage(plantingTreeImages[userDetails.treeTypeIdToPlant])
@@ -61,7 +63,7 @@ export const PlantPage = () => {
 
   const plantTreeHandler = async () => {
     const myTokens: UserTokens = await api.user.users.tokens.request()
-    if (!myTokens.items.length) {
+    if (!myTokens.result.length) {
       setIsPlanting(true)
       try {
         const allowance = await getBuyAllowance(userDetails.address)
@@ -108,6 +110,8 @@ export const PlantPage = () => {
         setIsPlanting(false)
         console.log(e.message)
       }
+    } else {
+      history.push(`/token/${myTokens.result[0].token_id}`)
     }
   }
 

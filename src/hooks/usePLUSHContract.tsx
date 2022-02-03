@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import detectEthereumProvider from '@metamask/detect-provider'
 import { ExternalProvider, JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 
-const getTreeContractAddress = window.config.CORE_GET_TREE_CONTRACT_ADDRESS ?? "0x4092305B458e5ab84274De5F9C5d228C737345df"
-const PLUSHContractAddress = window.config.PLUSH_CONTRACT_ADDRESS ?? "0x6FB60c408363636dAC206AA98EE429d79923DD33"
+const getTreeContractAddress = window.config.CORE_GET_TREE_CONTRACT_ADDRESS ?? import.meta.env.VITE_GET_TREE_CONTRACT_ADDRESS
+const PLUSHContractAddress = window.config.PLUSH_CONTRACT_ADDRESS ?? import.meta.env.VITE_PLUSH_CONTRACT_ADDRESS
 
 const usePLUSHContract = () => {
   const [provider, setProvider] = useState<Web3Provider>()
