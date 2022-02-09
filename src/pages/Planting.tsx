@@ -16,6 +16,7 @@ import { PlantingModal } from '@/components/App/shared-components/PlantingModal/
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import { useHistory } from "react-router";
+import routes from "@/components/Router/routes";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -29,7 +30,7 @@ export const PlantPage = () => {
   const [userDetails] = useContext(userDetailsContext)
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
   const { getBuyAllowance, getApprove } = usePLAIContract()
-  const { mintATree } = useTreeContract()
+  const { mintTree } = useTreeContract()
   const history = useHistory()
 
   useEffect(() => {
@@ -38,12 +39,12 @@ export const PlantPage = () => {
 
   const checkTokenAvailability = async () => {
     //empty message for Pilot
-    const treeMintingResult = await mintATree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+    const treeMintingResult = await mintTree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
     if (treeMintingResult) {
-      const getMyTokensInterval = setInterval(async function () {
+      const getMyTokensInterval = setInterval(async () => {
         const myTokens: UserTokens = await api.user.users.tokens.request(getMyTokensInterval)
         if (myTokens.total > 0) {
-          history.push(`/token/${myTokens.tokens[0].token_id}`)
+          history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
         }
       }, 5000)
     } else {
@@ -94,7 +95,7 @@ export const PlantPage = () => {
         console.log(e.message)
       }
     } else {
-      history.push(`/token/${myTokens.tokens[0].token_id}`)
+      history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
     }
   }
 

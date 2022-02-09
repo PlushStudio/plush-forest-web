@@ -13,7 +13,7 @@ import { User } from '@/types/user'
 import { Page } from '@/Page'
 import routes from "@/components/Router/routes";
 import { UserTokens } from "@/types/UserTokens";
-import {Gender} from "@/types/Gender";
+import { Gender } from "@/types/Gender";
 
 export const Routes = () => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
@@ -101,7 +101,7 @@ export const Routes = () => {
       <Route path='/token/:id/'>
         <Page children={<TreeInfoPage />} />
       </Route>
-      {forestTokenId.length > 0 && <Redirect to={`/token/${forestTokenId}`} />}
+      {forestTokenId.length > 0 && <Redirect to={`${routes.token}/${forestTokenId}`} />}
       <Route exact path={routes.index}>
         <Page children={<AboutPage />} />
       </Route>
