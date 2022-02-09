@@ -58,9 +58,9 @@ export const api = {
               urls.user.trees.tokens,
               {
                 withCredentials: true
-              }).then(response => {
+              }).then((response: AxiosResponse) => {
                 if (response.status === 200) {
-                  if (response.data?.result.length > 0) {
+                  if (response.data?.tokens.length > 0) {
                     clearInterval(getMyTokensInterval as NodeJS.Timeout)
                   }
                 } else {
