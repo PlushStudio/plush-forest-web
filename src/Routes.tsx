@@ -97,7 +97,6 @@ export const Routes = () => {
     }
   }, [walletConnected])
 
-  console.log(userDetails.networkId)
   return (
     <Switch>
       <Route path='/token/:id/'>
