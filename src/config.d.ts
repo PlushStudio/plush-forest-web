@@ -7,7 +7,7 @@ interface Config {
   API_URL?: string
   PLUSH_CONTRACT_ADDRESS?: string
   CORE_CONTRACT_ADDRESS?: string
-  CORE_GET_TREE_CONTRACT_ADDRESS?: string
+  TREE_CONTRACT_ADDRESS?: string
   NETWORK_ID?: string,
   FOREST_CONTRACT_ADDRESS?: string,
   SIGNUP_LINK: string,
