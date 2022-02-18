@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, { useRef, useState } from 'react'
 import s from "./Menu.module.scss"
 import MenuDropdown from "@/components/App/shared-components/Menu/MenuDropdown";
 import classNames from "classnames";
@@ -26,12 +26,12 @@ const Menu = (menuOpener: React.ReactNode, menuList: MenuItem[], dropdownStyle?:
 
   return (
     <>
-    <div onClick={() => setIsKebabDropdownOpen(true)}
-         className={s.menuContainer}>
-      {menuOpener}
-    </div>
+      <div onClick={() => setIsKebabDropdownOpen(true)}
+        className={s.menuContainer}>
+        {menuOpener}
+      </div>
       <div className={dropdownClassName} ref={dropdownRef}>
-        <MenuDropdown menuList={menuList}/>
+        <MenuDropdown menuList={menuList} />
       </div>
     </>
   );

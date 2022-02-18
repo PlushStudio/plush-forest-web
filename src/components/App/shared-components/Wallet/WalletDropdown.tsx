@@ -37,7 +37,6 @@ const WalletDropdown: FC<{
       [s.dropdownHidden]: !isVisible
     })
 
-    console.log(isVisible)
     useEffect(() => {
       if (dropdownRef) {
         onDropdownRefInitialized(dropdownRef)

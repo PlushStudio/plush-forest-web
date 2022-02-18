@@ -76,7 +76,7 @@ export const Header: FC = () => {
     }
   ];
 
-  const menu = Menu(<img alt={'menu opener'} src={kebabIcon}/>, menuList)
+  const menu = Menu(<img alt={'menu opener'} src={kebabIcon} />, menuList)
 
   return (
     <div className={s.headerContainer}>

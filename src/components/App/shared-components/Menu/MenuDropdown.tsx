@@ -9,7 +9,7 @@ interface MenuItem {
   icon: string
 }
 
-const MenuDropdown = (props: { menuList: MenuItem[], className?: string } ) => {
+const MenuDropdown = (props: { menuList: MenuItem[], className?: string }) => {
   const [activeItemId, setActiveItemId] = useState<number>(0)
   const menuItemHandler = (itemName: string, index: number) => setActiveItemId(index)
 
