@@ -4,11 +4,13 @@ import { HeaderContent } from './HeaderContent'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import Wallet from '@/components/App/shared-components/Wallet/Wallet'
 import useTreeContract from "@/hooks/useTreeContract";
-import KebabDrowdown from "@/components/App/shared-components/KebabDropdown/KebabDrowdown";
 import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
 import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
 import useMetamaskWallet from "@/hooks/useMetamaskWallet";
 import routes from "@/components/Router/routes";
+import kebabIcon from "./kebabIcon.svg";
+import withDropdownHOC from "@/components/App/shared-components/Menu/Menu";
+import Menu from "@/components/App/shared-components/Menu/Menu";
 
 export const Header: FC = () => {
   const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
@@ -74,6 +76,8 @@ export const Header: FC = () => {
     }
   ];
 
+  const menu = Menu(<img alt={'menu opener'} src={kebabIcon}/>, menuList)
+
   return (
     <div className={s.headerContainer}>
       <Wallet
@@ -82,8 +86,8 @@ export const Header: FC = () => {
         onWalletDataLoaded={setContractData}
         isOpenDropdown={isOpenDropdown}
         setIsOpenDropdown={setIsOpenDropdown} />
-      <div className={s.kebabContainer}>
-        <KebabDrowdown menuList={menuList} />
+      <div className={s.menuContainer}>
+        {menu}
       </div>
       <HeaderContent />
     </div>

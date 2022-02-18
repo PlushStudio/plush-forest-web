@@ -1,7 +1,12 @@
-import {Token} from "@/types/Token";
-
 export type UserTokens = {
-  total: number,
-  tokens: Token[],
-  pageKey?: string,
+  items: [{
+    token: number
+  }],
+  meta: {
+    currentPage: number,
+    itemCount: number,
+    itemsPerPage: number,
+    totalItems: number,
+    totalPages: number,
+  }
 }

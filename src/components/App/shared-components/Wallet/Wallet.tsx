@@ -9,11 +9,15 @@ import WalletDropdown from '@/components/App/shared-components/Wallet/WalletDrop
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
 import useMetamaskAuth from '@/hooks/useMetamaskAuth'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
+import { AxiosResponse } from 'axios'
 import { WalletState } from './types/WalletStateType'
 import { Gender } from './types/Gender'
+import { User } from './types/user'
 import { useHistory } from "react-router";
 import { ethers } from "ethers";
 import routes from "@/components/Router/routes";
+
+type UserWallet = User & { statusCode?: number, message?: string }
 
 const Wallet: FC<{
   isOpenDropdown?: boolean | null,
@@ -107,7 +111,6 @@ const Wallet: FC<{
           ...userContractData,
           address: 'disconnected'
         })
-        history.push(routes.index)
         if (onWalletDataLoaded) {
           onWalletDataLoaded(undefined, undefined, '', undefined)
         }
@@ -147,7 +150,7 @@ const Wallet: FC<{
       if (name === 'userNotFound') {
         setWalletState('USER_NOT_FOUND')
       }
-      checkMetamaskConnection().then((isAccountConnected: boolean) => {
+      checkMetamaskConnection().then((isAccountConnected) => {
         if (isAccountConnected && networkId !== NETWORK_ID) {
           setWalletState('WRONG_NETWORK')
         }
@@ -164,6 +167,12 @@ const Wallet: FC<{
           new URL(`${api.url}/${api.user.auth.nonce.url}`),
           new URL(`${api.url}/${api.user.auth.login.url}`)
         )
+
+        const userData: AxiosResponse<UserWallet> = await api.user.users.profile.request()
+
+        if (userData.status === 200) {
+          setWalletState('CONNECTED')
+        }
 
       } catch (e: any) {
         switch (e.message) {
