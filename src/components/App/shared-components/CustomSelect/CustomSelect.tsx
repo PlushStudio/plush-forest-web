@@ -8,71 +8,51 @@ import treeIcon2 from '@/assets/images/tree-icon-selector/guaba.png'
 import treeIcon3 from '@/assets/images/tree-icon-selector/caoba.png'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import useMetamaskWallet from '@/hooks/useMetamaskWallet'
+import classNames from "classnames";
 
-interface IData {
-  id: number
-  name: string
-  available: number
+interface TreesInfo {
+  name: string,
   label: string
 }
 
-export const CustomSelect: React.FC = () => {
-  const data: IData[] = [
-    {
-      id: 0,
-      name: 'Shihuahuaco',
-      label: `The Amazon's tree of life.`,
-      available: 590,
-    },
-    {
-      id: 1,
-      name: 'Cacao',
-      label: 'The food of the Gods.',
-      available: 343,
-    },
-    {
-      id: 2,
-      name: 'Guaba',
-      label: 'The ice cream tree.',
-      available: 58,
-    },
-    {
-      id: 3,
-      name: 'Caoba',
-      label: 'The majestic mahogany.',
-      available: 7,
-    },
-  ]
+interface CustomSelectProps {
+  icons: string[],
+  itemsInfo: TreesInfo[],
+  prices: number[],
+  currency: string,
+  className?: string,
+  onSelect?: (itemId: number, itemName: string) => void
+}
 
+export const CustomSelect = ({ icons, itemsInfo, prices, currency, onSelect, className }: CustomSelectProps) => {
   const [isOpen, setOpen] = useState<boolean>(false)
-  const [items] = useState<IData[]>(data)
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
-  const [selectedItem, setSelectedItem] = useState<number>(0)
-  const { getCurrency, walletConnected } = useMetamaskWallet()
-  const [ticker, setTicker] = useState('')
+  const [selectedItemId, setSelectedItemId] = useState<number>(0)
+  const { walletConnected } = useMetamaskWallet()
   const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
+
+  const dropdownStyles = classNames(s.dropdown, className, { [s.focused]: isOpen })
+  const dropdownBodyStyles = classNames(s.dropdownBody, { [s.dropdownBodyOpen]: isOpen })
+  const arrowStyles = classNames(s.dropDownArrow, { [s.rotate180]: isOpen })
 
   const toggleDropdown = () => setOpen(!isOpen)
 
-  const getContractTicker = async () => {
-    const t = await getCurrency()
-    setTicker(t)
-  }
   useEffect(() => {
-    if (walletConnected) {
-      getContractTicker()
-    }
-    setSelectedItem(userDetails.treeTypeIdToPlant)
+    setSelectedItemId(userDetails.treeTypeIdToPlant)
   }, [walletConnected])
 
-  const handleItemClick = (id: number) => {
-    if (selectedItem === id) {
-      setSelectedItem(0)
+  const handleItemClick = (itemId: number, itemName: string) => {
+    if (onSelect) {
+      onSelect(itemId, itemName)
+    }
+    if (selectedItemId === itemId) {
+      setSelectedItemId(0)
+
     } else {
-      setSelectedItem(id)
+      setSelectedItemId(itemId)
       setUserDetails({
         ...userDetails,
-        treeTypeIdToPlant: data[id].id,
+        treeTypeIdToPlant: itemId,
       })
     }
     setOpen(false)
@@ -92,7 +72,7 @@ export const CustomSelect: React.FC = () => {
   })
 
   return (
-    <div className={`${s.dropdown} ${isOpen ? s.focused : ''}`}>
+    <div className={dropdownStyles}>
       <div
         className={`${s.dropdownHeader}`}
         onClick={() => {
@@ -100,61 +80,63 @@ export const CustomSelect: React.FC = () => {
         }}
       >
         <div className={s.dropdownHeaderContent}>
-          {items.map(
-            (item: IData, index: number) =>
-              selectedItem === index && (
+          {itemsInfo.map(
+            (item: TreesInfo, index: number) =>
+              selectedItemId === index && (
                 <img
                   key={index}
                   className={s.dropdownHeaderPrefix}
-                  src={TreeTypeSelectorImages[index]}
+                  src={icons[index]}
                   alt={'tree icon'}
                 />
               )
           )}
           <div className={s.headerContentContainer}>
             <h2>
-              {items.find((item: IData) => item.id == selectedItem)?.name}
+              {itemsInfo.find((item: TreesInfo, index: number) => index == selectedItemId)?.name}
             </h2>
-            <p>{items.find((item: IData) => item.id == selectedItem)?.label}</p>
+            <p>{itemsInfo.find((item: TreesInfo, index: number) => index == selectedItemId)?.label}</p>
           </div>
         </div>
         <div className={s.dropdownHeaderRightPull}>
-          <div className={`${s.itemPrice} ${s.itemPriceDropdownHeader}`}>
-            <h2>5</h2>
-            <p>{ticker}</p>
+          <div className={classNames(s.itemPrice, s.itemPriceDropdownHeader)}>
+            <h2>{prices[0]}</h2>
+            <p>{currency}</p>
           </div>
           <img
-            className={`${s.dropDownArrow} ${isOpen ? s.rotate180 : ''}`}
+            className={arrowStyles}
             src={arrowDown}
             alt="arrow down"
           />
         </div>
       </div>
-      <div className={`${s.dropdownBody} ${isOpen ? s.dropdownBodyOpen : ''}`}>
-        {items.map(
-          (item: IData, index: number) =>
+      <div className={dropdownBodyStyles}>
+        {itemsInfo.map(
+          (item: TreesInfo, index: number) =>
             userDetails.treesCount[index] !== 0 && (
               <div
-                key={item.id + index}
-                className={`${s.dropdownItem} ${selectedItem === item.id ? s.selectedItem : ''
-                  }`}
-                onClick={() => handleItemClick(item.id)}
+                key={item.name + index}
+                className={classNames(s.dropdownItem, { [s.selectedItem]: selectedItemId === index })}
+                onClick={() => handleItemClick(index, item.name)}
               >
                 <div className={s.dropdownItemPrefixContainer}>
                   <img
                     key={index}
-                    className={`${s.dropdownHeaderPrefix} ${s.dropdownChildItem}`}
-                    src={TreeTypeSelectorImages[item.id]}
+                    className={classNames(s.dropdownHeaderPrefix, s.dropdownChildItem)}
+                    src={TreeTypeSelectorImages[index]}
                     alt={'tree icon'}
                   />
                   <div className={s.dropdownItemContent}>
                     <div className={s.dropdownLabel}>{item.name}</div>
                     <div className={s.availableCount}>
-                      {`Available: ${userDetails.treesCount[item.id]}`}
+                      {`Available: ${userDetails.treesCount[index]}`}
                     </div>
                   </div>
                 </div>
-                <div className={s.itemPrice}>{`5 ${ticker}`}</div>
+                <div className={s.itemPrice}>
+                  {prices.map((price: number, priceIndex: number) => priceIndex === index && price)}
+                  {` ${currency}`}
+                </div>
               </div>
             )
         )}

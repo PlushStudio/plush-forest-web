@@ -14,7 +14,7 @@ import { Page } from '@/Page'
 import routes from "@/components/Router/routes";
 import { UserTokens } from "@/types/UserTokens";
 import { Gender } from "@/types/Gender";
-import {testnetNetworkId} from "@/constants";
+import { testnetNetworkId } from "@/constants";
 
 export const Routes = () => {
   const [userDetails, setUserDetails] = useContext(userDetailsContext)

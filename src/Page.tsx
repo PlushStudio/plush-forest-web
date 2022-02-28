@@ -25,7 +25,8 @@ export const Page = (props: Props) => {
         case routes.planting:
           setIsDataLoaded(userDetails.address !== undefined
             && userDetails.name !== undefined
-            && userDetails.treesCount.length !== 0)
+            && userDetails.treesCount.length !== 0
+            && userDetails.treesPrice.length !== 0)
           break
         case routes.index:
           setIsDataLoaded(true)

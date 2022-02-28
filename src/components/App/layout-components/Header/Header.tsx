@@ -14,7 +14,7 @@ export const Header: FC = () => {
   const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
   const [userDetails, setUserDetails] = useContext(userDetailsContext)
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false)
-  const { getTreeTypeCount } = useTreeContract()
+  const { getTreeTypeCount, getTreeTypePrice } = useTreeContract()
   const { provider } = useMetamaskWallet()
 
   const setContractData = async (address: string | undefined,
@@ -37,6 +37,12 @@ export const Header: FC = () => {
             await getTreeTypeCount('CACAO'),
             await getTreeTypeCount('GUABA'),
             await getTreeTypeCount('CAOBA')
+          ],
+          treesPrice: [
+            await getTreeTypePrice('SHIHUAHUACO'),
+            await getTreeTypePrice('CACAO'),
+            await getTreeTypePrice('GUABA'),
+            await getTreeTypePrice('CAOBA')
           ],
           networkId: Number(NETWORK_ID)
         })

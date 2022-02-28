@@ -17,8 +17,16 @@ import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import { useHistory } from "react-router";
 import routes from "@/components/Router/routes";
+import shihuahuacoIcon from "@/assets/images/tree-icon-selector/shihuahuaco.png";
+import cacaoIcon from "@/assets/images/tree-icon-selector/cacao.png";
+import guabaIcon from "@/assets/images/tree-icon-selector/guaba.png";
+import caobaIcon from "@/assets/images/tree-icon-selector/caoba.png";
+import { treesInfo } from "@/assets/data/Trees";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
+
+const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
+const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
 export const PlantPage = () => {
   const input = useRef<HTMLInputElement>(null)
@@ -28,18 +36,23 @@ export const PlantPage = () => {
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState(shihuahuacoTreeImage)
   const [userDetails] = useContext(userDetailsContext)
-  const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
   const { getBuyAllowance, getApprove } = usePLAIContract()
-  const { mintTree } = useTreeContract()
+  const { mintTree, getSafeBalance, deposit } = useTreeContract()
   const history = useHistory()
 
   useEffect(() => {
+
     setTreeImage(plantingTreeImages[userDetails.treeTypeIdToPlant])
   }, [userDetails.treeTypeIdToPlant])
 
   const checkTokenAvailability = async () => {
     //empty message for Pilot
-    const treeMintingResult = await mintTree(userDetails.address, treeNames[userDetails.treeTypeIdToPlant], nameFrom, userDetails.childName, '')
+    const treeMintingResult = await mintTree(userDetails.address,
+      treeNames[userDetails.treeTypeIdToPlant],
+      String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18),
+      nameFrom,
+      userDetails.childName,
+      '')
     if (treeMintingResult) {
       const getMyTokensInterval = setInterval(async () => {
         const myTokens: UserTokens = await api.user.users.tokens.request(getMyTokensInterval)
@@ -53,10 +66,11 @@ export const PlantPage = () => {
   }
   const startAllowanceLoop = async (delay: number = 7000) => {
     const updateBuyAllowance = setInterval(async function () {
-      const allowance = await getBuyAllowance(userDetails.address)
+      const allowance = await getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
       if (allowance) {
         setPlantingStatus('Planting your tree')
         clearInterval(updateBuyAllowance)
+        await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
         await checkTokenAvailability()
       }
     }, delay)
@@ -67,28 +81,37 @@ export const PlantPage = () => {
     if (!myTokens.tokens.length) {
       setIsPlanting(true)
       try {
-        const allowance = await getBuyAllowance(userDetails.address)
-        if (allowance) {
-          setPlantingStatus('Planting your tree')
-          await checkTokenAvailability()
-        } else {
-          const updateBuyAllowance = setInterval(async function () {
-            const allowanceResult = getBuyAllowance(userDetails.address)
-            if (await allowanceResult) {
-              clearInterval(updateBuyAllowance)
+        const safeBalance = await getSafeBalance(userDetails.address)
+        if (safeBalance !== undefined) {
+          if (safeBalance >= Number(userDetails.treesPrice[userDetails.treeTypeIdToPlant])) {
+            await checkTokenAvailability()
+          } else {
+            const allowance = await getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+            if (allowance) {
               setPlantingStatus('Planting your tree')
+              await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
               await checkTokenAvailability()
             } else {
-              setPlantingStatus('Confirmation')
-              clearInterval(updateBuyAllowance)
-              try {
-                await getApprove()
-                await startAllowanceLoop()
-              } catch (e) {
-                setIsPlanting(false)
-              }
+              const updateBuyAllowance = setInterval(async function () {
+                const allowanceResult = getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                if (await allowanceResult) {
+                  clearInterval(updateBuyAllowance)
+                  setPlantingStatus('Planting your tree')
+                  await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                  await checkTokenAvailability()
+                } else {
+                  setPlantingStatus('Confirmation')
+                  clearInterval(updateBuyAllowance)
+                  try {
+                    await getApprove(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                    await startAllowanceLoop()
+                  } catch (e) {
+                    setIsPlanting(false)
+                  }
+                }
+              }, 7000)
             }
-          }, 7000)
+          }
         }
       } catch (e: any) {
         setIsPlanting(false)
@@ -99,7 +122,7 @@ export const PlantPage = () => {
     }
   }
 
-  const startMintProcess = async (e: any) => {
+  const startMintProcess = async (e?: any) => {
     e.preventDefault()
     if (!nameFrom?.length) {
       input.current?.focus()
@@ -126,7 +149,10 @@ export const PlantPage = () => {
                 <Form.Label className={s.formLabel}>
                   To {userDetails.childName}
                 </Form.Label>
-                <CustomSelect />
+                <CustomSelect currency={userDetails.currency}
+                  itemsInfo={treesInfo}
+                  icons={treeTypeSelectorImages}
+                  prices={userDetails.treesPrice}/>
               </Form.Group>
               <Form.Group controlId="treeName" className={s.inputWrapper}>
                 <Form.Label className={s.formLabel}>

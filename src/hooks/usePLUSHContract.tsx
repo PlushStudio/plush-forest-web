@@ -5,6 +5,7 @@ import { ExternalProvider, JsonRpcSigner, Web3Provider } from '@ethersproject/pr
 
 const getTreeContractAddress = window.config.TREE_CONTRACT_ADDRESS ?? import.meta.env.VITE_TREE_CONTRACT_ADDRESS
 const PLUSHContractAddress = window.config.PLUSH_CONTRACT_ADDRESS ?? import.meta.env.VITE_PLUSH_CONTRACT_ADDRESS
+const coinWalletsContractAddress = window.config.COIN_WALLETS_CONTRACT_ADDRESS ?? import.meta.env.VITE_COIN_WALLETS_CONTRACT_ADDRESS
 
 const usePLUSHContract = () => {
   const [provider, setProvider] = useState<Web3Provider>()
@@ -42,19 +43,19 @@ const usePLUSHContract = () => {
     detectProvider()
   }, [])
 
-  const getBuyAllowance = async (address: string): Promise<boolean> => {
-    const allowanceResult = await PLUSHContract.allowance(address, getTreeContractAddress)
-    return parseInt(allowanceResult._hex, 16) === 5000000000000000000
+  const getBuyAllowance = async (address: string, treePrice: string): Promise<boolean> => {
+    const allowanceResult = await PLUSHContract.allowance(address, coinWalletsContractAddress)
+    return Number(ethers.utils.formatEther(allowanceResult)) >= Number(ethers.utils.formatEther(treePrice))
   }
 
-  const getApprove = async () => {
+  const getApprove = async (treePrice: string) => {
     let PLUSHContract = new ethers.Contract(
       PLUSHContractAddress,
       genericErc20Abi,
       // @ts-ignore
       signer
     )
-    await PLUSHContract.approve(getTreeContractAddress, '5000000000000000000')
+    await PLUSHContract.approve(coinWalletsContractAddress, treePrice)
   }
 
   return {
