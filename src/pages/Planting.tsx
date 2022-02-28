@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { MouseEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import shihuahuacoTreeImage from '@/assets/images/planting-tree/shihuahuaco.png'
@@ -22,6 +22,7 @@ import cacaoIcon from "@/assets/images/tree-icon-selector/cacao.png";
 import guabaIcon from "@/assets/images/tree-icon-selector/guaba.png";
 import caobaIcon from "@/assets/images/tree-icon-selector/caoba.png";
 import { treesInfo } from "@/assets/data/Trees";
+import { errors } from "@/hooks/useMetamaskWallet";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -93,8 +94,8 @@ export const PlantPage = () => {
               await checkTokenAvailability()
             } else {
               const updateBuyAllowance = setInterval(async function () {
-                const allowanceResult = getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
-                if (await allowanceResult) {
+                const allowancePromise = getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                if (await allowancePromise) {
                   clearInterval(updateBuyAllowance)
                   setPlantingStatus('Planting your tree')
                   await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
@@ -115,15 +116,15 @@ export const PlantPage = () => {
         }
       } catch (e: any) {
         setIsPlanting(false)
-        console.log(e.message)
+        throw errors.walletNotConnected
       }
     } else {
       history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
     }
   }
 
-  const startMintProcess = async (e?: any) => {
-    e.preventDefault()
+  const startMintProcess = async (e?: MouseEvent<HTMLButtonElement>) => {
+    e?.preventDefault()
     if (!nameFrom?.length) {
       input.current?.focus()
       setIsVisited(true)
@@ -152,7 +153,7 @@ export const PlantPage = () => {
                 <CustomSelect currency={userDetails.currency}
                   itemsInfo={treesInfo}
                   icons={treeTypeSelectorImages}
-                  prices={userDetails.treesPrice}/>
+                  prices={[1,2,3,4]}/>
               </Form.Group>
               <Form.Group controlId="treeName" className={s.inputWrapper}>
                 <Form.Label className={s.formLabel}>
@@ -178,7 +179,7 @@ export const PlantPage = () => {
               )}
               {!isPlanting && (
                 <MainActionButton
-                  onClick={(e: void) => startMintProcess(e)}
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
                   text="Plant your tree"
                   variant="small"
                   image="tree"

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import s from './MainActionButton.module.scss'
 import arrowIcon from '@/assets/images/24-px-1-outlined-arrow-right.svg'
 import treeIcon from '@/assets/images/32-px-1-outlined-tree-white.png'
@@ -9,7 +9,7 @@ interface IGetStartedBtn {
   text: string
   variant?: 'small' | ''
   image?: 'tree' | 'next'
-  onClick?: () => void
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   loading?: boolean
 }
 

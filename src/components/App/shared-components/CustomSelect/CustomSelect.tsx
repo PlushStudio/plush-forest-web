@@ -100,7 +100,7 @@ export const CustomSelect = ({ icons, itemsInfo, prices, currency, onSelect, cla
         </div>
         <div className={s.dropdownHeaderRightPull}>
           <div className={classNames(s.itemPrice, s.itemPriceDropdownHeader)}>
-            <h2>{prices[0]}</h2>
+            <h2>{prices[selectedItemId]}</h2>
             <p>{currency}</p>
           </div>
           <img
@@ -134,8 +134,7 @@ export const CustomSelect = ({ icons, itemsInfo, prices, currency, onSelect, cla
                   </div>
                 </div>
                 <div className={s.itemPrice}>
-                  {prices.map((price: number, priceIndex: number) => priceIndex === index && price)}
-                  {` ${currency}`}
+                  {`${prices[index]} ${currency}`}
                 </div>
               </div>
             )
