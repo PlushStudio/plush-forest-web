@@ -79,7 +79,7 @@ const Wallet: FC<{
               }
             }
           } catch (e) {
-            console.log(e)
+            throw Error(e.message);
           }
         }
         updateWalletNetwork()
