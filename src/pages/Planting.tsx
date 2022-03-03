@@ -153,7 +153,7 @@ export const PlantPage = () => {
                 <CustomSelect currency={userDetails.currency}
                   itemsInfo={treesInfo}
                   icons={treeTypeSelectorImages}
-                  prices={[1,2,3,4]}/>
+                  prices={userDetails.treesPrice}/>
               </Form.Group>
               <Form.Group controlId="treeName" className={s.inputWrapper}>
                 <Form.Label className={s.formLabel}>
