@@ -12,10 +12,10 @@ import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValue'
 import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-
 import TreeNotAvailable from '@/components/App/shared-components/TreeNotAvailable/TreeNotAvailable'
+
 export const TreeInfoPage: React.FC = () => {
-  const params = useParams<any>()
+  const params = useParams<{ id?: string }>();
   const [treeData, setTreeData] = useState<TreeData>(treeDefault)
   const [userHasToken, setUserHasToken] = useState<boolean | undefined>(undefined)
 
