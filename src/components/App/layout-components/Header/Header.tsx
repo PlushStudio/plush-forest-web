@@ -75,7 +75,7 @@ export const Header: FC = () => {
     },
     {
       title: 'Request features',
-      href: '/',
+      href: routes.index,
       icon: cakeIcon
     }
   ];

@@ -3,7 +3,7 @@ import { Header } from '@/components/App/layout-components/Header/Header'
 import NoPlushTokenModal from "@/components/App/shared-components/NoPlushTokenModal/NoPlushTokenModal";
 import { userDetailsContext } from "@/context/UserDetailsProvider";
 import { CircleLoader } from "@/components/App/shared-components/Loader/CircleLoader";
-import { useParams } from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import routes from "@/components/Router/routes";
 
 type Props = {
@@ -18,6 +18,7 @@ export const Page = (props: Props) => {
   const [userDetails] = useContext(userDetailsContext)
   const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
   const params = useParams<{ id?: string }>();
+  const { pathname } = useLocation()
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -45,12 +46,13 @@ export const Page = (props: Props) => {
     {!!props.headerComponent &&
       props.headerComponent
     }
-    {isDataLoaded ?
+    { `/${pathname.split('/')[1]}` !== `${routes.token}` ?
+      isDataLoaded ?
       <div className={`${props.contentClass}`}>
         {userDetails.hasToken !== false ? props.children :
           <NoPlushTokenModal redirectTo={'https://plush.family/'} />
         }
-      </div> : <CircleLoader />}
+      </div> : <CircleLoader /> : props.children }
     {!!props.footerComponent &&
       props.footerComponent
     }

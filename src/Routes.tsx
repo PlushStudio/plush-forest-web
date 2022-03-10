@@ -99,7 +99,7 @@ export const Routes = () => {
 
   return (
     <Switch>
-      <Route path='/token/:id/'>
+      <Route path={`${routes.token}/:id/`}>
         <Page children={<TreeInfoPage />} />
       </Route>
       {forestTokenId.length > 0 && userDetails.networkId === Number(testnetNetworkId) && <Redirect to={`${routes.token}/${forestTokenId}`} />}
