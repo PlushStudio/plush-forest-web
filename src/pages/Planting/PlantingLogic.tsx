@@ -1,35 +1,23 @@
 import React, { MouseEvent, useContext, useEffect, useRef, useState } from 'react'
-import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import shihuahuacoTreeImage from '@/assets/images/planting-tree/shihuahuaco.png'
 import cacaoTreeImage from '@/assets/images/planting-tree/cacao.png'
 import guabaTreeImage from '@/assets/images/planting-tree/guaba.png'
 import caobaImage from '@/assets/images/planting-tree/caoba.png'
-import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
-import s from './Planting.module.scss'
-import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
-import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import usePLAIContract from '@/hooks/usePLUSHContract'
 import useTreeContract from '@/hooks/useTreeContract'
-import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import { useHistory } from "react-router";
 import routes from "@/components/Router/routes";
-import shihuahuacoIcon from "@/assets/images/tree-icon-selector/shihuahuaco.png";
-import cacaoIcon from "@/assets/images/tree-icon-selector/cacao.png";
-import guabaIcon from "@/assets/images/tree-icon-selector/guaba.png";
-import caobaIcon from "@/assets/images/tree-icon-selector/caoba.png";
-import { treesInfo } from "@/assets/data/Trees";
 import { errors } from "@/hooks/useMetamaskWallet";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
-const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
-const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
-
-export const PlantPage = () => {
+export const PlantingLogic = () => {
   const input = useRef<HTMLInputElement>(null)
   const [isVisited, setIsVisited] = useState<boolean>(false)
   const [isPlanting, setIsPlanting] = useState<boolean>(false)
@@ -40,9 +28,11 @@ export const PlantPage = () => {
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintTree, getSafeBalance, deposit } = useTreeContract()
   const history = useHistory()
+  const params = useParams<{ id?: string }>();
+
+  const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
   useEffect(() => {
-
     setTreeImage(plantingTreeImages[userDetails.treeTypeIdToPlant])
   }, [userDetails.treeTypeIdToPlant])
 
@@ -58,7 +48,7 @@ export const PlantPage = () => {
       const getMyTokensInterval = setInterval(async () => {
         const myTokens: UserTokens = await api.user.users.tokens.request(getMyTokensInterval)
         if (myTokens.total > 0) {
-          history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
+          await isTokenBackendAvailable(myTokens.tokens[0].token_id, 5000)
         }
       }, 5000)
     } else {
@@ -123,6 +113,26 @@ export const PlantPage = () => {
     }
   }
 
+  const isTokenBackendAvailable = async (tokenId: string, delay: number) => {
+    const checkTokenBackendInterval = setInterval(async () => {
+      try {
+        const tokenAvailabilityResult = await axios.get(
+          `${api.url}/forest/tokens/token/${tokenId}`,
+          { withCredentials: true }
+        )
+        if (tokenAvailabilityResult) {
+          history.push(`${routes.token}/${tokenId}`)
+          clearInterval(checkTokenBackendInterval)
+        }
+      }
+      catch (e: any) {
+        throw Error(e.message)
+      }
+    }, delay)
+
+    return checkTokenBackendInterval
+  }
+
   const startMintProcess = async (e?: MouseEvent<HTMLButtonElement>) => {
     e?.preventDefault()
     if (!nameFrom?.length) {
@@ -138,66 +148,18 @@ export const PlantPage = () => {
     setNameFrom(e.target.value)
   }
 
-  return (
-    <div className={s.backgroundContainer}>
-      <div className={s.container}>
-        {isPlanting ? (
-          <PlantingModal status={plantingStatus} />
-        ) : (
-          <div className={s.plantingFormWrapper}>
-            <Form className={s.plantingForm}>
-              <Form.Group controlId="treeName" className={s.formHeader}>
-                <Form.Label className={s.formLabel}>
-                  To {userDetails.childName}
-                </Form.Label>
-                <CustomSelect currency={userDetails.currency}
-                  itemsInfo={treesInfo}
-                  icons={treeTypeSelectorImages}
-                  prices={userDetails.treesPrice} />
-              </Form.Group>
-              <Form.Group controlId="treeName" className={s.inputWrapper}>
-                <Form.Label className={s.formLabel}>
-                  From
-                </Form.Label>
-                <CustomInput
-                  input={input}
-                  onChange={(e: any) => {
-                    nameFromHandler(e)
-                  }}
-                  value={nameFrom}
-                  type="text"
-                  placeholder="Your name"
-                  readonly={isPlanting}
-                  status={nameFrom || !isVisited ? 'isTyping' : 'error'}
-                  message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
-                />
-              </Form.Group>
-              {userDetails.balance < 5 && (
-                <span className={s.statusText}>
-                  You need more plush tokens to perform this operation
-                </span>
-              )}
-              {!isPlanting && (
-                <MainActionButton
-                  onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
-                  text="Plant your tree"
-                  variant="small"
-                  image="tree"
-                />
-              )}
-              {isPlanting && (
-                <MainActionButton
-                  loading={isPlanting}
-                  text="Planting..."
-                  variant="small"
-                  image="tree"
-                />
-              )}
-            </Form>
-            <img src={treeImage} className="planting-tree-image" alt="logo" />
-          </div>
-        )}
-      </div>
-    </div>
-  )
+  return {
+    nameFromHandler,
+    startMintProcess,
+    setIsPlanting,
+    setPlantingStatus,
+    setIsVisited,
+    setNameFrom,
+    setTreeImage,
+    isPlanting,
+    isVisited,
+    treeImage,
+    nameFrom,
+    plantingStatus
+  }
 }

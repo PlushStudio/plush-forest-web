@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { PageNotFound } from './pages/PageNotFound'
 import { AboutPage } from './pages/About'
-import { PlantPage } from './pages/Planting'
+import { Planting } from './pages/Planting/Planting'
 import { TreeInfoPage } from './pages/TreeInfo'
 import { userDetailsContext } from '@/context/UserDetailsProvider'
 import api from '@/api/api'
@@ -108,7 +108,7 @@ export const Routes = () => {
       </Route>
       <Route exact path={routes.planting}>
         {userDetails.address !== 'disconnected' ?
-          <Page children={<PlantPage />} /> :
+          <Page children={<Planting />} /> :
           <Redirect to={routes.index} />
         }
       </Route>
