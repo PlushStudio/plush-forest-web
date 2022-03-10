@@ -13,7 +13,6 @@ import { useHistory } from "react-router";
 import routes from "@/components/Router/routes";
 import { errors } from "@/hooks/useMetamaskWallet";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -28,7 +27,6 @@ export const PlantingLogic = () => {
   const { getBuyAllowance, getApprove } = usePLAIContract()
   const { mintTree, getSafeBalance, deposit } = useTreeContract()
   const history = useHistory()
-  const params = useParams<{ id?: string }>();
 
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
