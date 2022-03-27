@@ -59,7 +59,7 @@ export const PlantingLogic = () => {
       if (allowance) {
         setPlantingStatus('Planting your tree')
         clearInterval(updateBuyAllowance)
-        await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+        await deposit(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
         await checkTokenAvailability()
       }
     }, delay)
@@ -78,7 +78,7 @@ export const PlantingLogic = () => {
             const allowance = await getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
             if (allowance) {
               setPlantingStatus('Planting your tree')
-              await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+              await deposit(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
               await checkTokenAvailability()
             } else {
               const updateBuyAllowance = setInterval(async function () {
@@ -86,7 +86,7 @@ export const PlantingLogic = () => {
                 if (await allowancePromise) {
                   clearInterval(updateBuyAllowance)
                   setPlantingStatus('Planting your tree')
-                  await deposit(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                  await deposit(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
                   await checkTokenAvailability()
                 } else {
                   setPlantingStatus('Confirmation')
