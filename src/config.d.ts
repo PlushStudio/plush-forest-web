@@ -14,4 +14,5 @@ interface Config {
   SIGNUP_LINK: string,
   MATOMO_URL?: string,
   MATOMO_SITE_ID?: string
+  LANDING_URL: string
 }

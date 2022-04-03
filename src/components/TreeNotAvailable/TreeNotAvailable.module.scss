@@ -1,0 +1,81 @@
+@use "../../assets/styles/theme";
+@use '../../assets/styles/variables';
+
+.container {
+  margin-top: 66px;
+}
+
+.modal {
+  margin: 0 auto;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 131px 40px;
+  background-color: theme.$white;
+  border-radius: 24px;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.02),
+    0 8px 8px -2px rgba(0, 0, 0, 0.02), 0 16px 16px -4px rgba(0, 0, 0, 0.03),
+    0 32px 32px -8px rgba(0, 0, 0, 0.04), 0 64px 64px -12px rgba(0, 0, 0, 0.03);
+  position: relative;
+  z-index: variables.$medium-order;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 74px;
+    left: 110px;
+    width: 218px;
+    height: 152px;
+    transform: rotate(-45deg);
+    filter: blur(50px);
+    background-image: linear-gradient(183deg, #ffedcc 97%, #d6f7ff 4%);
+    opacity: 0.5;
+    z-index: variables.$low-order;
+  }
+  &::after {
+    position: absolute;
+    content: '';
+    top: 74px;
+    left: 260px;
+    width: 218px;
+    height: 152px;
+    background-color: black;
+    z-index: variables.$low-order;
+    transform: rotate(-45deg);
+    filter: blur(50px);
+    background-image: linear-gradient(183deg, #ffd8ed 97%, #dcf3ff 3%);
+    opacity: 0.5;
+  }
+  img {
+    height: 136px;
+    width: 172px;
+    margin-bottom: 28px;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 4px;
+    font-family: 'Moranga', sans-serif;
+    font-weight: 500;
+    color: theme.$grey-800;
+  }
+
+  p {
+    font-family: 'AvenirNextRoundedPro-Reg', sans-serif;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: theme.$grey-800;
+  }
+
+  a {
+    font-family: 'AvenirNextRoundedPro-Reg', sans-serif;
+    text-decoration: none;
+    color: theme.$white;
+    font-size: 20px;
+    border-radius: 160px;
+    padding: 14px 52px;
+    background: linear-gradient(0deg, #03af86 0%, #3ecc78 100%);
+    box-shadow: inset 0 -1px 0 0 #009369;
+  }
+}

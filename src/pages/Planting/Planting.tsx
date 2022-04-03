@@ -1,24 +1,24 @@
-import React, { MouseEvent, useContext, useRef } from 'react'
+import React, { MouseEvent, useRef } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
+import { CustomInput } from '@/components/CustomInput/CustomInput'
 import s from './Planting.module.scss'
-import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
-import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
-import { userDetailsContext } from '@/context/UserDetailsProvider'
-import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
+import { MainActionButton } from '@/components/MainActionButton/MainActionButton'
+import { CustomSelect } from '@/components/CustomSelect/CustomSelect'
+import { PlantingModal } from '@/components/PlantingModal/PlantingModal'
 import shihuahuacoIcon from "@/assets/images/tree-icon-selector/shihuahuaco.png";
 import cacaoIcon from "@/assets/images/tree-icon-selector/cacao.png";
 import guabaIcon from "@/assets/images/tree-icon-selector/guaba.png";
 import caobaIcon from "@/assets/images/tree-icon-selector/caoba.png";
 import { treesInfo } from "@/assets/data/Trees";
 import { PlantingLogic } from "@/pages/Planting/PlantingLogic";
+import { useStore } from "effector-react";
+import { $user } from "@/store/user";
 
 const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
 
 export const Planting = () => {
   const input = useRef<HTMLInputElement>(null)
-  const [userDetails] = useContext(userDetailsContext)
   const {
     startMintProcess,
     nameFromHandler,
@@ -28,6 +28,8 @@ export const Planting = () => {
     plantingStatus,
     treeImage
   } = PlantingLogic()
+
+  const { childs } = useStore($user)
 
   return (
     <div className={s.backgroundContainer}>
@@ -39,12 +41,11 @@ export const Planting = () => {
             <Form className={s.plantingForm}>
               <Form.Group controlId="treeName" className={s.formHeader}>
                 <Form.Label className={s.formLabel}>
-                  To {userDetails.childName}
+                  To {childs[0].name}
                 </Form.Label>
-                <CustomSelect currency={userDetails.currency}
+                <CustomSelect currency={"PLSH"}
                   itemsInfo={treesInfo}
-                  icons={treeTypeSelectorImages}
-                  prices={userDetails.treesPrice} />
+                  icons={treeTypeSelectorImages} />
               </Form.Group>
               <Form.Group controlId="treeName" className={s.inputWrapper}>
                 <Form.Label className={s.formLabel}>
@@ -63,7 +64,7 @@ export const Planting = () => {
                   message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
                 />
               </Form.Group>
-              {userDetails.balance < 5 && (
+              {4 < 5 && (
                 <span className={s.statusText}>
                   You need more plush tokens to perform this operation
                 </span>

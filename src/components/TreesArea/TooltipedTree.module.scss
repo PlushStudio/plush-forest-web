@@ -1,0 +1,47 @@
+@use '../../assets/styles/theme';
+@use '../../assets/styles/variables';
+
+.popoverWrapper {
+  width: fit-content;
+  padding: 10px;
+}
+
+.popoverContent {
+  padding: 14px 24px 20px 24px;
+}
+
+.popoverTitle {
+  text-align: center;
+  background-color: theme.$grey-800 !important;
+  color: theme.$grays-000-white;
+  font-family: Moranga, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 20px 20px 0 0 !important;
+}
+
+.popoverMainText {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  text-align: center;
+  color: theme.$grey-800 !important;
+}
+
+.popoverMinorText {
+  margin: 6px 48px;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 14px;
+  line-height: 1.43;
+  text-align: center;
+  color: theme.$grays-500
+}
+
+.popoverActionText {
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  color: theme.$emerald-01-solid-emerald-700;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}

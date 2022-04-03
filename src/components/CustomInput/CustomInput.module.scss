@@ -1,0 +1,83 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/theme';
+
+.inputContainer {
+  width: 488px;
+  padding: 0px 14px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid theme.$white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  background-color: theme.$white;
+  height: 64px;
+
+  &.hidden {
+    .nameText {
+      display: none;
+    }
+  }
+
+  &.error {
+    background-image: url(../../assets/images/inputWarning.svg);
+    background-repeat: no-repeat;
+    background-position: 446px center;
+    border: 1px solid theme.$light-pink;
+    transition: box-shadow .2s;
+    flex-direction: row;
+    align-items: center;
+    &:focus-within {
+      box-shadow: 0 0 0 4px theme.$light-pink-200;
+    }
+  }
+
+  &.isTyping {
+    transition: .2s;
+
+    &:focus-within {
+      box-shadow: 0 0 0 4px theme.$purple-light-200;
+      border: 1px solid theme.$purple-2;
+    }
+
+    &:hover {
+      border: solid 1px theme.$purple-light;
+    }
+  }
+}
+
+.nameText {
+  width: fit-content;
+  color: theme.$solid-blue-600;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0;
+}
+
+.customInput {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 18px;
+  line-height: 24px;
+  color: theme.$grey-800;
+  background-color: rgba(0 ,0 ,0 ,0);
+}
+
+.customInput::placeholder {
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 18px;
+  color: theme.$grey-800;
+}
+
+.inputMessage {
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+  color:  theme.$light-pink;
+  font-family: AvenirNextRoundedPro-REg, sans-serif;
+  font-size: 14px;
+  padding-left: 8px;
+  margin-bottom: 0;
+}

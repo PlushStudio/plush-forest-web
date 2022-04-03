@@ -1,0 +1,20 @@
+.status {
+  align-items: center;
+  display: flex;
+
+  .statusIcon {
+    &.small {
+      height: 28px;
+      margin-left: 2px;
+      margin-right: 2px;
+      width: 28px;
+    }
+
+    &.big {
+      height: 32px;
+      margin-left: 4px;
+      margin-right: 4px;
+      width: 32px;
+    }
+  }
+}

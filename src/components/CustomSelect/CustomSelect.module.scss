@@ -1,0 +1,178 @@
+@use '../../assets/styles/variables';
+@use '../../assets/styles/theme';
+
+.dropdown {
+  border-radius: 16px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  background-image: linear-gradient(to bottom, #fff 0%, #f1f1f1 100%);
+  border: solid 1px theme.$white;
+  position: relative;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &.focused {
+    box-shadow: 0 0 0 4px rgba(86, 104, 254, 0.2) !important;
+    border: 1px solid #5668fe !important;
+  }
+}
+
+.dropdownHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  height: 80px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dropdownHeaderContent {
+  display: flex;
+  align-items: center;
+}
+
+.headerContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  h2 {
+    font-size: 20px;
+    color: theme.$grey-800;
+    margin-bottom: 0px;
+  }
+  p {
+    margin: 0;
+    font-size: 16px;
+    color: theme.$grays-500;
+  }
+}
+
+.dropdownHeaderRightPull {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownBody {
+  display: none;
+  position: absolute;
+  border-top: 1px solid #e5e8ec;
+  background: white;
+  width: 100%;
+  top: 94px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgb(0 0 0 / 10%);
+}
+
+.dropdownBodyOpen {
+  display: block;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  transition: 0.2s ease;
+
+  &:first-child {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: theme.$purple-super-light;
+  }
+
+  &:hover .itemPrice {
+    background: theme.$white;
+  }
+}
+
+.selectedItem {
+  background: theme.$purple-super-light;
+  .itemPrice{
+    background-color: theme.$white;
+  }
+}
+
+.dropdownItemPrefix {
+  width: 64px;
+  height: 64px;
+  margin: 0 12px 0 0;
+  border-radius: 160px;
+  background-position: center;
+}
+
+.dropdownItemPrefixContainer {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownHeaderPrefix {
+  width: 56px;
+  height: 56px;
+  margin: 0 18px 0 0;
+  border-radius: 160px;
+  background-position: center;
+}
+
+.dropdownChildItem {
+  width: 64px;
+  height: 64px;
+}
+
+.itemPrice {
+  padding: 5px 20px 7px;
+  padding-right: 10px;
+  background: theme.$grays-50;
+  border-radius: 26px;
+  font-size: 14px;
+  &.itemPriceDropdownHeader {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    margin-right: 10px;
+ background-color: theme.$light-grays-500;
+
+    h2 {
+      font-size: 14px;
+      margin: 0;
+      color: theme.$grey-800;
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+
+    }
+    p {
+      font-size: 12px;
+      margin: 0;
+      color: theme.$grays-500;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+    }
+
+  }
+}
+
+.dropDownArrow {
+  transition: all 0.2s ease-in-out;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
+.availableCount {
+  color: theme.$grey-600;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 14px;
+  display: flex;
+}
+
+.dropdownLabel {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 16px;
+  color: theme.$grey-800;
+}

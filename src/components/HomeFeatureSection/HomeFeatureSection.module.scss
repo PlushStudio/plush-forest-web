@@ -1,0 +1,145 @@
+@use '../../assets/styles/theme';
+@use '../../assets/styles/variables';
+
+.container {
+  display: flex;
+  align-items: center;
+  &:nth-of-type(2) {
+    margin-top: -105px;
+  }
+  &:nth-of-type(3) {
+    margin-top: -105px;
+  }
+}
+
+.twoBirds {
+  width: 525px;
+}
+
+.womanWithPlant {
+  height: 530px;
+  margin-left: -40px;
+}
+
+.bigTree {
+  height: 408px;
+}
+
+.leaf {
+  position: absolute;
+  right: 87px;
+  top: 100px;
+  width: 70px;
+}
+
+.lines {
+  position: absolute;
+  right: 0;
+  top: -10px;
+  width: 145px;
+}
+
+.firstContainerText {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5em;
+  width: 50%;
+  margin-top: 28px;
+}
+
+.secondContainerText {
+  display: flex;
+  flex-direction: column;
+  width: 47%;
+  margin-top: -20px;
+}
+.thirdContainerText {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5em;
+  width: 50%;
+  margin-top: 98px;
+}
+.leafContainer {
+  position: absolute;
+  right: 0;
+  top: 1664px;
+}
+
+.imageBlock {
+  position: relative;
+  width: 439px;
+}
+
+.widthAuto {
+  width: auto;
+}
+
+.steps {
+  position: absolute;
+  left: 14px;
+  z-index: variables.$low-order;
+  top: 262px;
+  width: 116px;
+  height: 112px;
+  margin: 28px 412px 0 0;
+  object-fit: contain;
+}
+
+.link {
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  color: theme.$emerald-600-s;
+  width: 100%;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.title {
+  height: 40px;
+  font-family: Moranga, sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.43;
+  color: theme.$grey-800;
+}
+
+.description {
+  width: 100%;
+  margin: 16px 0 18px;
+  font-family: AvenirNextRoundedPro-Reg, sans-serif;
+  font-size: 20px;
+  white-space: normal;
+  line-height: 1.4;
+  color: theme.$grey-800;
+}
+
+.sectionThreeDescription {
+  max-width: 96%;
+}
+
+.sectionThreeGetStarted {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  width: 100%;
+  color: theme.$grey-800;
+  padding-bottom: 4em;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+.plantingDots {
+  position: absolute;
+  left: 0;
+  z-index: variables.$low-order;
+  top: 74px;
+}
+
+.dots {
+  position: absolute;
+  left: 104px;
+  top: 104px;
+  width: 342px;
+  height: 304px;
+  object-fit: contain;
+  z-index: variables.$low-order;
+}
