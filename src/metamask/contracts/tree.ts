@@ -1,4 +1,4 @@
-import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
+import { JsonRpcSigner } from '@ethersproject/providers'
 import { Contract, ethers } from 'ethers'
 import axios from "axios";
 import api from "@/api/api";
@@ -8,21 +8,14 @@ const address = window.config.TREE_CONTRACT_ADDRESS ?? import.meta.env.VITE_TREE
 
 class TreeContractManager {
   contract: Contract
-  readonly signer: JsonRpcSigner;
 
-  constructor(provider: Web3Provider) {
-    this.contract = new ethers.Contract(address, abi, provider)
-    this.signer = provider.getSigner()
+  constructor(signer: JsonRpcSigner) {
+    this.contract = new ethers.Contract(address, abi, signer)
   }
 
   mintTree = async (address: string, treeType: string, amount: string, from: string, name: string, message?: string) => {
     try {
-      let contractForMint = new ethers.Contract(
-        address,
-        abi,
-        this.signer
-      )
-      return await contractForMint.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
+      return await this.contract.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
         console.log(transferResult.hash)
         console.log({
           tree: treeType, name: name, from, message: 'Test message'})

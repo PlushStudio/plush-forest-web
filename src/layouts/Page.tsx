@@ -170,7 +170,7 @@ export const Page = (props: Props) => {
   }, [walletStore, user])
 
   return (
-    dataFetched && treesCount.length > 0 ?
+    dataFetched ?
       <>
         <Header
           walletProps={{

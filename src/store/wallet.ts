@@ -17,10 +17,11 @@ export const walletDomain = createDomain('wallet');
 
 export const getMetamaskWalletFx = createEffect(async (): Promise<WalletStore> => {
   const provider = await MetamaskWallet.detectProvider()
+  const signer = await provider.getSigner()
   const wallet = new MetamaskWallet(provider)
-  const plushContractManager = new PlushContractManager(provider)
+  const plushContractManager = new PlushContractManager(signer)
   const plushCoinWalletsContractManager = new PlushCoinWalletsContractManager(provider)
-  const treeContractManager = new TreeContractManager(provider)
+  const treeContractManager = new TreeContractManager(signer)
   const coreContractManager = new CoreContractManager(provider)
 
   return {

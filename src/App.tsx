@@ -9,14 +9,11 @@ import {$walletStore, getMetamaskWalletFx} from "@/store/wallet";
 import {useStore} from "effector-react";
 import {useUpdateEffect} from "usehooks-ts";
 import {CircleLoader} from "@/components/Loader/CircleLoader";
-import {$forest} from "@/store/forest";
 
 function App() {
   const walletStore = useStore($walletStore)
   const {isLoggedIn, isLoginStateRecieved} = useStore($auth)
   const user = useStore($user)
-  const {treesCount, treesPrice} = useStore($forest)
-  const [isMetamaskReady, setIsMetamaskReady] = useState<boolean>(true);
   const [isReady, setReady] = useState(false)
 
   const setInitialLoginState = async () => {

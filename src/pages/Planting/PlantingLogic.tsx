@@ -1,9 +1,9 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import shihuahuacoTreeImage from '@/assets/images/planting-tree/shihuahuaco.png'
-import cacaoTreeImage from '@/assets/images/planting-tree/cacao.png'
-import guabaTreeImage from '@/assets/images/planting-tree/guaba.png'
-import caobaImage from '@/assets/images/planting-tree/caoba.png'
+import shihuahuacoTreeImage from '@/assets/images/planting-tree/tree-shihuahuaco.png'
+import cacaoTreeImage from '@/assets/images/planting-tree/tree-cacao.png'
+import guabaTreeImage from '@/assets/images/planting-tree/tree-guaba.png'
+import caobaImage from '@/assets/images/planting-tree/tree-caoba.png'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import { useHistory } from "react-router";
