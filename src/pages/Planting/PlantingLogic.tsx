@@ -141,8 +141,9 @@ export const PlantingLogic = () => {
       input.current?.focus()
       setIsVisited(true)
     } else {
-      if (safeBalance > 5 || safeBalance > 5)
+      if (safeBalance > 5 || userBalance > 5) {
         await plantTreeHandler()
+      }
     }
   }
 
