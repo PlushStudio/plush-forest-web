@@ -13,7 +13,7 @@ class PlushContractManager {
   }
 
   getBalance = async (address: string): Promise<number> => {
-    const balanceStr = await this.contract.functions.balanceOf(address)
+    const balanceStr = await this.contract.balanceOf(address)
     const balance = parseInt(ethers.utils.formatUnits(balanceStr, 18))
     return balance
   }

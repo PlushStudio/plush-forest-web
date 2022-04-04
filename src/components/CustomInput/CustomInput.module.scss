@@ -28,6 +28,7 @@
     transition: box-shadow .2s;
     flex-direction: row;
     align-items: center;
+
     &:focus-within {
       box-shadow: 0 0 0 4px theme.$light-pink-200;
     }
@@ -62,7 +63,7 @@
   font-size: 18px;
   line-height: 24px;
   color: theme.$grey-800;
-  background-color: rgba(0 ,0 ,0 ,0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .customInput::placeholder {
@@ -75,7 +76,7 @@
   display: inline-block;
   width: 100%;
   margin-top: 10px;
-  color:  theme.$light-pink;
+  color: theme.$light-pink;
   font-family: AvenirNextRoundedPro-REg, sans-serif;
   font-size: 14px;
   padding-left: 8px;

@@ -79,6 +79,7 @@ function App() {
     }
 
     sync()
+
   }, [isLoginStateRecieved])
 
   useUpdateEffect(() => {
@@ -103,11 +104,9 @@ function App() {
       if (!walletStore.wallet) {
         return
       }
-
       walletStore.wallet.removeAccountsChangedListener(accountsChangedHandler)
     }
   }, [walletStore])
-
 
   useEffect(() => {
     getMetamaskWalletFx()

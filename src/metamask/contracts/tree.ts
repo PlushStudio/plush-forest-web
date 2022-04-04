@@ -16,9 +16,6 @@ class TreeContractManager {
   mintTree = async (address: string, treeType: string, amount: string, from: string, name: string, message?: string) => {
     try {
       return await this.contract.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
-        console.log(transferResult.hash)
-        console.log({
-          tree: treeType, name: name, from, message: 'Test message'})
         return axios.post(`${api.url}/forest/transactions/new`,
           {
             hash: transferResult.hash, tree: treeType, name: name, from, message: 'Test message'

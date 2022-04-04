@@ -1,4 +1,4 @@
-.accordion > .card > .card-header {
+.accordion>.card>.card-header {
   display: flex;
   justify-content: space-between;
   background: white;
@@ -7,7 +7,7 @@
   font-size: 18px;
 }
 
-.accordion > .card {
+.accordion>.card {
   border: none;
   outline: none;
   border-radius: 8px;
@@ -17,10 +17,12 @@
   }
 }
 
-.show, .collapsing {
+.show,
+.collapsing {
   max-width: 1050px;
 }
 
-.accordion .collapse, .accordion .collapsing {
+.accordion .collapse,
+.accordion .collapsing {
   padding: 0 5.2em;
 }

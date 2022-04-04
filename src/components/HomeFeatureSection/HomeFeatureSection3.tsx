@@ -3,6 +3,7 @@ import s from './HomeFeatureSection.module.scss'
 import bigTree from '@/assets/images/picture-large-tree.png'
 import leaf from '@/assets/images/leaf.svg'
 import lines from '@/assets/images/lines.svg'
+import classNames from "classnames";
 
 export const HomeFeatureSection3 = () => {
   return (
@@ -14,10 +15,10 @@ export const HomeFeatureSection3 = () => {
         <span className={s.title}>
           A forest of a thousand wishes.
         </span>
-        <span className={`${s.sectionThreeDescription} ${s.description}`}>
+        <span className={classNames(s.sectionThreeDescription, s.description)}>
           Each tree comes with an option to add a secret note for your child. Only your child will be able to read it, and only on a date that you specify. And thanks to smart contract technology, your message will be securely sealed until your child is ready to view it.
         </span>
-        <span className={`${s.sectionThreeGetStarted}`}>Coming soon</span>
+        <span className={s.sectionThreeGetStarted}>Coming soon</span>
       </div>
       <div className={s.leafContainer}>
         <img className={s.lines} src={lines} alt='lines' />

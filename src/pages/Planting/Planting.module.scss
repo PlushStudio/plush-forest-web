@@ -40,7 +40,7 @@
   height: 176px !important;
 }
 
-.formHeader{
+.formHeader {
   margin-bottom: 26px;
 }
 
@@ -51,6 +51,21 @@
   width: 100%;
 
 }
+
 .inputWrapper {
   margin-bottom: 0;
+}
+
+.statusText {
+  margin-top: 20px;
+  margin-left: 8px;
+  color: #c1656e;
+  font-family: 'AvenirNextRoundedPro-Demi', sans-serif;
+}
+
+.faucetLink {
+  text-decoration: underline;
+  color: #714fec;
+  cursor: pointer;
+
 }

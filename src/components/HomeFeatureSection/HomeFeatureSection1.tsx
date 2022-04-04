@@ -1,9 +1,19 @@
 import React from 'react'
 import s from './HomeFeatureSection.module.scss'
-import plantDots from '@/assets/images/planting-dots.svg'
 import womanWithPlant from '@/assets/images/woman-with-plants.png'
+import { setActiveAccordionTabId } from "@/store/app";
 
-export const HomeFeatureSection1 = () => {
+export const HomeFeatureSection1 = ({ accordionRef }: any) => {
+
+  const scrollToAccordion = () => {
+    setActiveAccordionTabId(0)
+    if (accordionRef && accordionRef.current) {
+      accordionRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <div className={s.container}>
       <div className={s.imageBlock}>
@@ -25,7 +35,7 @@ export const HomeFeatureSection1 = () => {
           communities, by giving them the necessary resources to lift them out
           of poverty.
         </span>
-        <span className={s.link}>How it works</span>
+        <span onClick={() => scrollToAccordion()} className={s.link}>How it works</span>
       </div>
     </div>
   )

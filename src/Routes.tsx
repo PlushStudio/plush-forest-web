@@ -6,12 +6,13 @@ import { Planting } from './pages/Planting/Planting'
 import { TreeInfoPage } from './pages/TreeInfo/TreeInfo'
 import { Page } from '@/layouts/Page'
 import routes from "@/Router/routes";
-import ProtectedRoute from "@/Router/ProtectedRoute";
 
 export const Routes = () => {
   return (
     <Switch>
-      <ProtectedRoute path={routes.planting} component={<Page children={<Planting />} />}/>
+      <Route exact path={routes.planting}>
+        <Page children={<Planting />} />
+      </Route>
       <Route exact path={routes.index}>
         <Page children={<AboutPage />} />
       </Route>

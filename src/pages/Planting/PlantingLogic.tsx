@@ -13,6 +13,7 @@ import { useStore } from "effector-react";
 import { $walletStore } from "@/store/wallet";
 import { $forest } from "@/store/forest";
 import { $user } from "@/store/user";
+import { $app } from "@/store/app";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -26,8 +27,10 @@ export const PlantingLogic = () => {
   const [treeImage, setTreeImage] = useState<string>(shihuahuacoTreeImage)
   const history = useHistory()
   const walletStore = useStore($walletStore)
-  const { selectedTreeType, treesPrice } = useStore($forest)
+  const { treesPrice } = useStore($forest)
+  const { selectedTreeType } = useStore($app)
   const user = useStore($user)
+  const { userBalance, safeBalance } = useStore($app)
 
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
@@ -138,7 +141,8 @@ export const PlantingLogic = () => {
       input.current?.focus()
       setIsVisited(true)
     } else {
-      await plantTreeHandler()
+      if (safeBalance > 5 || safeBalance > 5)
+        await plantTreeHandler()
     }
   }
 

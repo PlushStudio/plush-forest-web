@@ -12,8 +12,9 @@ import selectorGuabaImg from '@/assets/images/tree-type-selector/guaba.png'
 import selectorShihuahuacoImg from '@/assets/images/tree-type-selector/shihuahuaco.png'
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { useStore } from "effector-react";
-import { $forest, setActiveTreeEvent } from "@/store/forest";
+import { $forest } from "@/store/forest";
 import { treeNames } from "@/pages/Planting/PlantingLogic";
+import { setActiveTree } from "@/store/app";
 
 interface treeTooltip {
   name: string,
@@ -32,7 +33,7 @@ export const TreeTypeSelector = () => {
 
   const handleClick = (activeTreeId: number) => {
     setActiveTreeId(activeTreeId)
-    setActiveTreeEvent(treeNames[activeTreeId].toUpperCase())
+    setActiveTree(treeNames[activeTreeId].toUpperCase())
   }
 
   const TreeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]

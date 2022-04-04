@@ -33,6 +33,7 @@
     opacity: 0.5;
     z-index: variables.$low-order;
   }
+
   &::after {
     position: absolute;
     content: '';
@@ -47,6 +48,7 @@
     background-image: linear-gradient(183deg, #ffd8ed 97%, #dcf3ff 3%);
     opacity: 0.5;
   }
+
   img {
     height: 136px;
     width: 172px;

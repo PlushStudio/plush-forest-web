@@ -33,14 +33,16 @@
   bottom: 20px;
   z-index: variables.$medium-order;
 }
+
 @media (max-width: 1392px) {
-  .footerPlant{
+  .footerPlant {
     left: auto;
     right: 120px;
   }
 }
 
-.rightPull, .leftPull {
+.rightPull,
+.leftPull {
   display: flex;
   align-items: center;
   padding-top: 18px;
@@ -73,4 +75,3 @@
   cursor: default;
   padding-left: 12px;
 }
-

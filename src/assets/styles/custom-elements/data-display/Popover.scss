@@ -11,13 +11,13 @@
 .treeTooltipWrapper {
   z-index: variables.$higher-order;
 }
+
 .treeTooltipWrapper .arrow:after {
-  border-bottom-color: #26272a!important;
+  border-bottom-color: #26272a !important;
   position: initial;
   margin: 0 auto;
 }
 
 .treeTooltipWrapper .popover-header::before {
-  border-bottom: 1px solid #26272a!important;
+  border-bottom: 1px solid #26272a !important;
 }
-

@@ -4,9 +4,11 @@
 .container {
   display: flex;
   align-items: center;
+
   &:nth-of-type(2) {
     margin-top: -105px;
   }
+
   &:nth-of-type(3) {
     margin-top: -105px;
   }
@@ -53,6 +55,7 @@
   width: 47%;
   margin-top: -20px;
 }
+
 .thirdContainerText {
   display: flex;
   flex-direction: column;
@@ -60,6 +63,7 @@
   width: 50%;
   margin-top: 98px;
 }
+
 .leafContainer {
   position: absolute;
   right: 0;
@@ -92,6 +96,7 @@
   width: 100%;
   cursor: pointer;
   font-size: 20px;
+  z-index: variables.$higher-order;
 }
 
 .title {
@@ -114,7 +119,7 @@
 }
 
 .sectionThreeDescription {
-  max-width: 96%;
+  max-width: 600px;
 }
 
 .sectionThreeGetStarted {

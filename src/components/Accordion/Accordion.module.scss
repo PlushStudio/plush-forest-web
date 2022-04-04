@@ -4,13 +4,13 @@
   display: flex;
   justify-content: space-between;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
-  background: theme.$white !important;
-  border: none !important;
+  background: theme.$white;
+  border: none;
   height: 64px;
 }
 
 .card-body {
-  margin: 4px 140px 40px 42px !important;
+  margin: 4px 140px 40px 42px;
 }
 
 .secondAccordionTitle {
@@ -19,7 +19,8 @@
   padding: 16px 0;
 }
 
-.collapsing, .show {
+.collapsing,
+.show {
   background: theme.$white;
   margin-top: 4px;
 }

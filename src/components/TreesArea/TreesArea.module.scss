@@ -13,9 +13,11 @@
 }
 
 $screen-width: 1392;
+
 @function px-to-vw($value) {
-  @return ($value * 100) / $screen-width + vw;
+  @return ($value * 100) / $screen-width+vw;
 }
+
 .treesArea1 {
   right: 0;
   max-height: px-to-vw(720);
@@ -36,6 +38,7 @@ $screen-width: 1392;
   right: px-to-vw(95);
   top: px-to-vw(335);
 }
+
 .tree2 {
   height: px-to-vw(68);
   width: px-to-vw(92);
@@ -99,10 +102,12 @@ $screen-width: 1392;
   width: px-to-vw(88);
   height: px-to-vw(80);
 }
+
 @media (min-width: 1392px) {
   .treesArea1 {
     max-height: 720px;
   }
+
   .tree1 {
     position: absolute;
     width: 88px;
@@ -110,6 +115,7 @@ $screen-width: 1392;
     right: 95px;
     top: 335px;
   }
+
   .tree2 {
     height: 68px;
     width: 92px;
@@ -158,6 +164,7 @@ $screen-width: 1392;
     right: 546px;
     top: 382px;
   }
+
   .tree9 {
     right: 652px;
     top: 493px;

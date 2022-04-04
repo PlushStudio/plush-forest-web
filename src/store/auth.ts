@@ -9,11 +9,11 @@ export const logoutEvent = createEvent()
 export const loginEvent = createEvent()
 
 export const $auth = authDomain.createStore<{
-  isLoggedIn: boolean,
-  isLoginStateRecieved: boolean
+  isLoggedIn: boolean | undefined,
+  isLoginStateRecieved: boolean | undefined
 }>({
-  isLoggedIn: false,
-  isLoginStateRecieved: false
+  isLoggedIn: undefined,
+  isLoginStateRecieved: undefined
 })
 
 export const loginFx = createEffect(async (wallet: MetamaskWallet): Promise<void> => {

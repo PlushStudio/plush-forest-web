@@ -1,15 +1,12 @@
-import { createDomain, createEffect, createEvent } from 'effector';
+import { createDomain, createEffect } from 'effector';
 import { logoutEvent } from './auth';
 import { WalletStore } from "@/store/wallet";
 import { ApiTreesMy } from "@/services/forest/trees";
 
 export const forestDomain = createDomain('forest');
 
-export const setActiveTreeEvent = createEvent<string>()
-
 export const getForestDataFx = createEffect(async (walletStore: WalletStore): Promise<ApiTreesMy> => {
   return {
-    selectedTreeType: 'SHIHUAHUACO',
     treesPrice: [
       await walletStore.treeContractManager.getTreeTypePrice('SHIHUAHUACO'),
       await walletStore.treeContractManager.getTreeTypePrice('CACAO'),
@@ -27,13 +24,9 @@ export const getForestDataFx = createEffect(async (walletStore: WalletStore): Pr
 
 export const $forest = forestDomain
   .createStore<ApiTreesMy>({
-    selectedTreeType: 'SHIHUAHUACO',
     treesCount: [],
     treesPrice: [],
-  }).on(setActiveTreeEvent, (state, activeTree) => ({
-    ...state,
-    selectedTreeType: activeTree
-  })).reset(logoutEvent);
+  }).reset(logoutEvent);
 
 $forest.on(getForestDataFx.doneData, (_, forest: ApiTreesMy) => {
   return forest

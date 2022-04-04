@@ -31,9 +31,11 @@
   font-weight: 100;
   color: theme.$grays-500;
 }
+
 .disabledLink {
   pointer-events: none;
 }
+
 .contentBlock {
   display: flex;
   flex-direction: column;

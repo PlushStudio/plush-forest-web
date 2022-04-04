@@ -8,9 +8,10 @@ import treeIcon2 from '@/assets/images/tree-icon-selector/guaba.png'
 import treeIcon3 from '@/assets/images/tree-icon-selector/caoba.png'
 import classNames from "classnames";
 import { useStore } from "effector-react";
-import { $forest, setActiveTreeEvent } from "@/store/forest";
+import { $forest } from "@/store/forest";
 import { useOnClickOutside } from "usehooks-ts";
 import { treeNames } from "@/pages/Planting/PlantingLogic";
+import { $app, setActiveTree } from "@/store/app";
 
 interface TreesInfo {
   name: string,
@@ -29,7 +30,8 @@ const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
 export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }: CustomSelectProps) => {
   const [isOpen, setOpen] = useState<boolean>(false)
-  const { selectedTreeType, treesPrice, treesCount } = useStore($forest)
+  const { treesPrice, treesCount } = useStore($forest)
+  const { selectedTreeType } = useStore($app)
 
   const [selectedItemId, setSelectedItemId] = useState<number>(0)
 
@@ -47,7 +49,7 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
     if (onSelect) {
       onSelect(itemId, itemName)
     }
-    setActiveTreeEvent(itemName.toUpperCase())
+    setActiveTree(itemName.toUpperCase())
     setOpen(false)
   }
 
