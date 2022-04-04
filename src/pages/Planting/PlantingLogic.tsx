@@ -1,18 +1,19 @@
-import React, { MouseEvent, useContext, useEffect, useRef, useState } from 'react'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import shihuahuacoTreeImage from '@/assets/images/planting-tree/shihuahuaco.png'
-import cacaoTreeImage from '@/assets/images/planting-tree/cacao.png'
-import guabaTreeImage from '@/assets/images/planting-tree/guaba.png'
-import caobaImage from '@/assets/images/planting-tree/caoba.png'
-import { userDetailsContext } from '@/context/UserDetailsProvider'
-import usePLAIContract from '@/hooks/usePLUSHContract'
-import useTreeContract from '@/hooks/useTreeContract'
+import shihuahuacoTreeImage from '@/assets/images/planting-tree/tree-shihuahuaco.png'
+import cacaoTreeImage from '@/assets/images/planting-tree/tree-cacao.png'
+import guabaTreeImage from '@/assets/images/planting-tree/tree-guaba.png'
+import caobaImage from '@/assets/images/planting-tree/tree-caoba.png'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
 import { useHistory } from "react-router";
-import routes from "@/components/Router/routes";
-import { errors } from "@/hooks/useMetamaskWallet";
+import routes from "@/Router/routes";
 import axios from "axios";
+import { useStore } from "effector-react";
+import { $walletStore } from "@/store/wallet";
+import { $forest } from "@/store/forest";
+import { $user } from "@/store/user";
+import { $app } from "@/store/app";
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -20,27 +21,31 @@ export const PlantingLogic = () => {
   const input = useRef<HTMLInputElement>(null)
   const [isVisited, setIsVisited] = useState<boolean>(false)
   const [isPlanting, setIsPlanting] = useState<boolean>(false)
+  const [currentTreePrice, setCurrentTreePrice] = useState<string>('')
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState<string>('')
-  const [treeImage, setTreeImage] = useState(shihuahuacoTreeImage)
-  const [userDetails] = useContext(userDetailsContext)
-  const { getBuyAllowance, getApprove } = usePLAIContract()
-  const { mintTree, getSafeBalance, deposit } = useTreeContract()
+  const [treeImage, setTreeImage] = useState<string>(shihuahuacoTreeImage)
   const history = useHistory()
+  const walletStore = useStore($walletStore)
+  const { treesPrice } = useStore($forest)
+  const { selectedTreeType } = useStore($app)
+  const user = useStore($user)
+  const { userBalance, safeBalance } = useStore($app)
 
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
   useEffect(() => {
-    setTreeImage(plantingTreeImages[userDetails.treeTypeIdToPlant])
-  }, [userDetails.treeTypeIdToPlant])
+    setTreeImage(plantingTreeImages[treeNames.indexOf(selectedTreeType)])
+    setCurrentTreePrice(String(treesPrice[treeNames.indexOf(selectedTreeType)] * 10 ** 18))
+  }, [selectedTreeType])
 
   const checkTokenAvailability = async () => {
     //empty message for Pilot
-    const treeMintingResult = await mintTree(userDetails.address,
-      treeNames[userDetails.treeTypeIdToPlant],
-      String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18),
+    const treeMintingResult = await walletStore?.treeContractManager.mintTree(user.address,
+      selectedTreeType,
+      currentTreePrice,
       nameFrom,
-      userDetails.childName,
+      user.childs[0].name,
       '')
     if (treeMintingResult) {
       const getMyTokensInterval = setInterval(async () => {
@@ -55,11 +60,11 @@ export const PlantingLogic = () => {
   }
   const startAllowanceLoop = async (delay: number = 7000) => {
     const updateBuyAllowance = setInterval(async function () {
-      const allowance = await getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+      const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
       if (allowance) {
         setPlantingStatus('Planting your tree')
         clearInterval(updateBuyAllowance)
-        await deposit(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+        await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
         await checkTokenAvailability()
       }
     }, delay)
@@ -70,29 +75,29 @@ export const PlantingLogic = () => {
     if (!myTokens.tokens.length) {
       setIsPlanting(true)
       try {
-        const safeBalance = await getSafeBalance(userDetails.address)
+        const safeBalance = await walletStore?.plushCoinWalletsContractManager.getBalance(user.address)
         if (safeBalance !== undefined) {
-          if (safeBalance >= Number(userDetails.treesPrice[userDetails.treeTypeIdToPlant])) {
+          if (safeBalance >= Number(treesPrice[treeNames.indexOf(selectedTreeType)])) {
             await checkTokenAvailability()
           } else {
-            const allowance = await getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+            const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
             if (allowance) {
               setPlantingStatus('Planting your tree')
-              await deposit(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+              await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
               await checkTokenAvailability()
             } else {
               const updateBuyAllowance = setInterval(async function () {
-                const allowancePromise = getBuyAllowance(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                const allowancePromise = walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
                 if (await allowancePromise) {
                   clearInterval(updateBuyAllowance)
                   setPlantingStatus('Planting your tree')
-                  await deposit(userDetails.address, String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                  await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
                   await checkTokenAvailability()
                 } else {
                   setPlantingStatus('Confirmation')
                   clearInterval(updateBuyAllowance)
                   try {
-                    await getApprove(String(userDetails.treesPrice[userDetails.treeTypeIdToPlant] * 10 ** 18))
+                    await walletStore?.plushContractManager.getApprove(currentTreePrice)
                     await startAllowanceLoop()
                   } catch (e) {
                     setIsPlanting(false)
@@ -104,7 +109,7 @@ export const PlantingLogic = () => {
         }
       } catch (e: any) {
         setIsPlanting(false)
-        throw errors.walletNotConnected
+        throw new Error(e.message)
       }
     } else {
       history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
@@ -122,8 +127,7 @@ export const PlantingLogic = () => {
           history.push(`${routes.token}/${tokenId}`)
           clearInterval(checkTokenBackendInterval)
         }
-      }
-      catch (e: any) {
+      } catch (e: any) {
         throw Error(e.message)
       }
     }, delay)
@@ -137,7 +141,8 @@ export const PlantingLogic = () => {
       input.current?.focus()
       setIsVisited(true)
     } else {
-      await plantTreeHandler()
+      if (safeBalance > 5 || safeBalance > 5)
+        await plantTreeHandler()
     }
   }
 

@@ -1,0 +1,42 @@
+@import './../../../../styles/main.scss';
+
+.modal {
+  width: 488px;
+
+  .content {
+    align-items: center;
+    display: flex;
+    padding-top: 12px;
+
+    .info {
+      margin-left: 12px;
+
+      .addressContainer {
+        align-items: center;
+        display: flex;
+
+        .copyButton {
+          margin-lefT: 4px;
+        }
+      }
+
+      .status {
+        color: #5f36ea;
+        font-size: 12px;
+        line-height: 1.33;
+        margin-top: 2px;
+        user-select: none;
+
+        @include font-fallback('Avenir Next Rounded Pro');
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .switchAccountButton {
+    margin-top: 32px;
+  }
+}

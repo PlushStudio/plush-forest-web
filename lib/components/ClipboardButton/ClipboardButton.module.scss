@@ -1,0 +1,13 @@
+.button {
+  height: 16px;
+  width: 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.copied {
+    cursor: default;
+    opacity: 0.5;
+  }
+}

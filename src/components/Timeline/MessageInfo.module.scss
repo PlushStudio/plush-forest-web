@@ -1,0 +1,36 @@
+@use "/src/assets/styles/theme";
+
+.messageInfo {
+  display: flex;
+  max-width: 688px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2em auto 0 auto;
+  padding: 30px 90px 26px 90px;
+  border-radius: 160px;
+  background: theme.$white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 2px 0 rgba(0, 0, 0, 0.01), 0 2px 4px 0 rgba(0, 0, 0, 0.02), 0 4px 4px -1px rgba(0, 0, 0, 0.02), 0 8px 12px -2px rgba(0, 0, 0, 0.02);
+
+  p,
+  p span,
+  span {
+    font-family: AvenirNextRoundedPro-Reg, sans-serif;
+    font-size: 18px;
+    line-height: 1.33;
+    text-align: center;
+  }
+
+  p {
+    color: theme.$grey-800;
+
+    span {
+      color: theme.$emerald-600;
+    }
+  }
+
+  span {
+    font-weight: bold;
+    color: theme.$grey-800;
+  }
+}

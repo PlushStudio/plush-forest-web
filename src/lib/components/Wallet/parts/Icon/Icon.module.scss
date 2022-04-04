@@ -1,0 +1,24 @@
+.icon {
+  height: 40px;
+  position: relative;
+  width: 40px;
+}
+
+.status {
+  border: solid 2px #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 12px;
+  left: 34px;
+  position: absolute;
+  top: 24px;
+  width: 12px;
+
+  &.error {
+    background-color: #d959f8;
+  }
+
+  &.success {
+    background-color: #34caa7;
+  }
+}

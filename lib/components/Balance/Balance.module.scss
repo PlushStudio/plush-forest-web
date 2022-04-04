@@ -1,0 +1,24 @@
+@import './../../styles/main.scss';
+
+.balance {
+  align-items: center;
+  display: flex;
+
+  .count {
+    color: #73757c;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.67;
+
+    @include font-fallback('Avenir Next Rounded Pro');
+  }
+
+  .currency {
+    color: #26272a;
+    font-size: 12px;
+    margin-left: 4px;
+    text-transform: uppercase;
+
+    @include font-fallback('Avenir Next Rounded Pro');
+  }
+}

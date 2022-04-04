@@ -1,24 +1,28 @@
-import React, { MouseEvent, useContext, useRef } from 'react'
+import React, { MouseEvent, useEffect, useRef } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { CustomInput } from '@/components/App/shared-components/CustomInput/CustomInput'
+import { CustomInput } from '@/components/CustomInput/CustomInput'
 import s from './Planting.module.scss'
-import { MainActionButton } from '@/components/App/shared-components/MainActionButton/MainActionButton'
-import { CustomSelect } from '@/components/App/shared-components/CustomSelect/CustomSelect'
-import { userDetailsContext } from '@/context/UserDetailsProvider'
-import { PlantingModal } from '@/components/App/shared-components/PlantingModal/PlantingModal'
+import { MainActionButton } from '@/components/MainActionButton/MainActionButton'
+import { CustomSelect } from '@/components/CustomSelect/CustomSelect'
+import { PlantingModal } from '@/components/PlantingModal/PlantingModal'
 import shihuahuacoIcon from "@/assets/images/tree-icon-selector/shihuahuaco.png";
 import cacaoIcon from "@/assets/images/tree-icon-selector/cacao.png";
 import guabaIcon from "@/assets/images/tree-icon-selector/guaba.png";
 import caobaIcon from "@/assets/images/tree-icon-selector/caoba.png";
 import { treesInfo } from "@/assets/data/Trees";
 import { PlantingLogic } from "@/pages/Planting/PlantingLogic";
+import { useStore } from "effector-react";
+import { $user } from "@/store/user";
+import { $forest, getForestDataFx } from "@/store/forest";
+import { $walletStore } from "@/store/wallet";
+import { CircleLoader } from "@/components/Loader/CircleLoader";
+import { $app } from "@/store/app";
 
 const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
 
 export const Planting = () => {
   const input = useRef<HTMLInputElement>(null)
-  const [userDetails] = useContext(userDetailsContext)
   const {
     startMintProcess,
     nameFromHandler,
@@ -29,66 +33,78 @@ export const Planting = () => {
     treeImage
   } = PlantingLogic()
 
+  const { childs } = useStore($user)
+  const { treesPrice } = useStore($forest)
+  const walletStore = useStore($walletStore)
+  const { userBalance, safeBalance } = useStore($app)
+
+  useEffect(() => {
+    if (walletStore) {
+      getForestDataFx(walletStore)
+    }
+  }, [walletStore])
+
   return (
-    <div className={s.backgroundContainer}>
-      <div className={s.container}>
-        {isPlanting ? (
-          <PlantingModal status={plantingStatus} />
-        ) : (
-          <div className={s.plantingFormWrapper}>
-            <Form className={s.plantingForm}>
-              <Form.Group controlId="treeName" className={s.formHeader}>
-                <Form.Label className={s.formLabel}>
-                  To {userDetails.childName}
-                </Form.Label>
-                <CustomSelect currency={userDetails.currency}
-                  itemsInfo={treesInfo}
-                  icons={treeTypeSelectorImages}
-                  prices={userDetails.treesPrice} />
-              </Form.Group>
-              <Form.Group controlId="treeName" className={s.inputWrapper}>
-                <Form.Label className={s.formLabel}>
-                  From
-                </Form.Label>
-                <CustomInput
-                  input={input}
-                  onChange={(e: any) => {
-                    nameFromHandler(e)
-                  }}
-                  value={nameFrom}
-                  type="text"
-                  placeholder="Your name"
-                  readonly={isPlanting}
-                  status={nameFrom || !isVisited ? 'isTyping' : 'error'}
-                  message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
-                />
-              </Form.Group>
-              {userDetails.balance < 5 && (
-                <span className={s.statusText}>
-                  You need more plush tokens to perform this operation
-                </span>
-              )}
-              {!isPlanting && (
-                <MainActionButton
-                  onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
-                  text="Plant your tree"
-                  variant="small"
-                  image="tree"
-                />
-              )}
-              {isPlanting && (
-                <MainActionButton
-                  loading={isPlanting}
-                  text="Planting..."
-                  variant="small"
-                  image="tree"
-                />
-              )}
-            </Form>
-            <img src={treeImage} className="planting-tree-image" alt="logo" />
-          </div>
-        )}
-      </div>
-    </div>
+    treesPrice.length > 0 ?
+      <div className={s.backgroundContainer}>
+        <div className={s.container}>
+          {isPlanting ? (
+            <PlantingModal status={plantingStatus} />
+          ) : (
+            <div className={s.plantingFormWrapper}>
+              <Form className={s.plantingForm}>
+                <Form.Group controlId="treeName" className={s.formHeader}>
+                  <Form.Label className={s.formLabel}>
+                    To {childs[0].name}
+                  </Form.Label>
+                  <CustomSelect currency={"PLSH"}
+                    itemsInfo={treesInfo}
+                    icons={treeTypeSelectorImages} />
+                </Form.Group>
+                <Form.Group controlId="treeName" className={s.inputWrapper}>
+                  <Form.Label className={s.formLabel}>
+                    From
+                  </Form.Label>
+                  <CustomInput
+                    input={input}
+                    onChange={(e: any) => {
+                      nameFromHandler(e)
+                    }}
+                    value={nameFrom}
+                    type="text"
+                    placeholder="Your name"
+                    readonly={isPlanting}
+                    status={nameFrom || !isVisited ? 'isTyping' : 'error'}
+                    message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
+                  />
+                </Form.Group>
+                {(userBalance < 5 && safeBalance < 5) && (
+                  <div className={s.statusText}>
+                    You need more plush tokens to perform this operation.<br />
+                    <span className={s.faucetLink}>Go to the Faucet </span> to get some PLSH tokens
+                  </div>
+                )}
+                {!isPlanting && (
+                  <MainActionButton
+                    onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
+                    text="Plant your tree"
+                    variant="small"
+                    image="tree"
+                  />
+                )}
+                {isPlanting && (
+                  <MainActionButton
+                    loading={isPlanting}
+                    text="Planting..."
+                    variant="small"
+                    image="tree"
+                  />
+                )}
+              </Form>
+              <img src={treeImage} className="planting-tree-image" alt="logo" />
+            </div>
+          )}
+        </div>
+      </div> : <CircleLoader />
   )
 }

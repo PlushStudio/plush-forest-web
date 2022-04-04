@@ -1,0 +1,43 @@
+@import './../../../../styles/main.scss';
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 488px;
+
+  .content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      color: #26272a;
+      font-size: 22px;
+      line-height: 1.45;
+      margin-top: 16px;
+      text-align: center;
+
+      @include font-fallback('Moranga');
+    }
+
+    .status {
+      margin-top: 24px;
+    }
+
+    .hint {
+      color: #26272a;
+      font-size: 18px;
+      line-height: 1.33;
+      margin-top: 32px;
+      text-align: center;
+      width: 374px;
+
+      @include font-fallback('Avenir Next Rounded Pro');
+    }
+  }
+
+  .switchNetworkButton {
+    margin-top: 26px;
+  }
+}

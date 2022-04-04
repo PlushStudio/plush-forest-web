@@ -1,1 +1,0 @@
-export type WalletState = 'CONNECTED' | 'USER_NOT_FOUND' | 'WRONG_NETWORK' | 'DISCONNECTED'

@@ -3,7 +3,7 @@
 
 .backgroundContainer {
   min-height: 100vh;
-  background: theme.$grays-50 url('../../assets/images/sky.png') no-repeat;
+  background: theme.$grays-50 url('../../assets/images/sky@2x.png') no-repeat;
   background-size: cover;
   background-position-x: 451px;
   background-position-y: -70px;
@@ -40,7 +40,7 @@
   height: 176px !important;
 }
 
-.formHeader{
+.formHeader {
   margin-bottom: 26px;
 }
 
@@ -51,6 +51,21 @@
   width: 100%;
 
 }
+
 .inputWrapper {
   margin-bottom: 0;
+}
+
+.statusText {
+  margin-top: 20px;
+  margin-left: 8px;
+  color: #c1656e;
+  font-family: 'AvenirNextRoundedPro-Demi', sans-serif;
+}
+
+.faucetLink {
+  text-decoration: underline;
+  color: #714fec;
+  cursor: pointer;
+
 }

@@ -1,0 +1,44 @@
+@use "/src/assets/styles/theme";
+@use "/src/assets/styles/variables";
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2em 88px 1em;
+  position: absolute;
+  width: 100%;
+  max-width: 1392px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.wrongModalContainer {
+  width: 488px;
+  height: 328px;
+  margin: 20px 48px 0 0;
+  padding: 0 16px 16px;
+  border-radius: 24px;
+}
+
+.kebabContainer {
+  display: flex;
+  align-items: center;
+  z-index: variables.$higher-order;
+}
+
+.right {
+  display: flex;
+  height: 40px;
+  z-index: variables.$higher-order;
+
+  .balance {
+    margin-left: 14px;
+  }
+
+  .balanceRightSeparator {
+    margin-left: 14px;
+  }
+}
