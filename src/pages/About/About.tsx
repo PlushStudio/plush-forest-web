@@ -88,7 +88,7 @@ export const AboutPage = () => {
             <MainActionButton onClick={() => getStarted()} text='Get started' image='next' />
             <TreesArea />
           </div>
-          <div className={s.homeFeatureContainer}>
+          <div className={isLoggedIn ? s.homeFeatureContainer : s.homeFeatureContainerHeight}>
             <HomeFeatureSection1 accordionRef={ref} />
             <HomeFeatureSection2 />
             <HomeFeatureSection3 />
