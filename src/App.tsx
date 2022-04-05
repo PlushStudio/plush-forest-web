@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import '@/index.scss'
 import '@/index.css'
-import {Routes} from '@/Routes'
-import {$user, getUserFx} from "@/store/user";
-import {$auth, loginEvent, loginFx, logoutEvent, logoutFx} from "@/store/auth";
-import {ApiError} from "@/services/api/types";
-import {$walletStore, getMetamaskWalletFx} from "@/store/wallet";
-import {useStore} from "effector-react";
-import {useUpdateEffect} from "usehooks-ts";
-import {CircleLoader} from "@/components/Loader/CircleLoader";
+import { Routes } from '@/Routes'
+import { $user, getUserFx } from "@/store/user";
+import { $auth, loginEvent, loginFx, logoutEvent, logoutFx } from "@/store/auth";
+import { ApiError } from "@/services/api/types";
+import { $walletStore, getMetamaskWalletFx } from "@/store/wallet";
+import { useStore } from "effector-react";
+import { useUpdateEffect } from "usehooks-ts";
+import { CircleLoader } from "@/components/Loader/CircleLoader";
 
 function App() {
   const walletStore = useStore($walletStore)
-  const {isLoggedIn, isLoginStateRecieved} = useStore($auth)
+  const { isLoggedIn, isLoginStateRecieved } = useStore($auth)
   const user = useStore($user)
   const [isReady, setReady] = useState(false)
 
@@ -113,9 +113,9 @@ function App() {
   }, [])
 
   return (
-     isReady ?
-        <Routes/>
-     : <CircleLoader/>
+    isReady ?
+      <Routes />
+      : <CircleLoader />
   )
 }
 

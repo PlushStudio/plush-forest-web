@@ -7,6 +7,7 @@ const ApiAppSchema = z.object({
   currentNetwork: (z.string()).transform(toNotNullableString),
   userBalance: (z.number()),
   safeBalance: (z.number()),
+  currency: z.string(),
   activeAccordionTabId: (z.number()),
 })
 

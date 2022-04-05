@@ -6,7 +6,7 @@ import { $user } from "@/store/user";
 import { $walletStore } from "@/store/wallet";
 import MetamaskWallet from "@/metamask/wallet/metamaskWallet";
 import { CircleLoader } from "@/components/Loader/CircleLoader";
-import { setIsOpenMenuDropdown, setSafeBalance, setUserBalance } from "@/store/app";
+import { setCurrencyEvt, setIsOpenMenuDropdownEvt, setSafeBalanceEvt, setUserBalanceEvt } from "@/store/app";
 
 type Props = {
   children: ReactNode
@@ -40,8 +40,6 @@ export const Page = (props: Props) => {
     if (!walletStore) {
       throw new Error('Wallet is undefined')
     }
-
-    console.log(balance, currency)
 
     try {
       await walletStore.wallet.connect()
@@ -112,7 +110,7 @@ export const Page = (props: Props) => {
 
     if (network.name !== getExpectedNetworkName() && isMounted) {
       setWalletState('WRONG_NETWORK')
-      setIsOpenMenuDropdown(true)
+      setIsOpenMenuDropdownEvt(true)
       setDataFetched(true)
       return
     }
@@ -127,21 +125,22 @@ export const Page = (props: Props) => {
       setBalance(safeBalance)
       setCurrency(currency)
 
-      setSafeBalance(safeBalance)
-      setUserBalance(userBalance)
+      setSafeBalanceEvt(safeBalance)
+      setUserBalanceEvt(userBalance)
+      setCurrencyEvt(currency)
     }
 
     if (!user.id) {
       setWalletState('USER_NOT_FOUND')
       setDataFetched(true)
-      setIsOpenMenuDropdown(true)
+      setIsOpenMenuDropdownEvt(true)
       return
     }
 
     if (isMounted) {
       setWalletState('USER_FOUND')
       setDataFetched(true)
-      setIsOpenMenuDropdown(true)
+      setIsOpenMenuDropdownEvt(true)
     }
   }
 

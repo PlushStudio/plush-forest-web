@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef } from 'react'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { CustomInput } from '@/components/CustomInput/CustomInput'
@@ -21,22 +21,34 @@ import { $app } from "@/store/app";
 
 const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
 
+const FAUCET_LINK = window.config.FAUCET_URL ?? import.meta.env.VITE_FAUCET_URL
+
 export const Planting = () => {
   const input = useRef<HTMLInputElement>(null)
   const {
     startMintProcess,
     nameFromHandler,
     isPlanting,
+    isPlantBtnLoading,
     isVisited,
     nameFrom,
     plantingStatus,
-    treeImage
+    treeImage,
+    isBalanceHintVisible
   } = PlantingLogic()
 
   const { childs } = useStore($user)
-  const { treesPrice } = useStore($forest)
+  const { treesPrice, treesCount } = useStore($forest)
   const walletStore = useStore($walletStore)
-  const { userBalance, safeBalance } = useStore($app)
+  const { currency } = useStore($app)
+
+  const [isReady, setIsReady] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (treesPrice.length > 0 && treesCount.length > 0) {
+      setIsReady(true)
+    }
+  }, [treesPrice, treesCount])
 
   useEffect(() => {
     if (walletStore) {
@@ -45,7 +57,7 @@ export const Planting = () => {
   }, [walletStore])
 
   return (
-    treesPrice.length > 0 ?
+    isReady ?
       <div className={s.backgroundContainer}>
         <div className={s.container}>
           {isPlanting ? (
@@ -57,7 +69,7 @@ export const Planting = () => {
                   <Form.Label className={s.formLabel}>
                     To {childs[0].name}
                   </Form.Label>
-                  <CustomSelect currency={"PLSH"}
+                  <CustomSelect currency={currency}
                     itemsInfo={treesInfo}
                     icons={treeTypeSelectorImages} />
                 </Form.Group>
@@ -78,28 +90,21 @@ export const Planting = () => {
                     message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
                   />
                 </Form.Group>
-                {(userBalance < 5 && safeBalance < 5) && (
+                {isBalanceHintVisible && (
                   <div className={s.statusText}>
-                    You need more plush tokens to perform this operation.<br />
-                    <span className={s.faucetLink}>Go to the Faucet </span> to get some PLSH tokens
+                    Not enough {currency}.
+                    <span> Get {currency} at </span>
+                    <a href={FAUCET_LINK} target="_blank" className={s.faucetLink}>faucet.plush.dev</a>
                   </div>
                 )}
-                {!isPlanting && (
-                  <MainActionButton
-                    onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
-                    text="Plant your tree"
-                    variant="small"
-                    image="tree"
-                  />
-                )}
-                {isPlanting && (
-                  <MainActionButton
-                    loading={isPlanting}
-                    text="Planting..."
-                    variant="small"
-                    image="tree"
-                  />
-                )}
+                <MainActionButton
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
+                  text="Plant your tree"
+                  variant="small"
+                  image="tree"
+                  disabled={isBalanceHintVisible || !nameFrom?.length || isPlantBtnLoading}
+                  loading={isPlantBtnLoading}
+                />
               </Form>
               <img src={treeImage} className="planting-tree-image" alt="logo" />
             </div>

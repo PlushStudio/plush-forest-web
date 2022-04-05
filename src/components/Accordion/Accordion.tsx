@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { Accordion, Card } from 'react-bootstrap'
 import s from './Accordion.module.scss'
 import '@/assets/styles/custom-elements/data-display/Accordion.scss'
@@ -7,16 +7,16 @@ import accordionPlus from '@/assets/images/16-px-1-outlined-plus.svg'
 import abstractIconLeaf from '@/assets/images/abstract-icon-1.svg'
 import abstractIconEye from '@/assets/images/abstract-icon-2.svg'
 import abstractIconHeart from '@/assets/images/abstract-icon-3.svg'
-import { $app, setActiveAccordionTabId } from "@/store/app";
+import { $app, setActiveAccordionTabIdEvt } from "@/store/app";
 import { useStore } from "effector-react";
 
 export const LearnMoreAccordion = () => {
   const { activeAccordionTabId } = useStore($app)
 
   const handleTabClick = (tabId: number) => {
-    setActiveAccordionTabId(tabId)
+    setActiveAccordionTabIdEvt(tabId)
     if (activeAccordionTabId === tabId) {
-      setActiveAccordionTabId(-1)
+      setActiveAccordionTabIdEvt(-1)
     }
   }
 

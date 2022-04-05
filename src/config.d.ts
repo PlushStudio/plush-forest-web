@@ -4,6 +4,8 @@ interface Window {
 }
 
 interface Config {
+  LANDING_URL: string,
+  FAUCET_URL: string
   API_URL?: string
   PLUSH_CONTRACT_ADDRESS?: string
   CORE_CONTRACT_ADDRESS?: string
@@ -14,5 +16,4 @@ interface Config {
   SIGNUP_LINK: string,
   MATOMO_URL?: string,
   MATOMO_SITE_ID?: string
-  LANDING_URL: string
 }

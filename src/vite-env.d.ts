@@ -12,4 +12,5 @@ interface ImportMetaEnv {
   VITE_COIN_WALLETS_CONTRACT_ADDRESS: string,
   VITE_SIGNUP_LINK: string,
   VITE_NETWORK_ID: string,
+  VITE_FAUCET_URL: string
 }

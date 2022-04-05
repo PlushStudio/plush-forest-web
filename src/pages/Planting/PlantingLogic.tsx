@@ -21,11 +21,14 @@ export const PlantingLogic = () => {
   const input = useRef<HTMLInputElement>(null)
   const [isVisited, setIsVisited] = useState<boolean>(false)
   const [isPlanting, setIsPlanting] = useState<boolean>(false)
+  const [isPlantBtnLoading, setIsPlantBtnLoading] = useState<boolean>(false)
   const [currentTreePrice, setCurrentTreePrice] = useState<string>('')
   const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState<string>(shihuahuacoTreeImage)
+  const [isBalanceHintVisible, setIsBalanceHintVisible] = useState<boolean>(false)
   const history = useHistory()
+
   const walletStore = useStore($walletStore)
   const { treesPrice } = useStore($forest)
   const { selectedTreeType } = useStore($app)
@@ -37,7 +40,14 @@ export const PlantingLogic = () => {
   useEffect(() => {
     setTreeImage(plantingTreeImages[treeNames.indexOf(selectedTreeType)])
     setCurrentTreePrice(String(treesPrice[treeNames.indexOf(selectedTreeType)] * 10 ** 18))
-  }, [selectedTreeType])
+  }, [selectedTreeType, treesPrice])
+
+  useEffect(() => {
+    if (userBalance < treesPrice[treeNames.indexOf(selectedTreeType)]
+      || safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
+      setIsBalanceHintVisible(true)
+    }
+  }, [safeBalance, userBalance])
 
   const checkTokenAvailability = async () => {
     //empty message for Pilot
@@ -56,16 +66,24 @@ export const PlantingLogic = () => {
       }, 5000)
     } else {
       setIsPlanting(false)
+      setIsPlantBtnLoading(false)
     }
   }
   const startAllowanceLoop = async (delay: number = 7000) => {
     const updateBuyAllowance = setInterval(async function () {
       const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
       if (allowance) {
-        setPlantingStatus('Planting your tree')
-        clearInterval(updateBuyAllowance)
-        await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
-        await checkTokenAvailability()
+        try {
+          setPlantingStatus('Planting your tree')
+          clearInterval(updateBuyAllowance)
+          await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
+          await checkTokenAvailability()
+        } catch (e) {
+          clearInterval(updateBuyAllowance)
+          setIsPlanting(false)
+          setIsPlantBtnLoading(false)
+          throw Error(e.message)
+        }
       }
     }, delay)
   }
@@ -100,7 +118,9 @@ export const PlantingLogic = () => {
                     await walletStore?.plushContractManager.getApprove(currentTreePrice)
                     await startAllowanceLoop()
                   } catch (e) {
+                    console.log(e.message)
                     setIsPlanting(false)
+                    setIsPlantBtnLoading(false)
                   }
                 }
               }, 7000)
@@ -109,6 +129,7 @@ export const PlantingLogic = () => {
         }
       } catch (e: any) {
         setIsPlanting(false)
+        setIsPlantBtnLoading(false)
         throw new Error(e.message)
       }
     } else {
@@ -137,11 +158,12 @@ export const PlantingLogic = () => {
 
   const startMintProcess = async (e?: MouseEvent<HTMLButtonElement>) => {
     e?.preventDefault()
-    if (!nameFrom?.length) {
-      input.current?.focus()
-      setIsVisited(true)
-    } else {
-      if (safeBalance > 5 || userBalance > 5) {
+    if (!isBalanceHintVisible) {
+      if (!nameFrom?.length) {
+        input.current?.focus()
+        setIsVisited(true)
+      } else {
+        setIsPlantBtnLoading(true)
         await plantTreeHandler()
       }
     }
@@ -161,9 +183,11 @@ export const PlantingLogic = () => {
     setNameFrom,
     setTreeImage,
     isPlanting,
+    isPlantBtnLoading,
     isVisited,
     treeImage,
     nameFrom,
-    plantingStatus
+    plantingStatus,
+    isBalanceHintVisible
   }
 }

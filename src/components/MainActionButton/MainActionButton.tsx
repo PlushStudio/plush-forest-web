@@ -10,7 +10,8 @@ interface IGetStartedBtn {
   variant?: 'small' | ''
   image?: 'tree' | 'next'
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
-  loading?: boolean
+  loading?: boolean,
+  disabled?: boolean
 }
 
 export const MainActionButton = ({
@@ -19,29 +20,31 @@ export const MainActionButton = ({
   loading,
   onClick,
   image,
+  disabled
 }: IGetStartedBtn) => {
 
   const style = classNames(s.container, s[variant])
+  const buttonStyle = classNames(s.btnPrimary, { [s.disabled]: disabled })
 
   return (
     <div className={style}>
-      <button onClick={onClick} className={s.btnPrimary}>
+      <button onClick={onClick} className={buttonStyle}>
         {text}
-        {image === 'next' && (
-          <img alt="get started arrow" className={s.image} src={arrowIcon} />
-        )}
-        {image === 'tree' && (
-          <img alt="get started arrow" className={s.image} src={treeIcon} />
-        )}
-        {loading && (
+
+        {loading ?
           <Spinner
+            className={s.spinner}
             as="span"
             animation="grow"
             size="sm"
             role="status"
             aria-hidden="true"
-          />
-        )}
+          /> :
+          image === 'next' ?
+            <img alt="get started arrow" className={s.image} src={arrowIcon} /> :
+            image === 'tree' &&
+            <img alt="get started arrow" className={s.image} src={treeIcon} />
+        }
       </button>
     </div>
   )
