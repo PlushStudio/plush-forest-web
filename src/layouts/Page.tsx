@@ -41,8 +41,6 @@ export const Page = (props: Props) => {
       throw new Error('Wallet is undefined')
     }
 
-    console.log(balance, currency)
-
     try {
       await walletStore.wallet.connect()
     } catch (error: any) {

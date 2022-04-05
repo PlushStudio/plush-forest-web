@@ -37,7 +37,7 @@ export const PlantingLogic = () => {
   useEffect(() => {
     setTreeImage(plantingTreeImages[treeNames.indexOf(selectedTreeType)])
     setCurrentTreePrice(String(treesPrice[treeNames.indexOf(selectedTreeType)] * 10 ** 18))
-  }, [selectedTreeType])
+  }, [selectedTreeType, treesPrice])
 
   const checkTokenAvailability = async () => {
     //empty message for Pilot
@@ -62,10 +62,16 @@ export const PlantingLogic = () => {
     const updateBuyAllowance = setInterval(async function () {
       const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
       if (allowance) {
-        setPlantingStatus('Planting your tree')
-        clearInterval(updateBuyAllowance)
-        await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
-        await checkTokenAvailability()
+        try {
+          setPlantingStatus('Planting your tree')
+          clearInterval(updateBuyAllowance)
+          await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
+          await checkTokenAvailability()
+        } catch (e) {
+          clearInterval(updateBuyAllowance)
+          setIsPlanting(false)
+          throw Error(e.message)
+        }
       }
     }, delay)
   }
@@ -100,6 +106,7 @@ export const PlantingLogic = () => {
                     await walletStore?.plushContractManager.getApprove(currentTreePrice)
                     await startAllowanceLoop()
                   } catch (e) {
+                    console.log(e.message)
                     setIsPlanting(false)
                   }
                 }

@@ -19,17 +19,13 @@ class PlushCoinWalletsContractManager {
   }
 
   deposit = async (address: string, value: string) => {
-    try {
-      let CoinWalletsContract = new ethers.Contract(
-        plushCoinWalletsAddress,
-        abi,
-        this.signer
-      )
-      const depositResult = await CoinWalletsContract.deposit(address, value)
-      await depositResult.wait()
-    } catch (e: any) {
-      throw Error(e.message)
-    }
+    let CoinWalletsContract = new ethers.Contract(
+      plushCoinWalletsAddress,
+      abi,
+      this.signer
+    )
+    const depositResult = await CoinWalletsContract.deposit(address, value)
+    await depositResult.wait()
   }
 
 }

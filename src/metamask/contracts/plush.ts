@@ -19,11 +19,7 @@ class PlushContractManager {
   }
 
   getApprove = async (treePrice: string) => {
-    try {
-      await this.contract.approve(plushCoinWalletsAddress, treePrice)
-    } catch (e) {
-      console.log(e.message)
-    }
+    return await this.contract.approve(plushCoinWalletsAddress, treePrice)
   }
 
   getBuyAllowance = async (address: string, treePrice: string): Promise<boolean | undefined> => {
