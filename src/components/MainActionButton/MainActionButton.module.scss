@@ -12,12 +12,17 @@
     .btnPrimary {
       font-size: 18px;
       padding-left: 24px;
+      align-items: center;
 
       .image {
         margin: 0 0 0 10px;
       }
     }
   }
+}
+
+.spinner {
+  margin-left: 10px;
 }
 
 .image {
@@ -31,8 +36,7 @@
   align-content: center;
   justify-content: center;
   color: theme.$white;
-  padding: 0 22px;
-  padding-left: 30px;
+  padding: 0 22px 0 30px;
   width: fit-content;
   height: 64px;
   font-family: AvenirNextRoundedPro-Demi, serif;
@@ -43,4 +47,16 @@
   cursor: pointer;
   font-size: 18px;
   border: none;
+  transition: .3s ease-out;
+
+  &:hover {
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 6%), 0 1px 2px 0 rgb(0 0 0 / 4%), inset 0 -1px 0 0 #007453;
+    background-image: linear-gradient(#38dc7b 0%, #00b98d 100%);
+  }
+
+  &.disabled {
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 6%), 0 1px 2px 0 rgb(0 0 0 / 4%), inset 0 -1px 0 0 #00936900;
+    background-image: linear-gradient(#3ecc7887 0%, #03af8678 100%);
+    cursor: default;
+  }
 }

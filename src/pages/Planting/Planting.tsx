@@ -21,37 +21,34 @@ import { $app } from "@/store/app";
 
 const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
 
+const FAUCET_LINK = window.config.FAUCET_URL ?? import.meta.env.VITE_FAUCET_URL
+
 export const Planting = () => {
   const input = useRef<HTMLInputElement>(null)
   const {
     startMintProcess,
     nameFromHandler,
     isPlanting,
+    isPlantBtnLoading,
     isVisited,
     nameFrom,
     plantingStatus,
-    treeImage
+    treeImage,
+    isBalanceHintVisible
   } = PlantingLogic()
 
   const { childs } = useStore($user)
   const { treesPrice, treesCount } = useStore($forest)
   const walletStore = useStore($walletStore)
-  const { userBalance, safeBalance, currency } = useStore($app)
+  const { currency } = useStore($app)
 
   const [isReady, setIsReady] = useState<boolean>(false)
-  const [isBalanceHintVisible, setIsBalanceHintVisible] = useState<boolean>(false)
 
   useEffect(() => {
     if (treesPrice.length > 0 && treesCount.length > 0) {
       setIsReady(true)
     }
   }, [treesPrice, treesCount])
-
-  useEffect(() => {
-    if (userBalance < 5 && safeBalance < 5) {
-      setIsBalanceHintVisible(true)
-    }
-  }, [safeBalance, userBalance])
 
   useEffect(() => {
     if (walletStore) {
@@ -95,26 +92,19 @@ export const Planting = () => {
                 </Form.Group>
                 {isBalanceHintVisible && (
                   <div className={s.statusText}>
-                    Not enough {currency}.<br />
-                    Get {currency} at <span className={s.faucetLink}>faucet.plush.dev</span>
+                    Not enough {currency}.
+                    <span> Get {currency} at </span>
+                    <a href={FAUCET_LINK} target="_blank" className={s.faucetLink}>faucet.plush.dev</a>
                   </div>
                 )}
-                {!isPlanting && (
-                  <MainActionButton
-                    onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
-                    text="Plant your tree"
-                    variant="small"
-                    image="tree"
-                  />
-                )}
-                {isPlanting && (
-                  <MainActionButton
-                    loading={isPlanting}
-                    text="Planting..."
-                    variant="small"
-                    image="tree"
-                  />
-                )}
+                <MainActionButton
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
+                  text="Plant your tree"
+                  variant="small"
+                  image="tree"
+                  disabled={isBalanceHintVisible || !nameFrom?.length || isPlantBtnLoading}
+                  loading={isPlantBtnLoading}
+                />
               </Form>
               <img src={treeImage} className="planting-tree-image" alt="logo" />
             </div>
