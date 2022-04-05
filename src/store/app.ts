@@ -4,12 +4,13 @@ import { ApiApp } from "@/services/app";
 
 export const appDomain = createDomain('app');
 
-export const setActiveTree = createEvent<string>()
-export const setWalletNetwork = createEvent<string>()
-export const setIsOpenMenuDropdown = createEvent<boolean>()
-export const setUserBalance = createEvent<number>()
-export const setSafeBalance = createEvent<number>()
-export const setActiveAccordionTabId = createEvent<number>()
+export const setActiveTreeEvt = createEvent<string>()
+export const setWalletNetworkEvt = createEvent<string>()
+export const setIsOpenMenuDropdownEvt = createEvent<boolean>()
+export const setUserBalanceEvt = createEvent<number>()
+export const setSafeBalanceEvt = createEvent<number>()
+export const setCurrencyEvt = createEvent<string>()
+export const setActiveAccordionTabIdEvt = createEvent<number>()
 
 export const $app = appDomain
   .createStore<ApiApp>({
@@ -18,29 +19,34 @@ export const $app = appDomain
     currentNetwork: '',
     userBalance: 0,
     safeBalance: 0,
+    currency: '',
     activeAccordionTabId: -1
   })
-  .on(setActiveTree, (state, activeTree) => ({
+  .on(setActiveTreeEvt, (state, activeTree) => ({
     ...state,
     selectedTreeType: activeTree
   }))
-  .on(setWalletNetwork, (state, currentNetwork) => ({
+  .on(setWalletNetworkEvt, (state, currentNetwork) => ({
     ...state,
     currentNetwork
   }))
-  .on(setIsOpenMenuDropdown, (state, value) => ({
+  .on(setIsOpenMenuDropdownEvt, (state, value) => ({
     ...state,
     isOpenMenuDropdown: value
   }))
-  .on(setUserBalance, (state, value) => ({
+  .on(setUserBalanceEvt, (state, value) => ({
     ...state,
     userBalance: value
   }))
-  .on(setSafeBalance, (state, value) => ({
+  .on(setSafeBalanceEvt, (state, value) => ({
     ...state,
     safeBalance: value
   }))
-  .on(setActiveAccordionTabId, (state, id) => ({
+  .on(setCurrencyEvt, (state, currency) => ({
+    ...state,
+    currency
+  }))
+  .on(setActiveAccordionTabIdEvt, (state, id) => ({
     ...state,
     activeAccordionTabId: id
   }))

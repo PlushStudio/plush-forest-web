@@ -11,7 +11,7 @@ import { useStore } from "effector-react";
 import { $forest } from "@/store/forest";
 import { useOnClickOutside } from "usehooks-ts";
 import { treeNames } from "@/pages/Planting/PlantingLogic";
-import { $app, setActiveTree } from "@/store/app";
+import { $app, setActiveTreeEvt } from "@/store/app";
 
 interface TreesInfo {
   name: string,
@@ -49,7 +49,7 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
     if (onSelect) {
       onSelect(itemId, itemName)
     }
-    setActiveTree(itemName.toUpperCase())
+    setActiveTreeEvt(itemName.toUpperCase())
     setOpen(false)
   }
 

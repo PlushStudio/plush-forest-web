@@ -1,12 +1,12 @@
 import React from 'react'
 import s from './HomeFeatureSection.module.scss'
 import womanWithPlant from '@/assets/images/woman-with-plants.png'
-import { setActiveAccordionTabId } from "@/store/app";
+import { setActiveAccordionTabIdEvt } from "@/store/app";
 
 export const HomeFeatureSection1 = ({ accordionRef }: any) => {
 
   const scrollToAccordion = () => {
-    setActiveAccordionTabId(0)
+    setActiveAccordionTabIdEvt(0)
     if (accordionRef && accordionRef.current) {
       accordionRef.current.scrollIntoView({
         behavior: 'smooth',

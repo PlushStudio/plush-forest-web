@@ -14,7 +14,7 @@ import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { useStore } from "effector-react";
 import { $forest } from "@/store/forest";
 import { treeNames } from "@/pages/Planting/PlantingLogic";
-import { setActiveTree } from "@/store/app";
+import { setActiveTreeEvt } from "@/store/app";
 
 interface treeTooltip {
   name: string,
@@ -33,7 +33,7 @@ export const TreeTypeSelector = () => {
 
   const handleClick = (activeTreeId: number) => {
     setActiveTreeId(activeTreeId)
-    setActiveTree(treeNames[activeTreeId].toUpperCase())
+    setActiveTreeEvt(treeNames[activeTreeId].toUpperCase())
   }
 
   const TreeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]

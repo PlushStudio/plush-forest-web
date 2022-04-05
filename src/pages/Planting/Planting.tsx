@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef } from 'react'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { CustomInput } from '@/components/CustomInput/CustomInput'
@@ -34,9 +34,24 @@ export const Planting = () => {
   } = PlantingLogic()
 
   const { childs } = useStore($user)
-  const { treesPrice } = useStore($forest)
+  const { treesPrice, treesCount } = useStore($forest)
   const walletStore = useStore($walletStore)
-  const { userBalance, safeBalance } = useStore($app)
+  const { userBalance, safeBalance, currency } = useStore($app)
+
+  const [isReady, setIsReady] = useState<boolean>(false)
+  const [isBalanceHintVisible, setIsBalanceHintVisible] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (treesPrice.length > 0 && treesCount.length > 0) {
+      setIsReady(true)
+    }
+  }, [treesPrice, treesCount])
+
+  useEffect(() => {
+    if (userBalance < 5 && safeBalance < 5) {
+      setIsBalanceHintVisible(true)
+    }
+  }, [safeBalance, userBalance])
 
   useEffect(() => {
     if (walletStore) {
@@ -45,7 +60,7 @@ export const Planting = () => {
   }, [walletStore])
 
   return (
-    treesPrice.length > 0 ?
+    isReady ?
       <div className={s.backgroundContainer}>
         <div className={s.container}>
           {isPlanting ? (
@@ -57,7 +72,7 @@ export const Planting = () => {
                   <Form.Label className={s.formLabel}>
                     To {childs[0].name}
                   </Form.Label>
-                  <CustomSelect currency={"PLSH"}
+                  <CustomSelect currency={currency}
                     itemsInfo={treesInfo}
                     icons={treeTypeSelectorImages} />
                 </Form.Group>
@@ -78,10 +93,10 @@ export const Planting = () => {
                     message={!nameFrom && isVisited ? 'Your name is required to plant a tree' : ''}
                   />
                 </Form.Group>
-                {(userBalance < 5 && safeBalance < 5) && (
+                {isBalanceHintVisible && (
                   <div className={s.statusText}>
-                    You need more plush tokens to perform this operation.<br />
-                    <span className={s.faucetLink}>Go to the Faucet </span> to get some PLSH tokens
+                    Not enough {currency}.<br />
+                    Get {currency} at <span className={s.faucetLink}>faucet.plush.dev</span>
                   </div>
                 )}
                 {!isPlanting && (
