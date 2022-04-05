@@ -44,7 +44,7 @@ export const PlantingLogic = () => {
 
   useEffect(() => {
     if (userBalance < treesPrice[treeNames.indexOf(selectedTreeType)]
-      || safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
+      && safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
       setIsBalanceHintVisible(true)
     }
   }, [safeBalance, userBalance])
