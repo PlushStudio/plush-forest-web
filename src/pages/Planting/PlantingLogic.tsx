@@ -47,7 +47,7 @@ export const PlantingLogic = () => {
       || safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
       setIsBalanceHintVisible(true)
     }
-  }, [safeBalance, userBalance, currentTreePrice])
+  }, [safeBalance, userBalance])
 
   const checkTokenAvailability = async () => {
     //empty message for Pilot
