@@ -4,6 +4,7 @@ import s from './Timeline.module.scss'
 import TimelineCard from '@/components/Timeline/TimelineCards/TimelineCard'
 import heartImg from '@/assets/images/bitmap-copy@2x.png'
 import timelineBase from '@/assets/images/timelinebase.png'
+import classNames from "classnames";
 
 export interface ICardInfo {
   date: string,
@@ -55,7 +56,7 @@ const Timeline = ({ timelineInfo }: TimelineInfo) => {
   ]
   return (
     <div>
-      <div className={`${s.container} ${s.cdTimelineContainer}`}>
+      <div className={classNames(s.container, s.cdTimelineContainer)}>
         <div className={s.greyDot} />
         {cardInfo.map((item: ICardInfo, index: number): JSX.Element => {
           return <TimelineCard id={index + 1} cardInfo={cardInfo[index]} />

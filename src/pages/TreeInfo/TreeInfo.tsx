@@ -13,11 +13,17 @@ import { treeDefault } from '@/context/DefaultValues'
 import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import TreeNotAvailable from '@/components/TreeNotAvailable/TreeNotAvailable'
+import classNames from "classnames";
 
 export const TreeInfoPage: React.FC = () => {
   const params = useParams<{ id?: string }>();
   const [treeData, setTreeData] = useState<TreeData>(treeDefault)
   const [userHasToken, setUserHasToken] = useState<boolean | undefined>(undefined)
+
+  const backgroundStyles = classNames(
+    s.backgroundContainer,
+    { [s.backgroundImg]: userHasToken }
+  )
 
   useEffect(() => {
     (async () => {
@@ -64,9 +70,7 @@ export const TreeInfoPage: React.FC = () => {
   }, [])
 
   return (
-    <div
-      className={`${s.backgroundContainer} ${userHasToken && s.backgroundImg} `}
-    >
+    <div className={backgroundStyles}>
       <div className={s.container}>
         {userHasToken !== false ? <Row>
           <Col>

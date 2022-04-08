@@ -5,6 +5,10 @@
   height: 64px;
   align-items: center;
   font-size: 18px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .accordion>.card {

@@ -2,7 +2,7 @@ import React from 'react'
 import s from '@/components/Header/HeaderContent.module.scss'
 import treeIcon from '@/assets/images/plush-logo.svg'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import Logo from '@/assets/images/plush-forest-tagline.svg'
+import TaglineIcon from '@/assets/images/plush-forest-tagline.svg'
 
 interface Params {
   currentLocation: string
@@ -17,9 +17,9 @@ export const HeaderContent: () => JSX.Element = () => {
       <Link className={pathname.startsWith('/token/') ? s.disabledLink : ''} to={'/'}>
         <img className={s.treeIcon} src={treeIcon} alt="tree icon" />
       </Link>
-      <div className={`${!params.id ? s.contentBlock : s.invisible}`}>
+      <div className={!params.id ? s.contentBlock : s.invisible}>
         <span className={s.logoTitle}>Plush Forest</span>
-        <img src={Logo} alt="" />
+        <img src={TaglineIcon} alt="forest tagline" />
       </div>
     </div>
   )

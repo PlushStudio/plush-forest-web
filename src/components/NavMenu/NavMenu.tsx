@@ -6,6 +6,7 @@ import map from '@/assets/images/32-px-1-outlined-map-pin-gray.png'
 import note from '@/assets/images/32-px-1-outlined-note-gray.png'
 import tree from '@/assets/images/32-px-1-outlined-tree-white.png'
 import { Link } from 'react-router-dom'
+import classNames from "classnames";
 
 export const NavMenu: React.FC = () => {
 
@@ -23,9 +24,11 @@ export const NavMenu: React.FC = () => {
             <div className={s.navMenuWrapper}>
                 {NavItems.map((item: string, index: number) =>
                     <div onClick={() => menuHandler(index)}
-                        className={`${s.navMenuItem} ${isActive === index && s.active} 
-                         ${(index === 0 && s.roundedTop)}
-                         ${(index === NavItems.length - 1 && s.roundedBottom)}`}
+                        className={classNames(s.navMenuItem,
+                            { [s.active]: isActive === index },
+                            { [s.roundedTop]: index === 0 },
+                            { [s.roundedBottom]: index === NavItems.length - 1 },
+                        )}
                     >
                         <Link to={`${NavLinks[index]}`}>
                             <img className={s.navItemImg} src={item} alt="menu item" />

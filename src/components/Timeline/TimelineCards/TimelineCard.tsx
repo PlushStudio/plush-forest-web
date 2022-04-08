@@ -29,28 +29,35 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
         }
     }
 
+    const timelineStyle = classNames(
+        s.cdTimelineBlock,
+        { [s.reverse]: id % 2 === 0 }
+    )
+
+    const cardContainer = classNames(
+        s.cardContainer,
+        { [s.showBack]: showBack }
+    )
+
+    const cdTimelineContent = classNames(
+        s.cdTimelineContent,
+        id % 2 === 0 ? s.arrowLeft : s.arrowRight,
+        s[cardInfo.size]
+    )
+
     return (
-        <div className={`${s.cdTimelineBlock} ${id % 2 === 0 ? s.reverse : ''} `}>
+        <div className={timelineStyle}>
             <div className={s.cdTimelineImg}>
                 <img src={orangeDot} alt="Picture" />
             </div>
-            <div
-                onClick={handleFlip}
-                className={`${s.cardContainer} ${showBack && s.showBack}`}
-            >
-                <div
-                    className={`${s.cdTimelineContent} ${id % 2 === 0 ? s.arrowLeft : s.arrowRight
-                        } ${s[cardInfo.size]}`}
-                >
+            <div onClick={handleFlip} className={cardContainer}>
+                <div className={cdTimelineContent}>
                     <div className={s.cdTimelineContentText}>
                         <span className={s.cdTimelineDate}>{cardInfo.date}</span>
                         <p className={s.colorContrastMedium}>{cardInfo.text}</p>
-                        <a href="#" className={`${id % 2 === 0 ? s.disabledText : s.btn}`}>
-                            {id % 2 === 0 ? (
-                                cardInfo.planterOrganization
-                            ) : (
-                                <a
-                                    className={s.linked}
+                        <a href="#" className={id % 2 === 0 ? s.disabledText : s.btn}>
+                            {id % 2 === 0 ? cardInfo.planterOrganization : (
+                                <a className={s.linked}
                                     href={`https://${NETWORK_ID === testnetNetworkId && `testnets.`}opensea.io/assets/${NETWORK_ID === mainnetNetworkId ? 'matic' : 'mumbai'}/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
                                 >
                                     {cardInfo.subtext}
@@ -58,19 +65,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                             )}
                         </a>
                     </div>
-                    <div
-                        className={
-                            cardInfo.size === 'sm'
-                                ? s.smCardImgContainer
-                                : s.mdCardImgContainer
-                        }
-                    >
-                        <img
-                            className={
-                                cardInfo.size === 'sm'
-                                    ? s.timelineContentImgSm
-                                    : s.timelineContentImgMd
-                            }
+                    <div className={cardInfo.size === 'sm' ? s.smCardImgContainer : s.mdCardImgContainer}>
+                        <img className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
                             src={cardInfo.img}
                             alt="timeline content image"
                         />
@@ -83,13 +79,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                         <p>{cardInfo.planterBio}</p>
                         <button onClick={() => setIsShowBack(false)}>Back</button>
                     </div>
-                    <img
-                        src={cardInfo.planterPhoto}
-                        className={
-                            cardInfo.size === 'sm'
-                                ? s.timelineContentImgSm
-                                : s.timelineContentImgMd
-                        }
+                    <img src={cardInfo.planterPhoto}
+                        className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
                         alt="timeline content image"
                     />
                 </div>

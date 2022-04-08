@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import kebabIcon from "@/assets/images/wallet/32-px-1-outlined-kebab-horizontal.svg";
 import s from "./KebabDrowdown.module.scss"
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 interface MenuItem {
   title: string,
@@ -37,12 +38,15 @@ const WalletKebab = (props: { menuList: MenuItem[] }) => {
   return (
     <div ref={kebabRef} className={s.kebab} onClick={() => setIsKebabDropdownOpen(!isKebabDropdownOpen)}>
       <img alt={'kebab button'} src={kebabIcon} />
-      <div className={`${s.kebabDropdown} ${isKebabDropdownOpen ? s.visible : s.hidden}`}>
+      <div className={classNames(s.kebabDropdown, isKebabDropdownOpen ? s.visible : s.hidden)}>
         {
           props.menuList.map((menuItem: MenuItem, index: number) =>
-            <div className={`${s.kebabListItemContainer} ${activeItemId === index ? s.kebabListItemContainerActive : ''}`}>
+            <div className={classNames(
+              s.kebabListItemContainer,
+              { [s.kebabListItemContainerActive]: activeItemId === index }
+            )}>
               <Link to={menuItem.href} onClick={() => menuItemHandler(menuItem.href, index)}>
-                <div className={`${activeItemId === index ? s.activeMenuItem : s.kebabListItem}`}>
+                <div className={activeItemId === index ? s.activeMenuItem : s.kebabListItem}>
                   {menuItem.title}
                   <div className={s.menuItemIcon}>
                     <img alt={"menu list icon"} src={props.menuList[index].icon} />

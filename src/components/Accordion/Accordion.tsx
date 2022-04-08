@@ -9,6 +9,7 @@ import abstractIconEye from '@/assets/images/abstract-icon-2.svg'
 import abstractIconHeart from '@/assets/images/abstract-icon-3.svg'
 import { $app, setActiveAccordionTabIdEvt } from "@/store/app";
 import { useStore } from "effector-react";
+import classNames from "classnames";
 
 export const LearnMoreAccordion = () => {
   const { activeAccordionTabId } = useStore($app)
@@ -25,12 +26,12 @@ export const LearnMoreAccordion = () => {
       <Accordion activeKey={activeAccordionTabId.toString()} bsPrefix={'accordion'}>
         <Card className={s.card}>
           <Accordion.Toggle
-            className={`unselectable accordionText ${activeAccordionTabId === 0 ? s.opened : ''}`}
+            className={classNames('unselectable', { [s.opened]: activeAccordionTabId === 0 })}
             onClick={() => handleTabClick(0)} as={Card.Header} eventKey='0'>
             How it works
             {activeAccordionTabId === 0 ?
-              <img alt='show more' src={accordionMinus} /> :
-              <img alt='show more' src={accordionPlus} />
+              <img alt='close accordion tab' src={accordionMinus} /> :
+              <img alt='open accordion tab' src={accordionPlus} />
             }
           </Accordion.Toggle>
           <Accordion.Collapse eventKey='0'>
@@ -51,7 +52,7 @@ export const LearnMoreAccordion = () => {
                   <div className={s.additionalLeftPull}>
                     <img src={abstractIconLeaf} alt={'leaf icon'} />
                   </div>
-                  <div className={`${s.additionalRightPull}  ${s.correctionStyle}`}>
+                  <div className={classNames(s.additionalRightPull, s.correctionStyle)}>
                     NGO's from around the world plant the trees and capture tree data with
                     EcoMatcher's Treecoder blockchain technology.
                   </div>
@@ -80,11 +81,12 @@ export const LearnMoreAccordion = () => {
         </Card>
         <Card className={s.card}>
           <Accordion.Toggle
-            className={`unselectable accordionText ${activeAccordionTabId === 1 ? s.opened : ''}`}
+            className={classNames('unselectable', { [s.opened]: activeAccordionTabId === 1 })}
             onClick={() => handleTabClick(1)} as={Card.Header} eventKey='1'>
             About Plant Your Future NGO
-            {activeAccordionTabId === 1 ? <img alt='show more' src={accordionMinus} /> :
-              <img alt='show more' src={accordionPlus} />
+            {activeAccordionTabId === 1 ?
+              <img alt='close accordion tab' src={accordionMinus} /> :
+              <img alt='open accordion tab' src={accordionPlus} />
             }
           </Accordion.Toggle>
           <Accordion.Collapse eventKey='1'>

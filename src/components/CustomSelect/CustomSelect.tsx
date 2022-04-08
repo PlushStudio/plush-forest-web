@@ -66,7 +66,7 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
   return (
     <div ref={ref} onClick={handleClickInside} className={dropdownStyles}>
       <div
-        className={`${s.dropdownHeader}`}
+        className={s.dropdownHeader}
       >
         <div className={s.dropdownHeaderContent}>
           {itemsInfo.map(

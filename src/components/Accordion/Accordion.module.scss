@@ -1,45 +1,9 @@
 @use '../../assets/styles/theme';
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  font-family: AvenirNextRoundedPro-Reg, sans-serif;
-  background: theme.$white;
-  border: none;
-  height: 64px;
-}
-
-.card-body {
-  margin: 4px 140px 40px 42px;
-}
-
-.secondAccordionTitle {
-  display: inline;
-  width: 100%;
-  padding: 16px 0;
-}
-
 .collapsing,
 .show {
   background: theme.$white;
   margin-top: 4px;
-}
-
-.accordionHeader {
-  font-family: AvenirNextRoundedPro-Reg, sans-serif;
-  font-size: 18px;
-  line-height: 1.33;
-  color: theme.$grey-800;
-}
-
-.accordionText {
-  padding: 1.25rem 2.6em;
-  transition: 0.3s linear;
-  font-family: AvenirNextRoundedPro-Reg, sans-serif;
-  line-height: 2.1;
-  cursor: default;
-  color: theme.$grey-800;
-  font-weight: 900
 }
 
 .tabAdditionalBlockContainer {
@@ -49,7 +13,6 @@
 .opened {
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   transition: 0.35s linear;
-  cursor: default;
   font-weight: 800;
 }
 
@@ -65,11 +28,7 @@
   margin: 36px 0 36px 40px;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-size: 18px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.33;
-  letter-spacing: normal;
   color: theme.$grey-800
 }
 
@@ -79,10 +38,6 @@
 
 .tabMainBlock {
   font-size: 20px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.4;
-  letter-spacing: normal;
   padding-top: 10px;
 }
