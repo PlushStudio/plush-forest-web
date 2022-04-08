@@ -11,31 +11,27 @@ interface MenuItem {
 }
 
 const WalletKebab = (props: { menuList: MenuItem[] }) => {
-  const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState<boolean>(true)
+  const [kebabDropdownOpen, setKebabDropdownOpen] = useState<boolean>(true)
   const kebabRef = useRef(null)
 
   const handleClickOutside = () => {
-    setIsKebabDropdownOpen(false)
+    setKebabDropdownOpen(false)
   }
 
-  const menuItemHandler = (href: string) => {
-    setIsKebabDropdownOpen(false)
+  const handleMenuItemClick = (href: string) => {
+    setKebabDropdownOpen(false)
     window.open(href, '_blank')
   }
-
-  useEffect(() => {
-    console.log(isKebabDropdownOpen)
-  }, [isKebabDropdownOpen])
 
   useOnClickOutside(kebabRef, handleClickOutside)
 
   return (
-    <div ref={kebabRef} className={s.kebab} onClick={() => setIsKebabDropdownOpen(true)}>
+    <div ref={kebabRef} className={s.kebab} onClick={() => setKebabDropdownOpen(true)}>
       <img alt={'kebab button'} src={kebabIcon} />
-      <div className={classNames(s.kebabDropdown, isKebabDropdownOpen ? s.visible : s.hidden)}>
+      <div className={classNames(s.kebabDropdown, kebabDropdownOpen ? s.visible : s.hidden)}>
         {
           props.menuList.map((menuItem: MenuItem, index: number) =>
-            <div onClick={() => menuItemHandler(menuItem.href)}
+            <div onClick={() => handleMenuItemClick(menuItem.href)}
               key={menuItem.href + index}
               className={s.kebabListItemContainer}>
               <div className={s.kebabListItem}>
