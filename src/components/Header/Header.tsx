@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import s from '@/components/Header/Header.module.scss'
 import { HeaderContent } from './HeaderContent'
 import { Wallet, Balance, Pipe } from '@/lib'
@@ -19,17 +19,16 @@ export const Header = ({ walletProps: { state, address, name,
   expectedNetworkName, connect,
   switchNetwork, register,
   switchAccount, openExplorer }, currency, balance }: headerProps) => {
-  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false)
 
   const menuList = [
     {
       title: 'About',
-      href: routes.index,
+      href: 'https://plush.family/',
       icon: infoIcon
     },
     {
       title: 'Request features',
-      href: routes.index,
+      href: 'https://discord.gg/wEguFDBbN6',
       icon: cakeIcon
     }
   ];
