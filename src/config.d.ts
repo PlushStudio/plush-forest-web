@@ -15,5 +15,6 @@ interface Config {
   COIN_WALLETS_CONTRACT_ADDRESS?: string,
   SIGNUP_LINK: string,
   MATOMO_URL?: string,
-  MATOMO_SITE_ID?: string
+  MATOMO_SITE_ID?: string,
+  PLUSH_LINK: string
 }
