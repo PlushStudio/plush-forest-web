@@ -16,5 +16,5 @@ interface Config {
   SIGNUP_LINK: string,
   MATOMO_URL?: string,
   MATOMO_SITE_ID?: string,
-  PLUSH_LINK: string
+  PLUSH_WEBSITE_URL: string
 }
