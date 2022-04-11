@@ -15,6 +15,8 @@ const treeIcons = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaIm
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
+  const imageSrc = treeIcons[treeNames.indexOf(treeData.treeType.toUpperCase())]
+
   return (
     <div className={s.info}>
       <div>
@@ -25,7 +27,7 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
         <div className={s.infoStats}>
           <div className={s.infoStatsContainerOne}>
             {treeData.info.map((item: any, index: number) =>
-              <div key={item + `${index}_`} className={s.infoStatsContainerOneBlock}>
+              <div key={item + index} className={s.infoStatsContainerOneBlock}>
                 <p>{item.title}</p>
                 <span>{item.desc}</span>
               </div>
@@ -33,7 +35,7 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
           </div>
           <div className={s.infoStatsContainerTwo}>
             {treeData.subInfo.map((item: any, index: number) =>
-              <div key={item + `_${index}`} className={s.infoStatsContainerTwoBlock}>
+              <div key={item + index} className={s.infoStatsContainerTwoBlock}>
                 <img src={item.img} alt={"sub info"} />
                 <div>
                   <p>{item.title}</p>
@@ -45,7 +47,7 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
         </div>
       </div>
       <div className={s.treeInRound}>
-        <img src={treeIcons[treeNames.indexOf(treeData.treeType.toUpperCase())]} className={s.treeImage} alt='tree' />
+        <img src={imageSrc} className={s.treeImage} alt='tree' />
       </div>
     </div>
   )
