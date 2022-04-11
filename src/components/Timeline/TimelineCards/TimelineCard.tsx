@@ -21,29 +21,22 @@ const NETWORK_ID = window.config.NETWORK_ID ?? import.meta.env.VITE_NETWORK_ID
 const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
     const params: Params = useParams()
 
-    const [showBack, setIsShowBack] = useState<boolean>(false)
-
-    switch (cardInfo.size) {
-        case 'md': s.md
-            break
-        case 'xs': s.xs
-            break
-    }
+    const [showBackSide, setShowBackSide] = useState<boolean>(false)
 
     const handleFlip = () => {
-        if (cardInfo.flipable && !showBack) {
-            setIsShowBack(true)
+        if (cardInfo.flipable && !showBackSide) {
+            setShowBackSide(true)
         }
     }
 
     const timelineStyle = classNames(
-      s.cdTimelineBlock,
+      s.timelineBlock,
       { [s.reverse]: id % 2 === 0 }
     )
 
     const cardContainerStyle = classNames(
       s.cardContainer,
-      { [s.showBack]: showBack }
+      { [s.showBackSide]: showBackSide }
     )
 
     let cardSize;
@@ -61,21 +54,21 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
             cardSize = s.sm
     }
 
-    const cdTimelineContentStyle = classNames(
-      s.cdTimelineContent,
+    const timelineContentStyle = classNames(
+      s.timelineContent,
       id % 2 === 0 ? s.arrowLeft : s.arrowRight,
       cardSize
     )
 
     return (
       <div className={timelineStyle}>
-          <div className={s.cdTimelineImg}>
+          <div className={s.timelineImg}>
               <img src={orangeDot} alt="Picture" />
           </div>
           <div onClick={handleFlip} className={cardContainerStyle}>
-              <div className={cdTimelineContentStyle}>
-                  <div className={s.cdTimelineContentText}>
-                      <span className={s.cdTimelineDate}>{cardInfo.date}</span>
+              <div className={timelineContentStyle}>
+                  <div className={s.timelineContentText}>
+                      <span className={s.timelineDate}>{cardInfo.date}</span>
                       <p className={s.colorContrastMedium}>{cardInfo.text}</p>
                       <a href="#" className={id % 2 === 0 ? s.disabledText : s.btn}>
                           {id % 2 === 0 ? cardInfo.planterOrganization : (
@@ -94,12 +87,12 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                       />
                   </div>
               </div>
-              <div className={classNames(s.backSide, s.cdTimelineContent, s[cardInfo.size])}>
+              <div className={classNames(s.backSide, s.timelineContent, s[cardInfo.size])}>
                   <div className={s.backSideInfo}>
                       <span>caretaker</span>
                       <h2>{cardInfo.planterName}</h2>
                       <p>{cardInfo.planterBio}</p>
-                      <button onClick={() => setIsShowBack(false)}>Back</button>
+                      <button onClick={() => setShowBackSide(false)}>Back</button>
                   </div>
                   <img src={cardInfo.planterPhoto}
                        className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}

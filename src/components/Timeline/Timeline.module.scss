@@ -7,9 +7,9 @@
   perspective: 2000px;
   cursor: pointer;
 
-  &.showBack {
+  &.showBackSide {
 
-    .cdTimelineContent {
+    .timelineContent {
       transform: rotateY(180deg);
     }
 
@@ -20,7 +20,7 @@
   }
 }
 
-.cdTimelineContent {
+.timelineContent {
   transition: .5s;
   backface-visibility: hidden;
 }
@@ -33,7 +33,7 @@
   }
 }
 
-.cdTimeline {
+.timeline {
   overflow: hidden;
   padding: 1em 0;
   color: red;
@@ -189,7 +189,7 @@
   color: theme.$grey-800;
 }
 
-.cdTimelineContentText {
+.timelineContentText {
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 20px;
   color: theme.$grey-800;
@@ -198,7 +198,7 @@
 .reverse {
   flex-direction: row-reverse;
 
-  .cdTimeline {
+  .timeline {
     &Img {
       margin-left: 0 !important;
       margin-right: calc(50% - 12px);

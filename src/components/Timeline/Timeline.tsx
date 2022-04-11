@@ -57,7 +57,7 @@ const Timeline = ({ timelineInfo }: TimelineInfo) => {
   ]
   return (
     <div>
-      <div className={classNames(s.container, s.cdTimelineContainer)}>
+      <div className={classNames(s.container, s.timelineContainer)}>
         <div className={s.greyDot} />
         {cardInfo.map((item: ICardInfo, index: number): JSX.Element => {
           return <TimelineCard id={index + 1} cardInfo={cardInfo[index]} />
