@@ -57,6 +57,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
             break
         case 'lg': cardSize = s.lg
             break
+        default:
+            cardSize = s.sm
     }
 
     const cdTimelineContentStyle = classNames(
