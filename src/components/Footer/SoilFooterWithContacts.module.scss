@@ -45,7 +45,6 @@
   }
 }
 
-.rightPull,
 .leftPull {
   display: flex;
   align-items: center;
@@ -71,4 +70,10 @@
   color: theme.$grays-50;
   cursor: default;
   padding-left: 12px;
+
+  &:hover {
+    cursor: pointer;
+    transition: color .2s;
+    color: theme.$emerald-500;
+  }
 }

@@ -5,10 +5,16 @@ import plushLogo from '@/assets/images/footerLogo/footerLogo@2x.png'
 import { Link } from 'react-router-dom'
 
 export const SoilFooterWithContacts: FC = () => {
+
+  const PLUSH_LINK = window.config.PLUSH_WEBSITE_URL ?? import.meta.env.VITE_PLUSH_WEBSITE_URL
+
+  const handleFooterLink = () => {
+    window.open(PLUSH_LINK, '_blank');
+  }
   return (
     <div className={s.soilFooterWithContactsContainer}>
       <div className={s.soilFooterContent}>
-        <div className={s.leftPull}>
+        <div onClick={handleFooterLink} className={s.leftPull}>
           <Link to={''}>
             <img className={s.logoIcon} src={plushLogo} alt={'logo plush'} />
           </Link>
