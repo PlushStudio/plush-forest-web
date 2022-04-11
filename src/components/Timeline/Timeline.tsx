@@ -5,12 +5,13 @@ import TimelineCard from '@/components/Timeline/TimelineCards/TimelineCard'
 import heartImg from '@/assets/images/bitmap-copy@2x.png'
 import timelineBase from '@/assets/images/timelinebase.png'
 import classNames from "classnames";
+import { CardSize } from "@/types/timeline/CardSize";
 
 export interface ICardInfo {
   date: string,
   text: string,
   img: string,
-  size: string,
+  size: CardSize,
   subtext?: string,
   planterName?: string
   planterPhoto?: string,
