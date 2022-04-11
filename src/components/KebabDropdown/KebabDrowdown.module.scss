@@ -51,24 +51,6 @@
   justify-content: space-between;
 }
 
-.activeMenuItem {
-  font-family: AvenirNextRoundedPro-Med, sans-serif;
-  color: theme.$indigo-500;
-  transition: .3s ease;
-  padding: 16px 12px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.activeMenuItem:hover {
-  text-decoration: none;
-  color: theme.$indigo-500;
-}
-
-.kebabListItemContainerActive {
-  background: theme.$light-gray;
-}
-
 .kebabListItemContainer:hover {
   transition: .3s ease;
   background: theme.$light-gray;
