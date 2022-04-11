@@ -19,7 +19,6 @@
   padding: 0 88px;
   margin: auto;
   display: flex;
-  justify-content: space-between;
 }
 
 .footerPlant {
@@ -34,6 +33,11 @@
   z-index: variables.$medium-order;
 }
 
+.logoIcon {
+  width: 32px;
+  height: 32px;
+}
+
 @media (max-width: 1392px) {
   .footerPlant {
     left: auto;
@@ -41,7 +45,6 @@
   }
 }
 
-.rightPull,
 .leftPull {
   display: flex;
   align-items: center;
@@ -63,15 +66,14 @@
   margin-right: 36px;
 }
 
-.termsAndPrivacy {
-  margin-left: 12px;
-  font-family: AvenirNextRoundedPro-Med, sans-serif;
-  color: theme.$grays-000-white;
-  cursor: pointer;
-}
-
 .leftPullText {
   color: theme.$grays-50;
   cursor: default;
   padding-left: 12px;
+
+  &:hover {
+    cursor: pointer;
+    transition: color .2s;
+    color: theme.$emerald-500;
+  }
 }

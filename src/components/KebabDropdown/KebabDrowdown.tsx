@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import kebabIcon from "@/assets/images/wallet/32-px-1-outlined-kebab-horizontal.svg";
 import s from "./KebabDrowdown.module.scss"
-import { Link } from "react-router-dom";
 import classNames from "classnames";
+import { useOnClickOutside } from "usehooks-ts";
 
 interface MenuItem {
   title: string,
@@ -11,48 +11,35 @@ interface MenuItem {
 }
 
 const WalletKebab = (props: { menuList: MenuItem[] }) => {
-  const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState<boolean>(false)
-  const [activeItemId, setActiveItemId] = useState<number>(0)
+  const [kebabDropdownOpen, setKebabDropdownOpen] = useState<boolean>(true)
   const kebabRef = useRef(null)
 
-  const handleClickOutside = (e: any) => {
-    // @ts-ignore
-    setIsKebabDropdownOpen(kebabRef?.current?.contains(e.target))
+  const handleClickOutside = () => {
+    setKebabDropdownOpen(false)
   }
 
-  useEffect(() => {
-    /**
-     * Set dropdown state if clicked on outside of dropdown
-     */
-    document.addEventListener('click', handleClickOutside)
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }, [])
-
-  const menuItemHandler = (itemName: string, index: number) => {
-    setActiveItemId(index)
-    setIsKebabDropdownOpen(false)
+  const handleMenuItemClick = (href: string) => {
+    setKebabDropdownOpen(false)
+    window.open(href, '_blank')
   }
+
+  useOnClickOutside(kebabRef, handleClickOutside)
 
   return (
-    <div ref={kebabRef} className={s.kebab} onClick={() => setIsKebabDropdownOpen(!isKebabDropdownOpen)}>
+    <div ref={kebabRef} className={s.kebab} onClick={() => setKebabDropdownOpen(true)}>
       <img alt={'kebab button'} src={kebabIcon} />
-      <div className={classNames(s.kebabDropdown, isKebabDropdownOpen ? s.visible : s.hidden)}>
+      <div className={classNames(s.kebabDropdown, kebabDropdownOpen ? s.visible : s.hidden)}>
         {
           props.menuList.map((menuItem: MenuItem, index: number) =>
-            <div className={classNames(
-              s.kebabListItemContainer,
-              { [s.kebabListItemContainerActive]: activeItemId === index }
-            )}>
-              <Link to={menuItem.href} onClick={() => menuItemHandler(menuItem.href, index)}>
-                <div className={activeItemId === index ? s.activeMenuItem : s.kebabListItem}>
-                  {menuItem.title}
-                  <div className={s.menuItemIcon}>
-                    <img alt={"menu list icon"} src={props.menuList[index].icon} />
-                  </div>
+            <div onClick={() => handleMenuItemClick(menuItem.href)}
+              key={menuItem.href + index}
+              className={s.kebabListItemContainer}>
+              <div className={s.kebabListItem}>
+                {menuItem.title}
+                <div className={s.menuItemIcon}>
+                  <img alt={"menu list icon"} src={props.menuList[index].icon} />
                 </div>
-              </Link>
+              </div>
             </div>)
         }
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import s from '@/components/Header/Header.module.scss'
 import { HeaderContent } from './HeaderContent'
 import { Wallet, Balance, Pipe } from '@/lib'
@@ -6,7 +6,6 @@ import { WalletProps } from '@/lib/components/Wallet/Wallet'
 import KebabDrowdown from "@/components/KebabDropdown/KebabDrowdown";
 import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
 import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
-import routes from "@/Router/routes";
 
 interface headerProps {
   walletProps: WalletProps,
@@ -19,17 +18,18 @@ export const Header = ({ walletProps: { state, address, name,
   expectedNetworkName, connect,
   switchNetwork, register,
   switchAccount, openExplorer }, currency, balance }: headerProps) => {
-  const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false)
+
+  const PLUSH_WEBSITE_URL = window.config.PLUSH_WEBSITE_URL ?? import.meta.env.VITE_PLUSH_WEBSITE_URL
 
   const menuList = [
     {
       title: 'About',
-      href: routes.index,
+      href: PLUSH_WEBSITE_URL,
       icon: infoIcon
     },
     {
       title: 'Request features',
-      href: routes.index,
+      href: 'https://discord.gg/wEguFDBbN6',
       icon: cakeIcon
     }
   ];
