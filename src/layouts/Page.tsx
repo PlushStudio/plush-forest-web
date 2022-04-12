@@ -153,7 +153,7 @@ export const Page = (props: Props) => {
   }
 
   const registerAccount = () => {
-    window.location.href = window.config.LANDING_URL ?? import.meta.env.VITE_LANDING_URL
+    window.location.href = window.config.SIGNUP_URL ?? import.meta.env.VITE_SIGNUP_URL
   }
 
   useEffect(() => {
