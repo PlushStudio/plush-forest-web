@@ -1,12 +1,12 @@
 import React, { ReactNode, useEffect, useMemo, useState } from 'react'
 import { Header } from '@/components/Header/Header'
-import { WalletState } from "@/lib/components/Wallet/Wallet";
-import { useStore } from "effector-react";
-import { $user } from "@/store/user";
-import { $walletStore } from "@/store/wallet";
-import MetamaskWallet from "@/metamask/wallet/metamaskWallet";
-import { CircleLoader } from "@/components/Loader/CircleLoader";
-import { setCurrencyEvt, setIsOpenMenuDropdownEvt, setSafeBalanceEvt, setUserBalanceEvt } from "@/store/app";
+import { WalletState } from '../../lib/components/Wallet/Wallet'
+import { useStore } from 'effector-react'
+import { $user } from '@/store/user'
+import { $walletStore } from '@/store/wallet'
+import MetamaskWallet from '@/metamask/wallet/metamaskWallet'
+import { CircleLoader } from '@/components/Loader/CircleLoader'
+import { setCurrencyEvt, setIsOpenMenuDropdownEvt, setSafeBalanceEvt, setUserBalanceEvt } from '@/store/app'
 
 type Props = {
   children: ReactNode
@@ -176,8 +176,8 @@ export const Page = (props: Props) => {
   }, [walletStore, user])
 
   return (
-    dataFetched ?
-      <>
+    dataFetched
+      ? <>
         <Header
           walletProps={{
             state: walletState,
@@ -201,5 +201,6 @@ export const Page = (props: Props) => {
         {!!props.footerComponent &&
           props.footerComponent
         }
-      </> : <CircleLoader />)
+      </>
+      : <CircleLoader />)
 }

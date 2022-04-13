@@ -1,9 +1,9 @@
-import { createDomain, createEffect, createEvent } from "effector";
+import { createDomain, createEffect, createEvent } from 'effector'
 import { login, logout } from '@/metamask/wallet/authenticator'
-import MetamaskWallet from '@/metamask/wallet/metamaskWallet';
-import api from "@/api/api";
+import MetamaskWallet from '@/metamask/wallet/metamaskWallet'
+import api from '@/api/api'
 
-export const authDomain = createDomain('auth');
+export const authDomain = createDomain('auth')
 
 export const logoutEvent = createEvent()
 export const loginEvent = createEvent()

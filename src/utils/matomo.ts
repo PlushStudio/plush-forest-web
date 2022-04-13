@@ -11,7 +11,7 @@ enum MatomoEvent {
 }
 
 const trackEvent = (category: Category, event: MatomoEvent, name?: string) => {
-  window._paq.push(['trackEvent', category, event, name]);
+  window._paq.push(['trackEvent', category, event, name])
 }
 
-export { trackEvent, Category, MatomoEvent };
+export { trackEvent, Category, MatomoEvent }

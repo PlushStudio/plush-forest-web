@@ -9,13 +9,13 @@ import { HomeFeatureSection2 } from '@/components/HomeFeatureSection/HomeFeature
 import { HomeFeatureSection3 } from '@/components/HomeFeatureSection/HomeFeatureSection3'
 import { Footer } from '@/components/Footer/Footer'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-import { useHistory } from "react-router";
-import routes from "@/Router/routes";
+import { useHistory } from 'react-router'
+import routes from '@/Router/routes'
 import { useStore } from 'effector-react'
-import { $auth } from "@/store/auth";
-import { $walletStore } from "@/store/wallet";
-import { $forest, getForestDataFx } from "@/store/forest";
-import { CircleLoader } from "@/components/Loader/CircleLoader";
+import { $auth } from '@/store/auth'
+import { $walletStore } from '@/store/wallet'
+import { $forest, getForestDataFx } from '@/store/forest'
+import { CircleLoader } from '@/components/Loader/CircleLoader'
 
 export const AboutPage = () => {
   const { isLoggedIn } = useStore($auth)
@@ -70,8 +70,8 @@ export const AboutPage = () => {
     }
   }
   return (
-    isReady ?
-      <>
+    isReady
+      ? <>
         <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
           viewBox='110 300 1140 700'>
           <g fill='none'>
@@ -97,6 +97,7 @@ export const AboutPage = () => {
         <div ref={accordionRef}>
           <Footer />
         </div>
-      </> : <CircleLoader />
+      </>
+      : <CircleLoader />
   )
 }

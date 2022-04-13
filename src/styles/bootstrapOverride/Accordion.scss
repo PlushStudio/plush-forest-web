@@ -1,0 +1,36 @@
+@use '../variables';
+@use '../theme';
+
+/* stylelint-disable -- Override bootstrap value with kebab-case. */
+.accordion>.card>.card-header {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  height: 64px;
+  align-items: center;
+  font-size: 18px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.accordion>.card {
+  border: none;
+  outline: none;
+  border-radius: 8px;
+
+  &:first-of-type {
+    margin-bottom: 4px;
+  }
+}
+
+.show,
+.collapsing {
+  max-width: 1050px;
+}
+
+.accordion .collapse,
+.accordion .collapsing {
+  padding: 0 5.2em;
+}

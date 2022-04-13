@@ -30,5 +30,5 @@ export const treesTooltip = [
     diameter: '6.5',
     lifespanYears: '350',
     conservationStatus: 'Vulnerable'
-  },
+  }
 ]

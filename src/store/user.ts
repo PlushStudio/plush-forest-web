@@ -1,8 +1,8 @@
-import userService from '@/services/user';
-import { ApiProfile } from '@/services/user/users';
-import { createDomain, createEffect } from 'effector';
-import { logoutEvent } from './auth';
-export const userDomain = createDomain('user');
+import userService from '@/services/user'
+import { ApiProfile } from '@/services/user/users'
+import { createDomain, createEffect } from 'effector'
+import { logoutEvent } from './auth'
+export const userDomain = createDomain('user')
 
 export const getUserFx = createEffect(async (): Promise<ApiProfile> => {
   return await userService.users.endpoints.getProfile()
@@ -22,7 +22,7 @@ export const $user = userDomain
     gender: 'FEMALE',
     isActive: false,
     childs: []
-  }).reset(logoutEvent);
+  }).reset(logoutEvent)
 
 $user.on(getUserFx.doneData, (_, user: ApiProfile) => {
   return user

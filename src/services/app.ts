@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { toNotNullableString } from "@/services/api/transforms";
+import { z } from 'zod'
+import { toNotNullableString } from '@/services/api/transforms'
 
 const ApiAppSchema = z.object({
   isOpenMenuDropdown: z.boolean(),
@@ -8,7 +8,7 @@ const ApiAppSchema = z.object({
   userBalance: (z.number()),
   safeBalance: (z.number()),
   currency: z.string(),
-  activeAccordionTabId: (z.number()),
+  activeAccordionTabId: (z.number())
 })
 
 export type ApiApp = z.infer<typeof ApiAppSchema>

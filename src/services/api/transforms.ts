@@ -1,5 +1,5 @@
 export const toNotNullableString = (value: string | null): string => {
-  return value ? value : ''
+  return value || ''
 }
 
 export const toNullableDate = (value: string | null): Date | null => {

@@ -1,16 +1,16 @@
-@use '../../assets/styles/variables';
-@use '../../assets/styles/theme';
+@use '../../styles/variables';
+@use '../../styles/theme';
 
 .dropdown {
   border-radius: 16px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 6%), 0 1px 2px 0 rgba(0, 0, 0, 6%);
   background-image: linear-gradient(to bottom, #fff 0%, #f1f1f1 100%);
   border: solid 1px theme.$white;
   position: relative;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &.focused {
-    box-shadow: 0 0 0 4px rgba(86, 104, 254, 0.2) !important;
+    box-shadow: 0 0 0 4px rgba(86, 104, 254, 20%) !important;
     border: 1px solid #5668fe !important;
   }
 }
@@ -38,7 +38,7 @@
   h2 {
     font-size: 20px;
     color: theme.$grey-800;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   p {
@@ -148,7 +148,6 @@
       margin: 0;
       color: theme.$grey-800;
       font-family: AvenirNextRoundedPro-Med, sans-serif;
-
     }
 
     p {
@@ -157,7 +156,6 @@
       color: theme.$grays-500;
       font-family: AvenirNextRoundedPro-Reg, sans-serif;
     }
-
   }
 }
 

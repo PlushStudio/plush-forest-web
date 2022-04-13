@@ -16,36 +16,6 @@ code {
         monospace;
 }
 
-.header-bar {
-    background-color: transparent;
-}
-
-.menu-container {
-    align-content: flex-end;
-}
-
-.tree-info-image {
-    width: 30vw;
-}
-
-.tree-info {
-    background-color: #f1f1f1;
-}
-
-.tree-info-menu {
-    background-color: #f7f7f7;
-}
-
-.locate-on-blockchain-bar {
-    background-color: #f7f7f7;
-}
-
-.planting-tree-image {
-    width: 632px;
-    height: 712px;
-    object-fit: contain;
-}
-
 .unselectable {
     webkit-touch-callout: none;
     /* iOS Safari */

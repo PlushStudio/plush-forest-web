@@ -1,5 +1,5 @@
-@use "/src/assets/styles/theme";
-@use "/src/assets/styles/variables";
+@use '/src/styles/theme';
+@use '/src/styles/variables';
 
 .backgroundContainer {
   min-height: 100vh;
@@ -19,6 +19,12 @@
 
 .skyImage {
   position: absolute;
+}
+
+.treeImage {
+  width: 632px;
+  height: 712px;
+  object-fit: contain;
 }
 
 .plantingFormWrapper {
@@ -49,7 +55,6 @@
   font-size: 18px;
   color: theme.$grey-800;
   width: 100%;
-
 }
 
 .inputWrapper {
@@ -60,7 +65,7 @@
   margin-top: 20px;
   margin-left: 8px;
   color: #c1656e;
-  font-family: 'AvenirNextRoundedPro-Demi', sans-serif;
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
 }
 
 .faucetLink {

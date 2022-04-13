@@ -1,5 +1,5 @@
-import { logoutEvent } from '@/store/auth';
-import axios from 'axios';
+import { logoutEvent } from '@/store/auth'
+import axios from 'axios'
 
 const backend = axios.create({
   baseURL: window.config.API_URL ?? import.meta.env.VITE_BASE_URL,
@@ -8,7 +8,7 @@ const backend = axios.create({
   headers: {
     'Content-Type': 'application/json'
   }
-});
+})
 
 backend.interceptors.response.use(
   (response) => response,
@@ -21,4 +21,4 @@ backend.interceptors.response.use(
   }
 )
 
-export default backend;
+export default backend

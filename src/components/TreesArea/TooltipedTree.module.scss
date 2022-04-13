@@ -1,5 +1,5 @@
-@use '../../assets/styles/theme';
-@use '../../assets/styles/variables';
+@use '../../styles/theme';
+@use '../../styles/variables';
 
 .popoverWrapper {
   width: fit-content;
@@ -7,7 +7,7 @@
 }
 
 .popoverContent {
-  padding: 14px 24px 20px 24px;
+  padding: 14px 24px 20px;
 }
 
 .popoverTitle {
@@ -34,7 +34,7 @@
   font-size: 14px;
   line-height: 1.43;
   text-align: center;
-  color: theme.$grays-500
+  color: theme.$grays-500;
 }
 
 .popoverActionText {

@@ -1,9 +1,9 @@
-import { createDomain, createEffect } from 'effector';
-import MetamaskWallet from '@/metamask/wallet/metamaskWallet';
-import PlushContractManager from '@/metamask/contracts/plush';
-import PlushCoinWalletsContractManager from '@/metamask/contracts/plushCoinWallets';
-import TreeContractManager from "@/metamask/contracts/tree";
-import CoreContractManager from "@/metamask/contracts/core";
+import { createDomain, createEffect } from 'effector'
+import MetamaskWallet from '@/metamask/wallet/metamaskWallet'
+import PlushContractManager from '@/metamask/contracts/plush'
+import PlushCoinWalletsContractManager from '@/metamask/contracts/plushCoinWallets'
+import TreeContractManager from '@/metamask/contracts/tree'
+import CoreContractManager from '@/metamask/contracts/core'
 
 export interface WalletStore {
   wallet: MetamaskWallet,
@@ -13,7 +13,7 @@ export interface WalletStore {
   coreContractManager: CoreContractManager
 }
 
-export const walletDomain = createDomain('wallet');
+export const walletDomain = createDomain('wallet')
 
 export const getMetamaskWalletFx = createEffect(async (): Promise<WalletStore> => {
   const provider = await MetamaskWallet.detectProvider()

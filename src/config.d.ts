@@ -1,6 +1,7 @@
 interface Window {
   config: Config,
   _paq: any,
+  ethereum: any;
 }
 
 interface Config {

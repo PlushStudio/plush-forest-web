@@ -6,12 +6,12 @@ import treeIcon0 from '@/assets/images/tree-icon-selector/shihuahuaco.png'
 import treeIcon1 from '@/assets/images/tree-icon-selector/cacao.png'
 import treeIcon2 from '@/assets/images/tree-icon-selector/guaba.png'
 import treeIcon3 from '@/assets/images/tree-icon-selector/caoba.png'
-import classNames from "classnames";
-import { useStore } from "effector-react";
-import { $forest } from "@/store/forest";
-import { useOnClickOutside } from "usehooks-ts";
-import { treeNames } from "@/pages/Planting/PlantingLogic";
-import { $app, setActiveTreeEvt } from "@/store/app";
+import classNames from 'classnames'
+import { useStore } from 'effector-react'
+import { $forest } from '@/store/forest'
+import { useOnClickOutside } from 'usehooks-ts'
+import { treeNames } from '@/pages/Planting/PlantingLogic'
+import { $app, setActiveTreeEvt } from '@/store/app'
 
 interface TreesInfo {
   name: string,
@@ -64,7 +64,7 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
   useOnClickOutside(ref, handleClickOutside)
 
   return (
-    <div ref={ref} onClick={handleClickInside} className={dropdownStyles}>
+    <div role={'presentation'} ref={ref} onClick={handleClickInside} className={dropdownStyles}>
       <div
         className={s.dropdownHeader}
       >
@@ -82,9 +82,9 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
           )}
           <div className={s.headerContentContainer}>
             <h2>
-              {itemsInfo.find((item: TreesInfo, index: number) => index == selectedItemId)?.name}
+              {itemsInfo.find((item: TreesInfo, index: number) => index === selectedItemId)?.name}
             </h2>
-            <p>{itemsInfo.find((item: TreesInfo, index: number) => index == selectedItemId)?.label}</p>
+            <p>{itemsInfo.find((item: TreesInfo, index: number) => index === selectedItemId)?.label}</p>
           </div>
         </div>
         <div className={s.dropdownHeaderRightPull}>
@@ -104,6 +104,7 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
           (item: TreesInfo, index: number) =>
             treesCount[index] !== 0 && (
               <div
+                role={'presentation'}
                 key={item.name + index}
                 className={classNames(s.dropdownItem, { [s.selectedItem]: selectedItemId === index })}
                 onClick={() => handleItemClick(index, item.name)}

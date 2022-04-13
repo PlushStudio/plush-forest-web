@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import '@/index.scss'
 import '@/index.css'
 import { Routes } from '@/Routes'
-import { $user, getUserFx } from "@/store/user";
-import { $auth, loginEvent, loginFx, logoutEvent, logoutFx } from "@/store/auth";
-import { ApiError } from "@/services/api/types";
-import { $walletStore, getMetamaskWalletFx } from "@/store/wallet";
-import { useStore } from "effector-react";
-import { useUpdateEffect } from "usehooks-ts";
-import { CircleLoader } from "@/components/Loader/CircleLoader";
+import { $user, getUserFx } from '@/store/user'
+import { $auth, loginEvent, loginFx, logoutEvent, logoutFx } from '@/store/auth'
+import { ApiError } from '@/services/api/types'
+import { $walletStore, getMetamaskWalletFx } from '@/store/wallet'
+import { useStore } from 'effector-react'
+import { useUpdateEffect } from 'usehooks-ts'
+import { CircleLoader } from '@/components/Loader/CircleLoader'
 
-function App() {
+function App () {
   const walletStore = useStore($walletStore)
   const { isLoggedIn, isLoginStateRecieved } = useStore($auth)
   const user = useStore($user)
@@ -79,7 +79,6 @@ function App() {
     }
 
     sync()
-
   }, [isLoginStateRecieved])
 
   useUpdateEffect(() => {
@@ -93,6 +92,7 @@ function App() {
       const currentAccountConnected = accounts.find((account) => account === user.address)
 
       if (!currentAccountConnected) {
+        // TODO: implement the functionality when disabling the current account
       }
 
       syncLoginState(accounts[0])
@@ -113,8 +113,8 @@ function App() {
   }, [])
 
   return (
-    isReady ?
-      <Routes />
+    isReady
+      ? <Routes />
       : <CircleLoader />
   )
 }

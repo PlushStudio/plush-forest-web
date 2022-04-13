@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { get } from "../api/methods";
-import { ApiGenderSchema } from "../api/schemas/ApiGenderShema";
-import { ApiRoleSchema } from "../api/schemas/ApiRoleSchema";
-import { toNotNullableString, toNullableDate } from "../api/transforms";
+import { z } from 'zod'
+import { get } from '../api/methods'
+import { ApiGenderSchema } from '../api/schemas/ApiGenderShema'
+import { ApiRoleSchema } from '../api/schemas/ApiRoleSchema'
+import { toNotNullableString, toNullableDate } from '../api/transforms'
 
 const ApiProfileSchema = z.object({
   id: z.string(),

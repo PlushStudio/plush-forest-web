@@ -8,7 +8,6 @@ export interface WalletProps {
     name: string;
     gender: Gender;
     address: string;
-    suggestCorrectNetwork?: boolean;
     modalStyle?: CSSProperties;
     className?: string;
     connect: () => void | Promise<void>;
