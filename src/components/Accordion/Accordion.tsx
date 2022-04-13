@@ -104,9 +104,6 @@ export const LearnMoreAccordion = () => {
                     Planted a further 35,000 trees that continue to thrive.
                   </li>
                   <li>
-                    Planted a further 35,000 trees that continue to thrive.
-                  </li>
-                  <li>
                     Achieved certification under the Climate, Community and Biodiversity Standard and the Verified
                     Carbon
                     Standard.
