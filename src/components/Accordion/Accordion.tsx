@@ -1,15 +1,15 @@
 import React from 'react'
 import { Accordion, Card } from 'react-bootstrap'
+import '@/styles/bootstrapOverride/Accordion.scss'
 import s from './Accordion.module.scss'
-import '@/assets/styles/custom-elements/data-display/Accordion.scss'
 import accordionMinus from '@/assets/images/16-px-1-outlined-minus.svg'
 import accordionPlus from '@/assets/images/16-px-1-outlined-plus.svg'
 import abstractIconLeaf from '@/assets/images/abstract-icon-1.svg'
 import abstractIconEye from '@/assets/images/abstract-icon-2.svg'
 import abstractIconHeart from '@/assets/images/abstract-icon-3.svg'
-import { $app, setActiveAccordionTabIdEvt } from "@/store/app";
-import { useStore } from "effector-react";
-import classNames from "classnames";
+import { $app, setActiveAccordionTabIdEvt } from '@/store/app'
+import { useStore } from 'effector-react'
+import classNames from 'classnames'
 
 export const LearnMoreAccordion = () => {
   const { activeAccordionTabId } = useStore($app)
@@ -29,9 +29,9 @@ export const LearnMoreAccordion = () => {
             className={classNames('unselectable', { [s.opened]: activeAccordionTabId === 0 })}
             onClick={() => handleTabClick(0)} as={Card.Header} eventKey='0'>
             How it works
-            {activeAccordionTabId === 0 ?
-              <img alt='close accordion tab' src={accordionMinus} /> :
-              <img alt='open accordion tab' src={accordionPlus} />
+            {activeAccordionTabId === 0
+              ? <img alt='close accordion tab' src={accordionMinus} />
+              : <img alt='open accordion tab' src={accordionPlus} />
             }
           </Accordion.Toggle>
           <Accordion.Collapse eventKey='0'>
@@ -53,8 +53,8 @@ export const LearnMoreAccordion = () => {
                     <img src={abstractIconLeaf} alt={'leaf icon'} />
                   </div>
                   <div className={classNames(s.additionalRightPull, s.correctionStyle)}>
-                    NGO's from around the world plant the trees and capture tree data with
-                    EcoMatcher's Treecoder blockchain technology.
+                    NGO&apos;s from around the world plant the trees and capture tree data with
+                    EcoMatcher&apos;s Treecoder blockchain technology.
                   </div>
                 </div>
                 <div className={s.tabAdditionalBlock}>
@@ -62,7 +62,7 @@ export const LearnMoreAccordion = () => {
                     <img src={abstractIconEye} alt={'eye icon'} />
                   </div>
                   <div className={s.additionalRightPull}>
-                    EcoMatcher inspects and validates information captured by NGO's, and
+                    EcoMatcher inspects and validates information captured by NGO&apos;s, and
                     offers Plush to purchase any available forests.
                   </div>
                 </div>
@@ -72,7 +72,7 @@ export const LearnMoreAccordion = () => {
                   </div>
                   <div className={s.additionalRightPull}>
                     Plush acquires a forest and further extends EcoMatcher’s technology to
-                    assign a tree selected by parents to every child's unique Plush token.
+                    assign a tree selected by parents to every child&apos;s unique Plush token.
                   </div>
                 </div>
               </div>
@@ -84,9 +84,9 @@ export const LearnMoreAccordion = () => {
             className={classNames('unselectable', { [s.opened]: activeAccordionTabId === 1 })}
             onClick={() => handleTabClick(1)} as={Card.Header} eventKey='1'>
             About Plant Your Future NGO
-            {activeAccordionTabId === 1 ?
-              <img alt='close accordion tab' src={accordionMinus} /> :
-              <img alt='open accordion tab' src={accordionPlus} />
+            {activeAccordionTabId === 1
+              ? <img alt='close accordion tab' src={accordionMinus} />
+              : <img alt='open accordion tab' src={accordionPlus} />
             }
           </Accordion.Toggle>
           <Accordion.Collapse eventKey='1'>
@@ -112,7 +112,7 @@ export const LearnMoreAccordion = () => {
                     Standard.
                   </li>
                 </ul>
-                For more info, please visit: <a href={"https://www.plantyourfuture.org.uk"}>
+                For more info, please visit: <a href={'https://www.plantyourfuture.org.uk'}>
                   https://www.plantyourfuture.org.uk
                 </a>
               </div>

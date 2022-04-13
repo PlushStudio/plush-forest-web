@@ -36,7 +36,7 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
           <div className={s.infoStatsContainerTwo}>
             {treeData.subInfo.map((item: any, index: number) =>
               <div key={item + index} className={s.infoStatsContainerTwoBlock}>
-                <img src={item.img} alt={"sub info"} />
+                <img src={item.img} alt={'sub info'} />
                 <div>
                   <p>{item.title}</p>
                   <span>{item.desc}</span>

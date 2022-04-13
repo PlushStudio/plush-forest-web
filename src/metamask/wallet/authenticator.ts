@@ -31,7 +31,7 @@ const sendLoginData = async (authUrl: URL, publicAddress: string, signature: str
   const response = await fetch(authUrl.href, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     credentials: 'include',
@@ -75,7 +75,7 @@ const logout = async (logoutUrl: URL): Promise<any> => {
   const response = await fetch(logoutUrl.href, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
     credentials: 'include'

@@ -1,9 +1,9 @@
-import { createDomain, createEffect } from 'effector';
-import { logoutEvent } from './auth';
-import { WalletStore } from "@/store/wallet";
-import { ApiTreesMy } from "@/services/forest/trees";
+import { createDomain, createEffect } from 'effector'
+import { logoutEvent } from './auth'
+import { WalletStore } from '@/store/wallet'
+import { ApiTreesMy } from '@/services/forest/trees'
 
-export const forestDomain = createDomain('forest');
+export const forestDomain = createDomain('forest')
 
 export const getForestDataFx = createEffect(async (walletStore: WalletStore): Promise<ApiTreesMy> => {
   return {
@@ -25,8 +25,8 @@ export const getForestDataFx = createEffect(async (walletStore: WalletStore): Pr
 export const $forest = forestDomain
   .createStore<ApiTreesMy>({
     treesCount: [],
-    treesPrice: [],
-  }).reset(logoutEvent);
+    treesPrice: []
+  }).reset(logoutEvent)
 
 $forest.on(getForestDataFx.doneData, (_, forest: ApiTreesMy) => {
   return forest

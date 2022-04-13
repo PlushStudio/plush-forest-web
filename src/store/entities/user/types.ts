@@ -1,4 +1,4 @@
-import { Gender } from "@/types/Gender";
+import { Gender } from '@/types/Gender'
 
 export interface User {
   address: string,

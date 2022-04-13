@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef, useState } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import shihuahuacoTreeImage from '@/assets/images/planting-tree/tree-shihuahuaco.png'
 import cacaoTreeImage from '@/assets/images/planting-tree/tree-cacao.png'
@@ -6,14 +6,14 @@ import guabaTreeImage from '@/assets/images/planting-tree/tree-guaba.png'
 import caobaImage from '@/assets/images/planting-tree/tree-caoba.png'
 import api from '@/api/api'
 import { UserTokens } from '@/types/UserTokens'
-import { useHistory } from "react-router";
-import routes from "@/Router/routes";
-import axios from "axios";
-import { useStore } from "effector-react";
-import { $walletStore } from "@/store/wallet";
-import { $forest } from "@/store/forest";
-import { $user } from "@/store/user";
-import { $app } from "@/store/app";
+import { useHistory } from 'react-router'
+import routes from '@/Router/routes'
+import axios from 'axios'
+import { useStore } from 'effector-react'
+import { $walletStore } from '@/store/wallet'
+import { $forest } from '@/store/forest'
+import { $user } from '@/store/user'
+import { $app } from '@/store/app'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -43,14 +43,33 @@ export const PlantingLogic = () => {
   }, [selectedTreeType, treesPrice])
 
   useEffect(() => {
-    if (userBalance < treesPrice[treeNames.indexOf(selectedTreeType)]
-      && safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
+    if (userBalance < treesPrice[treeNames.indexOf(selectedTreeType)] &&
+      safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
       setIsBalanceHintVisible(true)
     }
   }, [safeBalance, userBalance])
 
+  const isTokenBackendAvailable = async (tokenId: string, delay: number) => {
+    const checkTokenBackendInterval = setInterval(async () => {
+      try {
+        const tokenAvailabilityResult = await axios.get(
+          `${api.url}/forest/tokens/token/${tokenId}`,
+          { withCredentials: true }
+        )
+        if (tokenAvailabilityResult) {
+          history.push(`${routes.token}/${tokenId}`)
+          clearInterval(checkTokenBackendInterval)
+        }
+      } catch (e: any) {
+        throw Error(e.message)
+      }
+    }, delay)
+
+    return checkTokenBackendInterval
+  }
+
   const checkTokenAvailability = async () => {
-    //empty message for Pilot
+    // empty message for Pilot
     const treeMintingResult = await walletStore?.treeContractManager.mintTree(user.address,
       selectedTreeType,
       currentTreePrice,
@@ -135,25 +154,6 @@ export const PlantingLogic = () => {
     } else {
       history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
     }
-  }
-
-  const isTokenBackendAvailable = async (tokenId: string, delay: number) => {
-    const checkTokenBackendInterval = setInterval(async () => {
-      try {
-        const tokenAvailabilityResult = await axios.get(
-          `${api.url}/forest/tokens/token/${tokenId}`,
-          { withCredentials: true }
-        )
-        if (tokenAvailabilityResult) {
-          history.push(`${routes.token}/${tokenId}`)
-          clearInterval(checkTokenBackendInterval)
-        }
-      } catch (e: any) {
-        throw Error(e.message)
-      }
-    }, delay)
-
-    return checkTokenBackendInterval
   }
 
   const startMintProcess = async (e?: MouseEvent<HTMLButtonElement>) => {

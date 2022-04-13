@@ -1,4 +1,4 @@
-@use '../../assets/styles/theme';
+@use '../../styles/theme';
 
 .collapsing,
 .show {
@@ -29,7 +29,7 @@
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-size: 18px;
   line-height: 1.33;
-  color: theme.$grey-800
+  color: theme.$grey-800;
 }
 
 .correctionStyle {

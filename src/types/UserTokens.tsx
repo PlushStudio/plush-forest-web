@@ -1,4 +1,4 @@
-import { Token } from "@/types/Token";
+import { Token } from '@/types/Token'
 
 export type UserTokens = {
   total: number,

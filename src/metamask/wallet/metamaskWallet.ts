@@ -1,6 +1,6 @@
-import { JsonRpcSigner, Web3Provider, ExternalProvider } from '@ethersproject/providers';
-import { ethers } from 'ethers';
-import { EthereumNetwork, networks } from './networks';
+import { JsonRpcSigner, Web3Provider, ExternalProvider } from '@ethersproject/providers'
+import { ethers } from 'ethers'
+import { EthereumNetwork, networks } from './networks'
 import MetaMaskOnboarding from '@metamask/onboarding'
 import detectEthereumProvider from '@metamask/detect-provider'
 
@@ -8,7 +8,7 @@ class MetamaskWallet {
   readonly provider: Web3Provider
   readonly signer: JsonRpcSigner
 
-  constructor(provider: Web3Provider) {
+  constructor (provider: Web3Provider) {
     this.provider = provider
     this.signer = this.provider.getSigner()
   }
@@ -23,7 +23,7 @@ class MetamaskWallet {
 
       if (ethereumMetamaskGlobalObject) {
         // Explanation why any param is passed: https://github.com/ethers-io/ethers.js/issues/866
-        return new ethers.providers.Web3Provider(ethereumMetamaskGlobalObject, "any")
+        return new ethers.providers.Web3Provider(ethereumMetamaskGlobalObject, 'any')
       }
 
       throw new Error('Cannot detect provider. Check window.ethereum is available.')
@@ -52,7 +52,7 @@ class MetamaskWallet {
   }
 
   connect = async (): Promise<void> => {
-    this.provider.send("eth_requestAccounts", []);
+    this.provider.send('eth_requestAccounts', [])
   }
 
   getCurrentNetwork = (): EthereumNetwork => {
@@ -75,14 +75,14 @@ class MetamaskWallet {
 
   switchNetwork = async (id: string) => {
     (window.ethereum as any).request({
-      method: "wallet_switchEthereumChain",
+      method: 'wallet_switchEthereumChain',
       params: [{ chainId: ethers.utils.hexValue(ethers.utils.hexlify(Number(id))) }]
     })
   }
 
   switchAccount = async () => {
     (window.ethereum as any).request({
-      method: "wallet_requestPermissions",
+      method: 'wallet_requestPermissions',
       params: [{
         eth_accounts: {}
       }]

@@ -1,11 +1,11 @@
-import React  from 'react'
+import React from 'react'
 import s from '@/components/Header/Header.module.scss'
 import { HeaderContent } from './HeaderContent'
-import { Wallet, Balance, Pipe } from '@/lib'
-import { WalletProps } from '@/lib/components/Wallet/Wallet'
-import KebabDrowdown from "@/components/KebabDropdown/KebabDrowdown";
-import infoIcon from "@/assets/images/wallet/32-px-1-outlined-info.svg";
-import cakeIcon from "@/assets/images/wallet/32-px-1-outlined-cupcake.svg";
+import { Wallet, Balance, Pipe } from '../../../lib'
+import { WalletProps } from '../../../lib/components/Wallet/Wallet'
+import KebabDrowdown from '@/components/KebabDropdown/KebabDrowdown'
+import infoIcon from '@/assets/images/wallet/32-px-1-outlined-info.svg'
+import cakeIcon from '@/assets/images/wallet/32-px-1-outlined-cupcake.svg'
 
 interface headerProps {
   walletProps: WalletProps,
@@ -13,12 +13,15 @@ interface headerProps {
   currency: string
 }
 
-export const Header = ({ walletProps: { state, address, name,
-  gender, actualNetworkName,
-  expectedNetworkName, connect,
-  switchNetwork, register,
-  switchAccount, openExplorer }, currency, balance }: headerProps) => {
-
+export const Header = ({
+  walletProps: {
+    state, address, name,
+    gender, actualNetworkName,
+    expectedNetworkName, connect,
+    switchNetwork, register,
+    switchAccount, openExplorer
+  }, currency, balance
+}: headerProps) => {
   const PLUSH_WEBSITE_URL = window.config.PLUSH_WEBSITE_URL ?? import.meta.env.VITE_PLUSH_WEBSITE_URL
 
   const menuList = [
@@ -32,7 +35,7 @@ export const Header = ({ walletProps: { state, address, name,
       href: 'https://discord.gg/wEguFDBbN6',
       icon: cakeIcon
     }
-  ];
+  ]
 
   return (
     <div className={s.headerContainer}>
@@ -53,15 +56,17 @@ export const Header = ({ walletProps: { state, address, name,
           modalStyle={{ right: '0px', top: '60px' }} />
         <Pipe />
         {
-          currency.length > 0 ? (
-            <>
-              <Balance
-                className={s.balance}
-                balance={balance}
-                currency={currency} />
-              <Pipe className={s.balanceRightSeparator} />
-            </>
-          ) : null
+          currency.length > 0
+            ? (
+              <>
+                <Balance
+                  className={s.balance}
+                  balance={balance}
+                  currency={currency} />
+                <Pipe className={s.balanceRightSeparator} />
+              </>
+              )
+            : null
         }
         <div className={s.kebabContainer}>
           <KebabDrowdown menuList={menuList} />

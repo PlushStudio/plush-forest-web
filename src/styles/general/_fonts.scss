@@ -1,0 +1,45 @@
+@font-face {
+  font-family: Moranga-Medium;
+  src:
+    local(moranga-medium sans-serif),
+    url('/src/assets/fonts/Moranga-Medium.woff2') format('woff2'),
+    url('/src/assets/fonts/Moranga-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Moranga Regular';
+  src:
+    local(moranga-regular sans-serif),
+    url('/src/assets/fonts/Moranga-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: AvenirNextRoundedPro-Demi;
+  src:
+    local(avenirnextroundedpro-demi),
+    url('/src/assets/fonts/avenirnextroundedpro-demi.woff') format('woff');
+}
+
+@font-face {
+  font-family: AvenirNextRoundedPro-Med;
+  src:
+    local(avenirnextroundedpro-med sans-serif),
+    url('/src/assets/fonts/AvenirNextRoundedPro-Med.woff2') format('woff2'),
+    url('/src/assets/fonts/AvenirNextRoundedPro-Med.woff') format('woff');
+}
+
+@font-face {
+  font-family: AvenirNextRoundedPro-Reg;
+  src:
+    local(avenirnextroundedpro-reg sans-serif),
+    url('/src/assets/fonts/AvenirNextRoundedPro-Reg.woff2') format('woff2'),
+    url('/src/assets/fonts/AvenirNextRoundedPro-Reg.woff') format('woff');
+}
+
+@font-face {
+  font-family: AvenirNextRoundedPro-Bold;
+  src:
+    local(avenirnextroundedpro-bold sans-serif),
+    url('/src/assets/fonts/AvenirNextRoundedPro-Bold.otf') format('otf'),
+    url('/src/assets/fonts/AvenirNextRoundedPro-Bold.woff') format('woff');
+}

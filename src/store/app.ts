@@ -1,8 +1,8 @@
-import { createDomain, createEvent } from 'effector';
-import { logoutEvent } from './auth';
-import { ApiApp } from "@/services/app";
+import { createDomain, createEvent } from 'effector'
+import { logoutEvent } from './auth'
+import { ApiApp } from '@/services/app'
 
-export const appDomain = createDomain('app');
+export const appDomain = createDomain('app')
 
 export const setActiveTreeEvt = createEvent<string>()
 export const setWalletNetworkEvt = createEvent<string>()
@@ -50,4 +50,4 @@ export const $app = appDomain
     ...state,
     activeAccordionTabId: id
   }))
-  .reset(logoutEvent);
+  .reset(logoutEvent)

@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { get } from "../api/methods";
-import { toNullableDate } from "../api/transforms";
+import { z } from 'zod'
+import { get } from '../api/methods'
+import { toNullableDate } from '../api/transforms'
 
 const ApiTokensMySchema = z.object({
   total: z.number().nonnegative(),

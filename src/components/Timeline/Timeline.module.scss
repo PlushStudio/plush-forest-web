@@ -1,5 +1,5 @@
-@use '../../assets/styles/variables';
-@use '../../assets/styles/theme';
+@use '../../styles/variables';
+@use '../../styles/theme';
 
 .cardContainer {
   width: calc(50% - 36px);
@@ -8,7 +8,6 @@
   cursor: pointer;
 
   &.showBackSide {
-
     .timelineContent {
       transform: rotateY(180deg);
     }
@@ -18,11 +17,6 @@
       transform: rotateY(0deg) translateY(-50%);
     }
   }
-}
-
-.timelineContent {
-  transition: .5s;
-  backface-visibility: hidden;
 }
 
 .linked {
@@ -70,11 +64,18 @@
     flex-grow: 0;
     will-change: transform;
     font-size: 0.8em;
+    transition: 0.5s;
+    backface-visibility: hidden;
+
     --line-height-multiplier: 1.2;
+
     border-radius: 160px;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 2px 0 rgba(0, 0, 0, 0.01),
-      0 2px 4px 0 rgba(0, 0, 0, 0.02), 0 4px 4px -1px rgba(0, 0, 0, 0.02),
-      0 8px 12px -2px rgba(0, 0, 0, 0.02);
+    box-shadow:
+      0 1px 1px 0 rgba(0, 0, 0, 1%),
+      0 1px 2px 0 rgba(0, 0, 0, 1%),
+      0 2px 4px 0 rgba(0, 0, 0, 2%),
+      0 4px 4px -1px rgba(0, 0, 0, 2%),
+      0 8px 12px -2px rgba(0, 0, 0, 2%);
     background-color: theme.$white;
 
     &Container {
@@ -87,7 +88,7 @@
       line-height: 1.4;
       text-align: right;
       color: theme.$grey-800;
-      margin: 7px 0 4px 0;
+      margin: 7px 0 4px;
     }
 
     h2 {
@@ -131,8 +132,7 @@
   }
 }
 
-.arrowLeft:before {
-  // triangle next to content block
+.arrowLeft::before {
   content: '';
   position: absolute;
   right: 100%;
@@ -143,7 +143,7 @@
   top: calc(50% - 7px);
 }
 
-.arrowRight:before {
+.arrowRight::before {
   right: auto;
   content: '';
   position: absolute;
@@ -236,9 +236,12 @@
   border-radius: 20px;
   margin-top: 27px;
   object-fit: contain;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.01), 0 1px 2px 0 rgba(0, 0, 0, 0.01),
-    0 2px 4px 0 rgba(0, 0, 0, 0.02), 0 4px 4px -1px rgba(0, 0, 0, 0.02),
-    0 8px 12px -2px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    0 1px 1px 0 rgba(0, 0, 0, 1%),
+    0 1px 2px 0 rgba(0, 0, 0, 1%),
+    0 2px 4px 0 rgba(0, 0, 0, 2%),
+    0 4px 4px -1px rgba(0, 0, 0, 2%),
+    0 8px 12px -2px rgba(0, 0, 0, 2%);
 }
 
 .timelineBase img {
@@ -290,15 +293,18 @@
   top: 50%;
   font-size: 40px;
   transform: rotateY(-180deg) translateY(-50%);
-  transition: .5s;
+  transition: 0.5s;
   backface-visibility: hidden;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: theme.$white;
-  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 1%), 0 1px 2px 0 rgb(0 0 0 / 1%),
-    0 2px 4px 0 rgb(0 0 0 / 2%), 0 4px 4px -1px rgb(0 0 0 / 2%),
+  box-shadow:
+    0 1px 1px 0 rgb(0 0 0 / 1%),
+    0 1px 2px 0 rgb(0 0 0 / 1%),
+    0 2px 4px 0 rgb(0 0 0 / 2%),
+    0 4px 4px -1px rgb(0 0 0 / 2%),
     0 8px 12px -2px rgb(0 0 0 / 2%);
 
   &::after {
@@ -306,8 +312,8 @@
     position: absolute;
     top: calc(50% - 7px);
     left: -14px;
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     border: 7px solid transparent;
     border-right-color: theme.$white;
     z-index: 999;
@@ -327,7 +333,7 @@
     font-family: AvenirNextRoundedPro-Bold, sans-serif;
     color: theme.$grey-800;
     font-weight: bold;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   p {
@@ -340,7 +346,7 @@
 
   button {
     border: none;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0%);
     font-size: 16px;
     font-family: AvenirNextRoundedPro-Med, sans-serif;
     color: theme.$emerald-600;

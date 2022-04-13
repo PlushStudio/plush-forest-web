@@ -13,10 +13,10 @@ import { treeDefault } from '@/context/DefaultValues'
 import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import TreeNotAvailable from '@/components/TreeNotAvailable/TreeNotAvailable'
-import classNames from "classnames";
+import classNames from 'classnames'
 
 export const TreeInfoPage: React.FC = () => {
-  const params = useParams<{ id?: string }>();
+  const params = useParams<{ id?: string }>()
   const [treeData, setTreeData] = useState<TreeData>(treeDefault)
   const [userHasToken, setUserHasToken] = useState<boolean | undefined>(undefined)
 
@@ -40,13 +40,13 @@ export const TreeInfoPage: React.FC = () => {
             {
               title: 'Location',
               desc: response.data.attributes[4].value,
-              img: locationImg,
+              img: locationImg
             },
-            { title: 'Tree height', desc: '5.2 Inches', img: heightImg },
+            { title: 'Tree height', desc: '5.2 Inches', img: heightImg }
           ],
           firstBlockInfo: {
             message: response.data.description,
-            date: moment.unix(response.data.attributes[1].value).format('ll'),
+            date: moment.unix(response.data.attributes[1].value).format('ll')
           },
           planterOrganization: response.data.attributes[5].value,
           planterName: response.data.attributes[4].value,
@@ -54,9 +54,9 @@ export const TreeInfoPage: React.FC = () => {
           planterPhoto: response.data.farmer_photo,
           secondBlockInfo: {
             message: `${response.data.attributes[2].value} seedling was planted in ${response.data.attributes[3].value}.`,
-            date: moment.unix(response.data.attributes[0].value).format('ll'),
+            date: moment.unix(response.data.attributes[0].value).format('ll')
           },
-          imageLink: response.data.image,
+          imageLink: response.data.image
         })
         setUserHasToken(true)
       } catch (error) {
@@ -72,24 +72,26 @@ export const TreeInfoPage: React.FC = () => {
   return (
     <div className={backgroundStyles}>
       <div className={s.container}>
-        {userHasToken !== false ? <Row>
-          <Col>
-            <TreeInfoBlock treeData={treeData} />
-            <Timeline
-              timelineInfo={{
-                firstBlockInfo: treeData.firstBlockInfo.message,
-                secondBlockInfo: treeData.secondBlockInfo.message,
-                imageLink: treeData.imageLink,
-                planterName: treeData.planterName,
-                planterOrganization: treeData.planterOrganization,
-                planterPhoto: treeData.planterPhoto,
-                dedicatedDate: treeData.firstBlockInfo.date,
-                plantedDate: treeData.secondBlockInfo.date,
-                planterBio: treeData.planterBio
-              }}
-            />
-          </Col>
-        </Row> : <TreeNotAvailable />}
+        {userHasToken !== false
+          ? <Row>
+            <Col>
+              <TreeInfoBlock treeData={treeData} />
+              <Timeline
+                timelineInfo={{
+                  firstBlockInfo: treeData.firstBlockInfo.message,
+                  secondBlockInfo: treeData.secondBlockInfo.message,
+                  imageLink: treeData.imageLink,
+                  planterName: treeData.planterName,
+                  planterOrganization: treeData.planterOrganization,
+                  planterPhoto: treeData.planterPhoto,
+                  dedicatedDate: treeData.firstBlockInfo.date,
+                  plantedDate: treeData.secondBlockInfo.date,
+                  planterBio: treeData.planterBio
+                }}
+              />
+            </Col>
+          </Row>
+          : <TreeNotAvailable />}
       </div>
       <div className={s.footer} />
     </div>

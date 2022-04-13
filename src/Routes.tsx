@@ -5,26 +5,36 @@ import { AboutPage } from './pages/About/About'
 import { Planting } from './pages/Planting/Planting'
 import { TreeInfoPage } from './pages/TreeInfo/TreeInfo'
 import { Page } from '@/layouts/Page'
-import routes from "@/Router/routes";
+import routes from '@/Router/routes'
 
 export const Routes = () => {
   return (
     <Switch>
       <Route exact path={routes.planting}>
-        <Page children={<Planting />} />
+        <Page>
+          <Planting />
+        </Page>
       </Route>
       <Route exact path={routes.index}>
-        <Page children={<AboutPage />} />
+        <Page>
+          <AboutPage />
+        </Page>
       </Route>
       <Route path={`${routes.token}/:id/`}>
-        <Page children={<TreeInfoPage />} />
+        <Page>
+          <TreeInfoPage />
+        </Page>
       </Route>
-      <Route children={<PageNotFound />} />
+      <Route>
+        <PageNotFound />
+      </Route>
       <Route exact path={routes.notFound}>
         <PageNotFound />
       </Route>
       <Route path='*'>
-        <Page contentClass={'notFoundContentClass'} children={<PageNotFound />} />
+        <Page contentClass={'notFoundContentClass'}>
+          <PageNotFound />
+        </Page>
       </Route>
     </Switch>
   )

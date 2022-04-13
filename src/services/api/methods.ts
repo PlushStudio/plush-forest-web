@@ -1,7 +1,7 @@
-import axios from "axios"
-import backend from "./axios"
-import { ApiSuccessResponse, ApiSuccessResponseSchema } from "./schemas/ApiSuccessResponseSchema"
-import { ApiError, ApiErrorSchema } from "./types"
+import axios from 'axios'
+import backend from './axios'
+import { ApiSuccessResponse, ApiSuccessResponseSchema } from './schemas/ApiSuccessResponseSchema'
+import { ApiError, ApiErrorSchema } from './types'
 
 interface DataSchema<T> {
   parse: (value: unknown) => T

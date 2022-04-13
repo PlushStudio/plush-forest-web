@@ -1,11 +1,11 @@
-@use '../../assets/styles/variables';
-@use '../../assets/styles/theme';
+@use '../../styles/variables';
+@use '../../styles/theme';
 
 .inputContainer {
   width: 488px;
-  padding: 0px 14px;
+  padding: 0 14px;
   border-radius: 12px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 6%), 0 1px 2px 0 rgba(0, 0, 0, 6%);
   border: 1px solid theme.$white;
   display: flex;
   flex-direction: column;
@@ -21,11 +21,11 @@
   }
 
   &.error {
-    background-image: url(../../assets/images/inputWarning.svg);
+    background-image: url('../../assets/images/inputWarning.svg');
     background-repeat: no-repeat;
     background-position: 446px center;
     border: 1px solid theme.$light-pink;
-    transition: box-shadow .2s;
+    transition: box-shadow 0.2s;
     flex-direction: row;
     align-items: center;
 
@@ -35,7 +35,7 @@
   }
 
   &.isTyping {
-    transition: .2s;
+    transition: 0.2s;
 
     &:focus-within {
       box-shadow: 0 0 0 4px theme.$purple-light-200;
@@ -63,7 +63,7 @@
   font-size: 18px;
   line-height: 24px;
   color: theme.$grey-800;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0%);
 }
 
 .customInput::placeholder {

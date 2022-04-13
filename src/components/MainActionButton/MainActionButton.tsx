@@ -22,7 +22,6 @@ export const MainActionButton = ({
   image,
   disabled
 }: IGetStartedBtn) => {
-
   const style = classNames(s.container, s[variant])
   const buttonStyle = classNames(s.btnPrimary, { [s.disabled]: disabled })
 
@@ -31,18 +30,18 @@ export const MainActionButton = ({
       <button onClick={onClick} className={buttonStyle}>
         {text}
 
-        {loading ?
-          <Spinner
+        {loading
+          ? <Spinner
             className={s.spinner}
             as="span"
             animation="grow"
             size="sm"
             role="status"
             aria-hidden="true"
-          /> :
-          image === 'next' ?
-            <img alt="get started arrow" className={s.image} src={arrowIcon} /> :
-            image === 'tree' &&
+          />
+          : image === 'next'
+            ? <img alt="get started arrow" className={s.image} src={arrowIcon} />
+            : image === 'tree' &&
             <img alt="get started arrow" className={s.image} src={treeIcon} />
         }
       </button>

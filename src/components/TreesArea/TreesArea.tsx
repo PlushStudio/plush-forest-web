@@ -10,9 +10,9 @@ import tree07 from '@/assets/images/tree-07@3x.png'
 import tree08 from '@/assets/images/tree-08@3x.png'
 import tree09 from '@/assets/images/tree-09@3x.png'
 import tree10 from '@/assets/images/tree-10@3x.png'
-import { treesTooltipData } from '@/assets/data/Trees'
 import { TooltipedTree } from '@/components/TreesArea/TooltipedTree'
 import s from './TreesArea.module.scss'
+import classNames from 'classnames'
 
 export const TreesArea = () => {
   return (
@@ -22,14 +22,10 @@ export const TreesArea = () => {
         [tree01, tree02, tree03, tree04, tree05, tree06, tree07, tree08, tree09, tree10]
           .map((value, index) => {
             return (
-              <TooltipedTree key={index} className={`${s.tree} ${s[`tree${index + 1}`]}`}
-                from={treesTooltipData[index].from}
-                to={treesTooltipData[index].to}
-                icon={value}
-                day={treesTooltipData[index].day}
-                year={treesTooltipData[index].year}
-                month={treesTooltipData[index].month}
-                name={treesTooltipData[index].name} />
+              <TooltipedTree
+                key={index}
+                className={classNames(s.tree, s[`tree${index + 1}`])}
+                icon={value} />
             )
           })
       }

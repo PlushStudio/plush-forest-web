@@ -59,18 +59,18 @@ export const api = {
               {
                 withCredentials: true
               }).then((response: AxiosResponse) => {
-                if (response.status === 200) {
-                  if (response.data?.tokens.length > 0) {
-                    clearInterval(getMyTokensInterval as NodeJS.Timeout)
-                  }
-                } else {
+              if (response.status === 200) {
+                if (response.data?.tokens.length > 0) {
                   clearInterval(getMyTokensInterval as NodeJS.Timeout)
                 }
-                return response?.data
-              }).catch(r => {
-                console.error(r.message)
+              } else {
                 clearInterval(getMyTokensInterval as NodeJS.Timeout)
-              })
+              }
+              return response?.data
+            }).catch(r => {
+              console.error(r.message)
+              clearInterval(getMyTokensInterval as NodeJS.Timeout)
+            })
           } catch (error: any) {
             return error.response
           }

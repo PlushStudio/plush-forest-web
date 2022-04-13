@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import s from './CustomInput.module.scss'
 import classnames from 'classnames'
 
@@ -31,7 +31,7 @@ export const CustomInput = ({
 
   return (
     <>
-      <div onClick={handlerOnClick} className={style}>
+      <div aria-hidden onClick={handlerOnClick} className={style}>
         <p className={s.nameText}>{placeholder}</p>
         <input
           ref={input}

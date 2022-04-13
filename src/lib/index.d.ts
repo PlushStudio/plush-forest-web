@@ -1,9 +1,0 @@
-export { Balance } from "./components/Balance/Balance";
-export { ClipboardButton } from "./components/ClipboardButton/ClipboardButton";
-export { Modal } from "./components/Modal/Modal";
-export { BaseModal } from "./components/BaseModal/BaseModal";
-export { ResponsiveImage } from "./components/ResponsiveImage/ResponsiveImage";
-export { Pipe } from "./components/Pipe/Pipe";
-export { Wallet } from "./components/Wallet/Wallet";
-export { IconButton } from "./components/IconButton/IconButton";
-export { ConnectButton } from "./components/ConnectButton/ConnectButton";
