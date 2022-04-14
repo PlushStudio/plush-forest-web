@@ -83,7 +83,7 @@ export const LearnMoreAccordion = () => {
           <Accordion.Toggle
             className={classNames('unselectable', { [s.opened]: activeAccordionTabId === 1 })}
             onClick={() => handleTabClick(1)} as={Card.Header} eventKey='1'>
-            About Plant Your Future NGO
+            About NGO
             {activeAccordionTabId === 1
               ? <img alt='close accordion tab' src={accordionMinus} />
               : <img alt='open accordion tab' src={accordionPlus} />
