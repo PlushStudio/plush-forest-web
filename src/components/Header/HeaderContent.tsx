@@ -1,8 +1,8 @@
 import React from 'react'
 import s from '@/components/Header/HeaderContent.module.scss'
-import treeIcon from '@/assets/images/plush-logo.svg'
+import treeIcon from '@/assets/images/logo/plush-logo.svg'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import TaglineIcon from '@/assets/images/plush-forest-tagline.svg'
+import TaglineIcon from '@/assets/images/plushForestTagline/plush-forest-tagline.svg'
 
 interface Params {
   currentLocation: string

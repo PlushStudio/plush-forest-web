@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import s from '@/components/Footer/SoilFooterWithContacts.module.scss'
-import bitmapPlant from '@/assets/images/bitmap-plant.png'
+import bitmapPlant from '@/assets/images/plantOnSoil/plant-on-soil.png'
 import plushLogo from '@/assets/images/footerLogo/footerLogo@2x.png'
 import { Link } from 'react-router-dom'
 

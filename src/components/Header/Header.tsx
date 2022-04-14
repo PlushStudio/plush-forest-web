@@ -4,8 +4,9 @@ import { HeaderContent } from './HeaderContent'
 import { Wallet, Balance, Pipe } from '../../../lib'
 import { WalletProps } from '../../../lib/components/Wallet/Wallet'
 import KebabDrowdown from '@/components/KebabDropdown/KebabDrowdown'
-import infoIcon from '@/assets/images/wallet/32-px-1-outlined-info.svg'
-import cakeIcon from '@/assets/images/wallet/32-px-1-outlined-cupcake.svg'
+import infoIcon from '@/assets/images/outlinedIcons/outlined-info.svg'
+import cakeIcon from '@/assets/images/outlinedIcons/outlined-cupcake.svg'
+import { plushDiscordUrl } from '@/constants'
 
 interface headerProps {
   walletProps: WalletProps,
@@ -32,7 +33,7 @@ export const Header = ({
     },
     {
       title: 'Request features',
-      href: 'https://discord.gg/wEguFDBbN6',
+      href: plushDiscordUrl,
       icon: cakeIcon
     }
   ]

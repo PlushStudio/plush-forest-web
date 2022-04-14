@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './HomeFeatureSection.module.scss'
-import twoBirds from '@/assets/images/two-birds.png'
+import twoBirds from '@/assets/images/abstractHomeImages/abstract-two-birds.png'
 
 export const HomeFeatureSection2 = () => {
   return (

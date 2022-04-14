@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import s from './NoPlushTokenModal.module.scss'
-import ModalImg from '@/assets/images/image-1@3x.png'
+import ModalImg from '@/assets/images/cryingImage/crying-image.png'
 
 const NoPlushTokenModal: FC<{ redirectTo?: string }> = ({ redirectTo }) => {
   return (
