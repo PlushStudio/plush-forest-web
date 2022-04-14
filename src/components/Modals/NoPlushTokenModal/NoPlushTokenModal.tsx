@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import s from './NoPlushTokenModal.module.scss'
+import s from '../Modals.module.scss'
 import ModalImg from '@/assets/images/image-1@3x.png'
 
 const NoPlushTokenModal: FC<{ redirectTo?: string }> = ({ redirectTo }) => {
   return (
-    <div className={s.container}>
+    <div className={s.noPlushTokenContainer}>
       <div className={s.modal}>
         <img src={ModalImg} alt="no token" />
         <h2>No token</h2>

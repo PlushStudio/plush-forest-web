@@ -1,5 +1,5 @@
-import './index.scss'
-import './index.css'
+import './styles/index.scss'
+import './styles/index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Routes } from './Routes'

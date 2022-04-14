@@ -51,6 +51,7 @@
   z-index: variables.$higher-order;
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .socialItem {
@@ -67,11 +68,9 @@
 
 .leftPullText {
   color: theme.$grays-50;
-  cursor: default;
   padding-left: 12px;
 
   &:hover {
-    cursor: pointer;
     transition: color 0.2s;
     color: theme.$emerald-500;
   }

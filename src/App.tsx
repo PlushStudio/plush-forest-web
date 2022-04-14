@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import '@/index.scss'
-import '@/index.css'
+import '@/styles/index.scss'
+import '@/styles/index.css'
 import { Routes } from '@/Routes'
 import { $user, getUserFx } from '@/store/user'
 import { $auth, loginEvent, loginFx, logoutEvent, logoutFx } from '@/store/auth'

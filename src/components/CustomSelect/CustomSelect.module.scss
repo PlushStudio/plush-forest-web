@@ -5,7 +5,7 @@
   border-radius: 16px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 6%), 0 1px 2px 0 rgba(0, 0, 0, 6%);
   background-image: linear-gradient(to bottom, #fff 0%, #f1f1f1 100%);
-  border: solid 1px theme.$white;
+  border: solid 1px white;
   position: relative;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
@@ -87,19 +87,19 @@
 
   &:hover {
     cursor: pointer;
-    background: theme.$purple-super-light;
+    background: rgb(theme.$purple-light-200, 6%);
   }
 
   &:hover .itemPrice {
-    background: theme.$white;
+    background: white;
   }
 }
 
 .selectedItem {
-  background: theme.$purple-super-light;
+  background: rgb(theme.$purple-light-200, 6%);
 
   .itemPrice {
-    background-color: theme.$white;
+    background-color: white;
   }
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Accordion, Card } from 'react-bootstrap'
-import '@/styles/bootstrapOverride/Accordion.scss'
 import s from './Accordion.module.scss'
 import accordionMinus from '@/assets/images/16-px-1-outlined-minus.svg'
 import accordionPlus from '@/assets/images/16-px-1-outlined-plus.svg'

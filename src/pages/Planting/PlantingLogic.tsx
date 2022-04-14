@@ -1,5 +1,4 @@
 import { MouseEvent, useEffect, useRef, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import shihuahuacoTreeImage from '@/assets/images/planting-tree/tree-shihuahuaco.png'
 import cacaoTreeImage from '@/assets/images/planting-tree/tree-cacao.png'
 import guabaTreeImage from '@/assets/images/planting-tree/tree-guaba.png'
