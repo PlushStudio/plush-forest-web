@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import s from '../Modals.module.scss'
-import ModalImg from '@/assets/images/image-1@3x.png'
+import ModalImg from '@/assets/images/cryingImage/crying-image.png'
 
 const TreeNotAvailable = () => {
   return (
