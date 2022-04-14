@@ -18,10 +18,8 @@ const WalletKebab = (props: { menuList: MenuItem[] }) => {
     setKebabDropdownOpen(false)
   }
 
-  console.log(props.menuList)
   const handleMenuItemClick = (href: string) => {
     setKebabDropdownOpen(false)
-    console.log(href)
     window.open(href, '_blank')
   }
 
