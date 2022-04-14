@@ -1,3 +1,7 @@
+@use 'node_modules/normalize.css/normalize.css';
 @use 'variables';
 @use 'theme';
-@use 'general/fonts';
+@use 'fonts';
+@use 'bootstrap/dist/css/bootstrap.min.css';
+@use 'bootstrapOverride/Popover';
+@use 'bootstrapOverride/Accordion';

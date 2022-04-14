@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import '~/bootstrap/scss/bootstrap.scss'
 import s from '@/components/Footer/Footer.module.scss'
 import { LearnMoreAccordion } from '@/components/Accordion/Accordion'
 import { SoilFooterWithContacts } from './SoilFooterWithContacts'

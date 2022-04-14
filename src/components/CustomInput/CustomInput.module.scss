@@ -6,12 +6,12 @@
   padding: 0 14px;
   border-radius: 12px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 6%), 0 1px 2px 0 rgba(0, 0, 0, 6%);
-  border: 1px solid theme.$white;
+  border: 1px solid white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
-  background-color: theme.$white;
+  background-color: white;
   height: 64px;
 
   &.hidden {
@@ -30,7 +30,7 @@
     align-items: center;
 
     &:focus-within {
-      box-shadow: 0 0 0 4px theme.$light-pink-200;
+      box-shadow: 0 0 0 4px rgb(theme.$light-pink-200, 20%);
     }
   }
 
@@ -38,7 +38,7 @@
     transition: 0.2s;
 
     &:focus-within {
-      box-shadow: 0 0 0 4px theme.$purple-light-200;
+      box-shadow: 0 0 0 4px rgb(theme.$purple-light-200, 20%);
       border: 1px solid theme.$purple-2;
     }
 

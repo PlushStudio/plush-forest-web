@@ -17,10 +17,6 @@
   padding-top: 10rem;
 }
 
-.skyImage {
-  position: absolute;
-}
-
 .treeImage {
   width: 632px;
   height: 712px;
@@ -36,14 +32,6 @@
 .plantingForm {
   padding-top: 32px;
   padding-left: 10px;
-}
-
-.select {
-  width: 512px;
-}
-
-.textarea {
-  height: 176px !important;
 }
 
 .formHeader {
@@ -64,12 +52,12 @@
 .statusText {
   margin-top: 20px;
   margin-left: 8px;
-  color: #c1656e;
+  color: theme.$salmon;
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
 }
 
 .faucetLink {
   text-decoration: underline;
-  color: #714fec;
+  color: theme.$indigo-500;
   cursor: pointer;
 }

@@ -1,6 +1,5 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { Form } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { CustomInput } from '@/components/CustomInput/CustomInput'
 import s from './Planting.module.scss'
 import { MainActionButton } from '@/components/MainActionButton/MainActionButton'

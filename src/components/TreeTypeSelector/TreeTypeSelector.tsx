@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import s from './TreeTypeSelector.module.scss'
-import '@/styles/bootstrapOverride/Popover.scss'
 import { treesTooltip } from '@/assets/data/TreesTooltip'
 import oval from '@/assets/images/oval-copy.svg'
 import shihuahuacoIcon from '@/assets/images/tree-icon-selector/shihuahuaco.png'

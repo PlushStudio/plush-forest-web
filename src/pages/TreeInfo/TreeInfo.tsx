@@ -12,7 +12,7 @@ import { TreeData } from '@/types/tree/TreeData'
 import { treeDefault } from '@/context/DefaultValues'
 import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
-import TreeNotAvailable from '@/components/TreeNotAvailable/TreeNotAvailable'
+import TreeNotAvailable from '@/components/Modals/TreeNotAvailable/TreeNotAvailable'
 import classNames from 'classnames'
 
 export const TreeInfoPage: React.FC = () => {
