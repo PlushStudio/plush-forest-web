@@ -15,7 +15,6 @@ interface Config {
   NETWORK_ID?: string,
   FOREST_CONTRACT_ADDRESS?: string,
   COIN_WALLETS_CONTRACT_ADDRESS?: string,
-  SIGNUP_LINK: string,
   MATOMO_URL?: string,
   MATOMO_SITE_ID?: string,
 }
