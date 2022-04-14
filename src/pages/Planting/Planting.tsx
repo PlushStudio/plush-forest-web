@@ -20,7 +20,7 @@ import { $app } from '@/store/app'
 
 const treeTypeSelectorImages = [shihuahuacoIcon, cacaoIcon, guabaIcon, caobaIcon]
 
-const FAUCET_LINK = window.config.FAUCET_URL ?? import.meta.env.VITE_FAUCET_URL
+const FAUCET_URL = window.config.FAUCET_URL ?? import.meta.env.VITE_FAUCET_URL
 
 export const Planting = () => {
   const input = useRef<HTMLInputElement>(null)
@@ -95,7 +95,7 @@ export const Planting = () => {
                     <div className={s.statusText}>
                       Not enough {currency}.
                       <span> Get {currency} at </span>
-                      <a href={FAUCET_LINK} target="_blank" className={s.faucetLink} rel="noreferrer">faucet.plush.dev</a>
+                      <a href={FAUCET_URL} target="_blank" className={s.faucetLink} rel="noreferrer">faucet.plush.dev</a>
                     </div>
                   )}
                   <MainActionButton
