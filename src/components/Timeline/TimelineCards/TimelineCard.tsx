@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import s from '@/components/Timeline/Timeline.module.scss'
 import { ICardInfo } from '@/components/Timeline/Timeline'
-import orangeDot from '@/assets/images/orange-dot.png'
+import orangeDot from '@/assets/images/timeline/orange-dot.png'
 import { useParams } from 'react-router-dom'
 import { mainnetNetworkId, testnetNetworkId } from '@/constants'
 import classNames from 'classnames'

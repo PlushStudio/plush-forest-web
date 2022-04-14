@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import kebabIcon from '@/assets/images/wallet/32-px-1-outlined-kebab-horizontal.svg'
+import kebabIcon from '@/assets/images/outlinedIcons/outlined-kebab-horizontal.svg'
 import s from './KebabDrowdown.module.scss'
 import classNames from 'classnames'
 import { useOnClickOutside } from 'usehooks-ts'
@@ -18,8 +18,10 @@ const WalletKebab = (props: { menuList: MenuItem[] }) => {
     setKebabDropdownOpen(false)
   }
 
+  console.log(props.menuList)
   const handleMenuItemClick = (href: string) => {
     setKebabDropdownOpen(false)
+    console.log(href)
     window.open(href, '_blank')
   }
 

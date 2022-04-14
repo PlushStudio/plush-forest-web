@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import logo from '../assets/images/smallTreeIcon.svg'
+import logo from '../assets/images/smallTreeIcon/smallTreeIcon.svg'
 import { Page } from '@/layouts/Page'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import { useHistory } from 'react-router'

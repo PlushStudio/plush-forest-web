@@ -1,5 +1,3 @@
-import locationImg from '@/assets/images/tree-location.png'
-import heightImg from '@/assets/images/tree-height.png'
 import { Gender } from '@/types/Gender'
 
 export interface UserDefault {
@@ -33,8 +31,8 @@ export const treeDefault = {
   height: '5.2 Inches',
   co2: '2.5 Kg',
   subInfo: [
-    { title: 'Location', desc: '', img: locationImg },
-    { title: 'tree height', desc: '', img: heightImg }
+    { title: 'Location', desc: '', img: '' },
+    { title: 'tree height', desc: '', img: '' }
   ],
   firstBlockInfo: {
     message: '',

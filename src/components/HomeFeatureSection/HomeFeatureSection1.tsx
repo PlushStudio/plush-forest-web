@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './HomeFeatureSection.module.scss'
-import womanWithPlant from '@/assets/images/woman-with-plants.png'
+import womanWithPlant from '@/assets/images/abstractHomeImages/abstract-woman-with-plants.png'
 import { setActiveAccordionTabIdEvt } from '@/store/app'
 
 export const HomeFeatureSection1 = ({ accordionRef }: any) => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import s from './HomeFeatureSection.module.scss'
-import bigTree from '@/assets/images/picture-large-tree.png'
-import leaf from '@/assets/images/leaf.svg'
-import lines from '@/assets/images/lines.svg'
+import bigTree from '@/assets/images/abstractHomeImages/abstract-large-tree.png'
+import leaf from '@/assets/images/leaf/leaf.svg'
+import lines from '@/assets/images/dashLines/lines.svg'
 import classNames from 'classnames'
 
 export const HomeFeatureSection3 = () => {
