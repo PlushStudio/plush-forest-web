@@ -9,3 +9,9 @@ export const cutWalletPublicId = (id: string) => {
     return `${id.substr(0, 6)}...${id.substr(id.length - 4, 4)}`
   }
 }
+
+export const getLinkNameByURL = (URL: string) => {
+  if (URL) {
+    return URL.split('https://')[1]
+  }
+}

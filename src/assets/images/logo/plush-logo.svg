@@ -3,32 +3,38 @@
         <filter x="-3.8%" y="-5.4%" width="107.5%" height="110.9%" filterUnits="objectBoundingBox" id="c">
             <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"/>
             <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
-            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
+                         result="shadowInnerInner1"/>
             <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" in="shadowInnerInner1"/>
         </filter>
         <filter x="-65.7%" y="-60.2%" width="231.4%" height="294.4%" filterUnits="objectBoundingBox" id="d">
             <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
             <feGaussianBlur stdDeviation=".5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
             <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter1"
+                           result="shadowMatrixOuter1"/>
             <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter2"/>
             <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter2" result="shadowBlurOuter2"/>
             <feComposite in="shadowBlurOuter2" in2="SourceAlpha" operator="out" result="shadowBlurOuter2"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter2" result="shadowMatrixOuter2"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter2"
+                           result="shadowMatrixOuter2"/>
             <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter3"/>
             <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter3" result="shadowBlurOuter3"/>
             <feComposite in="shadowBlurOuter3" in2="SourceAlpha" operator="out" result="shadowBlurOuter3"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter3" result="shadowMatrixOuter3"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter3"
+                           result="shadowMatrixOuter3"/>
             <feMorphology radius=".5" in="SourceAlpha" result="shadowSpreadOuter4"/>
             <feOffset dy="4" in="shadowSpreadOuter4" result="shadowOffsetOuter4"/>
             <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter4" result="shadowBlurOuter4"/>
             <feComposite in="shadowBlurOuter4" in2="SourceAlpha" operator="out" result="shadowBlurOuter4"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter4" result="shadowMatrixOuter4"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter4"
+                           result="shadowMatrixOuter4"/>
             <feMorphology radius="1" in="SourceAlpha" result="shadowSpreadOuter5"/>
             <feOffset dy="8" in="shadowSpreadOuter5" result="shadowOffsetOuter5"/>
             <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter5" result="shadowBlurOuter5"/>
             <feComposite in="shadowBlurOuter5" in2="SourceAlpha" operator="out" result="shadowBlurOuter5"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.08 0" in="shadowBlurOuter5" result="shadowMatrixOuter5"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.08 0" in="shadowBlurOuter5"
+                           result="shadowMatrixOuter5"/>
             <feMerge>
                 <feMergeNode in="shadowMatrixOuter1"/>
                 <feMergeNode in="shadowMatrixOuter2"/>
@@ -40,32 +46,38 @@
         <filter x="-3.1%" y="-4.6%" width="106.2%" height="109.3%" filterUnits="objectBoundingBox" id="h">
             <feGaussianBlur stdDeviation=".5" in="SourceAlpha" result="shadowBlurInner1"/>
             <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
-            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
+                         result="shadowInnerInner1"/>
             <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" in="shadowInnerInner1"/>
         </filter>
         <filter x="-105%" y="-104.8%" width="310%" height="438.7%" filterUnits="objectBoundingBox" id="i">
             <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
             <feGaussianBlur stdDeviation=".5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
             <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter1"
+                           result="shadowMatrixOuter1"/>
             <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter2"/>
             <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter2" result="shadowBlurOuter2"/>
             <feComposite in="shadowBlurOuter2" in2="SourceAlpha" operator="out" result="shadowBlurOuter2"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter2" result="shadowMatrixOuter2"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter2"
+                           result="shadowMatrixOuter2"/>
             <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter3"/>
             <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter3" result="shadowBlurOuter3"/>
             <feComposite in="shadowBlurOuter3" in2="SourceAlpha" operator="out" result="shadowBlurOuter3"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter3" result="shadowMatrixOuter3"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter3"
+                           result="shadowMatrixOuter3"/>
             <feMorphology radius=".5" in="SourceAlpha" result="shadowSpreadOuter4"/>
             <feOffset dy="4" in="shadowSpreadOuter4" result="shadowOffsetOuter4"/>
             <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter4" result="shadowBlurOuter4"/>
             <feComposite in="shadowBlurOuter4" in2="SourceAlpha" operator="out" result="shadowBlurOuter4"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter4" result="shadowMatrixOuter4"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.2 0" in="shadowBlurOuter4"
+                           result="shadowMatrixOuter4"/>
             <feMorphology radius="1" in="SourceAlpha" result="shadowSpreadOuter5"/>
             <feOffset dy="8" in="shadowSpreadOuter5" result="shadowOffsetOuter5"/>
             <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter5" result="shadowBlurOuter5"/>
             <feComposite in="shadowBlurOuter5" in2="SourceAlpha" operator="out" result="shadowBlurOuter5"/>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.08 0" in="shadowBlurOuter5" result="shadowMatrixOuter5"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0.470588235 0 0 0 0 0.317647059 0 0 0 0.08 0" in="shadowBlurOuter5"
+                           result="shadowMatrixOuter5"/>
             <feMerge>
                 <feMergeNode in="shadowMatrixOuter1"/>
                 <feMergeNode in="shadowMatrixOuter2"/>
@@ -77,14 +89,20 @@
         <filter x="-3.8%" y="-6%" width="107.5%" height="112.1%" filterUnits="objectBoundingBox" id="m">
             <feGaussianBlur stdDeviation=".5" in="SourceAlpha" result="shadowBlurInner1"/>
             <feOffset dy=".5" in="shadowBlurInner1" result="shadowOffsetInner1"/>
-            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
+                         result="shadowInnerInner1"/>
             <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" in="shadowInnerInner1"/>
         </filter>
-        <path d="M39.908 18.46a7.745 7.745 0 0 0-.78-2.385 7.947 7.947 0 0 0-1.475-1.993 7.848 7.848 0 0 0-2.023-1.435c-.176-.088-.368-.2-.556-.247.168.044-.528 1.746-.592 1.9a4.515 4.515 0 0 1-.14.32 7.473 7.473 0 0 1-1.352 1.872 7.73 7.73 0 0 1-2.59 1.746c-1.096.445-2.244.418-3.403.43-1.252.015-2.512.182-3.667.676-1.092.46-2.075 1.205-2.66 2.242-.401.714-.601 1.514-.67 2.326-.069-.812-.269-1.612-.67-2.326-.585-1.037-1.568-1.781-2.66-2.242-1.155-.494-2.415-.66-3.667-.677-1.16-.011-2.307.016-3.402-.429a7.73 7.73 0 0 1-2.591-1.746 7.473 7.473 0 0 1-1.352-1.873 4.515 4.515 0 0 1-.14-.318c-.064-.155-.76-1.857-.592-1.901-.188.048-.38.16-.556.247a7.848 7.848 0 0 0-2.023 1.435 7.947 7.947 0 0 0-1.475 1.993A7.745 7.745 0 0 0 0 19.662c0 .075 0 .15.008.226.084 3.154 2.115 5.882 4.81 7.198 3.183 1.56 6.05 1.309 9.281 2.884.591.227 1.147.54 1.651.921 1.63 1.232 2.452 2.778 2.901 4.937.184.885.273 1.794.432 2.678.08.45.219 1.493.917 1.494.698-.001.836-1.044.917-1.494.16-.884.248-1.793.432-2.678.449-2.16 1.271-3.705 2.9-4.937a6.788 6.788 0 0 1 1.652-.921c3.23-1.575 6.098-1.325 9.28-2.884 2.696-1.316 4.727-4.044 4.811-7.198.008-.075.008-.15.008-.226 0-.41-.032-.812-.092-1.201" id="b"/>
-        <path d="M28.022 4.012c-1.616 0-3.12.48-4.38 1.308a7.973 7.973 0 0 0-3.608 6.676c0-.097-.006-.193-.01-.289-.004.096-.01.192-.01.289a7.973 7.973 0 0 0-3.609-6.676 7.986 7.986 0 0 0-12.364 6.676c0 2.173 1.004 4.227 2.636 5.644 1.984 1.72 4.334 1.892 6.822 2.247 1.526.217 2.933.726 4.142 1.703.424.343.441.367.804.776.526.591.962 1.251 1.183 2.524.041.237.106.726.383.726.005 0 .008-.002.013-.003.004 0 .007.003.012.003.277 0 .343-.489.384-.726.221-1.273.657-1.933 1.182-2.524.363-.409.38-.433.805-.776 1.208-.977 2.615-1.486 4.141-1.703 2.489-.355 4.839-.526 6.822-2.247 1.633-1.417 2.636-3.471 2.636-5.644a7.986 7.986 0 0 0-7.984-7.984" id="e"/>
-        <path d="M28.007 4c-1.618 0-3.123.48-4.385 1.308a7.969 7.969 0 0 0-3.612 6.675c0-.097-.006-.193-.01-.289-.004.096-.01.192-.01.289a7.969 7.969 0 0 0-3.612-6.675A7.962 7.962 0 0 0 11.993 4C7.58 4 4 7.575 4 11.983c0 2.172 1.004 4.226 2.639 5.642 1.986 1.721 4.338 1.893 6.83 2.247 1.527.217 2.935.727 4.146 1.703.424.342.441.367.805.776.526.591.962 1.25 1.184 2.523.04.238.106.726.384.726l.012-.002.012.002c.278 0 .343-.488.384-.726.222-1.272.658-1.932 1.184-2.523.364-.41.381-.434.805-.776 1.21-.976 2.619-1.486 4.147-1.703 2.491-.354 4.843-.526 6.83-2.247C34.994 16.21 36 14.155 36 11.983 36 7.575 32.42 4 28.007 4" id="g"/>
-        <path d="M27.557.839A5.596 5.596 0 0 0 24.607 0C22.656 0 20.95.985 20 2.464 19.05.984 17.341 0 15.392 0a5.596 5.596 0 0 0-2.95.839c-2.236 1.396-3.319 4.494-1.589 6.655.501.626 1.197 1.048 1.96 1.325 1.213.44 2.527.55 3.739.996 1.255.462 2.653 1.267 3.295 2.445.055.1.105.137.152.14.047-.003.097-.04.152-.14.642-1.178 2.04-1.983 3.295-2.445 1.212-.446 2.525-.556 3.739-.996.763-.277 1.459-.7 1.96-1.325 1.73-2.161.646-5.26-1.589-6.655" id="j"/>
-        <path d="M27.557.839A5.596 5.596 0 0 0 24.607 0C22.656 0 20.95.985 20 2.464 19.05.984 17.341 0 15.392 0a5.596 5.596 0 0 0-2.95.839c-2.236 1.396-3.319 4.494-1.589 6.655.501.626 1.197 1.048 1.96 1.325 1.213.44 2.527.55 3.739.996 1.255.462 2.653 1.267 3.295 2.445.055.1.105.137.152.14.047-.003.097-.04.152-.14.642-1.178 2.04-1.983 3.295-2.445 1.212-.446 2.525-.556 3.739-.996.763-.277 1.459-.7 1.96-1.325 1.73-2.161.646-5.26-1.589-6.655" id="l"/>
+        <path d="M39.908 18.46a7.745 7.745 0 0 0-.78-2.385 7.947 7.947 0 0 0-1.475-1.993 7.848 7.848 0 0 0-2.023-1.435c-.176-.088-.368-.2-.556-.247.168.044-.528 1.746-.592 1.9a4.515 4.515 0 0 1-.14.32 7.473 7.473 0 0 1-1.352 1.872 7.73 7.73 0 0 1-2.59 1.746c-1.096.445-2.244.418-3.403.43-1.252.015-2.512.182-3.667.676-1.092.46-2.075 1.205-2.66 2.242-.401.714-.601 1.514-.67 2.326-.069-.812-.269-1.612-.67-2.326-.585-1.037-1.568-1.781-2.66-2.242-1.155-.494-2.415-.66-3.667-.677-1.16-.011-2.307.016-3.402-.429a7.73 7.73 0 0 1-2.591-1.746 7.473 7.473 0 0 1-1.352-1.873 4.515 4.515 0 0 1-.14-.318c-.064-.155-.76-1.857-.592-1.901-.188.048-.38.16-.556.247a7.848 7.848 0 0 0-2.023 1.435 7.947 7.947 0 0 0-1.475 1.993A7.745 7.745 0 0 0 0 19.662c0 .075 0 .15.008.226.084 3.154 2.115 5.882 4.81 7.198 3.183 1.56 6.05 1.309 9.281 2.884.591.227 1.147.54 1.651.921 1.63 1.232 2.452 2.778 2.901 4.937.184.885.273 1.794.432 2.678.08.45.219 1.493.917 1.494.698-.001.836-1.044.917-1.494.16-.884.248-1.793.432-2.678.449-2.16 1.271-3.705 2.9-4.937a6.788 6.788 0 0 1 1.652-.921c3.23-1.575 6.098-1.325 9.28-2.884 2.696-1.316 4.727-4.044 4.811-7.198.008-.075.008-.15.008-.226 0-.41-.032-.812-.092-1.201"
+              id="b"/>
+        <path d="M28.022 4.012c-1.616 0-3.12.48-4.38 1.308a7.973 7.973 0 0 0-3.608 6.676c0-.097-.006-.193-.01-.289-.004.096-.01.192-.01.289a7.973 7.973 0 0 0-3.609-6.676 7.986 7.986 0 0 0-12.364 6.676c0 2.173 1.004 4.227 2.636 5.644 1.984 1.72 4.334 1.892 6.822 2.247 1.526.217 2.933.726 4.142 1.703.424.343.441.367.804.776.526.591.962 1.251 1.183 2.524.041.237.106.726.383.726.005 0 .008-.002.013-.003.004 0 .007.003.012.003.277 0 .343-.489.384-.726.221-1.273.657-1.933 1.182-2.524.363-.409.38-.433.805-.776 1.208-.977 2.615-1.486 4.141-1.703 2.489-.355 4.839-.526 6.822-2.247 1.633-1.417 2.636-3.471 2.636-5.644a7.986 7.986 0 0 0-7.984-7.984"
+              id="e"/>
+        <path d="M28.007 4c-1.618 0-3.123.48-4.385 1.308a7.969 7.969 0 0 0-3.612 6.675c0-.097-.006-.193-.01-.289-.004.096-.01.192-.01.289a7.969 7.969 0 0 0-3.612-6.675A7.962 7.962 0 0 0 11.993 4C7.58 4 4 7.575 4 11.983c0 2.172 1.004 4.226 2.639 5.642 1.986 1.721 4.338 1.893 6.83 2.247 1.527.217 2.935.727 4.146 1.703.424.342.441.367.805.776.526.591.962 1.25 1.184 2.523.04.238.106.726.384.726l.012-.002.012.002c.278 0 .343-.488.384-.726.222-1.272.658-1.932 1.184-2.523.364-.41.381-.434.805-.776 1.21-.976 2.619-1.486 4.147-1.703 2.491-.354 4.843-.526 6.83-2.247C34.994 16.21 36 14.155 36 11.983 36 7.575 32.42 4 28.007 4"
+              id="g"/>
+        <path d="M27.557.839A5.596 5.596 0 0 0 24.607 0C22.656 0 20.95.985 20 2.464 19.05.984 17.341 0 15.392 0a5.596 5.596 0 0 0-2.95.839c-2.236 1.396-3.319 4.494-1.589 6.655.501.626 1.197 1.048 1.96 1.325 1.213.44 2.527.55 3.739.996 1.255.462 2.653 1.267 3.295 2.445.055.1.105.137.152.14.047-.003.097-.04.152-.14.642-1.178 2.04-1.983 3.295-2.445 1.212-.446 2.525-.556 3.739-.996.763-.277 1.459-.7 1.96-1.325 1.73-2.161.646-5.26-1.589-6.655"
+              id="j"/>
+        <path d="M27.557.839A5.596 5.596 0 0 0 24.607 0C22.656 0 20.95.985 20 2.464 19.05.984 17.341 0 15.392 0a5.596 5.596 0 0 0-2.95.839c-2.236 1.396-3.319 4.494-1.589 6.655.501.626 1.197 1.048 1.96 1.325 1.213.44 2.527.55 3.739.996 1.255.462 2.653 1.267 3.295 2.445.055.1.105.137.152.14.047-.003.097-.04.152-.14.642-1.178 2.04-1.983 3.295-2.445 1.212-.446 2.525-.556 3.739-.996.763-.277 1.459-.7 1.96-1.325 1.73-2.161.646-5.26-1.589-6.655"
+              id="l"/>
         <linearGradient x1="50%" y1="100%" x2="50%" y2="-31.413%" id="a">
             <stop stop-color="#8EE597" offset="0%"/>
             <stop stop-color="#06AAB7" offset="100%"/>

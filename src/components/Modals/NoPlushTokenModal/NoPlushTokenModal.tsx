@@ -8,7 +8,8 @@ const NoPlushTokenModal: FC<{ redirectTo?: string }> = ({ redirectTo }) => {
       <div className={s.modal}>
         <img src={ModalImg} alt="no token" />
         <h2>No token</h2>
-        <p className={s.description}>There is no Plush token in your account. <br />It&apos;s required for creating Forest NFT</p>
+        <p className={s.description}>There is no Plush token in your account. <br />It&apos;s required for creating
+          Forest NFT</p>
         <a target={'_blank'} href={redirectTo} rel="noreferrer">Get token</a>
       </div>
     </div>

@@ -3,10 +3,10 @@ import s from './About.module.css'
 import { HomeText } from '@/components/HomeText/HomeText'
 import { TreeTypeSelector } from '@/components/TreeTypeSelector/TreeTypeSelector'
 import { MainActionButton } from '@/components/MainActionButton/MainActionButton'
-import { HomeFeatureSection1 } from '@/components/HomeFeatureSection/HomeFeatureSection1'
+import { FirstFeatureSection } from '@/components/HomeFeatureSection/FirstFeatureSection'
 import { TreesArea } from '@/components/TreesArea/TreesArea'
-import { HomeFeatureSection2 } from '@/components/HomeFeatureSection/HomeFeatureSection2'
-import { HomeFeatureSection3 } from '@/components/HomeFeatureSection/HomeFeatureSection3'
+import { SecondFeatureSection } from '@/components/HomeFeatureSection/SecondFeatureSection'
+import { ThirdFeatureSection } from '@/components/HomeFeatureSection/ThirdFeatureSection'
 import { Footer } from '@/components/Footer/Footer'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import { useHistory } from 'react-router'
@@ -16,10 +16,12 @@ import { $auth } from '@/store/auth'
 import { $walletStore } from '@/store/wallet'
 import { $forest, getForestDataFx } from '@/store/forest'
 import { CircleLoader } from '@/components/Loader/CircleLoader'
+import { useTranslation } from 'react-i18next'
 
 export const AboutPage = () => {
   const { isLoggedIn } = useStore($auth)
   const history = useHistory()
+  const { t } = useTranslation()
   const walletStore = useStore($walletStore)
   const { treesPrice } = useStore($forest)
   const [isReady, setIsReady] = useState<boolean | undefined>(undefined)
@@ -73,7 +75,7 @@ export const AboutPage = () => {
     isReady
       ? <>
         <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
-          viewBox='110 300 1140 700'>
+             viewBox='110 300 1140 700'>
           <g fill='none'>
             <g fill='#FAFAFA'>
               <path
@@ -85,13 +87,13 @@ export const AboutPage = () => {
           <div className={s.getStartedContentContainer}>
             <HomeText />
             {isLoggedIn && <TreeTypeSelector />}
-            <MainActionButton onClick={() => getStarted()} text='Get started' image='next' />
+            <MainActionButton onClick={() => getStarted()} text={t('HomePage.GetStartedButton')} image='next' />
             <TreesArea />
           </div>
           <div className={isLoggedIn ? s.homeFeatureContainer : s.homeFeatureContainerHeight}>
-            <HomeFeatureSection1 accordionRef={ref} />
-            <HomeFeatureSection2 />
-            <HomeFeatureSection3 />
+            <FirstFeatureSection accordionRef={ref} />
+            <SecondFeatureSection />
+            <ThirdFeatureSection />
           </div>
         </div>
         <div ref={accordionRef}>

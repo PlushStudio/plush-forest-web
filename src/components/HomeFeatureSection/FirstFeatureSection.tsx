@@ -1,9 +1,12 @@
 import React from 'react'
-import s from './HomeFeatureSection.module.scss'
+import s from './HomeFeatureSections.module.scss'
 import womanWithPlant from '@/assets/images/abstractHomeImages/abstract-woman-with-plants.png'
 import { setActiveAccordionTabIdEvt } from '@/store/app'
+import { useTranslation } from 'react-i18next'
 
-export const HomeFeatureSection1 = ({ accordionRef }: any) => {
+export const FirstFeatureSection = ({ accordionRef }: any) => {
+  const { t } = useTranslation()
+
   const scrollToAccordion = () => {
     setActiveAccordionTabIdEvt(0)
     if (accordionRef && accordionRef.current) {
@@ -23,20 +26,18 @@ export const HomeFeatureSection1 = ({ accordionRef }: any) => {
         />
       </div>
       <div className={s.firstContainerText}>
-        <span className={s.title}>Plant a tree. Celebrate life.</span>
+        <span className={s.title}>{t('HomePage.FirstInfoBlock.title')}</span>
         <span className={s.description}>
-          On average, one hectare of Amazon forest conserves 130 tons of carbon
-          per year. But the carbon offset is only the beginning. This agroforest
-          will be home to hundreds of animal and plant species found nowhere
-          else in the world. <br />
-          <br />
-          The forest will also provide much needed support to remote farming
-          communities, by giving them the necessary resources to lift them out
-          of poverty.
+          <p>
+             {t('HomePage.FirstInfoBlock.partOneDescription')}
+          </p>
+          <p>
+             {t('HomePage.FirstInfoBlock.partTwoDescription')}
+          </p>
         </span>
         <span role={'presentation'}
-          onClick={() => scrollToAccordion()}
-          className={s.link}>How it works
+              onClick={() => scrollToAccordion()}
+              className={s.link}>  {t('HomePage.FirstInfoBlock.howItWorksLink')}
         </span>
       </div>
     </div>

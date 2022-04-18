@@ -70,8 +70,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
         <img src={orangeDot} alt="orange dot" />
       </div>
       <div role={'presentation'}
-        onClick={handleFlip}
-        className={cardContainerStyle}>
+           onClick={handleFlip}
+           className={cardContainerStyle}>
         <div className={timelineContentStyle}>
           <div className={s.timelineContentText}>
             <span className={s.timelineDate}>{cardInfo.date}</span>
@@ -81,9 +81,9 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                 ? cardInfo.planterOrganization
                 : (
                   <a className={s.linked}
-                    target={'_blank'}
-                    rel="noreferrer"
-                    href={`https://${NETWORK_ID === testnetNetworkId && 'testnets.'}opensea.io/assets/${NETWORK_ID === mainnetNetworkId ? 'matic' : 'mumbai'}/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
+                     target={'_blank'}
+                     rel="noreferrer"
+                     href={`https://${NETWORK_ID === testnetNetworkId && 'testnets.'}opensea.io/assets/${NETWORK_ID === mainnetNetworkId ? 'matic' : 'mumbai'}/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
                   >
                     {cardInfo.subtext}
                   </a>
@@ -92,8 +92,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
           </div>
           <div className={cardInfo.size === 'sm' ? s.smCardImgContainer : s.mdCardImgContainer}>
             <img className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
-              src={cardInfo.img}
-              alt="timeline content"
+                 src={cardInfo.img}
+                 alt="timeline content"
             />
           </div>
         </div>
@@ -105,8 +105,8 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
             <button onClick={() => setShowBackSide(false)}>Back</button>
           </div>
           <img src={cardInfo.planterPhoto}
-            className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
-            alt="timeline content"
+               className={cardInfo.size === 'sm' ? s.timelineContentImgSm : s.timelineContentImgMd}
+               alt="timeline content"
           />
         </div>
       </div>

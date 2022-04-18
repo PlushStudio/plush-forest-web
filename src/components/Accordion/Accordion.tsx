@@ -9,8 +9,11 @@ import abstractIconHeart from '@/assets/images/abstractIcons/abstract-icon-3.svg
 import { $app, setActiveAccordionTabIdEvt } from '@/store/app'
 import { useStore } from 'effector-react'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
+import { plantYourFutureUrl } from '@/constants'
 
 export const LearnMoreAccordion = () => {
+  const { t } = useTranslation()
   const { activeAccordionTabId } = useStore($app)
 
   const handleTabClick = (tabId: number) => {
@@ -19,6 +22,8 @@ export const LearnMoreAccordion = () => {
       setActiveAccordionTabIdEvt(-1)
     }
   }
+
+  const charityListArray: Array<string> = t('HomePage.Accordion.SecondTab.charityList', { returnObjects: true })
 
   return (
     <div>
@@ -36,15 +41,7 @@ export const LearnMoreAccordion = () => {
           <Accordion.Collapse eventKey='0'>
             <Card.Body>
               <div className={s.tabMainBlock}>
-                To bring this forest to Plush family, we have partnered with Ecomatcher - a
-                blockchain
-                organization that has developed a unique
-                technology to facilitate transparent tree planting between NGOs who plant and
-                maintain
-                the trees, and the people who want to support this initiative.
-                By working with Ecomatcher we are able to provide precise tree tracking and
-                ownership
-                verification with blockchain technology.
+                {t('HomePage.Accordion.FirstTab.description')}
               </div>
               <div className={s.tabAdditionalBlockContainer}>
                 <div className={s.tabAdditionalBlock}>
@@ -52,8 +49,7 @@ export const LearnMoreAccordion = () => {
                     <img src={abstractIconLeaf} alt={'leaf icon'} />
                   </div>
                   <div className={classNames(s.additionalRightPull, s.correctionStyle)}>
-                    NGO&apos;s from around the world plant the trees and capture tree data with
-                    EcoMatcher&apos;s Treecoder blockchain technology.
+                    {t('HomePage.Accordion.FirstTab.NGO')}
                   </div>
                 </div>
                 <div className={s.tabAdditionalBlock}>
@@ -61,8 +57,7 @@ export const LearnMoreAccordion = () => {
                     <img src={abstractIconEye} alt={'eye icon'} />
                   </div>
                   <div className={s.additionalRightPull}>
-                    EcoMatcher inspects and validates information captured by NGO&apos;s, and
-                    offers Plush to purchase any available forests.
+                    {t('HomePage.Accordion.FirstTab.ecoMatcher')}
                   </div>
                 </div>
                 <div className={s.tabAdditionalBlock}>
@@ -70,8 +65,7 @@ export const LearnMoreAccordion = () => {
                     <img src={abstractIconHeart} alt={'heart icon'} />
                   </div>
                   <div className={s.additionalRightPull}>
-                    Plush acquires a forest and further extends EcoMatcher’s technology to
-                    assign a tree selected by parents to every child&apos;s unique Plush token.
+                    {t('HomePage.Accordion.FirstTab.plush')}
                   </div>
                 </div>
               </div>
@@ -91,26 +85,18 @@ export const LearnMoreAccordion = () => {
           <Accordion.Collapse eventKey='1'>
             <Card.Body>
               <div className={s.tabMainBlock}>
-                Plant Your Future’s work helps farmers transform deforested and degraded land into productive
-                agroforestry
-                systems. Put simply, agroforestry combines agriculture with forestry.
-                Native fruit and timber trees are planted alongside short-term crops.
-                <br /><br />
-                <b className={s.secondAccordionTitle}>Since 2009, the charity has:</b>
-                <br /><br />
-                <ul>
-                  <li>
-                    Planted a further 35,000 trees that continue to thrive.
-                  </li>
-                  <li>
-                    Achieved certification under the Climate, Community and Biodiversity Standard and the Verified
-                    Carbon
-                    Standard.
-                  </li>
-                </ul>
-                For more info, please visit: <a href={'https://www.plantyourfuture.org.uk'}>
-                  https://www.plantyourfuture.org.uk
-                </a>
+                <p>
+                  <b className={s.secondAccordionTitle}>{t('Accordion.SecondTab.charityTitle')}</b>
+                </p>
+                <p>
+                  <ul>
+                    {charityListArray.map((item, index) => <li key={item + index}>
+                      {item}
+                    </li>)}
+                  </ul>
+                  {t('HomePage.Accordion.SecondTab.moreInfoText')}
+                  <a href={plantYourFutureUrl}>{plantYourFutureUrl}</a>
+                </p>
               </div>
             </Card.Body>
           </Accordion.Collapse>
