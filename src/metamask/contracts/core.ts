@@ -1,10 +1,10 @@
 import { Web3Provider } from '@ethersproject/providers'
-import { PlushCoreToken, PlushCoreToken__factory as PlushCoreTokenFactory } from '@plushfamily/plush-protocol-contracts'
+import { PlushCoreToken as PlushCoreTokenContract, PlushCoreToken__factory as PlushCoreTokenFactory } from '@plushfamily/plush-protocol-contracts'
 
 const address = window.config.CORE_CONTRACT_ADDRESS ?? import.meta.env.VITE_CORE_CONTRACT_ADDRESS
 
 class CoreContractManager {
-  contract: PlushCoreToken
+  contract: PlushCoreTokenContract
 
   constructor (provider: Web3Provider) {
     this.contract = PlushCoreTokenFactory.connect(address, provider)

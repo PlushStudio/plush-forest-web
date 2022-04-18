@@ -1,11 +1,11 @@
 import { ethers } from 'ethers'
 import { plushCoinWalletsAddress } from '@/metamask/contracts/plushCoinWallets'
 import { JsonRpcSigner } from '@ethersproject/providers'
-import { Plush, Plush__factory as PlushFactory } from '@plushfamily/plush-protocol-contracts'
+import { Plush as PlushContract, Plush__factory as PlushFactory } from '@plushfamily/plush-protocol-contracts'
 const address = window.config.PLUSH_CONTRACT_ADDRESS ?? import.meta.env.VITE_PLUSH_CONTRACT_ADDRESS
 
 class PlushContractManager {
-  contract: Plush
+  contract: PlushContract
 
   constructor (signer: JsonRpcSigner) {
     this.contract = PlushFactory.connect(address, signer)

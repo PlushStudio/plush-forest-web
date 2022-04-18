@@ -2,12 +2,12 @@ import { JsonRpcSigner } from '@ethersproject/providers'
 import { ethers } from 'ethers'
 import axios from 'axios'
 import api from '@/api/api'
-import { PlushGetTree, PlushGetTree__factory as PlushGetTreeFactory } from '@plushstudio/plush-studio-contracts'
+import { PlushGetTree as PlushGetTreeContract, PlushGetTree__factory as PlushGetTreeFactory } from '@plushstudio/plush-studio-contracts'
 
 const address = window.config.TREE_CONTRACT_ADDRESS ?? import.meta.env.VITE_TREE_CONTRACT_ADDRESS
 
 class TreeContractManager {
-  contract: PlushGetTree
+  contract: PlushGetTreeContract
 
   constructor (signer: JsonRpcSigner) {
     this.contract = PlushGetTreeFactory.connect(address, signer)
