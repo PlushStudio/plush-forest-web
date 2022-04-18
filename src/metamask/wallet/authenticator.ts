@@ -1,11 +1,11 @@
 import MetamaskWallet from './metamaskWallet'
 
 /**
-   * Returns nonce from backend
-   * @param nonceUrl URL to get nonce
-   * @param address Wallet address
-   * @returns Nonce number
-   */
+ * Returns nonce from backend
+ * @param nonceUrl URL to get nonce
+ * @param address Wallet address
+ * @returns Nonce number
+ */
 const getNonce = async (nonceUrl: URL, address: string): Promise<number | undefined> => {
   const url = `${nonceUrl.href}/${address}`
   const response = await fetch(url, {

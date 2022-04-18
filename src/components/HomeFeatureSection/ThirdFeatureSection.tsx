@@ -1,11 +1,13 @@
 import React from 'react'
-import s from './HomeFeatureSection.module.scss'
+import s from './HomeFeatureSections.module.scss'
 import bigTree from '@/assets/images/abstractHomeImages/abstract-large-tree.png'
 import leaf from '@/assets/images/leaf/leaf.svg'
 import lines from '@/assets/images/dashLines/lines.svg'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
-export const HomeFeatureSection3 = () => {
+export const ThirdFeatureSection = () => {
+  const { t } = useTranslation()
   return (
     <div className={s.container}>
       <div className={s.imageBlock}>
@@ -13,12 +15,12 @@ export const HomeFeatureSection3 = () => {
       </div>
       <div className={s.thirdContainerText}>
         <span className={s.title}>
-          A forest of a thousand wishes.
+          {t('HomePage.ThirdInfoBlock.title')}
         </span>
         <span className={classNames(s.sectionThreeDescription, s.description)}>
-          Each tree comes with an option to add a secret note for your child. Only your child will be able to read it, and only on a date that you specify. And thanks to smart contract technology, your message will be securely sealed until your child is ready to view it.
+              {t('HomePage.ThirdInfoBlock.description')}
         </span>
-        <span className={s.sectionThreeGetStarted}>Coming soon</span>
+        <span className={s.sectionThreeGetStarted}> {t('Home.ThirdInfoBlock.comingSoonLink')}</span>
       </div>
       <div className={s.leafContainer}>
         <img className={s.lines} src={lines} alt='lines' />

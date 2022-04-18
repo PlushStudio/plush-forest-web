@@ -27,17 +27,17 @@ const WalletKebab = (props: { menuList: MenuItem[] }) => {
 
   return (
     <div role={'presentation'}
-      ref={kebabRef}
-      className={s.kebab}
-      onClick={() => setKebabDropdownOpen(true)}>
+         ref={kebabRef}
+         className={s.kebab}
+         onClick={() => setKebabDropdownOpen(true)}>
       <img alt={'kebab button'} src={kebabIcon} />
       <div className={classNames(s.kebabDropdown, kebabDropdownOpen ? s.visible : s.hidden)}>
         {
           props.menuList.map((menuItem: MenuItem, index: number) =>
             <div role={'presentation'}
-              onClick={() => handleMenuItemClick(menuItem.href)}
-              key={menuItem.href + index}
-              className={s.kebabListItemContainer}>
+                 onClick={() => handleMenuItemClick(menuItem.href)}
+                 key={menuItem.href + index}
+                 className={s.kebabListItemContainer}>
               <div className={s.kebabListItem}>
                 {menuItem.title}
                 <div className={s.menuItemIcon}>

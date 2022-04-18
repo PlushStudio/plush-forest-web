@@ -12,15 +12,10 @@ import { $forest } from '@/store/forest'
 import { useOnClickOutside } from 'usehooks-ts'
 import { treeNames } from '@/pages/Planting/PlantingLogic'
 import { $app, setActiveTreeEvt } from '@/store/app'
-
-interface TreesInfo {
-  name: string,
-  label: string
-}
+import { useTranslation } from 'react-i18next'
 
 interface CustomSelectProps {
   icons: string[],
-  itemsInfo: TreesInfo[],
   currency: string,
   className?: string,
   onSelect?: (itemId: number, itemName: string) => void
@@ -28,7 +23,7 @@ interface CustomSelectProps {
 
 const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
-export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }: CustomSelectProps) => {
+export const CustomSelect = ({ icons, currency, onSelect, className }: CustomSelectProps) => {
   const [isOpen, setOpen] = useState<boolean>(false)
   const { treesPrice, treesCount } = useStore($forest)
   const { selectedTreeType } = useStore($app)
@@ -39,7 +34,13 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
   const dropdownBodyStyles = classNames(s.dropdownBody, { [s.dropdownBodyOpen]: isOpen })
   const arrowStyles = classNames(s.dropDownArrow, { [s.rotate180]: isOpen })
 
+  const { t } = useTranslation()
   const ref = useRef(null)
+
+  const treesInfo: Array<{
+    name: string,
+    label: string
+  }> = t('PlantingPage.TreesInfo', { returnObjects: true })
 
   useEffect(() => {
     setSelectedItemId(treeNames.indexOf(selectedTreeType))
@@ -69,8 +70,8 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
         className={s.dropdownHeader}
       >
         <div className={s.dropdownHeaderContent}>
-          {itemsInfo.map(
-            (item: TreesInfo, index: number) =>
+          {treesInfo.map(
+            (item, index: number) =>
               selectedItemId === index && (
                 <img
                   key={index}
@@ -82,9 +83,9 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
           )}
           <div className={s.headerContentContainer}>
             <h2>
-              {itemsInfo.find((item: TreesInfo, index: number) => index === selectedItemId)?.name}
+              {treesInfo.find((item, index: number) => index === selectedItemId)?.name}
             </h2>
-            <p>{itemsInfo.find((item: TreesInfo, index: number) => index === selectedItemId)?.label}</p>
+            <p>{treesInfo.find((item, index: number) => index === selectedItemId)?.label}</p>
           </div>
         </div>
         <div className={s.dropdownHeaderRightPull}>
@@ -100,8 +101,8 @@ export const CustomSelect = ({ icons, itemsInfo, currency, onSelect, className }
         </div>
       </div>
       <div className={dropdownBodyStyles}>
-        {itemsInfo.map(
-          (item: TreesInfo, index: number) =>
+        {treesInfo.map(
+          (item, index: number) =>
             treesCount[index] !== 0 && (
               <div
                 role={'presentation'}

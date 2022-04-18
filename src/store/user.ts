@@ -2,6 +2,7 @@ import userService from '@/services/user'
 import { ApiProfile } from '@/services/user/users'
 import { createDomain, createEffect } from 'effector'
 import { logoutEvent } from './auth'
+
 export const userDomain = createDomain('user')
 
 export const getUserFx = createEffect(async (): Promise<ApiProfile> => {

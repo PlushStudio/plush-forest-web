@@ -1,0 +1,127 @@
+{
+  "Header": {
+    "logoTitle": "Plush Forest"
+  },
+  "Footer": {
+    "logoTitle": "Plush Family",
+    "title": "Learn more"
+  },
+  "HomePage": {
+    "MainText": "Dedicate a tree to your child in the sustainable Amazon forest and help the local community of Campoverde, Peru improve their livelihood.",
+    "TreePickerTitle": "Select your tree:",
+    "GetStartedButton": "Get started",
+    "FirstInfoBlock": {
+      "title": "Plant a tree. Celebrate life.",
+      "partOneDescription": "On average, one hectare of Amazon forest conserves 130 tons of carbon per year. But the carbon offset is only the beginning. This agroforest will be home to hundreds of animal and plant species found nowhere else in the world.",
+      "partTwoDescription": "The forest will also provide much needed support to remote farming communities, by giving them the necessary resources to lift them out of poverty.",
+      "howItWorksLink": "How it works"
+    },
+    "SecondInfoBlock": {
+      "title": "Blockchain certified & transparent.",
+      "description": "With the help from our friends at Ecomatcher, you will have access to the precise location of the tree, the species planted, the date of planting, and the farmer who will be taking care of your child’s tree. All information will be securely stored on blockchain and connected to your child’s Plush NFT token."
+    },
+    "ThirdInfoBlock": {
+      "title": "A forest of a thousand wishes.",
+      "description": "Each tree comes with an option to add a secret note for your child. Only your child will be able to read it, and only on a date that you specify. And thanks to smart contract technology, your message will be securely sealed until your child is ready to view it.",
+      "comingSoonLink": "Coming soon"
+    },
+    "TreesTooltip": [
+      {
+        "name": "Shihuahuaco",
+        "description": "It can take a Shihuahuaco (Dipteryx micrantha) up to 1000 years to reach a height of 164 feet. It sustains a staggering amount of life and it can capture up to 40 tones of CO2. Each year, in Peru alone, approximately 184,000 of Shihuahuaco trees are cut down for the timber industry, making these trees highly endangered.",
+        "height": "198",
+        "diameter": "5",
+        "lifespanYears": "1000+",
+        "conservationStatus": "Endangered"
+      },
+      {
+        "name": "Cacao",
+        "description": "Cacao (Theobroma cacao) is the main ingredient in chocolate, but this magical tree can also be used for construction of homes. It’s fiber is used for clothing, thread and paper. Cacao also has many medicinal uses against lower blood pressure, anemia, diarrhea, angina and many skin related problems.",
+        "height": "26",
+        "diameter": "0.98",
+        "lifespanYears": "100",
+        "conservationStatus": "Vulnerable"
+      },
+      {
+        "name": "Guaba",
+        "description": "Guaba (Inga edulis) or the ice cream bean tree produces long pods filled with edible, sweet vanilla-like goodness. It is a fast growing tree and a prized addition to agroforestry. It provides local communities with fruits, medicinal bark, nutrient-rich mulch and a much needed shade for cacao trees.",
+        "height": "98",
+        "diameter": "2",
+        "lifespanYears": "35",
+        "conservationStatus": "Widespread"
+      },
+      {
+        "name": "Caoba (Big-leaf mahogany)",
+        "description": "Caoba (Swietenia macrophylla) is a majestic evergreen tree, prized for its deep reddish color, durability, and beauty. So much, that it’s population has declined 70% since the 1950s. Caoba bark has medicinal properties, and the tree is often used in reforestation projects to provide shade for other species.",
+        "height": "147",
+        "diameter": "6.5",
+        "lifespanYears": "350",
+        "conservationStatus": "Vulnerable"
+      }
+    ],
+    "Accordion": {
+      "FirstTab": {
+        "title": "How it works",
+        "description": "To bring this forest to Plush family, we have partnered with Ecomatcher - a blockchain organization that has developed a unique technology to facilitate transparent tree planting between NGOs who plant and maintain the trees, and the people who want to support this initiative. By working with Ecomatcher we are able to provide precise tree tracking and ownership verification with blockchain technology.",
+        "NGO": "NGO's from around the world plant the trees and capture tree data with EcoMatcher's Treecoder blockchain technology.",
+        "ecoMatcher": "EcoMatcher inspects and validates information captured by NGO's, and offers Plush to purchase any available forests.",
+        "plush": "Plush acquires a forest and further extends EcoMatcher’s technology to assign a tree selected by parents to every child's unique Plush token."
+      },
+      "SecondTab": {
+        "title": "About NGO",
+        "description": "Plant Your Future’s work helps farmers transform deforested and degraded land into productive agroforestry systems. Put simply, agroforestry combines agriculture with forestry. Native fruit and timber trees are planted alongside short-term crops.",
+        "charityTitle": "Since 2009, the charity has:",
+        "charityList": [
+          "Planted a further 35,000 trees that continue to thrive.",
+          "Achieved certification under the Climate, Community and Biodiversity Standard and the Verified Carbon Standard."
+        ],
+        "moreInfoText": "For more info, please visit:"
+      }
+    }
+  },
+  "PlantingPage": {
+    "PlantYourTreeButton": "Plant your tree",
+    "PlantingModal": [
+      {
+        "stepName": "Confirmation",
+        "subtitle": "Did you known?",
+        "title": "Verifying tree availability",
+        "timing": "This should take about 15 sec.",
+        "content": "Peru is one of the 10 most biodiverse countries in the world. Over half of the country is covered with forests and species that are still being discovered. More than 330,000 people depend directly on the country's forests for their livelihoods, including 350 Indigenous and ethnic groups."
+      },
+      {
+        "stepName": "Planting",
+        "subtitle": "Did you known?",
+        "title": "Minting your tree token",
+        "timing": "This should take about 10 sec.",
+        "content": "The Amazon deforestation and degradation is expected to reach critical levels by 2030. According to WWF, the Amazon is close to a tipping point past which it will no longer be able to sustain itself. This will result in significant impact on the well-being and health of our planet and our children."
+      }
+    ],
+    "plantingInputPlaceholder": "Your name",
+    "plantingInputError": "Your name is required to plant a tree",
+    "plantFrom": "From",
+    "plantTo": "to",
+    "TreesInfo": [
+      {
+        "name": "Shihuahuaco",
+        "label": "The Amazon's tree of life."
+      },
+      {
+        "name": "Cacao",
+        "label": "The food of the Gods."
+      },
+      {
+        "name": "Guaba",
+        "label": "The ice cream tree."
+      },
+      {
+        "name": "Caoba",
+        "label": "The majestic mahogany."
+      }
+    ]
+  },
+  "NotFoundPage": {
+    "notFoundText": "Page Not Found",
+    "plantTreeBtnText": "Let's Plant a Tree"
+  }
+}

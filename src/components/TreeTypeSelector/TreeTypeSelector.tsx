@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import s from './TreeTypeSelector.module.scss'
-import { treesTooltip } from '@/assets/data/TreesTooltip'
 import oval from '@/assets/images/ovalGradient/oval-gradient.svg'
 import shihuahuacoIcon from '@/assets/images/treeIconSelector/shihuahuaco-selector.png'
 import cacaoIcon from '@/assets/images/treeIconSelector/cacao-selector.png'
@@ -15,21 +14,25 @@ import { useStore } from 'effector-react'
 import { $forest } from '@/store/forest'
 import { treeNames } from '@/pages/Planting/PlantingLogic'
 import { setActiveTreeEvt } from '@/store/app'
-
-interface treeTooltip {
-  name: string,
-  description: string,
-  height?: string,
-  diameter?: string,
-  lifespanYears?: string,
-  conservationStatus?: string
-}
+import { useTranslation } from 'react-i18next'
 
 const selectorTreePreviews = [selectorShihuahuacoImg, selectorCacaoImg, selectorGuabaImg, selectorCaobaImg]
 
 export const TreeTypeSelector = () => {
   const [activeTreeId, setActiveTreeId] = useState(0)
   const { treesCount } = useStore($forest)
+  const { t } = useTranslation()
+
+  interface treeTooltip {
+    name: string,
+    description: string,
+    height: string,
+    diameter: string,
+    lifespanYears: string,
+    conservationStatus: string
+  }
+
+  const treeTooltips: Array<treeTooltip> = t('HomePage.TreesTooltip', { returnObjects: true })
 
   const handleClick = (activeTreeId: number) => {
     setActiveTreeId(activeTreeId)
@@ -57,11 +60,11 @@ export const TreeTypeSelector = () => {
             <div className={s.popoverFooterContainer}>
               <div className={s.popoverFooter}>
                 <div className={s.footerItem}>
-                  <div className={s.footerItemValue}>{`${treeTooltip.height}'`}</div>
+                  <div className={s.footerItemValue}>{treeTooltip.height}</div>
                   <div className={s.footerItemTitle}>Height</div>
                 </div>
                 <div className={s.footerItem}>
-                  <div className={s.footerItemValue}>{`${treeTooltip.diameter}'`}</div>
+                  <div className={s.footerItemValue}>{treeTooltip.diameter}</div>
                   <div className={s.footerItemTitle}>Diameter</div>
                 </div>
                 <div className={s.footerItem}>
@@ -82,22 +85,26 @@ export const TreeTypeSelector = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.header}>Select your tree:</div>
+      <div className={s.header}>{t('HomePage.TreePickerTitle')}</div>
       <div className={s.circlesContainer}>
         {treesCount.map((count: number, index: number) =>
-          count !== 0 && <OverlayTrigger key={index} trigger={['hover', 'focus']} placement='top' overlay={popover(treesTooltip[index], index)}
-            defaultShow={false}
-            delay={300}>
-            <div role={'presentation'}
-              className={s.circleContainer}
-              onClick={() => handleClick(index)}>
-              <img className={s.circle}
-                src={TreeTypeSelectorImages[index]}
-                alt={'tree type'} />
-              {activeTreeId === index &&
-                <img className={s.ovalSelected} src={oval} alt='oval selected' />}
-            </div>
-          </OverlayTrigger>
+          count !== 0 && <OverlayTrigger
+              key={index}
+              trigger={['hover', 'focus']}
+              placement='top'
+              overlay={popover(treeTooltips[index], index)}
+              defaultShow={false}
+              delay={300}>
+              <div role={'presentation'}
+                   className={s.circleContainer}
+                   onClick={() => handleClick(index)}>
+                <img className={s.circle}
+                     src={TreeTypeSelectorImages[index]}
+                     alt={'tree type'} />
+                {activeTreeId === index &&
+                  <img className={s.ovalSelected} src={oval} alt='oval selected' />}
+              </div>
+            </OverlayTrigger>
         )}
       </div>
     </div>

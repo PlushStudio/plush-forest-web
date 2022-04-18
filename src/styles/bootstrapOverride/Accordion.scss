@@ -1,5 +1,5 @@
 /* stylelint-disable -- Override bootstrap value with kebab-case. */
-.accordion>.card>.card-header {
+.accordion > .card > .card-header {
   display: flex;
   justify-content: space-between;
   background: white;
@@ -13,7 +13,7 @@
   }
 }
 
-.accordion>.card {
+.accordion > .card {
   border: none;
   outline: none;
   border-radius: 8px;

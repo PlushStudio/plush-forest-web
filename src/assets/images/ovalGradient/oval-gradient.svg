@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80" viewBox="0 0 80 80">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80"
+     viewBox="0 0 80 80">
     <defs>
         <linearGradient id="0nrily6m8c" x1="50%" x2="50%" y1="100%" y2="0%">
             <stop offset="0%" stop-color="#FFD34E"/>
@@ -7,7 +8,8 @@
         <filter id="wbyyd6zrfa" width="110%" height="110%" x="-5%" y="-5%" filterUnits="objectBoundingBox">
             <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="4"/>
             <feOffset in="shadowBlurInner1" result="shadowOffsetInner1"/>
-            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic"
+                         result="shadowInnerInner1"/>
             <feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
         </filter>
         <circle id="qhmh2gziwb" cx="40" cy="40" r="40"/>

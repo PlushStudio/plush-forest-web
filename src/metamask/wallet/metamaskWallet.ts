@@ -19,7 +19,10 @@ class MetamaskWallet {
     }
 
     try {
-      const ethereumMetamaskGlobalObject = await detectEthereumProvider({ mustBeMetaMask: true, silent: true }) as ExternalProvider
+      const ethereumMetamaskGlobalObject = await detectEthereumProvider({
+        mustBeMetaMask: true,
+        silent: true
+      }) as ExternalProvider
 
       if (ethereumMetamaskGlobalObject) {
         // Explanation why any param is passed: https://github.com/ethers-io/ethers.js/issues/866

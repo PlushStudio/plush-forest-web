@@ -22,7 +22,7 @@ export const PlantingLogic = () => {
   const [isPlanting, setIsPlanting] = useState<boolean>(false)
   const [isPlantBtnLoading, setIsPlantBtnLoading] = useState<boolean>(false)
   const [currentTreePrice, setCurrentTreePrice] = useState<string>('')
-  const [plantingStatus, setPlantingStatus] = useState<string>('Confirmation')
+  const [plantingStep, setPlantingStep] = useState<number>(0)
   const [nameFrom, setNameFrom] = useState<string>('')
   const [treeImage, setTreeImage] = useState<string>(shihuahuacoTreeImage)
   const [isBalanceHintVisible, setIsBalanceHintVisible] = useState<boolean>(false)
@@ -92,7 +92,7 @@ export const PlantingLogic = () => {
       const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
       if (allowance) {
         try {
-          setPlantingStatus('Planting your tree')
+          setPlantingStep(1)
           clearInterval(updateBuyAllowance)
           await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
           await checkTokenAvailability()
@@ -118,7 +118,7 @@ export const PlantingLogic = () => {
           } else {
             const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
             if (allowance) {
-              setPlantingStatus('Planting your tree')
+              setPlantingStep(1)
               await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
               await checkTokenAvailability()
             } else {
@@ -126,11 +126,11 @@ export const PlantingLogic = () => {
                 const allowancePromise = walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)
                 if (await allowancePromise) {
                   clearInterval(updateBuyAllowance)
-                  setPlantingStatus('Planting your tree')
+                  setPlantingStep(1)
                   await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
                   await checkTokenAvailability()
                 } else {
-                  setPlantingStatus('Confirmation')
+                  setPlantingStep(0)
                   clearInterval(updateBuyAllowance)
                   try {
                     await walletStore?.plushContractManager.getApprove(currentTreePrice)
@@ -176,17 +176,12 @@ export const PlantingLogic = () => {
   return {
     nameFromHandler,
     startMintProcess,
-    setIsPlanting,
-    setPlantingStatus,
-    setIsVisited,
-    setNameFrom,
-    setTreeImage,
     isPlanting,
     isPlantBtnLoading,
     isVisited,
     treeImage,
     nameFrom,
-    plantingStatus,
+    plantingStep,
     isBalanceHintVisible
   }
 }

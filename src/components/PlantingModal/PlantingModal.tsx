@@ -1,23 +1,32 @@
-import React from 'react'
+import React, { FC } from 'react'
 import s from './PlantingModal.module.scss'
 import './Loader.scss'
-import modalData from '@/assets/data/MintingModal'
+import { useTranslation } from 'react-i18next'
 
-interface Status {
-  status: string
+interface PlantingModalProps {
+  step: number
 }
 
-export const PlantingModal = ({ status }: Status) => {
+export const PlantingModal: FC<PlantingModalProps> = ({ step }) => {
+  const { t } = useTranslation()
+
+  const plantingModalInfo: Array<{
+    stepName: string,
+    subtitle: string,
+    title: string,
+    timing: string,
+    content: string
+  }> = t('PlantingPage.PlantingModal', { returnObjects: true })
   return (
     <div className={s.modalContainer}>
       <div className={s.modalContent}>
         <div className={s.modalTitle}>
           <span className={s.modalTitleStep}>
-            Step {modalData[status].step}/2:
+            Step {step + 1}/2:
           </span>
-          {modalData[status].title}
+          {plantingModalInfo[step].title}
         </div>
-        <div className={s.modalSecondText}>{modalData[status].timing}</div>
+        <div className={s.modalSecondText}>{plantingModalInfo[step].timing}</div>
         <div className="loaderContainer">
           <div className="loro">
             <div className="circ" />
@@ -28,8 +37,8 @@ export const PlantingModal = ({ status }: Status) => {
           </div>
         </div>
         <div className={s.modalFooterContainer}>
-          <div className={s.modalFooterTitle}>Did you know?</div>
-          <div className={s.modalFooterText}>{modalData[status].content}</div>
+          <div className={s.modalFooterTitle}>{plantingModalInfo[step].subtitle}</div>
+          <div className={s.modalFooterText}>{plantingModalInfo[step].content}</div>
         </div>
       </div>
     </div>
