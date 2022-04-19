@@ -86,7 +86,7 @@ export const LearnMoreAccordion = () => {
             <Card.Body>
               <div className={s.tabMainBlock}>
                 <p>
-                  <b className={s.secondAccordionTitle}>{t('Accordion.SecondTab.charityTitle')}</b>
+                  <b className={s.secondAccordionTitle}>{t('HomePage.Accordion.SecondTab.charityTitle')}</b>
                 </p>
                 <p>
                   <ul>
