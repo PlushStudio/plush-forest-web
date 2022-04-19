@@ -20,7 +20,7 @@ export const ThirdFeatureSection = () => {
         <span className={classNames(s.sectionThreeDescription, s.description)}>
               {t('HomePage.ThirdInfoBlock.description')}
         </span>
-        <span className={s.sectionThreeGetStarted}> {t('Home.ThirdInfoBlock.comingSoonLink')}</span>
+        <span className={s.sectionThreeGetStarted}> {t('HomePage.ThirdInfoBlock.comingSoonLink')}</span>
       </div>
       <div className={s.leafContainer}>
         <img className={s.lines} src={lines} alt='lines' />
