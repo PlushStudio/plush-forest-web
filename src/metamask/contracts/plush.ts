@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import { plushCoinWalletsAddress } from '@/metamask/contracts/plushCoinWallets'
+import { plushAccountsAddress } from '@/metamask/contracts/plushCoinWallets'
 import { JsonRpcSigner } from '@ethersproject/providers'
 import { Plush as PlushContract, Plush__factory as PlushFactory } from '@plushfamily/plush-protocol-contracts'
 
@@ -19,12 +19,12 @@ class PlushContractManager {
   }
 
   getApprove = async (treePrice: string) => {
-    return await this.contract.approve(plushCoinWalletsAddress, treePrice)
+    return await this.contract.approve(plushAccountsAddress, treePrice)
   }
 
   getBuyAllowance = async (address: string, treePrice: string): Promise<boolean | undefined> => {
     try {
-      const allowanceResult = await this.contract.allowance(address, plushCoinWalletsAddress)
+      const allowanceResult = await this.contract.allowance(address, plushAccountsAddress)
       return Number(ethers.utils.formatEther(allowanceResult)) >= Number(ethers.utils.formatEther(treePrice))
     } catch (e) {
       console.log(e.message)
