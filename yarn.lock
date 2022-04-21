@@ -728,6 +728,16 @@
     "@openzeppelin/hardhat-defender" "^1.6.0"
     dotenv "^16.0.0"
 
+"@plushfamily/plush-protocol-contracts@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@plushfamily/plush-protocol-contracts/-/plush-protocol-contracts-2.7.0.tgz#dee42f5a8dd84867515f586bbd8de40b112c66b3"
+  integrity sha512-M2dD6zlc9gcNlqMDu2rYmenzbWex5wFbpj1bBmnM5N31eJkCAvD1Zuje7+x1IxXaVXNVyDc5aBqofzhvywSFmg==
+  dependencies:
+    "@openzeppelin/contracts" "^4.5.0"
+    "@openzeppelin/contracts-upgradeable" "^4.5.2"
+    "@openzeppelin/hardhat-defender" "^1.6.0"
+    dotenv "^16.0.0"
+
 "@plushstudio/plush-studio-contracts@^0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-0.4.0.tgz#74a176cad3678b655d31405c773653506766b507"

@@ -1,16 +1,16 @@
 import { Web3Provider } from '@ethersproject/providers'
 import {
-  PlushCoreToken as PlushCoreTokenContract,
-  PlushCoreToken__factory as PlushCoreTokenFactory
+  LifeSpan as LifeSpanContract,
+  LifeSpan__factory as LifeSpanFactory
 } from '@plushfamily/plush-protocol-contracts'
 
-const address = window.config.CORE_CONTRACT_ADDRESS ?? import.meta.env.VITE_CORE_CONTRACT_ADDRESS
+const address = window.config.PLUSH_LIFESPAN ?? import.meta.env.VITE_PLUSH_LIFESPAN
 
 class CoreContractManager {
-  contract: PlushCoreTokenContract
+  contract: LifeSpanContract
 
   constructor (provider: Web3Provider) {
-    this.contract = PlushCoreTokenFactory.connect(address, provider)
+    this.contract = LifeSpanFactory.connect(address, provider)
   }
 
   getTokenOwner = async (tokenId: number): Promise<string> => {

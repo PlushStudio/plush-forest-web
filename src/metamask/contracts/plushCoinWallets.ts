@@ -1,19 +1,19 @@
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber, ethers } from 'ethers'
 import {
-  PlushCoinWallets as PlushCoinWalletsContract,
-  PlushCoinWallets__factory as PlushCoinWalletsFactory
+  PlushAccounts as PlushAccountsContract,
+  PlushAccounts__factory as PlushAccountsFactory
 } from '@plushfamily/plush-protocol-contracts'
 
-export const plushCoinWalletsAddress = window.config.COIN_WALLETS_CONTRACT_ADDRESS ?? import.meta.env.VITE_COIN_WALLETS_CONTRACT_ADDRESS
+export const plushAccountsAddress = window.config.PLUSH_ACCOUNTS ?? import.meta.env.VITE_PLUSH_ACCOUNTS
 
 class PlushCoinWalletsContractManager {
-  contract: PlushCoinWalletsContract
+  contract: PlushAccountsContract
   readonly signer: JsonRpcSigner;
 
   constructor (provider: Web3Provider) {
     this.signer = provider.getSigner()
-    this.contract = PlushCoinWalletsFactory.connect(plushCoinWalletsAddress, this.signer)
+    this.contract = PlushAccountsFactory.connect(plushAccountsAddress, this.signer)
   }
 
   getBalance = async (address: string): Promise<number> => {
