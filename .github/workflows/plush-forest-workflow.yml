@@ -82,3 +82,15 @@ jobs:
             export CLIENT_SIGNUP_URL=$CLIENT_SIGNUP_URL
             docker-compose pull $SERVICE_NAME
             docker-compose up -d --no-deps --build $SERVICE_NAME
+  DeployK8sDev:
+    runs-on: ubuntu-latest
+    needs: [ Build ]
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          repository: PlushFamily/infrastructure
+          event-type: deploy-dev
+          client-payload: '{"service": "plush-forest"}'
