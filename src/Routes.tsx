@@ -11,7 +11,7 @@ export const Routes = () => {
   return (
     <Switch>
       <Route exact path={routes.planting}>
-        <Page>
+        <Page withConnection>
           <Planting />
         </Page>
       </Route>

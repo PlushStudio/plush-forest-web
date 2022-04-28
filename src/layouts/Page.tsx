@@ -7,10 +7,16 @@ import { $walletStore } from '@/store/wallet'
 import MetamaskWallet from '@/metamask/wallet/metamaskWallet'
 import { CircleLoader } from '@/components/Loader/CircleLoader'
 import { setCurrencyEvt, setIsOpenMenuDropdownEvt, setSafeBalanceEvt, setUserBalanceEvt } from '@/store/app'
+import { UserTokens } from '@/types/UserTokens'
+import api from '@/api/api'
+import routes from '@/Router/routes'
+import { useHistory } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
 type Props = {
   children: ReactNode
   headerMessage?: string
+  withConnection?: boolean,
   headerComponent?: ReactNode
   footerComponent?: ReactNode
   contentClass?: string
@@ -20,10 +26,13 @@ export const Page = (props: Props) => {
   const [walletAddress, setWalletAddress] = useState<string>('')
   const [actualNetworkId, setActualNetworkId] = useState<string>('')
   const [dataFetched, setDataFetched] = useState<boolean>(false)
+  const [forestTokenChecked, setForestTokenChecked] = useState<boolean>(false)
   const [walletState, setWalletState] = useState<WalletState>('DISCONNECTED')
   const [balance, setBalance] = useState<number>(0)
   const [currency, setCurrency] = useState<string>('')
 
+  const location = useLocation()
+  const history = useHistory()
   const user = useStore($user)
   const walletStore = useStore($walletStore)
   const [isMounted, setIsMounted] = useState<boolean>(true)
@@ -35,6 +44,13 @@ export const Page = (props: Props) => {
   const getActualNetworkName = () => {
     return MetamaskWallet.getNetworkById(actualNetworkId).name
   }
+
+  useEffect(() => {
+    if (props.withConnection) {
+      setDataFetched(false)
+      checkUserForestToken()
+    }
+  }, [location.pathname])
 
   const connectWallet = async () => {
     if (!walletStore) {
@@ -86,6 +102,14 @@ export const Page = (props: Props) => {
 
   const openExplorer = async () => {
     window.open(getPolygonScanLink(user.address), '_blank')
+  }
+
+  const checkUserForestToken = async () => {
+    const myTokens: UserTokens = await api.user.users.tokens.request()
+    if (myTokens.tokens.length > 0) {
+      history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
+    }
+    setForestTokenChecked(true)
   }
 
   const fetchData = async (isMounted: boolean) => {
@@ -142,6 +166,10 @@ export const Page = (props: Props) => {
       setDataFetched(true)
       setIsOpenMenuDropdownEvt(true)
     }
+
+    if (props.withConnection) {
+      setDataFetched(forestTokenChecked)
+    }
   }
 
   const handleNetworkChanged = () => {
@@ -164,7 +192,6 @@ export const Page = (props: Props) => {
     }
 
     fetchData(isMounted)
-
     walletStore.wallet.addNetworkChangedListener(handleNetworkChanged)
     walletStore.wallet.addAccountsChangedListener(handleAccountChanged)
 
@@ -173,7 +200,7 @@ export const Page = (props: Props) => {
       walletStore.wallet.removeNetworkChangedListener(handleNetworkChanged)
       walletStore.wallet.removeAccountsChangedListener(handleAccountChanged)
     }
-  }, [walletStore, user])
+  }, [walletStore, user, forestTokenChecked])
 
   return (
     dataFetched
@@ -194,13 +221,14 @@ export const Page = (props: Props) => {
           }}
           balance={balance}
           currency={currency} />
-        {!!props.headerComponent &&
-          props.headerComponent
+        {props.headerComponent}
+        {
+          walletState !== 'WRONG_NETWORK'
+            ? props.children
+            : <CircleLoader />
         }
-        {walletState !== 'WRONG_NETWORK' ? props.children : <CircleLoader />}
-        {!!props.footerComponent &&
-          props.footerComponent
-        }
+        {props.footerComponent}
       </>
-      : <CircleLoader />)
+      : <CircleLoader />
+  )
 }
