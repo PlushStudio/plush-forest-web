@@ -26,7 +26,7 @@ class PlushContractManager {
     try {
       const allowanceResult = await this.contract.allowance(address, plushAccountsAddress)
       return Number(ethers.utils.formatEther(allowanceResult)) >= Number(ethers.utils.formatEther(treePrice))
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message)
     }
   }

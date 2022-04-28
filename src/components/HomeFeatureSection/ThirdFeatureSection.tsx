@@ -10,9 +10,7 @@ export const ThirdFeatureSection = () => {
   const { t } = useTranslation()
   return (
     <div className={s.container}>
-      <div className={s.imageBlock}>
-        <img className={s.bigTree} src={bigTree} alt='big tropical tree' />
-      </div>
+      <img className={s.imageBlock} src={bigTree} alt='big tropical tree' />
       <div className={s.thirdContainerText}>
         <span className={s.title}>
           {t('HomePage.ThirdInfoBlock.title')}

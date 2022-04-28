@@ -15,9 +15,7 @@ export const SecondFeatureSection = () => {
             {t('HomePage.SecondInfoBlock.description')}
         </span>
       </div>
-      <div className={s.imageBlock}>
-        <img className={s.twoBirds} src={twoBirds} alt='two birds' />
-      </div>
+      <img className={s.imageBlock} src={twoBirds} alt='two birds' />
     </div>
   )
 }

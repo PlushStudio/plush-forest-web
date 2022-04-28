@@ -18,13 +18,11 @@ export const FirstFeatureSection = ({ accordionRef }: any) => {
 
   return (
     <div className={s.container}>
-      <div className={s.imageBlock}>
-        <img
-          className={s.womanWithPlant}
-          src={womanWithPlant}
-          alt="two birds"
-        />
-      </div>
+      <img
+        className={s.imageBlock}
+        src={womanWithPlant}
+        alt="two birds"
+      />
       <div className={s.firstContainerText}>
         <span className={s.title}>{t('HomePage.FirstInfoBlock.title')}</span>
         <span className={s.description}>

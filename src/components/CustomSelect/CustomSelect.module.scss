@@ -1,5 +1,6 @@
-@use '../../styles/variables';
-@use '../../styles/theme';
+@use '/src/styles/variables';
+@use '/src/styles/theme';
+@use '/src/styles/mixins';
 
 .dropdown {
   border-radius: 16px;
@@ -23,6 +24,10 @@
   height: 80px;
   font-size: 20px;
   cursor: pointer;
+
+  @include mixins.media-to-md {
+    padding: 14px;
+  }
 }
 
 .dropdownHeaderContent {
@@ -127,6 +132,11 @@
 .dropdownChildItem {
   width: 64px;
   height: 64px;
+
+  @include mixins.media-to-xl {
+    width: 46px;
+    height: 46px;
+  }
 }
 
 .itemPrice {
@@ -155,6 +165,10 @@
       margin: 0;
       color: theme.$grays-500;
       font-family: AvenirNextRoundedPro-Reg, sans-serif;
+    }
+
+    @include mixins.media-to-md {
+      display: none;
     }
   }
 }

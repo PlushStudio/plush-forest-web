@@ -1,5 +1,5 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
-import s from './About.module.css'
+import s from './About.module.scss'
 import { HomeText } from '@/components/HomeText/HomeText'
 import { TreeTypeSelector } from '@/components/TreeTypeSelector/TreeTypeSelector'
 import { MainActionButton } from '@/components/MainActionButton/MainActionButton'
@@ -17,6 +17,7 @@ import { $walletStore } from '@/store/wallet'
 import { $forest, getForestDataFx } from '@/store/forest'
 import { CircleLoader } from '@/components/Loader/CircleLoader'
 import { useTranslation } from 'react-i18next'
+import heroWave from '../../assets/images/heroWave.svg'
 
 export const AboutPage = () => {
   const { isLoggedIn } = useStore($auth)
@@ -74,16 +75,8 @@ export const AboutPage = () => {
   return (
     isReady
       ? <>
-        <svg style={{ position: 'absolute', minHeight: 400, zIndex: -1 }} xmlns='http://www.w3.org/2000/svg'
-             viewBox='110 300 1140 700'>
-          <g fill='none'>
-            <g fill='#FAFAFA'>
-              <path
-                d='M1439.999 0v524.414c-119.69 59.348-236.289 12.964-328.983 11.586-92.693-1.378-237.982 32-438.052 84.78C472.894 673.558 109.483 770.28-.001 615V0h1440z' />
-            </g>
-          </g>
-        </svg>
-        <div className={s.container}>
+       <img src={heroWave} className={s.heroWave} alt={'hero wave'}/>
+        <div className={'container'}>
           <div className={s.getStartedContentContainer}>
             <HomeText />
             {isLoggedIn && <TreeTypeSelector />}
@@ -96,7 +89,7 @@ export const AboutPage = () => {
             <ThirdFeatureSection />
           </div>
         </div>
-        <div ref={accordionRef}>
+        <div className={s.footerContainer} ref={accordionRef}>
           <Footer />
         </div>
       </>

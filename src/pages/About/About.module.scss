@@ -1,0 +1,73 @@
+@use 'src/styles/theme';
+@use 'src/styles/variables';
+@use 'src/styles/mixins';
+
+.container {
+  max-width: 1392px;
+  margin: auto;
+  padding: 0 88px 2.4em;
+
+  @include mixins.media-to-lg {
+    padding: 0 2em;
+  }
+}
+
+.homeFeatureContainer {
+  padding-top: 11.4em;
+  margin: auto;
+
+  @include mixins.media-to-lg {
+    padding-top: 10vw;
+  }
+}
+
+.homeFeatureContainerHeight {
+  padding-top: 15.4em;
+  margin: auto;
+}
+
+.footerContainer {
+  margin-top: 34px;
+  background: theme.$grays-50;
+}
+
+.getStartedContentContainer {
+  position: relative;
+
+  @include mixins.media-to-xl {
+    margin-top: 0;
+  }
+}
+
+.waves {
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  margin-bottom: -7px;
+  min-height: 100px;
+  max-height: 500px;
+  background: #fafafa;
+
+  @include mixins.media-to-md {
+    height: 300px;
+    min-height: 200px;
+  }
+}
+
+.heroWave {
+  position: absolute;
+  min-height: 400px;
+  top: 0;
+  z-index: variables.$low-order;
+}
+
+.content {
+  position: relative;
+  height: 20vh;
+  text-align: center;
+  background-color: white;
+
+  @include mixins.media-to-md {
+    height: 30vh;
+  }
+}

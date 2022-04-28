@@ -1,5 +1,6 @@
 @use '/src/styles/theme';
 @use '/src/styles/variables';
+@use '/src/styles/mixins';
 
 .soilFooterWithContactsContainer {
   display: flex;
@@ -14,10 +15,6 @@
 
 .soilFooterContent {
   width: 100%;
-  max-width: 1392px;
-  padding: 0 88px;
-  margin: auto;
-  display: flex;
 }
 
 .footerPlant {
@@ -30,18 +27,22 @@
   right: 0;
   bottom: 20px;
   z-index: variables.$medium-order;
+
+  @include mixins.media-to-lg {
+    left: auto;
+    right: 120px;
+  }
+
+  @include mixins.media-to-xl {
+    width: 201px;
+    height: 216px;
+    right: 0;
+  }
 }
 
 .logoIcon {
   width: 32px;
   height: 32px;
-}
-
-@media (max-width: 1392px) {
-  .footerPlant {
-    left: auto;
-    right: 120px;
-  }
 }
 
 .leftPull {

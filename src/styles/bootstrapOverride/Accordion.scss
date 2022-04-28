@@ -1,3 +1,5 @@
+@use 'src/styles/mixins';
+
 /* stylelint-disable -- Override bootstrap value with kebab-case. */
 .accordion > .card > .card-header {
   display: flex;
@@ -33,4 +35,8 @@
 .accordion .collapsing {
   padding: 0 5.2em;
   background: white;
+
+  @include mixins.media-to-md {
+    padding: 0 2vw;
+  }
 }

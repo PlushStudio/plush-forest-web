@@ -46,7 +46,7 @@ export const LearnMoreAccordion = () => {
               <div className={s.tabAdditionalBlockContainer}>
                 <div className={s.tabAdditionalBlock}>
                   <div className={s.additionalLeftPull}>
-                    <img src={abstractIconLeaf} alt={'leaf icon'} />
+                    <img className={s.abstractIcon} src={abstractIconLeaf} alt={'leaf icon'} />
                   </div>
                   <div className={classNames(s.additionalRightPull, s.correctionStyle)}>
                     {t('HomePage.Accordion.FirstTab.NGO')}
@@ -54,7 +54,7 @@ export const LearnMoreAccordion = () => {
                 </div>
                 <div className={s.tabAdditionalBlock}>
                   <div className={s.additionalLeftPull}>
-                    <img src={abstractIconEye} alt={'eye icon'} />
+                    <img className={s.abstractIcon} src={abstractIconEye} alt={'eye icon'} />
                   </div>
                   <div className={s.additionalRightPull}>
                     {t('HomePage.Accordion.FirstTab.ecoMatcher')}
@@ -62,7 +62,7 @@ export const LearnMoreAccordion = () => {
                 </div>
                 <div className={s.tabAdditionalBlock}>
                   <div className={s.additionalLeftPull}>
-                    <img src={abstractIconHeart} alt={'heart icon'} />
+                    <img className={s.abstractIcon} src={abstractIconHeart} alt={'heart icon'} />
                   </div>
                   <div className={s.additionalRightPull}>
                     {t('HomePage.Accordion.FirstTab.plush')}

@@ -1,24 +1,37 @@
-@use '../../styles/theme';
-@use '../../styles/variables';
+@use 'src/styles/theme';
+@use 'src/styles/variables';
+@use 'src/styles/mixins';
 
 .container {
   margin-top: 2.2em;
+
+  @include mixins.media-to-lg {
+    margin-top: 2vw;
+  }
+
+  @include mixins.media-to-sm {
+    display: none;
+  }
 }
 
-.header,
-footer {
+.header {
   width: 136px;
-  margin: 0 24px 16px 0;
+  margin-bottom: 16px;
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 18px;
   line-height: 1.33;
   color: theme.$grey-800;
+
+  @include mixins.media-to-lg {
+    font-size: 1.6vw;
+    width: 100%;
+    margin-bottom: 1vw;
+  }
 }
 
 .circlesContainer {
   display: flex;
   position: relative;
-  z-index: variables.$higher-order;
 }
 
 .ovalSelected {
@@ -28,6 +41,13 @@ footer {
   left: -4px;
   top: -4px;
   border-radius: 50px;
+
+  @include mixins.media-to-lg {
+    width: 7vw;
+    height: 7vw;
+    left: 0;
+    top: 0;
+  }
 }
 
 .circle {
@@ -41,6 +61,11 @@ footer {
   background-size: cover;
   transition: 0.2s ease;
   cursor: pointer;
+
+  @include mixins.media-to-lg {
+    width: 7vw;
+    height: 7vw;
+  }
 }
 
 .circle:hover {
@@ -50,6 +75,14 @@ footer {
 
 .circleContainer {
   position: relative;
+  width: 80px;
+  margin-right: 10px;
+
+  @include mixins.media-to-lg {
+    width: 7vw;
+    height: 7vw;
+    margin-right: 1vw;
+  }
 }
 
 .numberValue {

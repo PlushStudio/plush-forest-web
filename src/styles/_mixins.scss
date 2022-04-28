@@ -1,0 +1,33 @@
+@use './variables.scss';
+
+@mixin media-to-xs {
+  @media (max-width: map-get(variables.$grid-breakpoints, 'xs')) { @content; }
+}
+
+@mixin media-to-xl {
+  @media (max-width: map-get(variables.$grid-breakpoints, 'xl')) { @content; }
+}
+
+@mixin media-to-sm {
+  @media (max-width: map-get(variables.$grid-breakpoints, 'sm')) { @content; }
+}
+
+@mixin media-from-sm {
+  @media (min-width: map-get(variables.$grid-breakpoints, 'sm')) { @content; }
+}
+
+@mixin media-to-md {
+  @media (max-width: map-get(variables.$grid-breakpoints, 'md')) { @content; }
+}
+
+@mixin media-from-md {
+  @media (min-width: map-get(variables.$grid-breakpoints, 'md')) { @content; }
+}
+
+@mixin media-to-lg {
+  @media (max-width: map-get(variables.$grid-breakpoints, 'lg')) { @content; }
+}
+
+@mixin media-from-lg {
+  @media (min-width: map-get(variables.$grid-breakpoints, 'lg')) { @content; }
+}

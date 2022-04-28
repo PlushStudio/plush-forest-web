@@ -1,5 +1,6 @@
-@use '../../styles/variables';
-@use '../../styles/theme';
+@use '/src/styles/variables';
+@use '/src/styles/theme';
+@use '/src/styles/mixins';
 
 .inputContainer {
   width: 488px;
@@ -13,6 +14,10 @@
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   background-color: white;
   height: 64px;
+
+  @include mixins.media-to-md {
+    width: 100%;
+  }
 
   &.hidden {
     .nameText {
