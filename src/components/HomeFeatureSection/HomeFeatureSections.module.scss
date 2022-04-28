@@ -1,26 +1,31 @@
-@use '../../styles/theme';
-@use '../../styles/variables';
+@use '/src/styles/theme';
+@use '/src/styles/variables';
+@use '/src/styles/mixins';
 
 .container {
   display: flex;
   align-items: center;
 
   &:nth-of-type(2) {
-    margin-top: -105px;
+    margin-top: 40px;
+
+    @include mixins.media-to-md {
+      margin-top: 0;
+    }
   }
 
   &:nth-of-type(3) {
-    margin-top: -105px;
+    margin-top: -30px;
+
+    @include mixins.media-to-md {
+      margin-top: 0;
+    }
   }
-}
 
-.twoBirds {
-  width: 525px;
-}
-
-.womanWithPlant {
-  height: 530px;
-  margin-left: -40px;
+  @include mixins.media-to-sm {
+    justify-content: center;
+    flex-flow: column-reverse;
+  }
 }
 
 .bigTree {
@@ -32,6 +37,11 @@
   right: 87px;
   top: 100px;
   width: 70px;
+
+  @include mixins.media-to-sm {
+    width: 45px;
+    top: 317px;
+  }
 }
 
 .lines {
@@ -39,6 +49,11 @@
   right: 0;
   top: -10px;
   width: 145px;
+
+  @include mixins.media-to-sm {
+    width: 100px;
+    top: 200px;
+  }
 }
 
 .firstContainerText {
@@ -47,13 +62,32 @@
   margin-left: 5em;
   width: 50%;
   margin-top: 28px;
+
+  @include mixins.media-to-md {
+    display: flex;
+    flex-direction: column;
+    margin-left: 6vw;
+    width: 50%;
+    margin-top: 2vw;
+  }
+
+  @include mixins.media-to-sm {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
 .secondContainerText {
   display: flex;
   flex-direction: column;
   width: 47%;
-  margin-top: -20px;
+  margin-right: 5em;
+
+  @include mixins.media-to-sm {
+    margin: 0;
+    width: 100%;
+    order: 1;
+  }
 }
 
 .thirdContainerText {
@@ -62,6 +96,12 @@
   margin-left: 5em;
   width: 50%;
   margin-top: 98px;
+
+  @include mixins.media-to-sm {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0;
+  }
 }
 
 .leafContainer {
@@ -72,7 +112,20 @@
 
 .imageBlock {
   position: relative;
-  width: 439px;
+
+  @include mixins.media-to-md {
+    width: 40%;
+    margin: calc(12px + 3vw) 0;
+  }
+
+  @include mixins.media-to-sm {
+    width: 60%;
+  }
+
+  @include mixins.media-to-xs {
+    margin-top: calc(28px + 3vw);
+    width: 80%;
+  }
 }
 
 .widthAuto {
@@ -97,15 +150,31 @@
   cursor: pointer;
   font-size: 20px;
   z-index: variables.$higher-order;
+
+  @include mixins.media-to-sm {
+    font-size: calc(8px + 2vw);
+  }
+
+  @include mixins.media-to-xs {
+    text-align: center;
+    font-size: calc(10px + 2vw);
+  }
 }
 
 .title {
-  height: 40px;
   font-family: Moranga-Medium, sans-serif;
   font-size: 28px;
   font-weight: 500;
   line-height: 1.43;
   color: theme.$grey-800;
+
+  @include mixins.media-to-sm {
+    font-size: calc(14px + 2vw);
+  }
+
+  @include mixins.media-to-xs {
+    text-align: center;
+  }
 }
 
 .description {
@@ -116,6 +185,16 @@
   white-space: normal;
   line-height: 1.4;
   color: theme.$grey-800;
+
+  @include mixins.media-to-sm {
+    font-size: calc(8px + 2vw);
+    margin: 1vw 0;
+  }
+
+  @include mixins.media-to-xs {
+    font-size: calc(10px + 2vw);
+    text-align: justify;
+  }
 }
 
 .sectionThreeDescription {
@@ -130,6 +209,16 @@
   font-weight: 500;
   font-size: 20px;
   margin-top: 4px;
+
+  @include mixins.media-to-sm {
+    padding-bottom: 0;
+    font-size: calc(8px + 2vw);
+  }
+
+  @include mixins.media-to-xs {
+    text-align: center;
+    font-size: calc(10px + 2vw);
+  }
 }
 
 .plantingDots {

@@ -1,1 +1,20 @@
 @use 'global';
+@use 'src/styles/mixins';
+
+.container {
+  padding: 0;
+  width: 100%;
+  max-width: none;
+
+  @include mixins.media-from-lg {
+    max-width: 1216px;
+  }
+
+  @include mixins.media-to-lg {
+    padding: 0 30px;
+  }
+
+  @include mixins.media-to-sm {
+    padding: 0 20px;
+  }
+}

@@ -1,5 +1,6 @@
 @use '/src/styles/theme';
 @use '/src/styles/variables';
+@use '/src/styles/mixins';
 
 .backgroundContainer {
   min-height: 100vh;
@@ -21,17 +22,44 @@
   width: 632px;
   height: 712px;
   object-fit: contain;
+  max-height: 540px;
+
+  @include mixins.media-to-md {
+    width: 100%;
+    max-height: 430px;
+    margin-top: 80px;
+    height: auto;
+  }
+
+  @include mixins.media-to-xs {
+    max-height: 300px;
+  }
 }
 
 .plantingFormWrapper {
   display: flex;
   justify-content: space-between;
   margin: auto;
+  padding-top: 150px;
+
+  @include mixins.media-to-md {
+    flex-direction: column;
+    padding-top: 44px;
+  }
 }
 
 .plantingForm {
   padding-top: 32px;
   padding-left: 10px;
+
+  @include mixins.media-to-md {
+    padding-top: 100px;
+    padding-left: 0;
+  }
+
+  @include mixins.media-to-sm {
+    padding-top: 32px;
+  }
 }
 
 .formHeader {

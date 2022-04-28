@@ -1,18 +1,30 @@
 @use '/src/styles/theme';
 @use '/src/styles/variables';
+@use '/src/styles/mixins';
 
 .headerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2em 88px 1em;
+  padding-top: 1.2em;
+  padding-bottom: 1em;
   position: absolute;
   width: 100%;
-  max-width: 1392px;
   top: 0;
   left: 0;
   right: 0;
   margin: auto;
+
+  @include mixins.media-to-sm {
+    position: relative;
+    background: theme.$grays-50;
+  }
+}
+
+.wallet {
+  @include mixins.media-to-sm {
+    margin-right: 14px;
+  }
 }
 
 .wrongModalContainer {

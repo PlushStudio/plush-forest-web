@@ -1,12 +1,13 @@
 import React from 'react'
 import s from '@/components/Header/Header.module.scss'
 import { HeaderContent } from './HeaderContent'
-import { Wallet, Balance, Pipe } from '../../../lib'
+import { Wallet, Balance, Pipe, KebabDropdown } from '@plushfamily/ui-components'
 import { WalletProps } from '../../../lib/components/Wallet/Wallet'
-import KebabDrowdown from '@/components/KebabDropdown/KebabDrowdown'
 import infoIcon from '@/assets/images/outlinedIcons/outlined-info.svg'
 import cakeIcon from '@/assets/images/outlinedIcons/outlined-cupcake.svg'
 import { plushDiscordUrl } from '@/constants'
+import classNames from 'classnames'
+import { useMediaQuery } from 'react-responsive'
 
 interface headerProps {
   walletProps: WalletProps,
@@ -25,6 +26,10 @@ export const Header = ({
 }: headerProps) => {
   const PLUSH_WEBSITE_URL = window.config.PLUSH_WEBSITE_URL ?? import.meta.env.VITE_PLUSH_WEBSITE_URL
 
+  const isMobile = useMediaQuery({
+    query: '(max-width: 768px)'
+  })
+
   const menuList = [
     {
       title: 'About',
@@ -38,11 +43,18 @@ export const Header = ({
     }
   ]
 
+  const walletInstall = () => {
+    // TODO: create wallet install function
+  }
+
   return (
-    <div className={s.headerContainer}>
+    <div className={classNames('container', s.headerContainer)}>
       <HeaderContent />
       <div className={s.right}>
         <Wallet
+          className={s.wallet}
+          size={isMobile ? 'compact' : 'normal'}
+          install={walletInstall}
           state={state}
           address={address}
           name={name}
@@ -54,7 +66,9 @@ export const Header = ({
           register={register}
           switchAccount={switchAccount}
           openExplorer={openExplorer}
-          modalStyle={{ right: '0px', top: '60px' }} />
+          modalStyle={isMobile
+            ? { position: 'fixed', left: '50%', top: '200px', transform: 'translate(-50%, -50%)' }
+            : { position: 'fixed', right: '50px', top: '80px' } } />
         <Pipe />
         {
           currency.length > 0
@@ -70,7 +84,7 @@ export const Header = ({
             : null
         }
         <div className={s.kebabContainer}>
-          <KebabDrowdown menuList={menuList} />
+          <KebabDropdown menuStyle={{ top: '50px', right: '0' }} items={menuList} />
         </div>
       </div>
     </div>

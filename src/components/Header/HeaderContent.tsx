@@ -22,7 +22,7 @@ export const HeaderContent: () => JSX.Element = () => {
       </Link>
       <div className={!params.id ? s.contentBlock : s.invisible}>
         <span className={s.logoTitle}>{t('Header.logoTitle')}</span>
-        <img src={TaglineIcon} alt="forest tagline" />
+        <img className={s.tagline} src={TaglineIcon} alt="forest tagline" />
       </div>
     </div>
   )

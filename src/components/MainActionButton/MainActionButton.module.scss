@@ -1,13 +1,17 @@
-@use '../../styles/theme';
+@use 'src/styles/theme';
+@use 'src/styles/mixins';
 
 .container {
   user-select: none;
-  display: flex;
-  margin: 33px 62px 0 0;
+  margin-top: 32px;
   border-radius: 160px;
 
+  @include mixins.media-to-md {
+    margin-top: 18px;
+  }
+
   &.small {
-    margin: 20px 62px 0 0;
+    margin-top: 20px;
 
     .btnPrimary {
       font-size: 18px;
@@ -19,6 +23,11 @@
       }
     }
   }
+
+  @include mixins.media-to-xs {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .spinner {
@@ -28,17 +37,15 @@
 .image {
   margin: 0 8px 0 12px;
   width: 24px;
+
+  @include mixins.media-to-lg {
+    width: 16px;
+  }
 }
 
 .btnPrimary {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
   color: white;
-  padding: 0 22px 0 30px;
-  width: fit-content;
-  height: 64px;
+  padding: 19.5px 26px;
   font-family: AvenirNextRoundedPro-Demi, serif;
   border-radius: 160px;
   box-shadow:
@@ -60,5 +67,9 @@
     box-shadow: 0 1px 4px 0 rgb(0 0 0 / 6%), 0 1px 2px 0 rgb(0 0 0 / 4%), inset 0 -1px 0 0 #00936900;
     background-image: linear-gradient(#3ecc7887 0%, #03af8678 100%);
     cursor: default;
+  }
+
+  @include mixins.media-to-md {
+    padding: calc(12px + 0.4vw) calc(18px + 0.4vw);
   }
 }

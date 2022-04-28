@@ -96,7 +96,7 @@ export const PlantingLogic = () => {
           clearInterval(updateBuyAllowance)
           await walletStore?.plushCoinWalletsContractManager.deposit(user.address, currentTreePrice)
           await checkTokenAvailability()
-        } catch (e) {
+        } catch (e: any) {
           clearInterval(updateBuyAllowance)
           setIsPlanting(false)
           setIsPlantBtnLoading(false)
@@ -136,7 +136,6 @@ export const PlantingLogic = () => {
                     await walletStore?.plushContractManager.getApprove(currentTreePrice)
                     await startAllowanceLoop()
                   } catch (e) {
-                    console.log(e.message)
                     setIsPlanting(false)
                     setIsPlantBtnLoading(false)
                   }

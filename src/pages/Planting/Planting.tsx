@@ -60,7 +60,7 @@ export const Planting = () => {
   return (
     isReady
       ? <div className={s.backgroundContainer}>
-        <div className={s.container}>
+        <div className={'container'}>
           {isPlanting
             ? (
               <PlantingModal step={plantingStep} />
