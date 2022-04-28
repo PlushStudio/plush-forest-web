@@ -133,7 +133,7 @@
   width: 64px;
   height: 64px;
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     width: 46px;
     height: 46px;
   }

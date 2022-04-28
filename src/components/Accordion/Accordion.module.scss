@@ -10,7 +10,7 @@
 .tabAdditionalBlockContainer {
   padding: 42px 0 42px 22px;
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     padding: 0;
   }
 }
@@ -26,7 +26,7 @@
   align-items: center;
   margin-bottom: 16px;
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     flex-direction: column;
     margin-bottom: 0;
   }
@@ -42,7 +42,7 @@
   color: theme.$grey-800;
   text-align: center;
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     margin: 0;
     font-size: calc(8px + 2vw);
     height: auto;
@@ -55,7 +55,7 @@
 }
 
 .abstractIcon {
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     max-width: 24vw;
     margin: 20px 0;
   }
@@ -66,7 +66,7 @@
   line-height: 1.4;
   padding-top: 10px;
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     font-size: calc(10px + 2vw);
     text-align: justify;
   }

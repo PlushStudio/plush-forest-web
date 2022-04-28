@@ -33,7 +33,7 @@
     right: 120px;
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     width: 201px;
     height: 216px;
     right: 0;

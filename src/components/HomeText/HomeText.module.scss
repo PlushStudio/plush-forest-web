@@ -11,7 +11,7 @@
     max-width: none;
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     max-width: 348px;
     text-align: center;
     margin: auto;
@@ -30,7 +30,7 @@
     font-size: calc(14px + 2vw);
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     font-size: calc(16px + 2vw);
   }
 }

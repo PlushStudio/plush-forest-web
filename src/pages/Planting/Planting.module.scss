@@ -31,7 +31,7 @@
     height: auto;
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     max-height: 300px;
   }
 }

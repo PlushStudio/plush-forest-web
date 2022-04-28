@@ -34,7 +34,7 @@
 .getStartedContentContainer {
   position: relative;
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     margin-top: 0;
   }
 }

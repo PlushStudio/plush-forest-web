@@ -122,7 +122,7 @@
     width: 60%;
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     margin-top: calc(28px + 3vw);
     width: 80%;
   }
@@ -155,7 +155,7 @@
     font-size: calc(8px + 2vw);
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     text-align: center;
     font-size: calc(10px + 2vw);
   }
@@ -172,7 +172,7 @@
     font-size: calc(14px + 2vw);
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     text-align: center;
   }
 }
@@ -191,7 +191,7 @@
     margin: 1vw 0;
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     font-size: calc(10px + 2vw);
     text-align: justify;
   }
@@ -215,7 +215,7 @@
     font-size: calc(8px + 2vw);
   }
 
-  @include mixins.media-to-xl {
+  @include mixins.media-to-xs {
     text-align: center;
     font-size: calc(10px + 2vw);
   }

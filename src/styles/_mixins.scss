@@ -4,10 +4,6 @@
   @media (max-width: map-get(variables.$grid-breakpoints, 'xs')) { @content; }
 }
 
-@mixin media-to-xl {
-  @media (max-width: map-get(variables.$grid-breakpoints, 'xl')) { @content; }
-}
-
 @mixin media-to-sm {
   @media (max-width: map-get(variables.$grid-breakpoints, 'sm')) { @content; }
 }
