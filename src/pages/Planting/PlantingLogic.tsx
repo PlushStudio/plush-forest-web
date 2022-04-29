@@ -19,7 +19,7 @@ export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 export const PlantingLogic = () => {
   const input = useRef<HTMLInputElement>(null)
   const [isVisited, setIsVisited] = useState<boolean>(false)
-  const [isPlanting, setIsPlanting] = useState<boolean>(true)
+  const [isPlanting, setIsPlanting] = useState<boolean>(false)
   const [isPlantBtnLoading, setIsPlantBtnLoading] = useState<boolean>(false)
   const [currentTreePrice, setCurrentTreePrice] = useState<string>('')
   const [plantingStep, setPlantingStep] = useState<number>(0)
