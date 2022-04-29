@@ -3,6 +3,7 @@
 @use '/src/styles/mixins';
 
 .backgroundContainer {
+  display: flex;
   min-height: 100vh;
   background: theme.$grays-50 url('../../assets/images/sky/sky@2x.png') no-repeat;
   background-size: cover;

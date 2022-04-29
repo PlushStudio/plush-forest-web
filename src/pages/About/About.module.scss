@@ -13,10 +13,10 @@
 }
 
 .homeFeatureContainer {
-  padding-top: 11.4em;
+  padding-top: calc(12vh + 40px);
   margin: auto;
 
-  @include mixins.media-to-lg {
+  @include mixins.media-to-md {
     padding-top: 10vw;
   }
 }
@@ -24,6 +24,10 @@
 .homeFeatureContainerHeight {
   padding-top: 15.4em;
   margin: auto;
+
+  @include mixins.media-to-md {
+    padding-top: 10vw;
+  }
 }
 
 .footerContainer {
