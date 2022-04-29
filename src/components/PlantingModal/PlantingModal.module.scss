@@ -1,9 +1,9 @@
 @use '/src/styles/theme';
 @use '/src/styles/variables';
+@use '/src/styles/mixins';
 
 .modalContainer {
   max-width: 592px;
-  height: 448px;
   padding: 38px 48px 34px;
   border-radius: 24px;
   background: white;
@@ -13,51 +13,70 @@
     0 16px 16px -4px rgba(0, 0, 0, 3%),
     0 32px 32px -8px rgba(0, 0, 0, 4%),
     0 64px 64px -12px rgba(0, 0, 0, 3%);
-  margin: 60px auto auto;
   z-index: variables.$higher-order;
+  margin: 20% auto auto;
+
+  @include mixins.media-to-xs {
+    padding: 20px;
+  }
 }
 
 .modalTitle {
   max-width: 424px;
-  height: 36px;
-  margin: 0 36px 12px;
+  margin: 12px auto;
   font-family: Moranga-Medium, sans-serif;
   font-size: 24px;
   line-height: 1.5;
   text-align: center;
   color: theme.$grey-800;
+
+  @include mixins.media-to-xs {
+    margin: 12px 0;
+    font-size: calc(16px + 2vw);
+  }
 }
 
 .modalSecondText {
   max-width: 424px;
-  height: 24px;
-  margin: 12px 36px 26px;
+  margin: auto auto 26px;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-size: 18px;
   line-height: 1.33;
   text-align: center;
   color: theme.$grays-500;
+
+  @include mixins.media-to-xs {
+    margin: 12px 0;
+    font-size: calc(8px + 2vw);
+  }
 }
 
 .modalFooterTitle {
-  height: 30px;
   margin: 34px auto auto;
   font-family: Moranga-Medium, sans-serif;
   font-size: 20px;
   line-height: 1.5;
   text-align: center;
   color: theme.$grey-800;
+
+  @include mixins.media-to-xs {
+    margin: 12px auto auto;
+    font-size: calc(16px + 2vw);
+  }
 }
 
 .modalFooterText {
   max-width: 496px;
-  height: 120px;
   margin: 6px 0 0;
   font-family: AvenirNextRoundedPro-Reg, sans-serif;
   font-size: 18px;
   line-height: 1.33;
   text-align: center;
   color: theme.$grey-800;
+
+  @include mixins.media-to-xs {
+    font-size: calc(8px + 2vw);
+  }
 }
 
 .modalTitleStep {
