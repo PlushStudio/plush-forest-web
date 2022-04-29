@@ -40,13 +40,13 @@
   font-size: 18px;
   line-height: 1.33;
   color: theme.$grey-800;
-  text-align: center;
 
   @include mixins.media-to-xs {
     margin: 0;
     font-size: calc(8px + 2vw);
     height: auto;
     width: 100%;
+    text-align: center;
   }
 }
 

@@ -1,6 +1,6 @@
 <svg width="56" height="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
-        <filter x="-3.8%" y="-5.4%" width="107.5%" height="110.9%" filterUnits="objectBoundingBox" id="c">
+        <filter x="-3.8%" y="-5.4%" width="100%" height="100%" filterUnits="objectBoundingBox" id="c">
             <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"/>
             <feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"/>
             <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1"
