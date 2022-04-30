@@ -24,7 +24,7 @@ export const AboutPage = () => {
   const history = useHistory()
   const { t } = useTranslation()
   const walletStore = useStore($walletStore)
-  const { treesPrice } = useStore($forest)
+  const { treesPrice, treesCount } = useStore($forest)
   const [isReady, setIsReady] = useState<boolean | undefined>(undefined)
 
   const [ref, setRef] = useState<MutableRefObject<null>>()
@@ -36,7 +36,9 @@ export const AboutPage = () => {
 
   useEffect(() => {
     if (walletStore) {
-      getForestDataFx(walletStore)
+      if (treesPrice.length === 0 || treesCount.length === 0) {
+        getForestDataFx(walletStore)
+      }
     }
   }, [walletStore])
 
