@@ -53,7 +53,9 @@ export const Planting = () => {
 
   useEffect(() => {
     if (walletStore) {
-      getForestDataFx(walletStore)
+      if (treesPrice.length === 0 || treesCount.length === 0) {
+        getForestDataFx(walletStore)
+      }
     }
   }, [walletStore])
 

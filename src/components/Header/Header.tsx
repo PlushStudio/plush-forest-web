@@ -67,8 +67,8 @@ export const Header = ({
           switchAccount={switchAccount}
           openExplorer={openExplorer}
           modalStyle={isMobile
-            ? { position: 'fixed', left: '50%', top: '200px', transform: 'translate(-50%, -50%)' }
-            : { position: 'fixed', right: '50px', top: '80px' } } />
+            ? { position: 'fixed', left: '50%', top: '200px', transform: 'translate(-50%, -50%)', width: '94%' }
+            : { position: 'absolute', right: '-120', top: '54px' } } />
         <Pipe />
         {
           currency.length > 0
@@ -84,7 +84,7 @@ export const Header = ({
             : null
         }
         <div className={s.kebabContainer}>
-          <KebabDropdown menuStyle={{ top: '50px', right: '0' }} items={menuList} />
+          <KebabDropdown menuStyle={{ top: '46px', right: '0' }} items={menuList} />
         </div>
       </div>
     </div>
