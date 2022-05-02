@@ -18,28 +18,26 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
   const imageSrc = treeIcons[treeNames.indexOf(treeData.treeType.toUpperCase())]
 
   return (
-    <div className={s.info}>
-      <div>
-        <div className={s.infoTitle}>
-          <p>{treeData.name}</p>
-          <span>{`${ucFirst(treeData.treeType)} - the Amazon’s tree of life.`}</span>
-        </div>
-        <div className={s.infoStats}>
-          <div className={s.infoStatsContainerOne}>
+    <div className={s.treeInfoContainer}>
+      <div className={s.mainInfoContainer}>
+        <p className={s.mainInfoTitle}>{treeData.name}</p>
+        <span className={s.mainInfoDescription}>{`${ucFirst(treeData.treeType)} - the Amazon’s tree of life.`}</span>
+        <div className={s.statsContainer}>
+          <div className={s.textStatsBlock}>
             {treeData.info.map((item: any, index: number) =>
-              <div key={item + index} className={s.infoStatsContainerOneBlock}>
-                <p>{item.title}</p>
-                <span>{item.desc}</span>
+              <div key={item + index} className={s.containerOneBlock}>
+                <p className={s.textStatsBlockTitle}>{item.title}</p>
+                <span className={s.textStatsBlockDescription}>{item.desc}</span>
               </div>
             )}
           </div>
-          <div className={s.infoStatsContainerTwo}>
+          <div className={s.widgetsContainer}>
             {treeData.subInfo.map((item: any, index: number) =>
-              <div key={item + index} className={s.infoStatsContainerTwoBlock}>
+              <div key={item + index} className={s.widgetsContentBlock}>
                 <img src={item.img} alt={'sub info'} />
-                <div>
-                  <p>{item.title}</p>
-                  <span>{item.desc}</span>
+                <div className={s.widgetsContent}>
+                  <p className={s.widgetsContentTitle}>{item.title}</p>
+                  <span className={s.widgetsContentDescription}>{item.desc}</span>
                 </div>
               </div>
             )}

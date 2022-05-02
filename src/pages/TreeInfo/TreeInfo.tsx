@@ -71,7 +71,7 @@ export const TreeInfoPage: React.FC = () => {
 
   return (
     <div className={backgroundStyles}>
-      <div className={s.container}>
+      <div className={classNames(s.treeInfoContainer, 'container')}>
         {userHasToken !== false
           ? <Row>
             <Col>
