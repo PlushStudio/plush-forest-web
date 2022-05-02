@@ -68,7 +68,7 @@ export const Header = ({
           openExplorer={openExplorer}
           modalStyle={isMobile
             ? { position: 'fixed', left: '50%', top: '200px', transform: 'translate(-50%, -50%)', width: '94%' }
-            : { position: 'absolute', right: '-120', top: '54px' } } />
+            : { position: 'absolute', right: '-120px', top: '54px' } } />
         <Pipe />
         {
           currency.length > 0

@@ -1,6 +1,7 @@
 @use '/src/styles/theme';
+@use '/src/styles/mixins';
 
-.info {
+.treeInfoContainer {
   max-width: 1280px;
   width: 100%;
   display: flex;
@@ -8,112 +9,125 @@
   min-width: 640px;
   min-height: 640px;
   max-height: 1000px;
-  padding: 34px 124px 48px 44px;
+  padding: 40px;
   margin: 0 0 8px;
   border-radius: 32px;
   background-image: linear-gradient(179deg, #fff 37%, rgba(255, 255, 255, 0%) 98%);
 
-  &Title {
-    p {
-      font-family: Moranga-Medium, sans-serif;
-      font-size: 32px;
-      font-weight: 500;
-      line-height: 1.38;
-      color: theme.$grey-800;
-      margin-bottom: 2px;
-    }
-
-    span {
-      font-family: AvenirNextRoundedPro-Med, sans-serif;
-      font-size: 18px;
-      line-height: 1.33;
-      letter-spacing: normal;
-      color: theme.$grey-600;
-    }
+  @include mixins.media-to-md {
+    min-width: auto;
+    min-height: auto;
+    padding: calc(10px + 2vw);
   }
+}
 
-  &Stats {
-    padding-top: 28px;
+.mainInfoContainer {
+  width: 100%;
 
-    &Container {
-      &One {
-        display: flex;
-        justify-content: space-between;
-
-        &Block {
-          max-width: 140px;
-          width: 100%;
-
-          p {
-            font-family: AvenirNextRoundedPro-Med, sans-serif;
-            font-size: 16px;
-            line-height: 1.5;
-            letter-spacing: -0.2px;
-            color: theme.$grey-600;
-            padding-top: 6px;
-            margin-bottom: 8px;
-          }
-
-          span {
-            font-family: AvenirNextRoundedPro-Demi, sans-serif;
-            font-size: 18px;
-            line-height: 1.33;
-            color: theme.$grey-800;
-          }
-        }
-      }
-
-      &Two {
-        padding-top: 40px;
-
-        &Block {
-          display: flex;
-          align-items: center;
-
-          div {
-            padding-left: 20px;
-
-            p {
-              font-family: AvenirNextRoundedPro-Demi, sans-serif;
-              font-size: 18px;
-              line-height: 1.33;
-              letter-spacing: normal;
-              color: theme.$grey-800;
-              margin-bottom: 2px;
-            }
-
-            span {
-              font-family: AvenirNextRoundedPro-Med, sans-serif;
-              font-size: 16px;
-              font-weight: normal;
-              font-stretch: normal;
-              font-style: normal;
-              line-height: 1.5;
-              letter-spacing: -0.2px;
-              color: theme.$grey-600;
-            }
-          }
-        }
-
-        &Block:not(:first-child) {
-          padding-top: 10px;
-        }
-
-        &Block:not(:last-child) {
-          border-bottom: 2px solid #f5f5f6;
-          padding-bottom: 12px;
-        }
-      }
-    }
+  @include mixins.media-to-md {
+    width: 50%;
   }
+}
+
+.mainInfoTitle {
+  font-family: Moranga-Medium, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.38;
+  color: theme.$grey-800;
+  margin-bottom: 2px;
+}
+
+.mainInfoDescription {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: theme.$grey-600;
+}
+
+.statsContainer {
+  padding-top: 28px;
+}
+
+.textStatsBlock {
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerOneBlock {
+  width: 100%;
+}
+
+.textStatsBlockDescription {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+  color: theme.$grey-600;
+  padding-top: 6px;
+  margin-bottom: 8px;
+}
+
+.textStatsBlockTitle {
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  color: theme.$grey-800;
+}
+
+.widgetsContainer {
+  padding-top: 40px;
+}
+
+.widgetsContentBlock {
+  display: flex;
+  align-items: center;
+}
+
+.widgetsContentBlock:not(:first-child) {
+  padding-top: 10px;
+}
+
+.widgetsContentBlock:not(:last-child) {
+  border-bottom: 2px solid #f5f5f6;
+  padding-bottom: 12px;
+}
+
+.widgetsContent {
+  padding-left: 20px;
+}
+
+.widgetsContentTitle {
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: theme.$grey-800;
+  margin-bottom: 2px;
+}
+
+.widgetsContentDescription {
+  font-family: AvenirNextRoundedPro-Med, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+  color: theme.$grey-600;
 }
 
 .treeInRound {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+
+  @include mixins.media-to-md {
+    align-items: center;
+    width: 50%;
+  }
 }
 
 .treeImage {
   width: 100%;
-  max-width: 550px;
 }
