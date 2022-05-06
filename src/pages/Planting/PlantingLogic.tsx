@@ -13,7 +13,6 @@ import { $walletStore } from '@/store/wallet'
 import { $forest } from '@/store/forest'
 import { $user } from '@/store/user'
 import { $app } from '@/store/app'
-import { stringToBytes32 } from '@/utils/utils'
 
 export const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
@@ -71,7 +70,7 @@ export const PlantingLogic = () => {
   const checkTokenAvailability = async () => {
     // empty message for Pilot
     const treeMintingResult = await walletStore?.treeContractManager.mintTree(user.address,
-      stringToBytes32(selectedTreeType),
+      selectedTreeType,
       nameFrom,
       user.childs[0].name,
       '')

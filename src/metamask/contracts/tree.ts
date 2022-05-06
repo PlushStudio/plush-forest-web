@@ -6,6 +6,7 @@ import {
   PlushGetTree as PlushGetTreeContract,
   PlushGetTree__factory as PlushGetTreeFactory
 } from '@plushstudio/plush-studio-contracts'
+import { stringToBytes32 } from '@/utils/utils'
 
 const address = window.config.TREE_CONTRACT_ADDRESS ?? import.meta.env.VITE_TREE_CONTRACT_ADDRESS
 
@@ -18,7 +19,8 @@ class TreeContractManager {
 
   mintTree = async (address: string, treeType: string, from: string, name: string, message = 'empty message') => {
     try {
-      return await this.contract.buyTree(treeType, address, { gasLimit: 500000 }).then((transferResult: any) => {
+      const treeTypeBytes32 = stringToBytes32(treeType)
+      return await this.contract.buyTree(treeTypeBytes32, address, { gasLimit: 500000 }).then((transferResult: any) => {
         return axios.post(`${api.url}/forest/transactions/new`,
           {
             hash: transferResult.hash, tree: treeType, name: name, from, message
