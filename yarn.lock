@@ -726,10 +726,10 @@
   resolved "https://registry.yarnpkg.com/@plushfamily/ui-components/-/ui-components-0.0.16.tgz#650056df5abbef05e61c7222db7793e77312548b"
   integrity sha512-ZTzJqIM17oD0CeIgpjNX1TgNHDhVHC6MsIPwf6m2rSiq7f2MbF8msbrhKicHGV/oO2DxziO9YQI24/YQSSfqCw==
 
-"@plushstudio/plush-studio-contracts@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-0.6.0.tgz#22666ee8ba469f51b165b77a794c97e443562cf4"
-  integrity sha512-g7hyulk2I2eaJHjbcS/TkGbhoVl+U4dhnAhVyh9T076xEOpj/1dLbgBFp+03Ce4S8HO2zPPtTSH2LpxyUcjDcg==
+"@plushstudio/plush-studio-contracts@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-0.6.1.tgz#650a7bcccd068515b977be80fef0e9e4cef8209b"
+  integrity sha512-Fqe0V73OWK1MGreHGFICn0yCAhPNqvndYhpjFZds3XAoOzU2jWlTWyDLmHkmrdGAIg2Y62wPbpvQkr6uPXL4bA==
   dependencies:
     "@openzeppelin/contracts" "^4.6.0"
     "@openzeppelin/contracts-upgradeable" "^4.6.0"

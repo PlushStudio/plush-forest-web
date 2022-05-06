@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@plushfamily/plush-protocol-contracts": "^2.9.0",
-    "@plushstudio/plush-studio-contracts": "^0.6.0",
+    "@plushstudio/plush-studio-contracts": "^0.6.1",
     "@types/history": "^4.7.9",
     "@types/node": "^16.0.1",
     "@types/react": "^17.0.0",
