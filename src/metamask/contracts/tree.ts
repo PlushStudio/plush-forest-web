@@ -18,7 +18,7 @@ class TreeContractManager {
 
   mintTree = async (address: string, treeType: string, from: string, name: string, message = 'empty message') => {
     try {
-      return await this.contract.buyTree(address, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
+      return await this.contract.buyTree(treeType, address, { gasLimit: 500000 }).then((transferResult: any) => {
         return axios.post(`${api.url}/forest/transactions/new`,
           {
             hash: transferResult.hash, tree: treeType, name: name, from, message
