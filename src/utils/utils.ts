@@ -1,3 +1,5 @@
+import { ethers } from 'ethers'
+
 export function ucFirst (str: string) {
   if (!str) return str
 
@@ -14,4 +16,8 @@ export const getLinkNameByURL = (URL: string) => {
   if (URL) {
     return URL.split('https://')[1]
   }
+}
+
+export const stringToBytes32 = (treeName: string) => {
+  return ethers.utils.formatBytes32String(treeName)
 }

@@ -16,9 +16,9 @@ class TreeContractManager {
     this.contract = PlushGetTreeFactory.connect(address, signer)
   }
 
-  mintTree = async (address: string, treeType: string, amount: string, from: string, name: string, message = 'empty message') => {
+  mintTree = async (address: string, treeType: string, from: string, name: string, message = 'empty message') => {
     try {
-      return await this.contract.mint(address, amount, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
+      return await this.contract.buyTree(address, treeType, { gasLimit: 500000 }).then((transferResult: any) => {
         return axios.post(`${api.url}/forest/transactions/new`,
           {
             hash: transferResult.hash, tree: treeType, name: name, from, message
