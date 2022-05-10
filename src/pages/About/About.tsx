@@ -24,7 +24,7 @@ export const AboutPage = () => {
   const history = useHistory()
   const { t } = useTranslation()
   const walletStore = useStore($walletStore)
-  const { treesPrice, treesCount } = useStore($forest)
+  const { treesInfo } = useStore($forest)
   const [isReady, setIsReady] = useState<boolean | undefined>(undefined)
 
   const [ref, setRef] = useState<MutableRefObject<null>>()
@@ -36,7 +36,7 @@ export const AboutPage = () => {
 
   useEffect(() => {
     if (walletStore) {
-      if (treesPrice.length === 0 || treesCount.length === 0) {
+      if (treesInfo.length === 0) {
         getForestDataFx(walletStore)
       }
     }
@@ -44,11 +44,11 @@ export const AboutPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      setIsReady(treesPrice.length > 0)
+      setIsReady(treesInfo.length > 0)
     } else {
       setIsReady(true)
     }
-  }, [treesPrice, isLoggedIn])
+  }, [treesInfo, isLoggedIn])
 
   useEffect(() => {
     trackEvent(Category.Info, MatomoEvent.PageVisited, 'About')

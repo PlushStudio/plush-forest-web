@@ -32,6 +32,7 @@ export const TreeInfoPage: React.FC = () => {
           `${api.url}/forest/tokens/token/${params.id}`,
           { withCredentials: true }
         )
+
         setTreeData({
           ...treeData,
           name: response.data.name.split('tree')[0],
@@ -39,7 +40,7 @@ export const TreeInfoPage: React.FC = () => {
           subInfo: [
             {
               title: 'Location',
-              desc: response.data.attributes[4].value,
+              desc: response.data.attributes[3].value,
               img: locationImg
             },
             { title: 'Tree height', desc: '5.2 Inches', img: heightImg }

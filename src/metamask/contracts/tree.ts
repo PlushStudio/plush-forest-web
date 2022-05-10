@@ -53,6 +53,19 @@ class TreeContractManager {
       throw Error(e.message)
     }
   }
+
+  getTreeInfo = async (treeType: string) => {
+    try {
+      const treeInfo = await this.contract.trees(treeType)
+      return {
+        treeType: treeInfo.treeType,
+        price: Number(ethers.utils.formatEther(treeInfo.price)),
+        count: Number(treeInfo.count)
+      }
+    } catch (e: any) {
+      throw Error(e.message)
+    }
+  }
 }
 
 export default TreeContractManager

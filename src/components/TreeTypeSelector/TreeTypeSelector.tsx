@@ -15,12 +15,13 @@ import { $forest } from '@/store/forest'
 import { treeNames } from '@/pages/Planting/PlantingLogic'
 import { setActiveTreeEvt } from '@/store/app'
 import { useTranslation } from 'react-i18next'
+import { TreeInfo } from '@/types/tree/TreeInfo'
 
 const selectorTreePreviews = [selectorShihuahuacoImg, selectorCacaoImg, selectorGuabaImg, selectorCaobaImg]
 
 export const TreeTypeSelector = () => {
   const [activeTreeId, setActiveTreeId] = useState(0)
-  const { treesCount } = useStore($forest)
+  const { treesInfo } = useStore($forest)
   const { t } = useTranslation()
 
   interface treeTooltip {
@@ -87,8 +88,8 @@ export const TreeTypeSelector = () => {
     <div className={s.container}>
       <div className={s.header}>{t('HomePage.TreePickerTitle')}</div>
       <div className={s.circlesContainer}>
-        {treesCount.map((count: number, index: number) =>
-          count !== 0 && <OverlayTrigger
+        {treesInfo.map((treeInfo: TreeInfo, index: number) =>
+          treeInfo.count !== 0 && <OverlayTrigger
               key={index}
               trigger={['hover', 'focus']}
               placement='top'

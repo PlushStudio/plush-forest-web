@@ -38,7 +38,7 @@ export const Planting = () => {
   } = PlantingLogic()
 
   const { childs } = useStore($user)
-  const { treesPrice, treesCount } = useStore($forest)
+  const { treesInfo } = useStore($forest)
   const walletStore = useStore($walletStore)
   const { currency } = useStore($app)
   const { t } = useTranslation()
@@ -46,14 +46,14 @@ export const Planting = () => {
   const [isReady, setIsReady] = useState<boolean>(false)
 
   useEffect(() => {
-    if (treesPrice.length > 0 && treesCount.length > 0) {
+    if (treesInfo.length > 0) {
       setIsReady(true)
     }
-  }, [treesPrice, treesCount])
+  }, [treesInfo])
 
   useEffect(() => {
     if (walletStore) {
-      if (treesPrice.length === 0 || treesCount.length === 0) {
+      if (treesInfo.length === 0) {
         getForestDataFx(walletStore)
       }
     }
