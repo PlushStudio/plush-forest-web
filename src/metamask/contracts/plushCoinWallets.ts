@@ -17,7 +17,7 @@ class PlushCoinWalletsContractManager {
   }
 
   getBalance = async (address: string): Promise<number> => {
-    const balanceArr: [BigNumber] = await this.contract.functions.getWalletAmount(address)
+    const balanceArr: [BigNumber] = await this.contract.functions.getAccountBalance(address)
     return parseInt(ethers.utils.formatUnits(balanceArr[0], 18))
   }
 
