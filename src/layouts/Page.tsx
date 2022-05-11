@@ -47,7 +47,6 @@ export const Page = (props: Props) => {
 
   useEffect(() => {
     if (props.withConnection) {
-      setDataFetched(false)
       checkUserForestToken()
     }
   }, [location.pathname])
@@ -105,11 +104,18 @@ export const Page = (props: Props) => {
   }
 
   const checkUserForestToken = async () => {
-    const myTokens: UserTokens = await api.user.users.tokens.request()
-    if (myTokens.tokens.length > 0) {
-      history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
+    setDataFetched(false)
+    try {
+      const myTokens: UserTokens = await api.user.users.tokens.request()
+      if (myTokens.tokens.length > 0) {
+        history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
+      }
+    } catch (e: any) {
+      console.error(e.message)
+    } finally {
+      setDataFetched(true)
+      setForestTokenChecked(true)
     }
-    setForestTokenChecked(true)
   }
 
   const fetchData = async (isMounted: boolean) => {

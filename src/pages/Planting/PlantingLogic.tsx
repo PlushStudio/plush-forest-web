@@ -29,7 +29,7 @@ export const PlantingLogic = () => {
   const history = useHistory()
 
   const walletStore = useStore($walletStore)
-  const { treesPrice } = useStore($forest)
+  const { treesInfo } = useStore($forest)
   const { selectedTreeType } = useStore($app)
   const user = useStore($user)
   const { userBalance, safeBalance } = useStore($app)
@@ -37,14 +37,18 @@ export const PlantingLogic = () => {
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
   useEffect(() => {
-    setTreeImage(plantingTreeImages[treeNames.indexOf(selectedTreeType)])
-    setCurrentTreePrice(String(treesPrice[treeNames.indexOf(selectedTreeType)] * 10 ** 18))
-  }, [selectedTreeType, treesPrice])
+    if (treesInfo.length > 0) {
+      setTreeImage(plantingTreeImages[treeNames.indexOf(selectedTreeType)])
+      setCurrentTreePrice(String(treesInfo[treeNames.indexOf(selectedTreeType)].price * 10 ** 18))
+    }
+  }, [selectedTreeType, treesInfo])
 
   useEffect(() => {
-    if (userBalance < treesPrice[treeNames.indexOf(selectedTreeType)] &&
-      safeBalance < treesPrice[treeNames.indexOf(selectedTreeType)]) {
-      setIsBalanceHintVisible(true)
+    if (treesInfo.length > 0) {
+      if (userBalance < treesInfo[treeNames.indexOf(selectedTreeType)].price &&
+        safeBalance < treesInfo[treeNames.indexOf(selectedTreeType)].price) {
+        setIsBalanceHintVisible(true)
+      }
     }
   }, [safeBalance, userBalance])
 
@@ -112,7 +116,7 @@ export const PlantingLogic = () => {
       try {
         const safeBalance = await walletStore?.plushCoinWalletsContractManager.getBalance(user.address)
         if (safeBalance !== undefined) {
-          if (safeBalance >= Number(treesPrice[treeNames.indexOf(selectedTreeType)])) {
+          if (safeBalance >= Number(treesInfo[treeNames.indexOf(selectedTreeType)].price)) {
             await checkTokenAvailability()
           } else {
             const allowance = await walletStore?.plushContractManager.getBuyAllowance(user.address, currentTreePrice)

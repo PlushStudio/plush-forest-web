@@ -17,40 +17,37 @@ class TreeContractManager {
     this.contract = PlushGetTreeFactory.connect(address, signer)
   }
 
-  mintTree = async (address: string, treeType: string, from: string, name: string, message = 'empty message') => {
-    try {
-      const treeTypeBytes32 = stringToBytes32(treeType)
-      return await this.contract.mint(treeTypeBytes32, address, { gasLimit: 500000 }).then((transferResult: any) => {
-        return axios.post(`${api.url}/forest/transactions/new`,
-          {
-            hash: transferResult.hash, tree: treeType, name: name, from, message
-          }, { withCredentials: true }).then(response => {
-          return response.status === 201
-        }).catch(r => {
-          console.error(r.message)
-          return false
-        })
+  mintTree = async (address: string, type: string, from: string, name: string, message = 'empty message') => {
+    const treeTypeBytes32 = stringToBytes32(type)
+    return await this.contract.mint(treeTypeBytes32, address, { gasLimit: 500000 }).then((transferResult: any) => {
+      return axios.post(`${api.url}/forest/transactions/new`,
+        {
+          hash: transferResult.hash, tree: type, name: name, from, message
+        }, { withCredentials: true }).then(response => {
+        return response.status === 201
+      }).catch(r => {
+        console.error(r.message)
+        return false
       })
-    } catch (e: any) {
-      throw Error(e.message)
-    }
+    })
   }
 
-  getTreeTypeCount = async (treeType: string) => {
-    try {
-      const treeCount = await this.contract.getTreeTypeCount(treeType)
-      return treeCount.toNumber()
-    } catch (e: any) {
-      throw Error(e.message)
-    }
+  getTreeTypeCount = async (type: string) => {
+    const treeCount = await this.contract.getTreeTypeCount(type)
+    return treeCount.toNumber()
   }
 
-  getTreeTypePrice = async (treeType: string) => {
-    try {
-      const treePrice = await this.contract.getTreeTypePrice(treeType)
-      return Number(ethers.utils.formatEther(treePrice._hex))
-    } catch (e: any) {
-      throw Error(e.message)
+  getTreeTypePrice = async (type: string) => {
+    const treePrice = await this.contract.getTreeTypePrice(type)
+    return Number(ethers.utils.formatEther(treePrice._hex))
+  }
+
+  getTreeInfo = async (type: string) => {
+    const treeInfo = await this.contract.trees(type)
+    return {
+      type: treeInfo.treeType,
+      price: Number(ethers.utils.formatEther(treeInfo.price)),
+      count: Number(treeInfo.count)
     }
   }
 }

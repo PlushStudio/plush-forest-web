@@ -25,7 +25,7 @@ const TreeTypeSelectorImages = [treeIcon0, treeIcon1, treeIcon2, treeIcon3]
 
 export const CustomSelect = ({ icons, currency, onSelect, className }: CustomSelectProps) => {
   const [isOpen, setOpen] = useState<boolean>(false)
-  const { treesPrice, treesCount } = useStore($forest)
+  const forest = useStore($forest)
   const { selectedTreeType } = useStore($app)
 
   const [selectedItemId, setSelectedItemId] = useState<number>(0)
@@ -90,7 +90,7 @@ export const CustomSelect = ({ icons, currency, onSelect, className }: CustomSel
         </div>
         <div className={s.dropdownHeaderRightPull}>
           <div className={classNames(s.itemPrice, s.itemPriceDropdownHeader)}>
-            <h2>{treesPrice[selectedItemId]}</h2>
+            <h2>{forest.treesInfo[selectedItemId].price}</h2>
             <p>{currency}</p>
           </div>
           <img
@@ -103,7 +103,7 @@ export const CustomSelect = ({ icons, currency, onSelect, className }: CustomSel
       <div className={dropdownBodyStyles}>
         {treesInfo.map(
           (item, index: number) =>
-            treesCount[index] !== 0 && (
+            forest.treesInfo[index].count !== 0 && (
               <div
                 role={'presentation'}
                 key={item.name + index}
@@ -120,12 +120,12 @@ export const CustomSelect = ({ icons, currency, onSelect, className }: CustomSel
                   <div className={s.dropdownItemContent}>
                     <div className={s.dropdownLabel}>{item.name}</div>
                     <div className={s.availableCount}>
-                      {`Available: ${treesCount[index]}`}
+                      {`Available: ${forest.treesInfo[index].count}`}
                     </div>
                   </div>
                 </div>
                 <div className={s.itemPrice}>
-                  {`${treesPrice[index]} ${currency}`}
+                  {`${forest.treesInfo[index].price} ${currency}`}
                 </div>
               </div>
             )

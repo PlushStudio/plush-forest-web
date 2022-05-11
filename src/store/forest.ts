@@ -13,25 +13,18 @@ export const forestDomain = createDomain('forest')
 
 export const getForestDataFx = createEffect(async (walletStore: WalletStore): Promise<ApiTreesMy> => {
   return {
-    treesPrice: [
-      await walletStore.treeContractManager.getTreeTypePrice(shihuahuacoTreeNameBytes32),
-      await walletStore.treeContractManager.getTreeTypePrice(cacaoTreeNameBytes32),
-      await walletStore.treeContractManager.getTreeTypePrice(guabaTreeNameBytes32),
-      await walletStore.treeContractManager.getTreeTypePrice(caobaTreeNameBytes32)
-    ],
-    treesCount: [
-      await walletStore.treeContractManager.getTreeTypeCount(shihuahuacoTreeNameBytes32),
-      await walletStore.treeContractManager.getTreeTypeCount(cacaoTreeNameBytes32),
-      await walletStore.treeContractManager.getTreeTypeCount(guabaTreeNameBytes32),
-      await walletStore.treeContractManager.getTreeTypeCount(caobaTreeNameBytes32)
+    treesInfo: [
+      await walletStore.treeContractManager.getTreeInfo(shihuahuacoTreeNameBytes32),
+      await walletStore.treeContractManager.getTreeInfo(cacaoTreeNameBytes32),
+      await walletStore.treeContractManager.getTreeInfo(guabaTreeNameBytes32),
+      await walletStore.treeContractManager.getTreeInfo(caobaTreeNameBytes32)
     ]
   }
 })
 
 export const $forest = forestDomain
   .createStore<ApiTreesMy>({
-    treesCount: [],
-    treesPrice: []
+    treesInfo: []
   }).reset(logoutEvent)
 
 $forest.on(getForestDataFx.doneData, (_, forest: ApiTreesMy) => {

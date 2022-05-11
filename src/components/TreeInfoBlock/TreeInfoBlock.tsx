@@ -15,13 +15,13 @@ const treeIcons = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaIm
 const treeNames = ['SHIHUAHUACO', 'CACAO', 'GUABA', 'CAOBA']
 
 const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
-  const imageSrc = treeIcons[treeNames.indexOf(treeData.treeType.toUpperCase())]
+  const imageSrc = treeIcons[treeNames.indexOf(treeData.type.toUpperCase())]
 
   return (
     <div className={s.treeInfoContainer}>
       <div className={s.mainInfoContainer}>
         <p className={s.mainInfoTitle}>{treeData.name}</p>
-        <span className={s.mainInfoDescription}>{`${ucFirst(treeData.treeType)} - the Amazon’s tree of life.`}</span>
+        <span className={s.mainInfoDescription}>{`${ucFirst(treeData.type)} - the Amazon’s tree of life.`}</span>
         <div className={s.statsContainer}>
           <div className={s.textStatsBlock}>
             {treeData.info.map((item: any, index: number) =>
