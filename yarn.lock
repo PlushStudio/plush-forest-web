@@ -664,17 +664,12 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@openzeppelin/contracts-upgradeable@^4.5.2", "@openzeppelin/contracts-upgradeable@^4.6.0":
+"@openzeppelin/contracts-upgradeable@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts-upgradeable/-/contracts-upgradeable-4.6.0.tgz#1bf55f230f008554d4c6fe25eb165b85112108b0"
   integrity sha512-5OnVuO4HlkjSCJO165a4i2Pu1zQGzMs//o54LPrwUgxvEO2P3ax1QuaSI0cEHHTveA77guS0PnNugpR2JMsPfA==
 
-"@openzeppelin/contracts@4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.5.0.tgz#3fd75d57de172b3743cdfc1206883f56430409cc"
-  integrity sha512-fdkzKPYMjrRiPK6K4y64e6GzULR7R7RwxSigHS8DDp7aWDeoReqsQI+cxHV1UuhAqX69L1lAaWDxenfP+xiqzA==
-
-"@openzeppelin/contracts@^4.6.0":
+"@openzeppelin/contracts@4.6.0", "@openzeppelin/contracts@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.6.0.tgz#c91cf64bc27f573836dba4122758b4743418c1b3"
   integrity sha512-8vi4d50NNya/bQqCmaVzvHNmwHvS0OBKb7HNtuNwEE3scXWrP31fKQoGxNMT+KbzmrNZzatE3QK5p2gFONI/hg==
@@ -711,31 +706,31 @@
     proper-lockfile "^4.1.1"
     solidity-ast "^0.4.15"
 
-"@plushfamily/plush-protocol-contracts@^2.9.0":
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/@plushfamily/plush-protocol-contracts/-/plush-protocol-contracts-2.9.0.tgz#6158e6a70ebdf222ad93341c89f2b28628f23b01"
-  integrity sha512-Ax0DFMrQ8MwiZUoE6+x57v50Jvz6QgLWXGNkv71mkz9ViFxHWCvhKv9bxrP+lSljTQz4IHVlIBWK3e2R0x27fA==
+"@plushfamily/plush-protocol-contracts@^2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@plushfamily/plush-protocol-contracts/-/plush-protocol-contracts-2.10.0.tgz#279a5610f7473da6d84db827be6d71470bae6579"
+  integrity sha512-iPF8qxjMKWoD4N9VcDUYn/L0PEclkOR28EO0xdSrMs//PRjNqhBuYkmtAZcRO4ibLYb9NvTWbwrQHJaCAV/ZCg==
   dependencies:
-    "@openzeppelin/contracts" "4.5.0"
-    "@openzeppelin/contracts-upgradeable" "^4.5.2"
+    "@openzeppelin/contracts" "4.6.0"
+    "@openzeppelin/contracts-upgradeable" "^4.6.0"
     "@openzeppelin/hardhat-defender" "^1.6.0"
-    dotenv "^16.0.0"
+    dotenv "^16.0.1"
 
 "@plushfamily/ui-components@^0.0.16":
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@plushfamily/ui-components/-/ui-components-0.0.16.tgz#650056df5abbef05e61c7222db7793e77312548b"
   integrity sha512-ZTzJqIM17oD0CeIgpjNX1TgNHDhVHC6MsIPwf6m2rSiq7f2MbF8msbrhKicHGV/oO2DxziO9YQI24/YQSSfqCw==
 
-"@plushstudio/plush-studio-contracts@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-0.6.1.tgz#650a7bcccd068515b977be80fef0e9e4cef8209b"
-  integrity sha512-Fqe0V73OWK1MGreHGFICn0yCAhPNqvndYhpjFZds3XAoOzU2jWlTWyDLmHkmrdGAIg2Y62wPbpvQkr6uPXL4bA==
+"@plushstudio/plush-studio-contracts@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-1.0.0.tgz#971e37e4da3607148a1f8d9635c06690692f3bee"
+  integrity sha512-RpHp66ZtFeRKb+DCdJvmE0qAn3reRZnlEnJtgzoLE1wkQXj8y1giv/l3Xv+U4BiVDu9Z5n+d2SAWoTDbyF0cKw==
   dependencies:
     "@openzeppelin/contracts" "^4.6.0"
     "@openzeppelin/contracts-upgradeable" "^4.6.0"
     "@openzeppelin/hardhat-defender" "^1.6.0"
-    "@plushfamily/plush-protocol-contracts" "^2.9.0"
-    dotenv "^16.0.0"
+    "@plushfamily/plush-protocol-contracts" "^2.10.0"
+    dotenv "^16.0.1"
 
 "@popperjs/core@^2.8.6":
   version "2.11.5"
@@ -1623,10 +1618,10 @@ dom-helpers@^5.0.1, dom-helpers@^5.2.0, dom-helpers@^5.2.1:
     "@babel/runtime" "^7.8.7"
     csstype "^3.0.2"
 
-dotenv@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.0.tgz#c619001253be89ebb638d027b609c75c26e47411"
-  integrity sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==
+dotenv@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.1.tgz#8f8f9d94876c35dac989876a5d3a82a267fdce1d"
+  integrity sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==
 
 effector-react@^22.0.6:
   version "22.0.6"
