@@ -2,9 +2,9 @@ import { z } from 'zod'
 
 const ApiTreesMySchema = z.object({
   treesInfo: z.array(z.object({
-    treeType: z.string(),
-    price: z.number(),
-    count: z.number()
+    type: z.string(),
+    price: z.number().nonnegative(),
+    count: z.number().nonnegative()
   }))
 })
 

@@ -4,7 +4,7 @@ import { TreeDataSubInfo } from '@/types/tree/TreeDataSubInfo'
 export type TreeData = {
   name: string,
   desc: string,
-  treeType: string,
+  type: string,
   info: TreeDataInfo[],
   age: string,
   height: string,

@@ -21,7 +21,7 @@ export const userDefault: UserDefault = {
 export const treeDefault = {
   name: '',
   desc: '',
-  treeType: '',
+  type: '',
   info: [
     { title: 'Age', desc: '1 month' },
     { title: 'Height', desc: '5.2 Inches' },

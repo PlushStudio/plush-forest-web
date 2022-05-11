@@ -36,7 +36,7 @@ export const TreeInfoPage: React.FC = () => {
         setTreeData({
           ...treeData,
           name: response.data.name.split('tree')[0],
-          treeType: response.data.attributes[2].value,
+          type: response.data.attributes[2].value,
           subInfo: [
             {
               title: 'Location',
