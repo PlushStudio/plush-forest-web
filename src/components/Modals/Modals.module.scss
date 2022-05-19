@@ -1,8 +1,11 @@
-@use '../../styles/theme';
-@use '../../styles/variables';
+@use '/src/styles/theme';
+@use '/src/styles/variables';
 
 .treeNotAvailableContainer {
-  margin-top: 66px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .noPlushTokenContainer {
