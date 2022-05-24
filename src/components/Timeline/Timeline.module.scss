@@ -1,5 +1,6 @@
-@use '../../styles/variables';
-@use '../../styles/theme';
+@use 'src/styles/variables';
+@use 'src/styles/theme';
+@use 'src/styles/mixins';
 
 .cardContainer {
   width: calc(50% - 36px);
@@ -16,6 +17,10 @@
       cursor: auto;
       transform: rotateY(0deg) translateY(-50%);
     }
+  }
+
+  @include mixins.media-to-md {
+    width: auto;
   }
 }
 
@@ -55,6 +60,11 @@
       width: 1px;
       background: theme.$grey-300;
     }
+
+    @include mixins.media-to-md {
+      width: 100%;
+      padding-top: 0;
+    }
   }
 
   &Content {
@@ -66,9 +76,6 @@
     font-size: 0.8em;
     transition: 0.5s;
     backface-visibility: hidden;
-
-    --line-height-multiplier: 1.2;
-
     border-radius: 160px;
     box-shadow:
       0 1px 1px 0 rgba(0, 0, 0, 1%),
@@ -83,7 +90,6 @@
     }
 
     p {
-      font-size: 20px;
       font-weight: bold;
       line-height: 1.4;
       text-align: right;
@@ -111,6 +117,12 @@
       width: 24px;
       height: 24px;
     }
+
+    @include mixins.media-to-md {
+      margin-left: auto;
+      margin-top: 0;
+      top: -60px;
+    }
   }
 
   &Block {
@@ -122,6 +134,11 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    @include mixins.media-to-md {
+      justify-content: center;
+      margin-top: 100px;
     }
   }
 
@@ -153,6 +170,12 @@
   border: 7px solid transparent;
   border-left-color: #fff;
   top: calc(50% - 7px);
+
+  @include mixins.media-to-md {
+    left: -14px;
+    border-right-color: #fff;
+    top: calc(50% - 7px);
+  }
 }
 
 .btn {
@@ -182,16 +205,16 @@
   font-family: AvenirNextRoundedPro-Bold, sans-serif;
   font-size: 20px;
   font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.4;
-  letter-spacing: normal;
   color: theme.$grey-800;
+
+  @include mixins.media-to-xs {
+    font-size: calc(10px + 2vw);
+  }
 }
 
 .timelineContentText {
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
-  font-size: 20px;
   color: theme.$grey-800;
 }
 
@@ -200,18 +223,28 @@
 
   .timeline {
     &Img {
-      margin-left: 0 !important;
+      margin-left: 0;
       margin-right: calc(50% - 12px);
+
+      @include mixins.media-to-md {
+        margin-right: auto;
+        margin-top: 0;
+        top: -60px;
+      }
     }
 
     &Content {
-      text-align: left !important;
-      display: block !important;
+      text-align: left;
+      display: block;
 
       p {
-        text-align: left !important;
+        text-align: left;
       }
     }
+  }
+
+  @include mixins.media-to-md {
+    flex-direction: initial;
   }
 }
 
@@ -219,10 +252,15 @@
   max-width: 116px;
   height: 116px;
   object-fit: contain;
-  padding-top: 24px;
+  padding-top: 18px;
   min-width: 112px;
   border-radius: 50%;
   background: theme.$pale-grey;
+
+  @include mixins.media-to-md {
+    height: 70px;
+    min-width: 70px;
+  }
 }
 
 .mdCardImgContainer {
@@ -242,6 +280,10 @@
     0 2px 4px 0 rgba(0, 0, 0, 2%),
     0 4px 4px -1px rgba(0, 0, 0, 2%),
     0 8px 12px -2px rgba(0, 0, 0, 2%);
+
+  @include mixins.media-to-md {
+    margin-top: 18px;
+  }
 }
 
 .timelineBase img {
@@ -262,6 +304,10 @@
   height: 16px;
   background: theme.$grey-200;
   top: -26px;
+
+  @include mixins.media-to-md {
+    top: 0;
+  }
 }
 
 .xs {

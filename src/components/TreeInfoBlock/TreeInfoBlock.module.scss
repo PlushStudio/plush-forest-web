@@ -9,7 +9,7 @@
   min-width: 640px;
   min-height: 640px;
   max-height: 1000px;
-  padding: 40px;
+  padding-bottom: 40px;
   margin: 0 0 8px;
   border-radius: 32px;
   background-image: linear-gradient(179deg, #fff 37%, rgba(255, 255, 255, 0%) 98%);
@@ -17,7 +17,11 @@
   @include mixins.media-to-md {
     min-width: auto;
     min-height: auto;
-    padding: calc(10px + 2vw);
+    padding-top: calc(10px + 1vw);
+  }
+
+  @include mixins.media-to-xs {
+    text-align: center;
   }
 }
 
@@ -26,6 +30,10 @@
 
   @include mixins.media-to-md {
     width: 50%;
+  }
+
+  @include mixins.media-to-xs {
+    width: 100%;
   }
 }
 
@@ -36,27 +44,58 @@
   line-height: 1.38;
   color: theme.$grey-800;
   margin-bottom: 2px;
+
+  @include mixins.media-to-sm {
+    font-size: calc(20px + 1vw);
+  }
+
+  @include mixins.media-to-xs {
+    font-size: calc(20px + 3vw);
+  }
 }
 
 .mainInfoDescription {
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 18px;
   line-height: 1.33;
-  letter-spacing: normal;
   color: theme.$grey-600;
+
+  @include mixins.media-to-sm {
+    font-size: calc(10px + 1vw);
+  }
 }
 
 .statsContainer {
   padding-top: 28px;
+
+  @include mixins.media-to-sm {
+    font-size: 18px;
+  }
 }
 
 .textStatsBlock {
   display: flex;
   justify-content: space-between;
+
+  @include mixins.media-to-sm {
+    justify-content: normal;
+  }
 }
 
 .containerOneBlock {
   width: 100%;
+
+  &:last-child {
+    padding-right: 0;
+  }
+
+  @include mixins.media-to-sm {
+    padding-right: 20px;
+  }
+
+  @include mixins.media-to-xs {
+    padding-right: 0;
+  }
 }
 
 .textStatsBlockDescription {
@@ -67,6 +106,15 @@
   color: theme.$grey-600;
   padding-top: 6px;
   margin-bottom: 8px;
+
+  @include mixins.media-to-sm {
+    font-size: calc(8px + 1vw);
+    padding-top: 6px;
+  }
+
+  @include mixins.media-to-xs {
+    font-size: calc(8px + 2vw);
+  }
 }
 
 .textStatsBlockTitle {
@@ -74,48 +122,89 @@
   font-size: 18px;
   line-height: 1.33;
   color: theme.$grey-800;
+
+  @include mixins.media-to-sm {
+    font-size: calc(10px + 1vw);
+    margin-bottom: 0;
+  }
+
+  @include mixins.media-to-xs {
+    font-size: calc(10px + 2vw);
+  }
 }
 
 .widgetsContainer {
   padding-top: 40px;
+
+  @include mixins.media-to-xs {
+    display: flex;
+    justify-content: space-around;
+    padding-top: calc(10px + 2vw);
+    max-width: 400px;
+    margin: 14px auto auto;
+  }
+}
+
+.treeImageMobileContainer {
+  display: none;
+
+  @include mixins.media-to-xs {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
 }
 
 .widgetsContentBlock {
   display: flex;
   align-items: center;
-}
-
-.widgetsContentBlock:not(:first-child) {
-  padding-top: 10px;
+  text-align: left;
 }
 
 .widgetsContentBlock:not(:last-child) {
   border-bottom: 2px solid #f5f5f6;
-  padding-bottom: 12px;
-}
 
-.widgetsContent {
-  padding-left: 20px;
+  @include mixins.media-to-xs {
+    border: none;
+  }
 }
 
 .widgetsContentTitle {
   font-family: AvenirNextRoundedPro-Demi, sans-serif;
   font-size: 18px;
   line-height: 1.33;
-  letter-spacing: normal;
   color: theme.$grey-800;
   margin-bottom: 2px;
+
+  @include mixins.media-to-sm {
+    font-size: calc(10px + 1vw);
+  }
+
+  @include mixins.media-to-xs {
+    font-size: calc(10px + 2vw);
+  }
 }
 
 .widgetsContentDescription {
   font-family: AvenirNextRoundedPro-Med, sans-serif;
   font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.5;
   letter-spacing: -0.2px;
   color: theme.$grey-600;
+
+  @include mixins.media-to-sm {
+    font-size: calc(8px + 1vw);
+  }
+
+  @include mixins.media-to-xs {
+    font-size: calc(8px + 2vw);
+  }
+}
+
+.widgetsIcon {
+  @include mixins.media-to-sm {
+    width: calc(34px + 6vw);
+  }
 }
 
 .treeInRound {
@@ -126,8 +215,17 @@
     align-items: center;
     width: 50%;
   }
+
+  @include mixins.media-to-xs {
+    display: none;
+    width: auto;
+  }
 }
 
 .treeImage {
   width: 100%;
+
+  @include mixins.media-to-xs {
+    max-width: 164px;
+  }
 }

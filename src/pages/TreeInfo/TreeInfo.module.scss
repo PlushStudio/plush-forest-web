@@ -14,12 +14,7 @@
 }
 
 .treeInfoContainer {
-  max-width: 1240px;
   margin: auto;
-  padding-bottom: 4.4em;
-  padding-top: 10rem;
-
-  @include mixins.media-to-sm {
-    padding-top: 0;
-  }
+  padding-top: 94px;
+  padding-bottom: 80px;
 }

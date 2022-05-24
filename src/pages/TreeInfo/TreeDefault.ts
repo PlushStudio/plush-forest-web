@@ -1,23 +1,3 @@
-import { Gender } from '@/types/Gender'
-
-export interface UserDefault {
-  address: string | undefined,
-  treeTypeIdToPlant: number,
-  name: string | undefined,
-  gender: null | Gender,
-  isOpenDropdown: boolean | null,
-  hasToken: undefined
-}
-
-export const userDefault: UserDefault = {
-  address: undefined,
-  treeTypeIdToPlant: 0,
-  name: undefined,
-  gender: null,
-  isOpenDropdown: false,
-  hasToken: undefined
-}
-
 export const treeDefault = {
   name: '',
   desc: '',

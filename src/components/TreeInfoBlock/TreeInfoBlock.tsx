@@ -22,6 +22,9 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
       <div className={s.mainInfoContainer}>
         <p className={s.mainInfoTitle}>{treeData.name}</p>
         <span className={s.mainInfoDescription}>{`${ucFirst(treeData.type)} - the Amazon’s tree of life.`}</span>
+        <div className={s.treeImageMobileContainer}>
+          <img src={imageSrc} className={s.treeImage} alt="tree" />
+        </div>
         <div className={s.statsContainer}>
           <div className={s.textStatsBlock}>
             {treeData.info.map((item: any, index: number) =>
@@ -34,7 +37,7 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
           <div className={s.widgetsContainer}>
             {treeData.subInfo.map((item: any, index: number) =>
               <div key={item + index} className={s.widgetsContentBlock}>
-                <img src={item.img} alt={'sub info'} />
+                <img className={s.widgetsIcon} src={item.img} alt={'sub info'} />
                 <div className={s.widgetsContent}>
                   <p className={s.widgetsContentTitle}>{item.title}</p>
                   <span className={s.widgetsContentDescription}>{item.desc}</span>
@@ -45,7 +48,7 @@ const TreeInfoBlock: FC<TreeInfoBlockProps> = ({ treeData }: any) => {
         </div>
       </div>
       <div className={s.treeInRound}>
-        <img src={imageSrc} className={s.treeImage} alt='tree' />
+        <img src={imageSrc} className={s.treeImage} alt="tree" />
       </div>
     </div>
   )

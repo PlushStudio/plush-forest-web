@@ -1,4 +1,5 @@
 @use '/src/styles/theme';
+@use '/src/styles/mixins';
 
 .messageInfo {
   display: flex;
@@ -24,6 +25,10 @@
     font-size: 18px;
     line-height: 1.33;
     text-align: center;
+
+    @include mixins.media-to-xs {
+      font-size: calc(10px + 1vw);
+    }
   }
 
   p {
@@ -37,5 +42,17 @@
   span {
     font-weight: bold;
     color: theme.$grey-800;
+  }
+
+  @include mixins.media-to-sm {
+    width: auto;
+    margin: 32px auto 0;
+    padding: 30px 42px;
+  }
+}
+
+.bottomText {
+  @include mixins.media-to-xs {
+    font-size: calc(12px + 1vw);
   }
 }
