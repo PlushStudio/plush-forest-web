@@ -3,16 +3,9 @@
 
 .container {
   user-select: none;
-  margin-top: 32px;
   border-radius: 160px;
 
-  @include mixins.media-to-md {
-    margin-top: 18px;
-  }
-
   &.small {
-    margin-top: 20px;
-
     .btnPrimary {
       font-size: 18px;
       padding-left: 24px;

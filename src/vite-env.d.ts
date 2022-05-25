@@ -10,4 +10,5 @@ interface ImportMetaEnv {
   VITE_FAUCET_URL: string,
   VITE_PLUSH_WEBSITE_URL: string,
   VITE_SIGNUP_URL: string,
+  VITE_DISCORD_CHANNEL_LINK: string
 }

@@ -12,6 +12,7 @@ interface IGetStartedBtn {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   loading?: boolean,
   disabled?: boolean
+  className?: string
 }
 
 export const MainActionButton = ({
@@ -20,13 +21,14 @@ export const MainActionButton = ({
   loading,
   onClick,
   image,
-  disabled
+  disabled,
+  className
 }: IGetStartedBtn) => {
-  const style = classNames(s.container, s[variant])
+  const MainActionButtonContainerStyle = classNames(s.container, s[variant], className)
   const buttonStyle = classNames(s.btnPrimary, { [s.disabled]: disabled })
 
   return (
-    <div className={style}>
+    <div className={MainActionButtonContainerStyle}>
       <button onClick={onClick} className={buttonStyle}>
         {text}
 

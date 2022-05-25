@@ -28,7 +28,7 @@
   &.error {
     background-image: url('../../assets/images/inputWarning/inputWarning.svg');
     background-repeat: no-repeat;
-    background-position: 446px center;
+    background-position: calc(100% - 16px) center;
     border: 1px solid theme.$light-pink;
     transition: box-shadow 0.2s;
     flex-direction: row;
