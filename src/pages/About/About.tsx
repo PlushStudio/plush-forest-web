@@ -82,7 +82,10 @@ export const AboutPage = () => {
           <div className={s.getStartedContentContainer}>
             <HomeText />
             {isLoggedIn && <TreeTypeSelector />}
-            <MainActionButton onClick={() => getStarted()} text={t('HomePage.GetStartedButton')} image='next' />
+            <MainActionButton onClick={() => getStarted()}
+                              text={t('HomePage.GetStartedButton')}
+                              image='next'
+                              className={s.mainActionButton}/>
             <TreesArea />
           </div>
           <div className={isLoggedIn ? s.homeFeatureContainer : s.homeFeatureContainerHeight}>

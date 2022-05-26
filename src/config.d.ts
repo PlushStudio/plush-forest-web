@@ -17,4 +17,5 @@ interface Config {
   PLUSH_ACCOUNTS?: string,
   MATOMO_URL?: string,
   MATOMO_SITE_ID?: string,
+  DISCORD_CHANNEL_LINK?: string
 }

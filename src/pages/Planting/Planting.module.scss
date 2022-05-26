@@ -19,21 +19,53 @@
   padding-top: 10rem;
 }
 
+.treeImageContainer {
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+  width: 100%;
+  padding-left: 50px;
+
+  @include mixins.media-to-sm {
+    display: none;
+  }
+}
+
 .treeImage {
-  width: 632px;
-  height: 712px;
   object-fit: contain;
   max-height: 540px;
+  width: 100%;
 
   @include mixins.media-to-md {
-    width: 100%;
     max-height: 430px;
-    margin-top: 80px;
     height: auto;
+  }
+
+  @include mixins.media-to-sm {
+    display: none;
   }
 
   @include mixins.media-to-xs {
     max-height: 300px;
+  }
+}
+
+.treeImageContainerMobile {
+  display: none;
+  justify-content: center;
+  padding-top: 50px;
+
+  @include mixins.media-to-sm {
+    display: flex;
+  }
+}
+
+.treeImageMobile {
+  display: none;
+  max-width: 200px;
+
+  @include mixins.media-to-sm {
+    display: flex;
   }
 }
 
@@ -44,18 +76,30 @@
   padding-top: 150px;
 
   @include mixins.media-to-md {
-    flex-direction: column;
-    padding-top: 0;
+    padding-top: 100px;
+  }
+
+  @include mixins.media-to-sm {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 134px;
+    padding-bottom: 60px;
   }
 }
 
 .plantingForm {
-  padding-top: 32px;
   padding-left: 10px;
 
   @include mixins.media-to-md {
-    padding-top: 100px;
-    padding-left: 0;
+    width: 100%;
+  }
+
+  @include mixins.media-to-sm {
+    padding: 0 24px;
+  }
+
+  @include mixins.media-to-xs {
+    padding: 0;
   }
 }
 
@@ -75,14 +119,33 @@
 }
 
 .statusText {
+  display: flex;
+  flex-wrap: wrap;
   margin-top: 20px;
-  margin-left: 8px;
-  color: theme.$salmon;
-  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  color: theme.$grays-500;
+  font-family: AvenirNextRoundedPro-REg, sans-serif;
+  font-size: 15px;
+  max-width: 500px;
+
+  @include mixins.media-to-sm {
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+  }
 }
 
-.faucetLink {
+.linked {
   text-decoration: underline;
   color: theme.$indigo-500;
   cursor: pointer;
+}
+
+.mainActionButton {
+  display: flex;
+  margin-top: 30px;
+
+  @include mixins.media-to-md {
+    justify-content: center;
+  }
 }

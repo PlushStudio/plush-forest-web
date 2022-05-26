@@ -32,7 +32,10 @@ export const PlantingLogic = () => {
   const { treesInfo } = useStore($forest)
   const { selectedTreeType } = useStore($app)
   const user = useStore($user)
-  const { userBalance, safeBalance } = useStore($app)
+  const {
+    userBalance,
+    safeBalance
+  } = useStore($app)
 
   const plantingTreeImages = [shihuahuacoTreeImage, cacaoTreeImage, guabaTreeImage, caobaImage]
 
@@ -50,7 +53,7 @@ export const PlantingLogic = () => {
         setIsBalanceHintVisible(true)
       }
     }
-  }, [safeBalance, userBalance])
+  }, [safeBalance, userBalance, treesInfo])
 
   const isTokenBackendAvailable = async (tokenId: string, delay: number) => {
     const checkTokenBackendInterval = setInterval(async () => {
