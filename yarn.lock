@@ -716,10 +716,10 @@
     "@openzeppelin/hardhat-defender" "^1.6.0"
     dotenv "^16.0.1"
 
-"@plushfamily/ui-components@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@plushfamily/ui-components/-/ui-components-0.0.16.tgz#650056df5abbef05e61c7222db7793e77312548b"
-  integrity sha512-ZTzJqIM17oD0CeIgpjNX1TgNHDhVHC6MsIPwf6m2rSiq7f2MbF8msbrhKicHGV/oO2DxziO9YQI24/YQSSfqCw==
+"@plushfamily/ui-components@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@plushfamily/ui-components/-/ui-components-0.0.18.tgz#2e5c6adb6b90af1d49c4d5dfcfc5a083ea966a21"
+  integrity sha512-0eJoAdVMz4Iif8KAWTpCEGru9VTcBLy4bRGdk6uSONwX0cmQGkoe9bO1gdZvDIdgwzCpTnfFVIySKlf4sW1E5w==
 
 "@plushstudio/plush-studio-contracts@^1.0.0":
   version "1.0.0"
