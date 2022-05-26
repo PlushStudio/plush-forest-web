@@ -98,7 +98,7 @@ export const Planting = () => {
                 {isBalanceHintVisible && (
                   <div className={s.statusText}>
                       <span>Sorry, you don’t have enough PLSH to dedicate
-                        this tree to child. Please drop us a line in&nbsp;
+                        this tree to {childs[0].name}. Please drop us a line in&nbsp;
                         <a href={DISCORD_CHANNEL_LINK}
                            rel="noreferrer"
                            target={'_blank'}
