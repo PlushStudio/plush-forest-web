@@ -112,7 +112,6 @@ export const Planting = () => {
                 <MainActionButton
                   onClick={(e: MouseEvent<HTMLButtonElement>) => startMintProcess(e)}
                   text={t('PlantingPage.PlantYourTreeButton')}
-                  variant="small"
                   image="tree"
                   disabled={isBalanceHintVisible || !nameFrom?.length || isPlantBtnLoading}
                   loading={isPlantBtnLoading}

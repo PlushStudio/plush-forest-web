@@ -7,7 +7,6 @@ import classNames from 'classnames'
 
 interface IGetStartedBtn {
   text: string
-  variant?: 'small' | ''
   image?: 'tree' | 'next'
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
   loading?: boolean,
@@ -16,7 +15,6 @@ interface IGetStartedBtn {
 }
 
 export const MainActionButton = ({
-  variant = '',
   text,
   loading,
   onClick,
@@ -24,7 +22,7 @@ export const MainActionButton = ({
   disabled,
   className
 }: IGetStartedBtn) => {
-  const MainActionButtonContainerStyle = classNames(s.container, s[variant], className)
+  const MainActionButtonContainerStyle = classNames(s.container, className)
   const buttonStyle = classNames(s.btnPrimary, { [s.disabled]: disabled })
 
   return (

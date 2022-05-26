@@ -5,14 +5,17 @@
   user-select: none;
   border-radius: 160px;
 
-  &.small {
-    .btnPrimary {
-      font-size: 18px;
-      padding-left: 24px;
-      align-items: center;
+  .btnPrimary {
+    font-size: 18px;
+    padding-left: 24px;
+    align-items: center;
 
-      .image {
-        margin: 0 0 0 10px;
+    .image {
+      margin: 0 0 0 10px;
+      width: 24px;
+
+      @include mixins.media-to-lg {
+        width: 16px;
       }
     }
   }
@@ -25,15 +28,6 @@
 
 .spinner {
   margin-left: 10px;
-}
-
-.image {
-  margin: 0 8px 0 12px;
-  width: 24px;
-
-  @include mixins.media-to-lg {
-    width: 16px;
-  }
 }
 
 .btnPrimary {
