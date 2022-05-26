@@ -45,7 +45,7 @@ export const Planting = () => {
   const [isReady, setIsReady] = useState<boolean>(false)
 
   useEffect(() => {
-    if (treesInfo.length > 0) {
+    if (treesInfo.length > 0 && childs.length > 0) {
       setIsReady(true)
     }
   }, [treesInfo])
