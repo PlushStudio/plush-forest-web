@@ -122,9 +122,9 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
-  color: theme.$grays-500;
+  color: theme.$black;
   font-family: AvenirNextRoundedPro-REg, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   max-width: 500px;
 
   @include mixins.media-to-sm {

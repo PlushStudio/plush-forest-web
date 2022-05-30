@@ -148,7 +148,8 @@ export const Page = (props: Props) => {
     const address = await walletStore.wallet.getAddress()
     const safeBalance = await walletStore.plushCoinWalletsContractManager.getBalance(address)
     const userBalance = await walletStore.plushContractManager.getBalance(address)
-    const currency = await walletStore.plushContractManager.getCurrency()
+    // TODO: create task to change PLSH to PLUSH currency in contract
+    const currency = await walletStore.plushContractManager.getCurrency() === 'PLSH' ? 'PLUSH' : 'PLAI'
 
     if (isMounted) {
       setWalletAddress(address)
