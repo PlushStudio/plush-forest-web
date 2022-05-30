@@ -97,7 +97,7 @@ export const Planting = () => {
                 </Form.Group>
                 {isBalanceHintVisible && (
                   <div className={s.statusText}>
-                      <span>Sorry, you don’t have enough PLSH to dedicate
+                      <span>Sorry, you don’t have enough {currency} to dedicate
                         this tree to {childs[0].name}. Please drop us a line in&nbsp;
                         <a href={DISCORD_CHANNEL_LINK}
                            rel="noreferrer"
@@ -105,7 +105,7 @@ export const Planting = () => {
                            className={s.linked}>
                           Plush Forest channel
                         </a>
-                        &nbsp;of our Discord server and we’ll transfer you PLSH to finish the process.
+                        &nbsp;of our Discord server and we’ll transfer you {currency} to finish the process.
                       </span>
                   </div>
                 )}
