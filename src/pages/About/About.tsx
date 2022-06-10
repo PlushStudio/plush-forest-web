@@ -17,7 +17,7 @@ import { $walletStore } from '@/store/wallet'
 import { $forest, getForestDataFx } from '@/store/forest'
 import { CircleLoader } from '@/components/Loader/CircleLoader'
 import { useTranslation } from 'react-i18next'
-import heroWave from '../../assets/images/heroWave.svg'
+import heroWave from '@/assets/images/heroWave.svg'
 
 export const AboutPage = () => {
   const { isLoggedIn } = useStore($auth)
@@ -62,7 +62,7 @@ export const AboutPage = () => {
     try {
       await walletStore.wallet.connect()
     } catch (error: any) {
-      console.error(error)
+      // TODO: HANDLE NETWORK ERRORS CORRECTLY
     }
   }
 

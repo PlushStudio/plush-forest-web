@@ -1,0 +1,27 @@
+.pageContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentContainer {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.imageContainer {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.image {
+  max-width: 300px;
+}
+
+.title {
+  margin: auto;
+  font-family: AvenirNextRoundedPro-Demi, sans-serif;
+  font-size: 24px;
+}

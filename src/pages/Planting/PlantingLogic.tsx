@@ -156,7 +156,7 @@ export const PlantingLogic = () => {
         throw new Error(e.message)
       }
     } else {
-      history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
+      history.push(`${routes.token.split('/:')[0]}/${myTokens.tokens[0].token_id}`)
     }
   }
 

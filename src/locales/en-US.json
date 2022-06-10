@@ -123,5 +123,16 @@
   "NotFoundPage": {
     "notFoundText": "Page Not Found",
     "plantTreeBtnText": "Let's Plant a Tree"
+  },
+  "NoLifespanToken": {
+    "title": "Lifespan token is missing \uD83D\uDE22",
+    "actionButtonText": "Get Lifespan!"
+  },
+  "Modals": {
+    "TreeNotAvailable": {
+      "title": "Tree not available",
+      "description": "This tree does not exist on Plush Forest.",
+      "actionButtonText": "OK"
+    }
   }
 }
