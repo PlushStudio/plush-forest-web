@@ -1,7 +1,7 @@
 const Routes = Object.freeze({
   index: '/',
   planting: '/planting',
-  token: '/token/:id',
+  token: '/token',
   getLifespanToken: '/get-lifespan-token',
   notFound: '/404'
 } as const)

@@ -108,7 +108,7 @@ export const Page = (props: Props) => {
     try {
       const myTokens: UserTokens = await api.user.users.tokens.request()
       if (myTokens.tokens.length > 0) {
-        history.push(`${routes.token.split('/:')[0]}/${myTokens.tokens[0].token_id}`)
+        history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
       }
     } catch (e: any) {
       // TODO: HANDLE NETWORK ERRORS CORRECTLY
@@ -190,11 +190,14 @@ export const Page = (props: Props) => {
   useEffect(() => {
     const hasLifespanToken = user.childs.length > 0
 
-    if (hasLifespanToken && location.pathname === routes.getLifespanToken) {
-      history.push(routes.index)
-    }
-    if (!hasLifespanToken && props.withConnection) {
-      history.push(routes.getLifespanToken)
+    if (hasLifespanToken) {
+      if (location.pathname === routes.getLifespanToken) {
+        history.push(routes.index)
+      }
+    } else {
+      if (props.withConnection) {
+        history.push(routes.getLifespanToken)
+      }
     }
   }, [location.pathname, user.childs])
 

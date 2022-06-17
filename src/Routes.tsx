@@ -6,7 +6,7 @@ import { Planting } from './pages/Planting/Planting'
 import { TreeInfoPage } from './pages/TreeInfo/TreeInfo'
 import { Page } from '@/layouts/Page'
 import routes from '@/Router/routes'
-import NoLifespanToken from '@/pages/NoLifespanToken/NoLifespanToken'
+import NoLifespanToken from '@/pages/LifespanTokenPlug/LifespanTokenPlug'
 
 export const Routes = () => {
   return (
@@ -21,7 +21,7 @@ export const Routes = () => {
           <AboutPage />
         </Page>
       </Route>
-      <Route exact path={routes.token}>
+      <Route exact path={`${routes.token}/:id`}>
         <Page>
           <TreeInfoPage />
         </Page>
