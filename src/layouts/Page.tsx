@@ -111,7 +111,7 @@ export const Page = (props: Props) => {
         history.push(`${routes.token}/${myTokens.tokens[0].token_id}`)
       }
     } catch (e: any) {
-      console.error(e.message)
+      // TODO: HANDLE NETWORK ERRORS CORRECTLY
     } finally {
       setDataFetched(true)
       setForestTokenChecked(true)
@@ -173,10 +173,6 @@ export const Page = (props: Props) => {
       setDataFetched(true)
       setIsOpenMenuDropdownEvt(true)
     }
-
-    if (props.withConnection) {
-      setDataFetched(forestTokenChecked)
-    }
   }
 
   const handleNetworkChanged = () => {
@@ -190,6 +186,20 @@ export const Page = (props: Props) => {
   const registerAccount = () => {
     window.location.href = window.config.SIGNUP_URL ?? import.meta.env.VITE_SIGNUP_URL
   }
+
+  useEffect(() => {
+    const hasLifespanToken = user.childs.length > 0
+
+    if (hasLifespanToken) {
+      if (location.pathname === routes.getLifespanToken) {
+        history.push(routes.index)
+      }
+    } else {
+      if (props.withConnection) {
+        history.push(routes.getLifespanToken)
+      }
+    }
+  }, [location.pathname, user.childs])
 
   useEffect(() => {
     setIsMounted(true)

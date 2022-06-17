@@ -15,9 +15,11 @@ const urls = {
       address: 'user/users/address'
     },
     trees: {
-      tokens: 'forest/tokens/my',
-      token: 'forest/token/'
+      tokens: 'forest/tokens/my'
     }
+  },
+  forest: {
+    token: '/forest/tokens/token/'
   }
 }
 
@@ -85,8 +87,21 @@ export const api = {
                 withCredentials: true
               })
           } catch {
-            // TODO Handle errors. Now do nothing (perfect scenario)
+            // TODO: HANDLE NETWORK ERRORS CORRECTLY
           }
+        }
+      }
+    }
+  },
+  forest: {
+    token: {
+      request: async (tokenId: string | undefined): Promise<AxiosResponse<any>> => {
+        try {
+          return await backend.get(
+            `${urls.forest.token}/${tokenId}`,
+            { withCredentials: true })
+        } catch (error: any) {
+          return error.response as AxiosResponse
         }
       }
     }
