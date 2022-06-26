@@ -2,8 +2,6 @@ name: PF Workflow
 on: [ push ]
 env:
   SERVICE_NAME: plush-forest-web
-  COMPOSE_FILE: /home/docker-compose.yml
-  DEVELOPMENT_BRANCH_REF: refs/heads/master
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -43,45 +41,6 @@ jobs:
           push: true
           tags: ghcr.io/${{ env.GITHUB_REPOSITORY_LOWERCASE }}/${{ env.SERVICE_NAME }}:latest
   DeployDev:
-    runs-on: ubuntu-latest
-    needs: [ Build ]
-    if: ${{ github.ref == 'refs/heads/master' }}
-    env:
-      CLIENT_API_URL: https://api.plush.dev
-      CLIENT_PLAI_CONTRACT_ADDRESS: "0x6FB60c408363636dAC206AA98EE429d79923DD33"
-      CLIENT_PLUSH_CONTRACT_ADDRESS: "0x6FB60c408363636dAC206AA98EE429d79923DD33"
-      CLIENT_PLUSH_LIFESPAN: "0xF223230144547aB2541ffA092338dBD2C9A59C34"
-      CLIENT_TREE_CONTRACT_ADDRESS: "0xAA6A135B8BE5af4753ABBedBf878323eC6328403"
-      CLIENT_FOREST_CONTRACT_ADDRESS: "0x356881528562ab0F269a5d1982fd21B83fb835B0"
-      CLIENT_PLUSH_ACCOUNTS: "0xADb915E0dEf2D5B9F3f3FA2dcB8E0de774573D8B"
-      CLIENT_NETWORK_ID: "80001"
-      CLIENT_PLUSH_WEBSITE_URL: "https://plush.dev"
-      CLIENT_SIGNUP_URL: "https://signup.plush.dev"
-      CLIENT_DISCORD_CHANNEL_LINK: "https://discord.gg/JnCrvfd2ZS"
-    steps:
-      - name: Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: newbly.com
-          username: deploy
-          key: ${{ secrets.SSH_PRIVATE_KEY_FOR_DEPLOY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE_FOR_DEPLOY }}
-          envs: COMPOSE_FILE, SERVICE_NAME, CLIENT_API_URL, CLIENT_PLAI_CONTRACT_ADDRESS, CLIENT_PLUSH_CONTRACT_ADDRESS, CLIENT_PLUSH_LIFESPAN, CLIENT_TREE_CONTRACT_ADDRESS, CLIENT_NETWORK_ID, CLIENT_FOREST_CONTRACT_ADDRESS, CLIENT_PLUSH_ACCOUNTS, CLIENT_PLUSH_WEBSITE_URL, CLIENT_SIGNUP_URL, CLIENT_DISCORD_CHANNEL_LINK
-          script: |
-            export CLIENT_API_URL=$CLIENT_API_URL
-            export CLIENT_PLAI_CONTRACT_ADDRESS=$CLIENT_PLAI_CONTRACT_ADDRESS
-            export CLIENT_PLUSH_CONTRACT_ADDRESS=$CLIENT_PLUSH_CONTRACT_ADDRESS
-            export CLIENT_PLUSH_LIFESPAN=$CLIENT_PLUSH_LIFESPAN
-            export CLIENT_TREE_CONTRACT_ADDRESS=$CLIENT_TREE_CONTRACT_ADDRESS
-            export CLIENT_NETWORK_ID=$CLIENT_NETWORK_ID
-            export CLIENT_FOREST_CONTRACT_ADDRESS=$CLIENT_FOREST_CONTRACT_ADDRESS
-            export CLIENT_PLUSH_ACCOUNTS=$CLIENT_PLUSH_ACCOUNTS
-            export CLIENT_PLUSH_WEBSITE_URL=$CLIENT_PLUSH_WEBSITE_URL
-            export CLIENT_SIGNUP_URL=$CLIENT_SIGNUP_URL
-            export CLIENT_DISCORD_CHANNEL_LINK=$CLIENT_DISCORD_CHANNEL_LINK
-            docker-compose pull $SERVICE_NAME
-            docker-compose up -d --no-deps --build $SERVICE_NAME
-  DeployK8sDev:
     runs-on: ubuntu-latest
     needs: [ Build ]
     if: ${{ github.ref == 'refs/heads/master' }}
