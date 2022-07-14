@@ -664,23 +664,23 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@openzeppelin/contracts-upgradeable@^4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts-upgradeable/-/contracts-upgradeable-4.6.0.tgz#1bf55f230f008554d4c6fe25eb165b85112108b0"
-  integrity sha512-5OnVuO4HlkjSCJO165a4i2Pu1zQGzMs//o54LPrwUgxvEO2P3ax1QuaSI0cEHHTveA77guS0PnNugpR2JMsPfA==
+"@openzeppelin/contracts-upgradeable@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts-upgradeable/-/contracts-upgradeable-4.7.0.tgz#6437261286879d353f6de7bf3ac8216bef8a486d"
+  integrity sha512-wO3PyoAaAV/rA77cK8H4c3SbO98QylTjfiFxyvURUZKTFLV180rnAvna1x7/Nxvt0Gqv+jt1sXKC7ygxsq8iCw==
 
-"@openzeppelin/contracts@4.6.0", "@openzeppelin/contracts@^4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.6.0.tgz#c91cf64bc27f573836dba4122758b4743418c1b3"
-  integrity sha512-8vi4d50NNya/bQqCmaVzvHNmwHvS0OBKb7HNtuNwEE3scXWrP31fKQoGxNMT+KbzmrNZzatE3QK5p2gFONI/hg==
+"@openzeppelin/contracts@4.7.0", "@openzeppelin/contracts@^4.7.0":
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.7.0.tgz#3092d70ea60e3d1835466266b1d68ad47035a2d5"
+  integrity sha512-52Qb+A1DdOss8QvJrijYYPSf32GUg2pGaG/yCxtaA3cu4jduouTdg4XZSMLW9op54m1jH7J8hoajhHKOPsoJFw==
 
-"@plushfamily/plush-protocol-contracts@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@plushfamily/plush-protocol-contracts/-/plush-protocol-contracts-2.11.0.tgz#34c6049aed9c7ea653d5594d5d9f4eaab270d599"
-  integrity sha512-XmSKdaxFxNL+ZcBtheIF9PAvxl+Z5xBdj2hsb0+Gj/1ilssRv8unQQRhIJRtoEDsluf7xvBh9KzZ/WrHy9myow==
+"@plushfamily/plush-protocol-contracts@^2.12.1":
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/@plushfamily/plush-protocol-contracts/-/plush-protocol-contracts-2.12.1.tgz#99655269129e7a15bea664204f18cfa05f02ed6a"
+  integrity sha512-2DbNVoR652wZ2P6qFKhdKgbTXoJSl3Rc4SWKzVW0J04g5qvRyeGUi8QdgJRrDOvie+R8gb9QSPDbZXZ3GAU1Ig==
   dependencies:
-    "@openzeppelin/contracts" "4.6.0"
-    "@openzeppelin/contracts-upgradeable" "^4.6.0"
+    "@openzeppelin/contracts" "4.7.0"
+    "@openzeppelin/contracts-upgradeable" "^4.7.0"
     dotenv "^16.0.1"
 
 "@plushfamily/ui-components@^0.0.18":
@@ -688,14 +688,14 @@
   resolved "https://registry.yarnpkg.com/@plushfamily/ui-components/-/ui-components-0.0.18.tgz#2e5c6adb6b90af1d49c4d5dfcfc5a083ea966a21"
   integrity sha512-0eJoAdVMz4Iif8KAWTpCEGru9VTcBLy4bRGdk6uSONwX0cmQGkoe9bO1gdZvDIdgwzCpTnfFVIySKlf4sW1E5w==
 
-"@plushstudio/plush-studio-contracts@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-1.1.0.tgz#003bfd3e0b51f8faeed1b67e9c3b78d09b131e99"
-  integrity sha512-+RxkfWdIDX90dp5H3dJv6KQKbZtMJ1Qhuw3ra8kavbjO/4CqVy4mL5pWQYM8Nb5fLB5JUL7d6d2tYVr/XYXWOw==
+"@plushstudio/plush-studio-contracts@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@plushstudio/plush-studio-contracts/-/plush-studio-contracts-1.3.0.tgz#f65346c3a65e15b9915c879ae7a19191617860de"
+  integrity sha512-EpOLF+U1gqJRNYMLuAfb3MlBTtCQcw4qXtxt7jdmTWlyGq2Rp6ZzgOd7Tx/504S1dvgd8jaOCbog+58Prmsj6Q==
   dependencies:
-    "@openzeppelin/contracts" "^4.6.0"
-    "@openzeppelin/contracts-upgradeable" "^4.6.0"
-    "@plushfamily/plush-protocol-contracts" "^2.11.0"
+    "@openzeppelin/contracts" "^4.7.0"
+    "@openzeppelin/contracts-upgradeable" "^4.7.0"
+    "@plushfamily/plush-protocol-contracts" "^2.12.1"
     dotenv "^16.0.1"
 
 "@popperjs/core@^2.8.6":
