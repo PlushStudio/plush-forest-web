@@ -189,13 +189,14 @@ export const Page = (props: Props) => {
 
   useEffect(() => {
     const hasLifespanToken = user.childs.length > 0
-
     if (hasLifespanToken) {
       if (location.pathname === routes.getLifespanToken) {
         history.push(routes.index)
       }
     } else {
-      if (props.withConnection) {
+      if (walletState === 'DISCONNECTED') {
+        history.push(routes.index)
+      } else {
         history.push(routes.getLifespanToken)
       }
     }
