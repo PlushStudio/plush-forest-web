@@ -124,7 +124,7 @@
     "notFoundText": "Page Not Found",
     "plantTreeBtnText": "Let's Plant a Tree"
   },
-  "NoLifespanToken": {
+  "LifespanTokenPlug": {
     "title": "Lifespan token is missing \uD83D\uDE22",
     "actionButtonText": "Get Lifespan!"
   },
