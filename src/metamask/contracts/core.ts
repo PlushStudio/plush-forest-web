@@ -18,7 +18,7 @@ class CoreContractManager {
   }
 
   balanceOf = async (address: string): Promise<any> => {
-    return await this.contract.balanceOf(address).then((balanceOfResult) => balanceOfResult)
+    return await this.contract.balanceOf(address).then((balanceOfResult) => Number(balanceOfResult._hex))
   }
 }
 

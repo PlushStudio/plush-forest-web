@@ -188,19 +188,21 @@ export const Page = (props: Props) => {
   }
 
   useEffect(() => {
-    const hasLifespanToken = user.childs.length > 0
-    if (hasLifespanToken) {
-      if (location.pathname === routes.getLifespanToken) {
+    const checkLifespanToken = async () => {
+      if (dataFetched && walletState === 'DISCONNECTED') {
         history.push(routes.index)
+        return
       }
-    } else {
-      if (walletState === 'DISCONNECTED') {
-        history.push(routes.index)
-      } else {
+      const hasLifespanToken = await walletStore?.coreContractManager.balanceOf(user.address)
+      if (location.pathname === routes.planting) {
+        if (hasLifespanToken) {
+          return
+        }
         history.push(routes.getLifespanToken)
       }
     }
-  }, [location.pathname, user.childs])
+    checkLifespanToken()
+  }, [location.pathname, user.childs, dataFetched])
 
   useEffect(() => {
     setIsMounted(true)
