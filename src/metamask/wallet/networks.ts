@@ -8,6 +8,10 @@ export const networks = [
     name: 'Mumbai'
   },
   {
+    id: '84532',
+    name: 'Base Sepolia'
+  },
+  {
     id: '3',
     name: 'Ropsten Test Network'
   },

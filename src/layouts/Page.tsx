@@ -95,12 +95,12 @@ export const Page = (props: Props) => {
     await walletStore.wallet.switchAccount()
   }
 
-  const getPolygonScanLink = (address: string) => {
-    return `https://mumbai.polygonscan.com/address/${address}`
+  const getBaseScanLink = (address: string) => {
+    return `https://sepolia.basescan.org/address/${address}`
   }
 
   const openExplorer = async () => {
-    window.open(getPolygonScanLink(user.address), '_blank')
+    window.open(getBaseScanLink(user.address), '_blank')
   }
 
   const checkUserForestToken = async () => {
