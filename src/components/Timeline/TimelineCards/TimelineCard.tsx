@@ -83,7 +83,7 @@ const TimelineCard: FC<ITimelineCardProps> = ({ id, cardInfo }) => {
                   <a className={s.linked}
                      target={'_blank'}
                      rel="noreferrer"
-                     href={`https://${NETWORK_ID === testnetNetworkId && 'testnets.'}opensea.io/assets/${NETWORK_ID === mainnetNetworkId ? 'matic' : 'mumbai'}/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
+                     href={`https://testnets.opensea.io/assets/base_sepolia/${FOREST_CONTRACT_ADDRESS}/${params.id}`}
                   >
                     {cardInfo.subtext}
                   </a>
