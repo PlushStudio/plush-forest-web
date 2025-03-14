@@ -12,7 +12,7 @@ import moment from 'moment'
 import { Category, MatomoEvent, trackEvent } from '@/utils/matomo'
 import TreeNotAvailable from '@/components/Modals/TreeNotAvailable/TreeNotAvailable'
 import classNames from 'classnames'
-import { CircleLoader } from '@/components/Loader/CircleLoader'
+//import { CircleLoader } from '@/components/Loader/CircleLoader'
 
 export const TreeInfoPage: React.FC = () => {
   const params = useParams<{ id?: string }>()
@@ -74,9 +74,7 @@ export const TreeInfoPage: React.FC = () => {
     trackEvent(Category.Info, MatomoEvent.PageVisited, 'Tree info')
   }, [])
 
-  return (
-    dataFetched
-      ? <div className={backgroundStyles}>
+  return (<div className={backgroundStyles}>
         <div className={classNames(s.treeInfoContainer, 'container')}>
           {!tokenNotFound
             ? <>
@@ -99,6 +97,5 @@ export const TreeInfoPage: React.FC = () => {
         </div>
         <div className={s.footer} />
       </div>
-      : <CircleLoader />
   )
 }

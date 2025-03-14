@@ -15,7 +15,7 @@ import { useStore } from 'effector-react'
 import { $auth } from '@/store/auth'
 import { $walletStore } from '@/store/wallet'
 import { $forest, getForestDataFx } from '@/store/forest'
-import { CircleLoader } from '@/components/Loader/CircleLoader'
+//import { CircleLoader } from '@/components/Loader/CircleLoader'
 import { useTranslation } from 'react-i18next'
 import heroWave from '@/assets/images/heroWave.svg'
 
@@ -74,9 +74,7 @@ export const AboutPage = () => {
       history.push(routes.planting)
     }
   }
-  return (
-    isReady
-      ? <>
+  return (<>
        <img src={heroWave} className={s.heroWave} alt={'hero wave'}/>
         <div className={'container'}>
           <div className={s.getStartedContentContainer}>
@@ -98,6 +96,5 @@ export const AboutPage = () => {
           <Footer />
         </div>
       </>
-      : <CircleLoader />
   )
 }

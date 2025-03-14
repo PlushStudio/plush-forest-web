@@ -9,7 +9,7 @@ import { ApiError } from '@/services/api/types'
 import { $walletStore, getMetamaskWalletFx } from '@/store/wallet'
 import { useStore } from 'effector-react'
 import { useUpdateEffect } from 'usehooks-ts'
-import { CircleLoader } from '@/components/Loader/CircleLoader'
+// import { CircleLoader } from '@/components/Loader/CircleLoader'
 
 function App () {
   const walletStore = useStore($walletStore)
@@ -113,10 +113,7 @@ function App () {
     getMetamaskWalletFx()
   }, [])
 
-  return (
-    isReady
-      ? <Routes />
-      : <CircleLoader />
+  return (<Routes />
   )
 }
 

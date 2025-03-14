@@ -14,7 +14,7 @@ import { useStore } from 'effector-react'
 import { $user } from '@/store/user'
 import { $forest, getForestDataFx } from '@/store/forest'
 import { $walletStore } from '@/store/wallet'
-import { CircleLoader } from '@/components/Loader/CircleLoader'
+//import { CircleLoader } from '@/components/Loader/CircleLoader'
 import { $app } from '@/store/app'
 import { useTranslation } from 'react-i18next'
 
@@ -58,9 +58,7 @@ export const Planting = () => {
     }
   }, [walletStore])
 
-  return (
-    isReady
-      ? <div className={s.backgroundContainer}>
+  return (<div className={s.backgroundContainer}>
         <div className={'container'}>
           {isPlanting
             ? <PlantingModal step={plantingStep} />
@@ -127,6 +125,5 @@ export const Planting = () => {
           }
         </div>
       </div>
-      : <CircleLoader />
   )
 }

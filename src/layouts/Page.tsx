@@ -5,7 +5,7 @@ import { useStore } from 'effector-react'
 import { $user } from '@/store/user'
 import { $walletStore } from '@/store/wallet'
 import MetamaskWallet from '@/metamask/wallet/metamaskWallet'
-import { CircleLoader } from '@/components/Loader/CircleLoader'
+//import { CircleLoader } from '@/components/Loader/CircleLoader'
 import { setCurrencyEvt, setIsOpenMenuDropdownEvt, setSafeBalanceEvt, setUserBalanceEvt } from '@/store/app'
 import { UserTokens } from '@/types/UserTokens'
 import api from '@/api/api'
@@ -222,9 +222,7 @@ export const Page = (props: Props) => {
     }
   }, [walletStore, user, forestTokenChecked])
 
-  return (
-    dataFetched
-      ? <>
+  return (<>
         <Header
           walletProps={{
             state: walletState,
@@ -242,13 +240,9 @@ export const Page = (props: Props) => {
           balance={balance}
           currency={currency} />
         {props.headerComponent}
-        {
-          walletState !== 'WRONG_NETWORK'
-            ? props.children
-            : <CircleLoader />
+        {props.children
         }
         {props.footerComponent}
       </>
-      : <CircleLoader />
   )
 }
