@@ -77,10 +77,31 @@ class MetamaskWallet {
   }
 
   switchNetwork = async (id: string) => {
-    (window.ethereum as any).request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: ethers.utils.hexValue(ethers.utils.hexlify(Number(id))) }]
-    })
+    try {
+      await (window.ethereum as any).request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          { chainId: ethers.utils.hexValue(ethers.utils.hexlify(Number(id))) }
+        ]
+      })
+    } catch (error: any) {
+      if (error.code === 4902) {
+        await (window.ethereum as any).request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: ethers.utils.hexValue(ethers.utils.hexlify(Number(id))),
+              rpcUrls: ['https://sepolia.base.org'],
+              chainName: 'Base Sepolia Testnet',
+              nativeCurrency: { name: 'ETH', decimals: 18, symbol: 'ETH' },
+              blockExplorerUrls: ['https://base-sepolia.blockscout.com']
+            }
+          ]
+        })
+      } else {
+        console.error('Error change network:', error)
+      }
+    }
   }
 
   switchAccount = async () => {
